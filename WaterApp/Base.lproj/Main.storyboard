@@ -172,6 +172,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bmk-Ca-1pr"/>
                     <connections>
+                        <outlet property="btnProfile" destination="3nv-bY-hGa" id="1VO-DF-BJG"/>
                         <outlet property="loginButtonShape" destination="Uwr-MY-LV2" id="xd9-un-Xdf"/>
                         <outlet property="usernameLabel" destination="6Hb-TZ-1ak" id="tey-ov-mnf"/>
                     </connections>
@@ -530,7 +531,6 @@
         <image name="placeholder 2" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cza-iW-xbx"/>
         <segue reference="51U-uN-s9j"/>
         <segue reference="Tsq-72-AKj"/>
     </inferredMetricsTieBreakers>

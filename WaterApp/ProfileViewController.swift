@@ -12,9 +12,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var loginButtonShape: UIButton!
-    
     @IBAction func loginButton(_ sender: Any) {}
     
+    @IBOutlet weak var btnProfile: UIButton!
     
     @IBAction func selectProfilePhotoButtonTapped(_ sender: Any) {
         let myPickerController = UIImagePickerController()
@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.present(myPickerController, animated:true, completion: nil)
         
-        self.layer.cornerRadius = self.profilePhotoImageView.frame.size.width / 2
+        btnProfile.layer.cornerRadius = loginButtonShape.frame.size.width / 2
         
         
     }
@@ -48,10 +48,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
 
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-       
-        self.profilePhotoImageView.layer.cornerRadius = self.profilePhotoImageView.frame.size.width / 2
-        
-        profilePhotoImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+
+        btnProfile.setImage(info[UIImagePickerControllerOriginalImage] as? UIImage, for: UIControlState.normal);
+        btnProfile.layer.cornerRadius = loginButtonShape.frame.size.width / 2
         
         self.dismiss(animated: true, completion: nil)
        
