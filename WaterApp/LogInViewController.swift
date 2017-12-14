@@ -32,6 +32,9 @@ class LogInViewController: UIViewController {
     
         //----
         ref = Database.database().reference();
+        if(appDelegate.uid != "NoValue") {
+            self.navigationController?.popViewController(animated: true)
+        }
         super.viewDidLoad()
     }
     
@@ -69,7 +72,7 @@ class LogInViewController: UIViewController {
                 }
                 else {
                     //  give a message of error
-                    
+                    print("Errore:\(error.debugDescription)" )
                     
                 }
             })
