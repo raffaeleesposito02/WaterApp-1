@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 class CreateAccountViewController: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
@@ -17,6 +18,8 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var passwordMismatch: UILabel!
     @IBOutlet weak var existingUsername: UILabel!
     @IBOutlet weak var btnSignUp: UIButton!
+    var ref: DatabaseReference?;
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +34,10 @@ class CreateAccountViewController: UIViewController {
         btnSignUp.layer.shadowColor = UIColor.black.cgColor;
         btnSignUp.layer.shadowOffset = CGSize(width: 0.5, height: 0.5);
         btnSignUp.layer.shadowOpacity = 0.3;
+        ref = Database.database().reference();
+        
     }
+    
     // Method that set the layout of specific textFiled, in this way I don't have to repeat for all fields
     func layoutTextFiled(_ field: UITextField) {
         
@@ -56,7 +62,11 @@ class CreateAccountViewController: UIViewController {
                 Auth.auth().createUser(withEmail: email, password: pass, completion: {
                     (user, error) in
                     if let u = user {
+                        self.appDelegate.username = self.usernameTextField.text!
+                        
+                        self.ref?.child("Users").child("\(self.usernameTextField.text ?? "NoValue")").child("Email").setValue("\(self.emailTextField.text ?? "NoValue")");
                         print("User creato");
+                        
                     } else {
                         print("C'è stato un errore \(error.debugDescription)");
                     }

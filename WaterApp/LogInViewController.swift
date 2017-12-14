@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class LogInViewController: UIViewController {
 
@@ -17,7 +18,7 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var btnFacebook: UIButton!
     @IBOutlet weak var btnGoogle: UIButton!
     @IBOutlet weak var subViewLogIn: UIView!
-
+    var ref: DatabaseReference?
     
     override func viewDidLoad() {
         // set the layout of view
@@ -27,10 +28,9 @@ class LogInViewController: UIViewController {
         layoutButton(btnLogIn);
         layoutButton(btnGoogle);
         layoutButton(btnFacebook);
-        
     
         //----
-        
+        ref = Database.database().reference();
         super.viewDidLoad()
     }
     
@@ -63,12 +63,13 @@ class LogInViewController: UIViewController {
                 //check if the username is nil
                 if let u = user {
                     // the username was found
-                    print("trovato")
+                    print("Trovato")
                     
                 }
                 else {
+                    //  give a message of error
                     print("Non esiste");
-                    //give a message of error
+                    
                 }
             })
         }

@@ -181,6 +181,7 @@
                     <connections>
                         <outlet property="btnProfile" destination="3nv-bY-hGa" id="1VO-DF-BJG"/>
                         <outlet property="loginButtonShape" destination="Uwr-MY-LV2" id="xd9-un-Xdf"/>
+                        <outlet property="notifyNews" destination="9LG-1d-zEV" id="wim-H2-GaF"/>
                         <outlet property="usernameLabel" destination="6Hb-TZ-1ak" id="tey-ov-mnf"/>
                     </connections>
                 </viewController>
