@@ -12,7 +12,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var loginButtonShape: UIButton!
-    @IBAction func loginButton(_ sender: Any) {}
+    
+    @IBAction func loginButton(_ sender: Any) {
+        Accounts.shared.isLogged = false
+    }
     
     @IBOutlet weak var btnProfile: UIButton!
     
@@ -40,6 +43,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
         usernameLabel.text = Accounts.shared.currentUser
+        
+        if Accounts.shared.isLogged {
+            
+            loginButtonShape.setTitle("Logout", for: .normal)
+            
+        } else {
+            
+            loginButtonShape.setTitle("Login", for: .normal)
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,3 +65,5 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
 }
+
+

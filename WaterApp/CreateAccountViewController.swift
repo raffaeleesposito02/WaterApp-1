@@ -56,7 +56,8 @@ class CreateAccountViewController: UIViewController {
                 Auth.auth().createUser(withEmail: email, password: pass, completion: {
                     (user, error) in
                     if let u = user {
-                        print("User creato");
+                        print("User creato")
+                        self.navigationController?.popViewController(animated: true)
                     } else {
                         print("C'è stato un errore \(error.debugDescription)");
                     }

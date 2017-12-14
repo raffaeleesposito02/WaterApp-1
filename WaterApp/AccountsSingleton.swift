@@ -22,14 +22,14 @@ class Accounts {
     var currentUser: String = "Username"
     
     var isLogged: Bool = false
- 
-//----------v-----LOGIN-----v----------
+    
+    //----------v-----LOGIN-----v----------
     
     func isUserRight(username: String) -> Bool {
         
         for user in credentials.keys{
             print("controllo username")
-//            print(user, username)
+            //            print(user, username)
             if user == username {
                 print("username trovato!")
                 return true
@@ -42,7 +42,7 @@ class Accounts {
         var found: Bool = false
         for pass in credentials.values{
             print("controllo password")
-//            print(pass, password)
+            //            print(pass, password)
             if pass == password {
                 print("password trovata!")
                 found = true
@@ -68,11 +68,11 @@ class Accounts {
         currentUser = user
     }
     
-//----------^-----LOGIN-----^----------
+    //----------^-----LOGIN-----^----------
     
     
     
-//----------v-----CREATE ACCOUNT-----v----------
+    //----------v-----CREATE ACCOUNT-----v----------
     
     func addAccountCredentials(username: String, password: String){
         
@@ -93,3 +93,4 @@ class Accounts {
     }
     
 }
+

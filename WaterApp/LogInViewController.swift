@@ -64,7 +64,8 @@ class LogInViewController: UIViewController {
                 if let u = user {
                     // the username was found
                     print("trovato")
-                    
+                    Accounts.shared.isLogged = true
+                    self.navigationController?.popViewController(animated: true)
                 }
                 else {
                     print("Non esiste");

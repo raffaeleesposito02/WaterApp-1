@@ -538,7 +538,6 @@
         <image name="placeholder 2" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cza-iW-xbx"/>
         <segue reference="51U-uN-s9j"/>
         <segue reference="Tsq-72-AKj"/>
     </inferredMetricsTieBreakers>
