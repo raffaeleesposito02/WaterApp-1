@@ -40,8 +40,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, CLLocationManage
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         self.userPosition = userLocation.coordinate
-        
-        print("Position updated - lat: \(userLocation.coordinate.latitude) long: \(userLocation.coordinate.longitude)")
     
 /*        let start = DispatchTime.now()
         

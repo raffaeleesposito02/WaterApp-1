@@ -31,15 +31,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         btnProfile.layer.cornerRadius = btnProfile.bounds.width*0.5;
         super.viewDidLoad()
         ref = Database.database().reference();
-        // here I check if the user have done the Log in
-        if(self.appDelegate.username != "NoValue") {
-            ref?.child("Users").child("\(self.appDelegate.username)").observe(.childChanged , with: { (snapshot) in
-                self.usernameLabel.text = self.appDelegate.username;
-                let value = snapshot.value as? NSDictionary;
-                let notifyNew = value?["NotifyMe"] as? Bool
-                self.notifyNews.setOn(notifyNew!, animated: true);
-            })
-        }
+        print("\(self.appDelegate.username)")
+
+
     }
     
     @IBAction func selectProfilePhotoButtonTapped(_ sender: Any) {
@@ -60,13 +54,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         usernameLabel.text = Accounts.shared.currentUser
         
         if Accounts.shared.isLogged {
-            
             loginButtonShape.setTitle("Logout", for: .normal)
-            
         } else {
-            
             loginButtonShape.setTitle("Login", for: .normal)
-            
+            }
+        
+        print("\(self.appDelegate.username)")
+        // here I check if the user have done the Log in
+        if(self.appDelegate.username != "NoValue") {
+            print("\(self.appDelegate.username)")
+                        ref?.child("Preferences").child("Ho").observe(.value , with: { (snapshot) in
+                            self.usernameLabel.text = self.appDelegate.username;
+                            let value = snapshot.value as? NSDictionary;
+                            let notifyNew = value?["NotifyMe"] as? Bool
+                            self.notifyNews.setOn(notifyNew!, animated: true);
+                        })
         }
     }
 
