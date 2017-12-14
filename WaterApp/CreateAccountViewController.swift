@@ -67,6 +67,8 @@ class CreateAccountViewController: UIViewController {
                         self.ref?.child("Users").child("\(self.usernameTextField.text ?? "NoValue")").child("Email").setValue("\(self.emailTextField.text ?? "NoValue")");
                         print("User creato");
                         
+                        print("User creato")
+                        self.navigationController?.popViewController(animated: true)
                     } else {
                         print("C'è stato un errore \(error.debugDescription)");
                     }

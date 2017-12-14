@@ -63,8 +63,9 @@ class LogInViewController: UIViewController {
                 //check if the username is nil
                 if let u = user {
                     // the username was found
-                    print("Trovato")
-                    
+                    print("trovato")
+                    Accounts.shared.isLogged = true
+                    self.navigationController?.popViewController(animated: true)
                 }
                 else {
                     //  give a message of error
