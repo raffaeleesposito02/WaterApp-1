@@ -335,11 +335,11 @@
             </objects>
             <point key="canvasLocation" x="3278" y="1277"/>
         </scene>
-        <!--News-->
+        <!--Info-->
         <scene sceneID="LNH-0F-CtM">
             <objects>
                 <navigationController id="mTu-7l-hl6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="News" image="newspaper-folded 2 2" selectedImage="newspaper-folded 2" id="veZ-b1-GYH"/>
+                    <tabBarItem key="tabBarItem" title="Info" image="IconInfo_normal" selectedImage="IconInfo_selected" id="veZ-b1-GYH"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Q5k-Bo-k3J">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -503,6 +503,8 @@
     <resources>
         <image name="Group Favourites" width="195" height="25"/>
         <image name="Group Settings" width="196" height="24"/>
+        <image name="IconInfo_normal" width="40" height="40"/>
+        <image name="IconInfo_selected" width="40" height="40"/>
         <image name="IconSettingProfile_normal" width="20" height="21"/>
         <image name="IconSettingProfile_selected" width="20" height="21"/>
         <image name="NoneProfilePhoto" width="207" height="240"/>
@@ -513,7 +515,7 @@
         <image name="placeholder 2" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="51U-uN-s9j"/>
+        <segue reference="McD-Ua-rYx"/>
         <segue reference="Tsq-72-AKj"/>
     </inferredMetricsTieBreakers>
 </document>
