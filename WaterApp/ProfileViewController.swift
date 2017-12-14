@@ -22,25 +22,24 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         myPickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
         
         self.present(myPickerController, animated:true, completion: nil)
-        
-        btnProfile.layer.cornerRadius = loginButtonShape.frame.size.width / 2
-        
+        btnProfile.clipsToBounds = true;
+        btnProfile.contentMode = .center;
+        btnProfile.layer.cornerRadius = btnProfile.bounds.width*0.5
         
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+
         loginButtonShape.layer.cornerRadius = 8;
         usernameLabel.adjustsFontSizeToFitWidth = true
+        btnProfile.layer.cornerRadius = btnProfile.bounds.width*0.5;
         
+        super.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
         usernameLabel.text = Accounts.shared.currentUser
-        
-    
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,12 +47,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
 
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-
         btnProfile.setImage(info[UIImagePickerControllerOriginalImage] as? UIImage, for: UIControlState.normal);
-        btnProfile.layer.cornerRadius = loginButtonShape.frame.size.width / 2
-        
         self.dismiss(animated: true, completion: nil)
-       
     }
     
 }

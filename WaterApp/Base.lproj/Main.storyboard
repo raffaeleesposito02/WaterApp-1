@@ -158,16 +158,23 @@
                                 <color key="textColor" white="0.59578450520833337" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nv-bY-hGa">
-                                <rect key="frame" x="16" y="86" width="150" height="150"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="NoneProfilePhoto"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nv-bY-hGa">
+                                <rect key="frame" x="16" y="64" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="4YB-bO-SgR"/>
+                                    <constraint firstAttribute="height" constant="150" id="6v2-xs-FkZ"/>
+                                </constraints>
+                                <state key="normal" image="avatar-inside-a-circle"/>
                                 <connections>
                                     <action selector="selectProfilePhotoButtonTapped:" destination="vsn-W7-Eb3" eventType="touchUpInside" id="22J-wE-4ob"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3nv-bY-hGa" firstAttribute="top" secondItem="xWY-QG-zSN" secondAttribute="top" constant="44" id="Yim-Rr-dQv"/>
+                            <constraint firstItem="3nv-bY-hGa" firstAttribute="leading" secondItem="xWY-QG-zSN" secondAttribute="leading" constant="16" id="e7f-2s-XaY"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="xWY-QG-zSN"/>
                     </view>
                     <navigationItem key="navigationItem" id="bmk-Ca-1pr"/>
@@ -521,8 +528,8 @@
         <image name="Group Settings" width="196" height="24"/>
         <image name="IconSettingProfile_normal" width="20" height="21"/>
         <image name="IconSettingProfile_selected" width="20" height="21"/>
-        <image name="NoneProfilePhoto" width="207" height="240"/>
         <image name="Separator" width="325" height="12"/>
+        <image name="avatar-inside-a-circle" width="256" height="256"/>
         <image name="newspaper-folded 2" width="20" height="20"/>
         <image name="newspaper-folded 2 2" width="20" height="20"/>
         <image name="oFFFF" width="90" height="91"/>
@@ -531,6 +538,7 @@
         <image name="placeholder 2" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="cza-iW-xbx"/>
         <segue reference="51U-uN-s9j"/>
         <segue reference="Tsq-72-AKj"/>
     </inferredMetricsTieBreakers>
