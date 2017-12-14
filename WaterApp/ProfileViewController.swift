@@ -11,16 +11,19 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     @IBOutlet weak var usernameLabel: UILabel!
-   
+    
     @IBOutlet weak var btnProfile: UIButton!
     @IBOutlet weak var notifyNews: UISwitch!
     @IBOutlet weak var btnLogIn: UIButton!
     @IBOutlet weak var switchNotifyChanges: UISwitch!
     @IBOutlet weak var btnLogOut: UIButton!
+    @IBOutlet weak var labelLanguage: UILabel!
+    @IBOutlet weak var labelMeasurement: UILabel!
+    @IBOutlet weak var labelCity: UILabel!
     
-
+    
     var ref: DatabaseReference?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate;
     
@@ -31,6 +34,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         btnLogOut.isEnabled = false;
         btnLogIn.isEnabled = true;
         self.appDelegate.uid = "NoValue";
+        self.appDelegate.username = "Username"
         
     }
     
@@ -40,8 +44,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         btnLogOut.layer.cornerRadius = 8;
         btnProfile.layer.cornerRadius = btnProfile.bounds.width*0.5;
         super.viewDidLoad()
-        ref = Database.database().reference();  
-        print("Uid = \(self.appDelegate.uid)")
+        ref = Database.database().reference();
         
     }
     
@@ -57,17 +60,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
-
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
-        print("Uid view Did Appear = \(self.appDelegate.uid)")
+        
         // Here I check if the user have done the Log in
         if(self.appDelegate.uid != "NoValue") {
             //Enable the button Log out and disable the button of LogIn
             btnLogOut.isEnabled = true;
             btnLogIn.isEnabled = false;
-            print("Uid inside if  = \(self.appDelegate.uid)")
+           
             ref?.child("Users").child(self.appDelegate.uid).observe(.value , with: { (snapshot) in
                 
                 // Retrive all informations about that users
@@ -77,7 +79,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.usernameLabel.text  = value?["Username"] as? String
                 let notifyNew = value?["NotifyNews"] as? Bool
                 let notifyChanges =  value?["NotifyChanges"] as? Bool
-                
+                self.labelLanguage.text = value?["Language"] as? String
+                self.labelMeasurement.text = value?["Unit of Misure"] as? String;
                 
                 self.notifyNews.setOn(notifyNew ?? false, animated: true);
                 self.switchNotifyChanges.setOn(notifyChanges ?? false, animated: true);
@@ -85,11 +88,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             })
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         btnProfile.setImage(info[UIImagePickerControllerOriginalImage] as? UIImage, for: UIControlState.normal);
         self.dismiss(animated: true, completion: nil)
