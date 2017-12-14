@@ -19,6 +19,7 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var btnGoogle: UIButton!
     @IBOutlet weak var subViewLogIn: UIView!
     var ref: DatabaseReference?
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate;
     
     override func viewDidLoad() {
         // set the layout of view
@@ -62,14 +63,13 @@ class LogInViewController: UIViewController {
                 (user, error) in
                 //check if the username is nil
                 if let u = user {
-                    // the username was found
-                    print("trovato")
-                    Accounts.shared.isLogged = true
+                    // the username was found, so i need to come back and set the User_id
+                    self.appDelegate.uid = user?.uid ?? "NoValue";
                     self.navigationController?.popViewController(animated: true)
                 }
                 else {
                     //  give a message of error
-                    print("Non esiste");
+                    
                     
                 }
             })

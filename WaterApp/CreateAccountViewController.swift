@@ -60,14 +60,24 @@ class CreateAccountViewController: UIViewController {
             passwordMismatch.isHidden = true;
             if let email = emailTextField.text, let pass = passwordTextField.text {
                 Auth.auth().createUser(withEmail: email, password: pass, completion: {
+                    
                     (user, error) in
-                    if let u = user {
+                    
+                    if user != nil {
                         self.appDelegate.username = self.usernameTextField.text!
+                        // Create a reference to a particular user
+                        var reference =  self.ref?.child("Users").child("\(user?.uid ?? "NoValue")");
                         
-                        self.ref?.child("Users").child("\(self.usernameTextField.text ?? "NoValue")").child("Email").setValue("\(self.emailTextField.text ?? "NoValue")");
-                        print("User creato");
+                        // Create the all Informations that I need
+                        reference?.child("Email").setValue("\(self.emailTextField.text ?? "NoValue")");
+                        reference?.child("Language").setValue("English");
+                        reference?.child("Unit of Misure").setValue("Metric");
+                        reference?.child("NotifyNews").setValue(true);
+                        reference?.child("NotifyChanges").setValue(true);
+                        reference?.child("ProfileImage").setValue("There will be an image here");
+                        reference?.child("Username").setValue(self.usernameTextField.text!);
                         
-                        print("User creato")
+                        // I come back to Profile View
                         self.navigationController?.popViewController(animated: true)
                     } else {
                         print("C'è stato un errore \(error.debugDescription)");

@@ -8,32 +8,41 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var loginButtonShape: UIButton!
-    
-    @IBAction func loginButton(_ sender: Any) {
-        Accounts.shared.isLogged = false
-    }
-    
+   
     @IBOutlet weak var btnProfile: UIButton!
     @IBOutlet weak var notifyNews: UISwitch!
+    @IBOutlet weak var btnLogIn: UIButton!
+    @IBOutlet weak var switchNotifyChanges: UISwitch!
+    @IBOutlet weak var btnLogOut: UIButton!
+    
+
     var ref: DatabaseReference?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate;
     
+    // LogOut
+    @IBAction func actionLogOut(_ sender: Any) {
+        try! Auth.auth().signOut();
+        // After the logIn the button LogOut is not enable, meanwhile the LogIn yes
+        btnLogOut.isEnabled = false;
+        btnLogIn.isEnabled = true;
+        self.appDelegate.uid = "NoValue";
+        
+    }
     
     override func viewDidLoad() {
         
-        loginButtonShape.layer.cornerRadius = 8;
-        usernameLabel.adjustsFontSizeToFitWidth = true
+        btnLogIn.layer.cornerRadius = 8;
+        btnLogOut.layer.cornerRadius = 8;
         btnProfile.layer.cornerRadius = btnProfile.bounds.width*0.5;
         super.viewDidLoad()
-        ref = Database.database().reference();
-        print("\(self.appDelegate.username)")
-
-
+        ref = Database.database().reference();  
+        print("Uid = \(self.appDelegate.uid)")
+        
     }
     
     @IBAction func selectProfilePhotoButtonTapped(_ sender: Any) {
@@ -49,26 +58,31 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
 
+    
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
-        usernameLabel.text = Accounts.shared.currentUser
-        
-        if Accounts.shared.isLogged {
-            loginButtonShape.setTitle("Logout", for: .normal)
-        } else {
-            loginButtonShape.setTitle("Login", for: .normal)
-            }
-        
-        print("\(self.appDelegate.username)")
-        // here I check if the user have done the Log in
-        if(self.appDelegate.username != "NoValue") {
-            print("\(self.appDelegate.username)")
-                        ref?.child("Preferences").child("Ho").observe(.value , with: { (snapshot) in
-                            self.usernameLabel.text = self.appDelegate.username;
-                            let value = snapshot.value as? NSDictionary;
-                            let notifyNew = value?["NotifyMe"] as? Bool
-                            self.notifyNews.setOn(notifyNew!, animated: true);
-                        })
+        print("Uid view Did Appear = \(self.appDelegate.uid)")
+        // Here I check if the user have done the Log in
+        if(self.appDelegate.uid != "NoValue") {
+            //Enable the button Log out and disable the button of LogIn
+            btnLogOut.isEnabled = true;
+            btnLogIn.isEnabled = false;
+            print("Uid inside if  = \(self.appDelegate.uid)")
+            ref?.child("Users").child(self.appDelegate.uid).observe(.value , with: { (snapshot) in
+                
+                // Retrive all informations about that users
+                let value = snapshot.value as? NSDictionary;
+                
+                // Set Everything
+                self.usernameLabel.text  = value?["Username"] as? String
+                let notifyNew = value?["NotifyNews"] as? Bool
+                let notifyChanges =  value?["NotifyChanges"] as? Bool
+                
+                
+                self.notifyNews.setOn(notifyNew ?? false, animated: true);
+                self.switchNotifyChanges.setOn(notifyChanges ?? false, animated: true);
+                
+            })
         }
     }
 
