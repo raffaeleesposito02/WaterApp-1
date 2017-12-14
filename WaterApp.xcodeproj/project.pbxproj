@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		057F92561FDBEC3D00750964 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057F92551FDBEC3D00750964 /* MapViewController.swift */; };
 		3522EA7C1FE02BFB00280FDF /* AccountsSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3522EA7B1FE02BFB00280FDF /* AccountsSingleton.swift */; };
-		355E33D31FDE8A7D001B551B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 355E33CF1FDE8A7C001B551B /* FBSDKCoreKit.framework */; };
-		355E33D41FDE8A7D001B551B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 355E33D01FDE8A7C001B551B /* Bolts.framework */; };
-		355E33D51FDE8A7D001B551B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 355E33D11FDE8A7D001B551B /* FBSDKLoginKit.framework */; };
-		355E33D61FDE8A7D001B551B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 355E33D21FDE8A7D001B551B /* FBSDKShareKit.framework */; };
 		3579493D1FDA872700667BB6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579493C1FDA872700667BB6 /* ProfileViewController.swift */; };
 		35C733281FDC15EC007D1049 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C733271FDC15EC007D1049 /* LogInViewController.swift */; };
 		35C7332A1FDC18A3007D1049 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C733291FDC18A3007D1049 /* CreateAccountViewController.swift */; };
@@ -36,10 +32,6 @@
 		057F92551FDBEC3D00750964 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		30DFB4EE24CC2F6614492772 /* Pods-WaterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp.release.xcconfig"; sourceTree = "<group>"; };
 		3522EA7B1FE02BFB00280FDF /* AccountsSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSingleton.swift; sourceTree = "<group>"; };
-		355E33CF1FDE8A7C001B551B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		355E33D01FDE8A7C001B551B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		355E33D11FDE8A7D001B551B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		355E33D21FDE8A7D001B551B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		3579493C1FDA872700667BB6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		35C733271FDC15EC007D1049 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		35C733291FDC18A3007D1049 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -68,11 +60,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F5BD4441FDD2EB300D7B654 /* MapKit.framework in Frameworks */,
-				355E33D31FDE8A7D001B551B /* FBSDKCoreKit.framework in Frameworks */,
-				355E33D61FDE8A7D001B551B /* FBSDKShareKit.framework in Frameworks */,
-				355E33D51FDE8A7D001B551B /* FBSDKLoginKit.framework in Frameworks */,
 				7FBC6C271FDD296F001171BE /* CoreLocation.framework in Frameworks */,
-				355E33D41FDE8A7D001B551B /* Bolts.framework in Frameworks */,
 				71F7B4A876CD6C1F2A3F2453 /* Pods_WaterApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,15 +101,11 @@
 				6D0245B61FDFDF010020D732 /* ArticleViewController.swift */,
 				6DD6D1761FD981D800B78C7D /* Main.storyboard */,
 				3522EA7B1FE02BFB00280FDF /* AccountsSingleton.swift */,
-				6DD6D1791FD981D800B78C7D /* Assets.xcassets */,
-				355E33D01FDE8A7C001B551B /* Bolts.framework */,
-				355E33CF1FDE8A7C001B551B /* FBSDKCoreKit.framework */,
-				355E33D11FDE8A7D001B551B /* FBSDKLoginKit.framework */,
-				355E33D21FDE8A7D001B551B /* FBSDKShareKit.framework */,
 				6DD6D17B1FD981D800B78C7D /* LaunchScreen.storyboard */,
 				7F360C491FDFFA0600521C71 /* SplashViewController.swift */,
 				6DD6D17E1FD981D800B78C7D /* Info.plist */,
 				BDA719131FE15CCD00D25679 /* GoogleService-Info.plist */,
+				6DD6D1791FD981D800B78C7D /* Assets.xcassets */,
 			);
 			path = WaterApp;
 			sourceTree = "<group>";

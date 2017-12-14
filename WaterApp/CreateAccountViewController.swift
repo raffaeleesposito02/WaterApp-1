@@ -48,16 +48,17 @@ class CreateAccountViewController: UIViewController {
     
     @IBAction func createAccount(_ sender: Any) {
         // If the 2 password aren't equal show the warning
-        if(passwordTextField.text == retypePasswordTextField.text  || usernameTextField == nil ){
+        if( passwordTextField.text != retypePasswordTextField.text  || usernameTextField.text == nil ){
             passwordMismatch.isHidden = false;
         } else { // Do the registration
+            passwordMismatch.isHidden = true;
             if let email = emailTextField.text, let pass = passwordTextField.text {
                 Auth.auth().createUser(withEmail: email, password: pass, completion: {
                     (user, error) in
                     if let u = user {
                         print("User creato");
                     } else {
-                        print("C'è stato un errore");
+                        print("C'è stato un errore \(error.debugDescription)");
                     }
                     
                 });

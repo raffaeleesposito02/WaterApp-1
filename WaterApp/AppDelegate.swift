@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FBSDKCoreKit
 import Firebase
 
 @UIApplicationMain
@@ -39,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
-        FBSDKAppEvents.activateApp()
+       
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -47,15 +46,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         // Add any custom logic here.
         return true
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        let handled: Bool = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        
         // Add any custom logic here.
-        return handled
+        return true;
     }
 }
 
