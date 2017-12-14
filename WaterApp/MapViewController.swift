@@ -58,6 +58,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
      
         marker.map = googleMapsView
         marker.tracksInfoWindowChanges = true
+        marker.icon = #imageLiteral(resourceName: "flag-map-marker")
 
 //        if googleMapsView.selectedMarker == marker {
 //            performSegue(withIdentifier: "markerTapped", sender: nil)
