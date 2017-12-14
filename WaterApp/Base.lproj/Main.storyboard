@@ -18,45 +18,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3H-sI-Xkc">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rA-4r-8KR" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <connections>
-                                    <outlet property="delegate" destination="pze-eX-819" id="07U-3f-0ck"/>
-                                </connections>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bai-5b-0EW">
-                                <rect key="frame" x="330" y="78" width="39" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="oFFFF"/>
-                                <state key="highlighted" image="oNNNNNNN" backgroundImage="oNNNNNNN"/>
-                                <connections>
-                                    <action selector="findPosition:" destination="pze-eX-819" eventType="touchUpInside" id="5X4-lx-biX"/>
-                                </connections>
-                            </button>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="l3H-sI-Xkc" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" id="Pqc-1L-iSQ"/>
-                            <constraint firstItem="l3H-sI-Xkc" firstAttribute="trailing" secondItem="KMD-gR-rHM" secondAttribute="trailing" id="QDr-LT-8CW"/>
-                            <constraint firstItem="l3H-sI-Xkc" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" id="dzs-8x-jav"/>
-                            <constraint firstItem="l3H-sI-Xkc" firstAttribute="bottom" secondItem="KMD-gR-rHM" secondAttribute="bottom" id="vpX-Gs-acf"/>
+                            <constraint firstItem="2rA-4r-8KR" firstAttribute="trailing" secondItem="KMD-gR-rHM" secondAttribute="trailing" id="5Op-OF-bzb"/>
+                            <constraint firstItem="2rA-4r-8KR" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" id="6BN-xo-AeX"/>
+                            <constraint firstItem="2rA-4r-8KR" firstAttribute="bottom" secondItem="KMD-gR-rHM" secondAttribute="bottom" id="UN2-oZ-cyT"/>
+                            <constraint firstItem="2rA-4r-8KR" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" id="xka-1F-RAP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KMD-gR-rHM"/>
                     </view>
                     <navigationItem key="navigationItem" id="ReM-K7-1Zy">
-                        <barButtonItem key="leftBarButtonItem" title="My Position" id="lff-rn-JW8">
-                            <connections>
-                                <action selector="refLocation:" destination="pze-eX-819" id="3ua-qZ-oL3"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="NZu-Ef-VnM">
                             <connections>
-                                <action selector="searchButton:" destination="pze-eX-819" id="331-M8-t8U"/>
+                                <action selector="openSearchAddress:" destination="pze-eX-819" id="E3f-gm-gVg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="mapView" destination="l3H-sI-Xkc" id="8io-2o-PhL"/>
+                        <outlet property="googleMapsView" destination="2rA-4r-8KR" id="fFB-Rv-Eld"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o9S-l6-tfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -525,8 +509,6 @@
         <image name="Separator" width="325" height="12"/>
         <image name="newspaper-folded 2" width="20" height="20"/>
         <image name="newspaper-folded 2 2" width="20" height="20"/>
-        <image name="oFFFF" width="90" height="91"/>
-        <image name="oNNNNNNN" width="90" height="90"/>
         <image name="placeholder" width="20" height="20"/>
         <image name="placeholder 2" width="20" height="20"/>
     </resources>

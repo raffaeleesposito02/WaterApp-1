@@ -9,5 +9,7 @@ target 'WaterApp' do
 
    pod 'Firebase/Core'
    pod 'Firebase/Auth'
+   pod 'GoogleMaps', '~> 2.5'
+   pod 'GooglePlaces', '~> 2.5'
 
 end

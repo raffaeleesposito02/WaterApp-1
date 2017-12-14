@@ -7,134 +7,111 @@
 //
 
 import UIKit
-import MapKit
-import CoreLocation
+import GoogleMaps
+import GooglePlaces
 
-class MapViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
     
-    var userPosition: CLLocationCoordinate2D!
-    var managerPosition: CLLocationManager!
-
-    @IBOutlet weak var mapView: MKMapView!
+    // OUTLETS
     
-    @IBAction func searchButton(_ sender: Any) {
-        let searchController = UISearchController (searchResultsController: nil)
-        searchController.searchBar.delegate = self
-        present(searchController, animated: true, completion: nil)
-    }
+    @IBOutlet weak var googleMapsView: GMSMapView!
     
- 
-
+    // VARIABLES
+    var locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.mapView.delegate = self
-        self.managerPosition = CLLocationManager()
-        managerPosition.delegate = self
-        managerPosition.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        managerPosition.requestWhenInUseAuthorization()
-        managerPosition.startUpdatingLocation()
-   }
-    
-    
-    
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        self.userPosition = userLocation.coordinate
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
         
-        print("Position updated - lat: \(userLocation.coordinate.latitude) long: \(userLocation.coordinate.longitude)")
-    
-/*        let start = DispatchTime.now()
-        
-        let span = MKCoordinateSpanMake(0.05, 0.05)
-        
-        let region = MKCoordinateRegion(center: userPosition, span: span)
-        
-        mapView.setRegion(region, animated: true)
-        
-        sleep(20)
-        
-        let end = DispatchTime.now()
- */
-        let actualSpan = mapView.region.span
-        let actualRegion = mapView.region.center
- 
-        let region = MKCoordinateRegion(center: actualRegion, span: actualSpan)
-
-        mapView.setRegion(region, animated: true)
+        initGoogleMaps()
     }
     
+    func initGoogleMaps() {
+        
+        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
+        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        mapView.isMyLocationEnabled = true
+        self.googleMapsView.camera = camera
+        
+        self.googleMapsView.delegate = self
+        self.googleMapsView.isMyLocationEnabled = true
+        self.googleMapsView.settings.myLocationButton = true
+        
+        
+        // Creates a marker in the center of the map.
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
+        marker.title = "Sydney"
+        marker.snippet = "Australia"
+        marker.map = mapView
+    }
     
+    // MARK: CLLocation Manager Delegate
     
-    @IBAction func refLocation(_ sender: Any) {
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = .follow
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error while get location \(error)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last
+        
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+        
+        self.googleMapsView.animate(to: camera)
+        self.locationManager.stopUpdatingLocation()
         
     }
     
-    @IBAction func findPosition(_ sender: UIButton) {
-       dismiss(animated: true)
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = .follow
+    // MARK: GMSMapview Delegate
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        self.googleMapsView.isMyLocationEnabled = true
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        //ignoring user
-        UIApplication.shared.beginIgnoringInteractionEvents()
-        //Activity indicator
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.startAnimating()
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
         
-        self.view.addSubview(activityIndicator)
-        
-        //hide search bar
-        
-        searchBar.resignFirstResponder()
-        dismiss(animated: true, completion: nil)
-        
-        //create search request
-        
-        let searchRequest = MKLocalSearchRequest()
-        searchRequest.naturalLanguageQuery = searchBar.text
-        
-        let activeSearch = MKLocalSearch(request: searchRequest)
-        
-        activeSearch.start { (response, error) in
-            
-            activityIndicator.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
-            
-            if response == nil
-            {
-                print("ERROR")
-            }
-            else
-            {
-                //remove annotations
-                let annotations = self.mapView.annotations
-                self.mapView.removeAnnotations(annotations)
-                
-                //Getting data
-                let latitude = response?.boundingRegion.center.latitude
-                let longitude = response?.boundingRegion.center.longitude
-                
-                //create annotations
-                let annotation = MKPointAnnotation()
-                annotation.title = searchBar.text
-                annotation.coordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
-                self.mapView.addAnnotation(annotation)
-                
-                //zooming annotations
-                self.managerPosition.startUpdatingLocation()
-                let coordinate:CLLocationCoordinate2D = CLLocationCoordinate2D( latitude: latitude!, longitude: longitude!)
-                let span = MKCoordinateSpanMake(0.1, 0.1)
-                let region = MKCoordinateRegionMake(coordinate, span)
-                self.mapView.setRegion(region, animated: true)
-                
-            }
+        self.googleMapsView.isMyLocationEnabled = true
+        if (gesture) {
+            mapView.selectedMarker = nil
         }
-     
+        
     }
+    
+    // MARK: GOOGLE AUTO COMPLETE DELEGATE
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 15.0)
+        self.googleMapsView.camera = camera
+        self.dismiss(animated: true, completion: nil) // dismiss after select place
+        
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        
+        print("ERROR AUTO COMPLETE \(error)")
+        
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        self.dismiss(animated: true, completion: nil) // when cancel search
+    }
+    
+    
+    
+    @IBAction func openSearchAddress(_ sender: UIBarButtonItem) {
+        let autoCompleteController = GMSAutocompleteViewController()
+        autoCompleteController.delegate = self
+        
+        self.locationManager.startUpdatingLocation()
+        self.present(autoCompleteController, animated: true, completion: nil)
+    }
+    
+    
+    
+    
 }
