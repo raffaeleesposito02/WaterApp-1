@@ -1,0 +1,6 @@
+framework module Pods_WaterApp {
+  umbrella header "Pods-WaterApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
