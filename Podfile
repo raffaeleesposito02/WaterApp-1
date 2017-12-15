@@ -11,8 +11,4 @@ target 'WaterApp' do
    pod 'Firebase/Auth'
    pod 'Firebase/Database'
    pod 'GoogleSignIn'
-   pod 'FBSDKCoreKit'
-   pod 'FBSDKLoginKit'
-   pod 'Bolts'
-
 end

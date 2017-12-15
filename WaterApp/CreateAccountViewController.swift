@@ -72,10 +72,9 @@ class CreateAccountViewController: UIViewController {
                         (user, error) in
                         
                         if user != nil {
-                            self.appDelegate.username = self.usernameTextField.text!
+                            self.appDelegate.uid = (user?.uid)!;
                             // Create a reference to a particular user
                             let reference =  self.ref?.child("Users").child("\(user?.uid ?? "NoValue")");
-                            
                             // Create the all Informations that I need
                             reference?.child("Email").setValue("\(self.emailTextField.text ?? "NoValue")");
                             reference?.child("Language").setValue("English");
@@ -86,7 +85,7 @@ class CreateAccountViewController: UIViewController {
                             reference?.child("Username").setValue(self.usernameTextField.text!);
                             
                             // I come back to Profile View
-                            self.navigationController?.popViewController(animated: true)
+                            self.navigationController?.popToRootViewController(animated: true)
                         } else {
                             print("C'è stato un errore \(error?.localizedDescription)");
                         }

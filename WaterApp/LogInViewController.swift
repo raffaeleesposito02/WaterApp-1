@@ -10,10 +10,9 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import GoogleSignIn
-import FBSDKCoreKit
-import FBSDKLoginKit
 
-class LogInViewController: UIViewController, GIDSignInUIDelegate {
+
+class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate{
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -38,8 +37,7 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
         ref = Database.database().reference();
         
         GIDSignIn.sharedInstance().uiDelegate = self
-        
-        
+        GIDSignIn.sharedInstance().delegate = self;
         super.viewDidLoad()
     }
     
@@ -70,7 +68,7 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
             Auth.auth().signIn(withEmail: email, password: pass, completion: {
                 (user, error) in
                 //check if the username is nil
-                if let u = user {
+                if user != nil {
                     // the username was found, so i need to come back and set the User_id
                     self.appDelegate.uid = user?.uid ?? "NoValue";
                     self.navigationController?.popViewController(animated: true)
@@ -86,18 +84,7 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
     
     @IBAction func signWithGoogle(_ sender: Any) {
         GIDSignIn.sharedInstance().signIn();
-    }
-    
-    
-    
-    @IBAction func facebookLogin (sender: AnyObject){
-        let facebookLogin = FBSDKLoginManager()
-        print("Logging In");
-        facebookLogin.logIn(withReadPermissions: ["email"], from: self, handler:{(facebookResult, facebookError) -> Void in
-            if facebookError != nil { print("Facebook login failed. Error \(facebookError)")
-            } else if (facebookResult?.isCancelled)! { print("Facebook login was cancelled.")
-            } else { print("You’re inz ;)")}
-        });
+
     }
     
 //  hide keyboard
@@ -108,6 +95,56 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    
+    //when the signin complets
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        //if any error stop and print the error
+        if error != nil{
+            print(error ?? "google error")
+            return
+        }
+        guard let authentication = user.authentication else { return }
+        
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        
+        Auth.auth().signIn(with: credential) { (user, error) in
+            
+            if let error = error {
+                // ...
+                return
+            }
+            // Set the User_Id
+            self.appDelegate.uid = (user?.uid)! ;
+            
+            // I see if there is already the google account or not
+            self.ref?.child("Users").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                // If not i create a new one
+                if !(snapshot.hasChild(self.appDelegate.uid)){
+                    // Create the all Informations that I need
+                    let reference = self.ref?.child("Users").child(self.appDelegate.uid);
+                    reference?.child("Email").setValue("\(user?.email ?? "NoValue")");
+                    reference?.child("Language").setValue("English");
+                    reference?.child("Unit of Misure").setValue("Metric");
+                    reference?.child("NotifyNews").setValue(true);
+                    reference?.child("NotifyChanges").setValue(true);
+                    reference?.child("ProfileImage").setValue("There will be an image here");
+                    reference?.child("Username").setValue( (user?.displayName)!);
+                }
+                self.navigationController?.popViewController(animated: true);
+                
+            })
+
+    
+            
+        }
+        
+        
+        
     }
     
 }
