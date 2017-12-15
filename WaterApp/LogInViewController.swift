@@ -21,6 +21,7 @@ class LogInViewController: UIViewController {
     var ref: DatabaseReference?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate;
     
+    
     override func viewDidLoad() {
         // set the layout of view
         layoutTextFiled(usernameTextField);
