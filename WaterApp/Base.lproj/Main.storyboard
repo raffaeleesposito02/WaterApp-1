@@ -41,11 +41,36 @@
                     </navigationItem>
                     <connections>
                         <outlet property="googleMapsView" destination="2rA-4r-8KR" id="fFB-Rv-Eld"/>
+                        <segue destination="W1O-zo-BIk" kind="show" identifier="markerTapped" id="3af-bc-Yqj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o9S-l6-tfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1808.8" y="448.42578710644682"/>
+        </scene>
+        <!--Pop Up View Controller-->
+        <scene sceneID="de1-VW-Q5N">
+            <objects>
+                <viewController id="W1O-zo-BIk" customClass="PopUpViewController" customModule="WaterApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Gi-f5-0m7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SCEMO CHI LEGGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ua0-lN-U4X">
+                                <rect key="frame" x="73" y="251" width="229" height="165"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="f3u-8h-pEg"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HdV-hG-D9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2605.5999999999999" y="447.52623688155927"/>
         </scene>
         <!--Profile/Settings-->
         <scene sceneID="CwV-Zi-y6x">

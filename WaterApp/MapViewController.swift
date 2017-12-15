@@ -12,6 +12,12 @@ import GooglePlaces
 
 class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
     
+    func mapView(_ mapView:GMSMapView, didTap marker: GMSMarker) -> Bool {
+        print("\n\n\n\n\nDIOCANEEEEEEEEE\n\n\n\n\n")
+        performSegue(withIdentifier: "markerTapped", sender: nil)
+        return false
+    }
+    
     // OUTLETS
     
     @IBOutlet weak var googleMapsView: GMSMapView!
@@ -44,6 +50,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         
         // Creates a marker in the center of the map.
+       
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
         marker.title = "Sydney"
