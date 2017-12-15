@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         btnLogIn.isEnabled = true;
         self.appDelegate.uid = "NoValue";
         self.appDelegate.username = "Username"
+        self.usernameLabel.text = "Username"
         
     }
     
@@ -61,7 +62,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     
-    override func viewDidAppear(_ animated: Bool){
+    override func viewWillAppear(_ animated: Bool){
         super.viewDidAppear(animated)
         
         // Here I check if the user have done the Log in
@@ -98,6 +99,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    @IBAction func actionNotifyNews(_ sender: Any) {
+        ref?.child("Users").child(self.appDelegate.uid).child("NotifyNews").setValue(self.notifyNews.isOn);
+    }
+    
+    @IBAction func actionNotifyChanges(_ sender: Any) {
+        ref?.child("Users").child(self.appDelegate.uid).child("NotifyChanges").setValue(self.switchNotifyChanges.isOn);
+    }
 }
-
 
