@@ -55,22 +55,14 @@ class CreateAccountViewController: UIViewController {
     @IBAction func createAccount(_ sender: Any) {
         // If the 2 password aren't equal show the warning
         if( passwordTextField.text != retypePasswordTextField.text  || usernameTextField.text == nil ){
-            passwordMismatch.text = "Password doens't match or username is empty!"
-            passwordMismatch.sizeToFit();
-            passwordMismatch.isHidden = false;
+            createAlertMessage("Problem", "Password doens't match or Username is empty");
         } else { // Do the registration
-            passwordMismatch.isHidden = true;
-        
+            
             if let email = emailTextField.text, let pass = passwordTextField.text {
-                if(pass.count < 6) {
-                    passwordMismatch.text = "Password must to have 6 characters"
-                    passwordMismatch.sizeToFit();
-                    passwordMismatch.isHidden = false;
-                } else {
                     Auth.auth().createUser(withEmail: email, password: pass, completion: {
-                        
+                
                         (user, error) in
-                        
+        
                         if user != nil {
                             self.appDelegate.uid = (user?.uid)!;
                             // Create a reference to a particular user
@@ -87,11 +79,9 @@ class CreateAccountViewController: UIViewController {
                             // I come back to Profile View
                             self.navigationController?.popToRootViewController(animated: true)
                         } else {
-                            print("C'è stato un errore \(error?.localizedDescription)");
+                            self.manageTheError(error!);
                         }
-                        
                     });
-                }
             }
         }
     }
@@ -103,5 +93,40 @@ class CreateAccountViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
+    func manageTheError(_ error: Error){
+        if let errCode = AuthErrorCode(rawValue: error._code) {
+            
+            switch errCode {
+            case .emailAlreadyInUse:
+                // Create an alert message
+                createAlertMessage("Invalid Email", "Please check the entered email address");
+                break;
+            case .invalidEmail:
+                // Create an alert message
+                createAlertMessage("Email is not valid", "Please check the entered email address");
+                break;
+            case .weakPassword:
+                print("Weak Password")
+                // Create an alert message
+                createAlertMessage("Weak Password", "Password must have at least 6 characters");
+                break;
+            default:
+                createAlertMessage("Error", "Error 0x00081");
+                print("Other error: \(error.localizedDescription)");
+                break;
+            }
+        }
+    }
+    
+    func createAlertMessage(_ mTitle:String, _ mMessage: String) {
+        
+        let alertMessage = UIAlertController(title: mTitle, message: mMessage, preferredStyle: .alert)
+        // Attach an action on alert message
+        alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            alertMessage.dismiss(animated: true, completion: nil)
+        }))
+        // Display the alert message
+        self.present(alertMessage, animated: true, completion: nil)
+    }
 }
