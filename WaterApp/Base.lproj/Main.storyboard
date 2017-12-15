@@ -503,14 +503,12 @@
     <resources>
         <image name="Group Favourites" width="195" height="25"/>
         <image name="Group Settings" width="196" height="24"/>
-        <image name="IconInfo_normal" width="40" height="40"/>
-        <image name="IconInfo_selected" width="40" height="40"/>
+        <image name="IconInfo_normal" width="20" height="20"/>
+        <image name="IconInfo_selected" width="20" height="20"/>
         <image name="IconSettingProfile_normal" width="20" height="21"/>
         <image name="IconSettingProfile_selected" width="20" height="21"/>
         <image name="NoneProfilePhoto" width="207" height="240"/>
         <image name="Separator" width="325" height="12"/>
-        <image name="newspaper-folded 2" width="20" height="20"/>
-        <image name="newspaper-folded 2 2" width="20" height="20"/>
         <image name="placeholder" width="20" height="20"/>
         <image name="placeholder 2" width="20" height="20"/>
     </resources>
