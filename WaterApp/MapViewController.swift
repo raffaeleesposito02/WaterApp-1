@@ -52,17 +52,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         // Creates a marker in the center of the map.
        
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: 40.827839, longitude: 14.290466)
-//        marker.title = "Napoli"
-//        marker.snippet = "PORCODDIO, MADONNA \nPUTRIDA DSFJLJFDLF JSDFJLSDFJ\n SDJ FLKSJ LFSLG SK VJLS JDMCXVM.XCMLSML \nDSMLK SFDMLSDM FSLE MLFSM FKLSM XNXX OKSDJR\n OKSJ OIREWJI FJDSL FJLS "
-     
-        marker.map = googleMapsView
-        marker.tracksInfoWindowChanges = true
-        marker.icon = #imageLiteral(resourceName: "flag-map-marker")
-
-//        if googleMapsView.selectedMarker == marker {
-//            performSegue(withIdentifier: "markerTapped", sender: nil)
-//        }
+        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
+        marker.title = "Sydney"
+        marker.snippet = "Australia"
+        marker.map = mapView
+        
+        
     }
     
     // MARK: CLLocation Manager Delegate
@@ -79,6 +74,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         self.googleMapsView.animate(to: camera)
         self.locationManager.stopUpdatingLocation()
         
+        let filter = GMSAutocompleteFilter()
+        filter.type = .city
+        filter.country = "uk"
     }
     
     // MARK: GMSMapview Delegate
@@ -86,13 +84,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         self.googleMapsView.isMyLocationEnabled = true
     }
     
+    
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
         
         self.googleMapsView.isMyLocationEnabled = true
         if (gesture) {
             mapView.selectedMarker = nil
         }
-        
     }
     
     // MARK: GOOGLE AUTO COMPLETE DELEGATE
@@ -102,30 +100,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 15.0)
         self.googleMapsView.camera = camera
         self.dismiss(animated: true, completion: nil) // dismiss after select place
-        
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         
         print("ERROR AUTO COMPLETE \(error)")
-        
     }
     
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         self.dismiss(animated: true, completion: nil) // when cancel search
     }
     
-    
-    
     @IBAction func openSearchAddress(_ sender: UIBarButtonItem) {
-        let autoCompleteController = GMSAutocompleteViewController()
-        autoCompleteController.delegate = self
-        
-        self.locationManager.startUpdatingLocation()
-        self.present(autoCompleteController, animated: true, completion: nil)
+        let autocompletecontroller = GMSAutocompleteViewController()
+        autocompletecontroller.delegate = self
+        let filter = GMSAutocompleteFilter()
+        filter.type = .city //suitable filter type
+        filter.country = "IT"  //appropriate country code
+        autocompletecontroller.autocompleteFilter = filter
+        self.present(autocompletecontroller, animated: true, completion: nil)
     }
-    
-    
-    
-    
 }
