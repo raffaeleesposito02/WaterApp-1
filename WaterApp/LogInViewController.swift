@@ -9,8 +9,11 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import GoogleSignIn
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, GIDSignInUIDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -33,9 +36,10 @@ class LogInViewController: UIViewController {
     
         //----
         ref = Database.database().reference();
-        if(appDelegate.uid != "NoValue") {
-            self.navigationController?.popViewController(animated: true)
-        }
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
+        
         super.viewDidLoad()
     }
     
@@ -80,8 +84,22 @@ class LogInViewController: UIViewController {
         }
     }
     
-
-
+    @IBAction func signWithGoogle(_ sender: Any) {
+        GIDSignIn.sharedInstance().signIn();
+    }
+    
+    
+    
+    @IBAction func facebookLogin (sender: AnyObject){
+        let facebookLogin = FBSDKLoginManager()
+        print("Logging In");
+        facebookLogin.logIn(withReadPermissions: ["email"], from: self, handler:{(facebookResult, facebookError) -> Void in
+            if facebookError != nil { print("Facebook login failed. Error \(facebookError)")
+            } else if (facebookResult?.isCancelled)! { print("Facebook login was cancelled.")
+            } else { print("You’re inz ;)")}
+        });
+    }
+    
 //  hide keyboard
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

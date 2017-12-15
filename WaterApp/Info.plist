@@ -21,17 +21,17 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb145904572650922</string>
+				<string>com.googleusercontent.apps.437498123281-hbsukouqrpaaphhqhjp00e948rojnhnl</string>
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>FacebookAppID</key>
-	<string>145904572650922</string>
-	<key>FacebookDisplayName</key>
-	<string>alejesse_waterapp</string>
-	<key>LSApplicationQueriesSchemes</key>
+        <key>CFBundleVersion</key>
+        <string>1</string>
+        <key>FacebookAppID</key>
+        <string>145904572650922</string>
+        <key>FacebookDisplayName</key>
+        <string>alejesse_waterapp</string>
+        <key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>

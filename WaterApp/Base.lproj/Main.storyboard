@@ -328,6 +328,10 @@
                                         <state key="normal" title="Continue with Facebook">
                                             <color key="titleColor" red="0.99215686319999996" green="0.99607843159999998" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="facebookLoginWithSender:" destination="RXv-fE-kTm" eventType="touchUpInside" id="8cQ-6r-0dn"/>
+                                            <action selector="signWithFacebook:" destination="RXv-fE-kTm" eventType="touchUpInside" id="0i9-Rg-eRb"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Uc-fB-K49">
                                         <rect key="frame" x="25" y="428" width="325" height="50"/>
@@ -338,6 +342,9 @@
                                         <state key="normal" title="Continue with Google">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="signWithGoogle:" destination="RXv-fE-kTm" eventType="touchUpInside" id="J8i-Dg-sxW"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BuG-lC-3EO">
                                         <rect key="frame" x="107" y="503" width="161" height="28"/>
