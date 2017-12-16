@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var usernameLabel: UILabel!
     
@@ -23,6 +23,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var labelMeasurement: UILabel!
     @IBOutlet weak var labelCity: UILabel!
     
+    // I create a Picker view for the language
+    var pickerLanguage = UIPickerView();
+    var data = ["Italian", "English", "Napolitan"];
     
     var ref: DatabaseReference?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate;
@@ -35,7 +38,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         btnLogIn.isEnabled = true;
         self.appDelegate.uid = "NoValue";
         self.appDelegate.username = "Username"
-        self.usernameLabel.text = "Username"
+        self.usernameLabel.text = "Username";
         
     }
     
@@ -46,6 +49,23 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         btnProfile.layer.cornerRadius = btnProfile.bounds.width*0.5;
         super.viewDidLoad()
         ref = Database.database().reference();
+        
+        // I delegate the picker to itself. Same for the datasource of the picker
+        pickerLanguage.delegate = self
+        pickerLanguage.dataSource = self
+        
+        var pickerRect = pickerLanguage.frame;
+        pickerRect.origin.x = self.view.frame.minX + 20;
+        pickerRect.origin.y = self.view.frame.height/3; // some desired value
+        pickerLanguage.frame = pickerRect;
+        
+        pickerLanguage.isHidden = true;
+        view.addSubview(pickerLanguage)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(gestureReconizer:)))
+        labelLanguage.addGestureRecognizer(tap)
+        labelLanguage.isUserInteractionEnabled = true;
+        
         
     }
     
@@ -61,6 +81,27 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
+    @objc func tap(gestureReconizer: UITapGestureRecognizer) {
+        print("*")
+        pickerLanguage.isHidden = false
+    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return data.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        labelLanguage.text = data[row]
+        self.view.endEditing(true);
+        pickerView.isHidden = true;
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return data[row]
+    }
     
     override func viewWillAppear(_ animated: Bool){
         super.viewDidAppear(animated)
