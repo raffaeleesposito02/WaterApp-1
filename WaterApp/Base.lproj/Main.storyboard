@@ -321,6 +321,13 @@
                                                     <action selector="buttonLogin:" destination="RXv-fE-kTm" eventType="touchUpInside" id="sZm-fV-gVm"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlv-Sq-sT1">
+                                                <rect key="frame" x="8" y="0.0" width="309" height="51"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -427,6 +434,7 @@
                         <outlet property="btnFacebook" destination="zfs-8U-9LW" id="zAH-9f-Fyc"/>
                         <outlet property="btnGoogle" destination="4Uc-fB-K49" id="kpK-HG-z3P"/>
                         <outlet property="btnLogIn" destination="3Ie-nz-cvD" id="LCn-LU-9r0"/>
+                        <outlet property="loginError" destination="tlv-Sq-sT1" id="kyJ-EY-Oa8"/>
                         <outlet property="passwordTextField" destination="YYa-TN-4hl" id="pYZ-8B-3FV"/>
                         <outlet property="subViewLogIn" destination="ZRn-c6-f7a" id="XtE-gq-o0E"/>
                         <outlet property="usernameTextField" destination="PcT-3V-Q13" id="6YW-TO-Akg"/>
@@ -777,7 +785,6 @@
         <image name="placeholder 2" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="p32-hW-gJY"/>
         <segue reference="McD-Ua-rYx"/>
         <segue reference="Tsq-72-AKj"/>
     </inferredMetricsTieBreakers>
