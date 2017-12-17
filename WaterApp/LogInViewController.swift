@@ -17,13 +17,14 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var btnFacebook: UIButton!
     @IBOutlet weak var btnGoogle: UIButton!
     @IBOutlet weak var subViewLogIn: UIView!
-
+    @IBOutlet weak var passWrong: UILabel!
+    
     
     override func viewDidLoad() {
         // set the layout of view
         layoutTextFiled(usernameTextField);
         layoutTextFiled(passwordTextField);
-        
+        passWrong.isHidden = true
         layoutButton(btnLogIn);
         layoutButton(btnGoogle);
         layoutButton(btnFacebook);
@@ -69,8 +70,11 @@ class LogInViewController: UIViewController {
                 else {
                     print("Non esiste");
                     //give a message of error
+                    self.passWrong.isHidden = false
                 }
             })
+            
+        
         }
     }
     

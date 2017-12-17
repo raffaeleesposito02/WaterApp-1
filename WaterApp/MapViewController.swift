@@ -55,7 +55,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
         marker.title = "Sydney"
         marker.snippet = "Australia"
-        marker.map = mapView
+        marker.map = googleMapsView
+        marker.icon = #imageLiteral(resourceName: "flag-map-marker")
         
         
     }

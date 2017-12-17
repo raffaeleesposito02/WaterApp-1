@@ -263,6 +263,13 @@
                                             <action selector="buttonLogin:" destination="RXv-fE-kTm" eventType="touchUpInside" id="sZm-fV-gVm"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password is wrong or username doesn't exist!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8y-gj-eKF">
+                                        <rect key="frame" x="-12" y="1" width="349" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.21146245869228342" blue="0.011725795400590044" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -274,6 +281,7 @@
                         <outlet property="btnFacebook" destination="zfs-8U-9LW" id="zAH-9f-Fyc"/>
                         <outlet property="btnGoogle" destination="4Uc-fB-K49" id="kpK-HG-z3P"/>
                         <outlet property="btnLogIn" destination="3Ie-nz-cvD" id="LCn-LU-9r0"/>
+                        <outlet property="passWrong" destination="V8y-gj-eKF" id="zap-Wq-SOc"/>
                         <outlet property="passwordTextField" destination="YYa-TN-4hl" id="pYZ-8B-3FV"/>
                         <outlet property="subViewLogIn" destination="ZRn-c6-f7a" id="XtE-gq-o0E"/>
                         <outlet property="usernameTextField" destination="PcT-3V-Q13" id="6YW-TO-Akg"/>
@@ -427,7 +435,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kS4-wb-Lss" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1809" y="-371"/>
+            <point key="canvasLocation" x="1808.8" y="-371.06446776611699"/>
         </scene>
         <!--Article View Controller-->
         <scene sceneID="fNS-Bx-6Qa">
