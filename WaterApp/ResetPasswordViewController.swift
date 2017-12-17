@@ -13,6 +13,7 @@ import FirebaseAuth
 class ResetPasswordViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var resetButton: UIButton!
     
     @IBAction func submitAction(_ sender: Any) {
     
@@ -47,5 +48,12 @@ class ResetPasswordViewController: UIViewController {
                 self.present(alertController, animated: true, completion: nil)
             })
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        resetButton.layer.cornerRadius = 8
+        
     }
 }
