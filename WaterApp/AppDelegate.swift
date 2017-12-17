@@ -38,11 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var uid: String  = "NoValue";
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
         // Override point for customization after application launch.
         FirebaseApp.configure();
         uid = Auth.auth().currentUser?.uid ?? "NoValue"
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
+
         return true;
     }
 
