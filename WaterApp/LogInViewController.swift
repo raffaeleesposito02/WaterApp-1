@@ -12,7 +12,7 @@ import FirebaseDatabase
 import GoogleSignIn
 
 
-class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate{
+class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIScrollViewDelegate{
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -39,6 +39,16 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self;
         super.viewDidLoad()
+
+            
+            //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogInViewController.DismissKeyboard))
+            view.addGestureRecognizer(tap)
+        }
+    
+    @objc func DismissKeyboard(){
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     func layoutButton(_ btn: UIButton){
@@ -87,12 +97,7 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
 
     }
     
-//  hide keyboard
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
