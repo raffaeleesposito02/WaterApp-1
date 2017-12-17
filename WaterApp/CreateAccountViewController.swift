@@ -36,6 +36,13 @@ class CreateAccountViewController: UIViewController {
         btnSignUp.layer.shadowOpacity = 0.3;
         ref = Database.database().reference();
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CreateAccountViewController.DismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func DismissKeyboard(){
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     // Method that set the layout of specific textFiled, in this way I don't have to repeat for all fields
@@ -86,9 +93,9 @@ class CreateAccountViewController: UIViewController {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.view.endEditing(true)
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -726,7 +726,6 @@
         <image name="placeholder 2" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="p32-hW-gJY"/>
         <segue reference="McD-Ua-rYx"/>
         <segue reference="Tsq-72-AKj"/>
     </inferredMetricsTieBreakers>
