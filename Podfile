@@ -11,4 +11,6 @@ target 'WaterApp' do
    pod 'Firebase/Auth'
    pod 'Firebase/Database'
    pod 'GoogleSignIn'
+   pod 'Firebase/Storage'
+   pod 'FirebaseUI/Storage'
 end

@@ -135,6 +135,7 @@
                                     </switch>
                                     <button autoresizesSubviews="NO" opaque="NO" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nv-bY-hGa">
                                         <rect key="frame" x="17" y="28" width="150" height="150"/>
+                                        <color key="backgroundColor" red="0.0078431377187371254" green="0.0" blue="0.93725490570068359" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="o4B-1A-woP"/>
                                             <constraint firstAttribute="width" constant="150" id="scE-WC-nb2"/>
@@ -776,6 +777,7 @@
         <image name="placeholder 2" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="p32-hW-gJY"/>
         <segue reference="McD-Ua-rYx"/>
         <segue reference="Tsq-72-AKj"/>
     </inferredMetricsTieBreakers>

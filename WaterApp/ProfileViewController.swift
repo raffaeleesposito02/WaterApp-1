@@ -9,6 +9,8 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseStorage
+import FirebaseStorageUI
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -27,7 +29,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var pickerLanguage = UIPickerView();
     var data = ["Italian", "English", "Napolitan"];
     
+    // Ref to Database
     var ref: DatabaseReference?
+    //    Ref to Storage: where i save image
+    var storageRef: StorageReference?;
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate;
     
     // LogOut
@@ -49,23 +55,32 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         btnProfile.layer.cornerRadius = btnProfile.bounds.width*0.5;
         super.viewDidLoad()
         ref = Database.database().reference();
+        storageRef = Storage.storage().reference();
         
         // I delegate the picker to itself. Same for the datasource of the picker
         pickerLanguage.delegate = self
         pickerLanguage.dataSource = self
         
+        //        TODO: fix the position in landscape mode
         var pickerRect = pickerLanguage.frame;
-        pickerRect.origin.x = self.view.frame.minX + 20;
-        pickerRect.origin.y = self.view.frame.height/3; // some desired value
+        pickerRect.origin.x = self.view.frame.width/2 - pickerRect.width/2;
+        pickerRect.origin.y = self.view.frame.height/2 - pickerRect.height/2;
+
+        pickerLanguage.layer.cornerRadius = 8;
+        pickerLanguage.layer.borderWidth = 0.5;
+        
         pickerLanguage.frame = pickerRect;
         
         pickerLanguage.isHidden = true;
+        // I need to set a background color otherwise there is a written overlap
+        pickerLanguage.backgroundColor = UIColor.white;
+        
         view.addSubview(pickerLanguage)
+        
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(tap(gestureReconizer:)))
         labelLanguage.addGestureRecognizer(tap)
         labelLanguage.isUserInteractionEnabled = true;
-        
         
     }
     
@@ -82,7 +97,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @objc func tap(gestureReconizer: UITapGestureRecognizer) {
-        print("*")
         pickerLanguage.isHidden = false
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -95,12 +109,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         labelLanguage.text = data[row]
-        self.view.endEditing(true);
+        ref?.child("Users").child(self.appDelegate.uid).child("Language").setValue(data[row]);
         pickerView.isHidden = true;
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return data[row]
+    }
+    
+    //    Detect the rotation of screen
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+        } else {
+            print("Portrait")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool){
@@ -123,7 +146,24 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 let notifyChanges =  value?["NotifyChanges"] as? Bool
                 self.labelLanguage.text = value?["Language"] as? String
                 self.labelMeasurement.text = value?["Unit of Misure"] as? String;
-                
+                // Placeholder image
+                let placeholderImage = UIImage(named: "placeholder.jpg");
+                // get the reference of the image
+                let reference = self.storageRef?.child("Profile Images").child(self.appDelegate.uid).child("Image.jpg");
+                // Set the image
+                // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                reference?.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                    if let error = error {
+                        // Uh-oh, an error occurred!
+                        print("Error during download the image: \(error.localizedDescription)");
+                    } else {
+                        // Data for "images/island.jpg" is returned
+                        let image = UIImage(data: data!);
+                        // TODO: Fix the layer of btn profile
+                        self.btnProfile.setImage(image, for: UIControlState.normal);
+                        
+                    }
+                }
                 self.notifyNews.setOn(notifyNew ?? false, animated: true);
                 self.switchNotifyChanges.setOn(notifyChanges ?? false, animated: true);
                 
@@ -137,6 +177,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         btnProfile.setImage(info[UIImagePickerControllerOriginalImage] as? UIImage, for: UIControlState.normal);
+        // create a UIImage and upload it
+        let imageData = UIImageJPEGRepresentation((info[UIImagePickerControllerOriginalImage] as? UIImage)! , 0.0)
+        storageRef?.child("Profile Images").child(self.appDelegate.uid).child("Image.jpg").putData(imageData!, metadata: nil) { metadata, error in
+            if let error = error {
+                // Uh-oh, an error occurred!
+                print("Error during upload the image: \(error.localizedDescription)");
+            } else {
+                let downloadURL = metadata!.downloadURL()
+            }
+        }
         self.dismiss(animated: true, completion: nil)
     }
     
