@@ -12,10 +12,9 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseStorageUI
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource,UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var btnProfile: UIButton!
     @IBOutlet weak var notifyNews: UISwitch!
     @IBOutlet weak var btnLogIn: UIButton!
@@ -23,6 +22,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var btnLogOut: UIButton!
     @IBOutlet weak var labelLanguage: UILabel!
     @IBOutlet weak var labelCity: UILabel!
+    @IBOutlet weak var favouritesTableView: UITableView!
     
     // I create a Picker view for the language
     var pickerLanguage = UIPickerView();
@@ -53,6 +53,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         btnLogOut.layer.cornerRadius = 8;
         btnProfile.layer.cornerRadius = btnProfile.bounds.width*0.5;
         super.viewDidLoad()
+        
         ref = Database.database().reference();
         storageRef = Storage.storage().reference();
         
@@ -81,7 +82,31 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         labelLanguage.addGestureRecognizer(tap)
         labelLanguage.isUserInteractionEnabled = true;
         
+        
+        favouritesTableView.delegate = self
+        favouritesTableView.dataSource = self
+        
     }
+    
+    //MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------------ BEGIN
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return Favourite.shared.favouritePlace.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteTableCell", for: indexPath)
+        cell.textLabel?.text = Favourite.shared.favouritePlace[indexPath.row]
+        //cell.detailTextLabel?.text = newsContent[indexPath.row]
+        
+        return cell
+    }
+    //MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------- END
     
     @IBAction func selectProfilePhotoButtonTapped(_ sender: Any) {
         let myPickerController = UIImagePickerController()
@@ -92,8 +117,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         btnProfile.clipsToBounds = true;
         btnProfile.contentMode = .center;
         btnProfile.layer.cornerRadius = btnProfile.bounds.width*0.5
-        
     }
+    
     
     @objc func tap(gestureReconizer: UITapGestureRecognizer) {
         pickerLanguage.isHidden = false
@@ -196,6 +221,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func actionNotifyChanges(_ sender: Any) {
         ref?.child("Users").child(self.appDelegate.uid).child("NotifyChanges").setValue(self.switchNotifyChanges.isOn);
     }
-
+    
+    //Favourite TableView
 }
 

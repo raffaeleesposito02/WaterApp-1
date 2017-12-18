@@ -13,11 +13,26 @@ import FirebaseStorage
 
 class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
     
+    @IBOutlet weak var popView: UIView!
+    
+    //ARRAY THAT CONTAINS STARRED PLACES (STATIC, FOR NOW)
+    var starredPlace: [String] = ["Napoli", "Caserta", "#PIGGOD"]
+    
+    //WHEN MARKER IS TAPPED
     var storageRef: StorageReference?;
     
     func mapView(_ mapView:GMSMapView, didTap marker: GMSMarker) -> Bool {
-        performSegue(withIdentifier: "markerTapped", sender: nil)
+        
+        popView.isHidden = false
+        
+//        performSegue(withIdentifier: "markerTapped", sender: nil)
         return false
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        popView.isHidden = true
+        
     }
     
     // OUTLETS
@@ -32,6 +47,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         // I get the reference to the Storage where i have the file CSV
         storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
         
+        popView.isHidden = true
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -41,6 +58,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         initGoogleMaps();
         readFromCSV();
         
+        
+        popView.layer.cornerRadius = 10
+        
+        //PASS STARRED PLACES TO FavouriteSingleton, JUST FOR CHECKING IF IT WORKS!
+        addToFavourites()
+
+    }
+    
+    func addToFavourites(){
+        Favourite.shared.favouritePlace = starredPlace
     }
     
     func initGoogleMaps() {
@@ -54,7 +81,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         self.googleMapsView.isMyLocationEnabled = true
         self.googleMapsView.settings.myLocationButton = true
 
-        createrMarker(38, 56);
      
     }
     
@@ -191,13 +217,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int){
         
-        print("I'm putting Marker")
+
         var latitude: Float = Float(data[3][indexLatitude])!
         var longitude: Float = Float(data[3][indexLongitude])!
         
         for  i in 4...data.count-1 {
             
-            print("Latitudine: \(data[i][indexLatitude]) e Longitudine: \(data[i][indexLongitude])  index: \(i)");
+
             
             if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
                 
@@ -217,7 +243,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
             }
             
         }
-        print("I'm finished");
+
     }
     
 }
