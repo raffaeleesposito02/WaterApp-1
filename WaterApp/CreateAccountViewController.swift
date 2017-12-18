@@ -80,7 +80,6 @@ class CreateAccountViewController: UIViewController {
                             reference?.child("Unit of Misure").setValue("Metric");
                             reference?.child("NotifyNews").setValue(true);
                             reference?.child("NotifyChanges").setValue(true);
-                            reference?.child("ProfileImage").setValue("There will be an image here");
                             reference?.child("Username").setValue(self.usernameTextField.text!);
                             
                             // I come back to Profile View
