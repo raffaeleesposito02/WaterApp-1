@@ -15,6 +15,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     @IBOutlet weak var popView: UIView!
     
+    @IBAction func closePopup(_ sender: Any) {
+        popView.isHidden = true
+    }
+    
+    @IBOutlet weak var star: UIButton!
+    @IBAction func addOrRemoveStarred(_ sender: Any) {
+//        THERE IS ALREADY A FULL STAR ICON IN THE ASSETS READY TO USE
+    }
+ 
     //ARRAY THAT CONTAINS STARRED PLACES (STATIC, FOR NOW)
     var starredPlace: [String] = ["Napoli", "Caserta", "#PIGGOD"]
     
@@ -29,11 +38,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         return false
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        popView.isHidden = true
-        
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        
+//        popView.isHidden = true
+//        
+//    }
     
     // OUTLETS
     
@@ -42,8 +51,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     // VARIABLES
     var locationManager = CLLocationManager()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad();
+        createrMarker(40.84, 14.27)
         // I get the reference to the Storage where i have the file CSV
         storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
         
@@ -59,11 +70,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         readFromCSV();
         
         
-        popView.layer.cornerRadius = 10
+        popView.layer.cornerRadius = 24
+        popView.layer.shadowColor = UIColor.black.cgColor
+        popView.layer.shadowOpacity = 0.5
+        popView.layer.shadowOffset = CGSize.zero
+        popView.layer.shadowRadius = 60
         
         //PASS STARRED PLACES TO FavouriteSingleton, JUST FOR CHECKING IF IT WORKS!
         addToFavourites()
 
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        popView.isHidden = true
     }
     
     func addToFavourites(){

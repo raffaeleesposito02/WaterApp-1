@@ -78,9 +78,34 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.97648024559020996" green="0.97646200656890869" blue="0.97647440433502197" alpha="0.60078660102739723" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
-                            <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-kh-fvQ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-kh-fvQ">
                                 <rect key="frame" x="24" y="100" width="327" height="466"/>
-                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWB-tx-CbX">
+                                        <rect key="frame" x="283" y="8" width="36" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="close"/>
+                                        <connections>
+                                            <action selector="closePopup:" destination="pze-eX-819" eventType="touchUpInside" id="M5X-8G-wIJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BtN-t0-bxg">
+                                        <rect key="frame" x="240" y="7" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="star"/>
+                                        <connections>
+                                            <action selector="addOrRemoveStarred:" destination="pze-eX-819" eventType="touchUpInside" id="hT9-OI-vlo"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pX2-nM-zxz">
+                                        <rect key="frame" x="13" y="8" width="216" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -110,6 +135,7 @@
                     <connections>
                         <outlet property="googleMapsView" destination="2rA-4r-8KR" id="fFB-Rv-Eld"/>
                         <outlet property="popView" destination="f4V-kh-fvQ" id="m2m-7Z-NiQ"/>
+                        <outlet property="star" destination="BtN-t0-bxg" id="Sgj-7C-6PH"/>
                         <segue destination="W1O-zo-BIk" kind="show" identifier="markerTapped" id="3af-bc-Yqj"/>
                     </connections>
                 </viewController>
@@ -904,6 +930,7 @@
         <image name="IconSettingProfile_selected" width="25" height="25"/>
         <image name="Separator" width="325" height="12"/>
         <image name="avatar-inside-a-circle" width="256" height="256"/>
+        <image name="close" width="32" height="32"/>
         <image name="email" width="340" height="330"/>
         <image name="facebook-1" width="256" height="256"/>
         <image name="flag-map-marker" width="24" height="24"/>
@@ -913,6 +940,7 @@
         <image name="mappaa" width="375" height="667"/>
         <image name="placeholder" width="25" height="25"/>
         <image name="placeholder 2" width="25" height="25"/>
+        <image name="star" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="McD-Ua-rYx"/>
