@@ -14,6 +14,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     @IBOutlet weak var popView: UIView!
     
+    //ARRAY THAT CONTAINS STARRED PLACES (STATIC, FOR NOW)
+    var starredPlace: [String] = ["Napoli", "Caserta", "#PIGGOD"]
+    
     //WHEN MARKER IS TAPPED
     func mapView(_ mapView:GMSMapView, didTap marker: GMSMarker) -> Bool {
         
@@ -50,7 +53,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         initGoogleMaps()
         
         popView.layer.cornerRadius = 10
+        
+        //PASS STARRED PLACES TO FavouriteSingleton, JUST FOR CHECKING IF IT WORKS!
+        addToFavourites()
 
+    }
+    
+    func addToFavourites(){
+        Favourite.shared.favouritePlace = starredPlace
     }
     
     func initGoogleMaps() {
