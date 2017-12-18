@@ -81,12 +81,13 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 if user != nil {
                     // the username was found, so i need to come back and set the User_id
                     self.appDelegate.uid = user?.uid ?? "NoValue";
+                    Accounts.shared.createAlertMessage("Error", (error?.localizedDescription)!, self);
                     self.navigationController?.popViewController(animated: true)
                 }
                 else {
                     //  give a message of error
                     print("Errore:\(error.debugDescription)" )
-                    
+                    Accounts.shared.createAlertMessage("Error", (error?.localizedDescription)!, self);
                     
                 }
             })
