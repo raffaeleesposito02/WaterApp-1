@@ -77,15 +77,23 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.97648024559020996" green="0.97646200656890869" blue="0.97647440433502197" alpha="0.60078660102739723" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
+                            <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-kh-fvQ">
+                                <rect key="frame" x="24" y="100" width="327" height="466"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="KMD-gR-rHM" firstAttribute="trailing" secondItem="f4V-kh-fvQ" secondAttribute="trailing" constant="24" id="3fh-Rz-KmI"/>
                             <constraint firstItem="2rA-4r-8KR" firstAttribute="trailing" secondItem="KMD-gR-rHM" secondAttribute="trailing" id="5Op-OF-bzb"/>
                             <constraint firstItem="KMD-gR-rHM" firstAttribute="trailing" secondItem="3fU-iX-SC9" secondAttribute="trailing" constant="205" id="5TG-RD-aBb"/>
                             <constraint firstItem="2rA-4r-8KR" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" id="6BN-xo-AeX"/>
+                            <constraint firstItem="f4V-kh-fvQ" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" constant="36" id="CXq-PE-oaS"/>
                             <constraint firstItem="KMD-gR-rHM" firstAttribute="bottom" secondItem="3fU-iX-SC9" secondAttribute="bottom" constant="448" id="FMy-RU-hFb"/>
+                            <constraint firstItem="f4V-kh-fvQ" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" constant="24" id="JWL-Gy-oHo"/>
                             <constraint firstItem="2rA-4r-8KR" firstAttribute="bottom" secondItem="KMD-gR-rHM" secondAttribute="bottom" id="UN2-oZ-cyT"/>
                             <constraint firstItem="3fU-iX-SC9" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" constant="16" id="ZND-Dr-ZNh"/>
+                            <constraint firstItem="KMD-gR-rHM" firstAttribute="bottom" secondItem="f4V-kh-fvQ" secondAttribute="bottom" constant="52" id="gX5-SZ-OUb"/>
                             <constraint firstItem="3fU-iX-SC9" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" constant="16" id="lzP-dL-FGL"/>
                             <constraint firstItem="2rA-4r-8KR" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" id="xka-1F-RAP"/>
                         </constraints>
@@ -100,6 +108,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="googleMapsView" destination="2rA-4r-8KR" id="fFB-Rv-Eld"/>
+                        <outlet property="popView" destination="f4V-kh-fvQ" id="m2m-7Z-NiQ"/>
                         <segue destination="W1O-zo-BIk" kind="show" identifier="markerTapped" id="3af-bc-Yqj"/>
                     </connections>
                 </viewController>
@@ -161,7 +170,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ON5-FC-0Ex">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hb-TZ-1ak">
                                         <rect key="frame" x="197" y="20" width="148" height="24"/>
@@ -354,7 +363,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFn-00-9kc">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZRn-c6-f7a">
                                         <rect key="frame" x="25" y="25" width="325" height="240"/>
@@ -521,7 +530,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" bouncesZoom="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="bvJ-bp-qvz">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ERV-vY-g01">
                                         <rect key="frame" x="45" y="141" width="285" height="50"/>
@@ -640,7 +649,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jW-Tu-CQm">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qZL-nK-oZ3">
                                         <rect key="frame" x="50" y="91" width="275" height="45"/>
@@ -878,19 +887,19 @@
         <image name="Group Settings" width="196" height="24"/>
         <image name="IconInfo_normal" width="25" height="25"/>
         <image name="IconInfo_selected" width="25" height="25"/>
-        <image name="IconSettingProfile_normal" width="20" height="21"/>
-        <image name="IconSettingProfile_selected" width="20" height="21"/>
+        <image name="IconSettingProfile_normal" width="25" height="25"/>
+        <image name="IconSettingProfile_selected" width="25" height="25"/>
         <image name="Separator" width="325" height="12"/>
         <image name="avatar-inside-a-circle" width="256" height="256"/>
         <image name="flag-map-marker" width="24" height="24"/>
         <image name="flagAppost" width="24" height="24"/>
         <image name="flagwarning" width="24" height="24"/>
         <image name="mappaa" width="375" height="667"/>
-        <image name="placeholder" width="20" height="20"/>
-        <image name="placeholder 2" width="20" height="20"/>
+        <image name="placeholder" width="25" height="25"/>
+        <image name="placeholder 2" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="McD-Ua-rYx"/>
-        <segue reference="CFO-Rf-dcc"/>
+        <segue reference="Tsq-72-AKj"/>
     </inferredMetricsTieBreakers>
 </document>

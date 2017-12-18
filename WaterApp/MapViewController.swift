@@ -12,10 +12,21 @@ import GooglePlaces
 
 class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
     
+    @IBOutlet weak var popView: UIView!
+    
+    //WHEN MARKER IS TAPPED
     func mapView(_ mapView:GMSMapView, didTap marker: GMSMarker) -> Bool {
-        print("\n\n\n\n\nDIOCANEEEEEEEEE\n\n\n\n\n")
-        performSegue(withIdentifier: "markerTapped", sender: nil)
+        
+        popView.isHidden = false
+        
+//        performSegue(withIdentifier: "markerTapped", sender: nil)
         return false
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        popView.isHidden = true
+        
     }
     
     // OUTLETS
@@ -28,6 +39,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        popView.isHidden = true
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -35,6 +48,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         locationManager.startMonitoringSignificantLocationChanges()
         
         initGoogleMaps()
+        
+        popView.layer.cornerRadius = 10
+
     }
     
     func initGoogleMaps() {
@@ -56,7 +72,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         marker.snippet = "Australia"
         marker.map = googleMapsView
         marker.icon = #imageLiteral(resourceName: "flag-map-marker") */
-        createrMarker(38, 56);
+        createrMarker(40, 14);
      
     }
     
@@ -80,11 +96,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         print("Error while get location \(error)")
     }
  
-    
-    
-    
-  
-    
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
