@@ -50,22 +50,42 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         
         // Creates a marker in the center of the map.
-       
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
+    /*    let marker = GMSMarker()
+               marker.position = CLLocationCoordinate2D(latitude:47.383473872101504 , longitude: 6.240234375)
+        marker.title = "Castel dell'Ovo"
         marker.snippet = "Australia"
         marker.map = googleMapsView
-        marker.icon = #imageLiteral(resourceName: "flag-map-marker")
-        
-        
+        marker.icon = #imageLiteral(resourceName: "flag-map-marker") */
+        createrMarker(38, 56);
+     
     }
+    
+ 
+
+   func createrMarker(_ latitude: Float ,_ longitude: Float) {
+        let marker = GMSMarker()
+      
+        var location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+        
+        marker.position = location
+    marker.title = "Location.name"
+    marker.snippet = "Info window text"
+    marker.map = googleMapsView
+    }
+
     
     // MARK: CLLocation Manager Delegate
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error while get location \(error)")
     }
+ 
+    
+    
+    
+  
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last

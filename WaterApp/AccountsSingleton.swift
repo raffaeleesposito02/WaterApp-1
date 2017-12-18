@@ -92,5 +92,16 @@ class Accounts {
         
     }
     
+    func createAlertMessage(_ mTitle:String, _ mMessage: String, _ view: UIViewController) {
+        
+        let alertMessage = UIAlertController(title: mTitle, message: mMessage, preferredStyle: .alert)
+        // Attach an action on alert message
+        alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            alertMessage.dismiss(animated: true, completion: nil)
+        }))
+        // Display the alert message
+        view.present(alertMessage, animated: true, completion: nil)
+    }
+    
 }
 

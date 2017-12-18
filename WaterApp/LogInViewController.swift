@@ -20,7 +20,6 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     @IBOutlet weak var btnFacebook: UIButton!
     @IBOutlet weak var btnGoogle: UIButton!
     @IBOutlet weak var subViewLogIn: UIView!
-    @IBOutlet weak var loginError: UILabel!
     
     var ref: DatabaseReference?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate;
@@ -82,14 +81,14 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 if user != nil {
                     // the username was found, so i need to come back and set the User_id
                     self.appDelegate.uid = user?.uid ?? "NoValue";
-                    self.loginError.text! = (error?.localizedDescription)!
+                    Accounts.shared.createAlertMessage("Error", (error?.localizedDescription)!, self);
                     self.navigationController?.popViewController(animated: true)
                 }
                 else {
                     //  give a message of error
                     print("Errore:\(error.debugDescription)" )
+                    Accounts.shared.createAlertMessage("Error", (error?.localizedDescription)!, self);
                     
-                    self.loginError.text! = (error?.localizedDescription)!
                 }
             })
             
@@ -142,7 +141,6 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                     reference?.child("Unit of Misure").setValue("Metric");
                     reference?.child("NotifyNews").setValue(true);
                     reference?.child("NotifyChanges").setValue(true);
-                    reference?.child("ProfileImage").setValue("There will be an image here");
                     reference?.child("Username").setValue( (user?.displayName)!);
                 }
                 self.navigationController?.popViewController(animated: true);

@@ -22,12 +22,17 @@
                                 <rect key="frame" x="0.0" y="482" width="375" height="185"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iPhone 8" translatesAutoresizingMaskIntoConstraints="NO" id="BB2-nu-N2A">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone 8" translatesAutoresizingMaskIntoConstraints="NO" id="BB2-nu-N2A">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="BB2-nu-N2A" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Mns-ph-7aq"/>
+                            <constraint firstItem="BB2-nu-N2A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="e5f-hd-qZv"/>
+                            <constraint firstItem="BB2-nu-N2A" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="iHT-j8-xzK"/>
+                            <constraint firstItem="BB2-nu-N2A" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="yUq-uq-wrg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
