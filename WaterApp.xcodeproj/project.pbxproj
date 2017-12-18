@@ -437,7 +437,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = WaterApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.CimminoVittorio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -459,7 +459,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = WaterApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.CimminoVittorio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
