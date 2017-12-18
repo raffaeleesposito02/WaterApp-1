@@ -161,7 +161,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ON5-FC-0Ex">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hb-TZ-1ak">
                                         <rect key="frame" x="197" y="20" width="148" height="24"/>
@@ -205,17 +205,6 @@
                                             <action selector="actionNotifyNews:" destination="vsn-W7-Eb3" eventType="valueChanged" id="WQ1-hO-Nat"/>
                                         </connections>
                                     </switch>
-                                    <button autoresizesSubviews="NO" opaque="NO" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nv-bY-hGa">
-                                        <rect key="frame" x="17" y="20" width="150" height="150"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="o4B-1A-woP"/>
-                                            <constraint firstAttribute="width" constant="150" id="scE-WC-nb2"/>
-                                        </constraints>
-                                        <state key="normal" image="avatar-inside-a-circle"/>
-                                        <connections>
-                                            <action selector="selectProfilePhotoButtonTapped:" destination="vsn-W7-Eb3" eventType="touchUpInside" id="22J-wE-4ob"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5m-eE-Vym">
                                         <rect key="frame" x="309" y="375" width="49" height="18"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
@@ -274,6 +263,17 @@
                                         <color key="textColor" white="0.59578450520000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nv-bY-hGa">
+                                        <rect key="frame" x="17" y="20" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="o4B-1A-woP"/>
+                                            <constraint firstAttribute="width" constant="150" id="scE-WC-nb2"/>
+                                        </constraints>
+                                        <state key="normal" image="avatar-inside-a-circle"/>
+                                        <connections>
+                                            <action selector="selectProfilePhotoButtonTapped:" destination="vsn-W7-Eb3" eventType="touchUpInside" id="22J-wE-4ob"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="zYW-2J-p65" firstAttribute="top" secondItem="hWF-mD-bic" secondAttribute="bottom" constant="8" id="1nY-wj-l6F"/>
@@ -354,7 +354,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFn-00-9kc">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZRn-c6-f7a">
                                         <rect key="frame" x="25" y="25" width="325" height="240"/>
@@ -417,17 +417,17 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zfs-8U-9LW">
                                         <rect key="frame" x="25" y="340" width="325" height="50"/>
-                                        <color key="backgroundColor" red="0.25398534540000001" green="0.55022585390000001" blue="0.77514821290000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.26055422425270081" green="0.34793272614479065" blue="0.57655572891235352" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Y2N-Ge-DBe"/>
                                         </constraints>
                                         <state key="normal" title="Continue with Facebook">
-                                            <color key="titleColor" red="0.99215686319999996" green="0.99607843159999998" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.99289496605914884" green="0.99629855155944824" blue="0.99043983019907211" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Uc-fB-K49">
                                         <rect key="frame" x="25" y="417" width="325" height="50"/>
-                                        <color key="backgroundColor" red="0.7443677783" green="0.2886720002" blue="0.26796045899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.7991102933883667" green="0.34647592902183533" blue="0.28632763028144836" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="uia-s4-b9Q"/>
                                         </constraints>
@@ -459,6 +459,14 @@
                                             <segue destination="0tY-Jh-x6w" kind="show" id="yHH-ka-uVb"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="facebook-1" translatesAutoresizingMaskIntoConstraints="NO" id="37r-dk-LI9">
+                                        <rect key="frame" x="43" y="349" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="google-plus-1" translatesAutoresizingMaskIntoConstraints="NO" id="eXS-yz-XaG">
+                                        <rect key="frame" x="43" y="426" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="zfs-8U-9LW" secondAttribute="trailing" constant="25" id="1tQ-18-q2e"/>
@@ -521,7 +529,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" bouncesZoom="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="bvJ-bp-qvz">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ERV-vY-g01">
                                         <rect key="frame" x="45" y="141" width="285" height="50"/>
@@ -639,10 +647,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jW-Tu-CQm">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qZL-nK-oZ3">
-                                        <rect key="frame" x="50" y="91" width="275" height="45"/>
+                                        <rect key="frame" x="50" y="156" width="275" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="QuG-TG-2D2"/>
                                         </constraints>
@@ -651,7 +659,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSr-Zp-Aug">
-                                        <rect key="frame" x="45" y="167" width="285" height="50"/>
+                                        <rect key="frame" x="45" y="232" width="285" height="50"/>
                                         <color key="backgroundColor" red="0.93883985280990601" green="0.62346851825714111" blue="0.22339046001434326" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="YzE-Gz-LaH"/>
@@ -665,7 +673,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DxR-1c-Ev9">
-                                        <rect key="frame" x="122.5" y="50" width="130.5" height="22"/>
+                                        <rect key="frame" x="122.5" y="115" width="130.5" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="25b-HC-GgD"/>
                                         </constraints>
@@ -673,10 +681,14 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="email" translatesAutoresizingMaskIntoConstraints="NO" id="ylY-iu-mlm">
+                                        <rect key="frame" x="34" y="386" width="306" height="231"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="uSr-Zp-Aug" secondAttribute="bottom" constant="30" id="1An-2f-KEy"/>
-                                    <constraint firstItem="DxR-1c-Ev9" firstAttribute="top" secondItem="3jW-Tu-CQm" secondAttribute="top" constant="50" id="6IH-GE-BB9"/>
+                                    <constraint firstItem="DxR-1c-Ev9" firstAttribute="top" secondItem="3jW-Tu-CQm" secondAttribute="top" constant="115" id="6IH-GE-BB9"/>
                                     <constraint firstItem="uSr-Zp-Aug" firstAttribute="centerX" secondItem="3jW-Tu-CQm" secondAttribute="centerX" id="IhA-8z-fXK"/>
                                     <constraint firstItem="qZL-nK-oZ3" firstAttribute="centerX" secondItem="3jW-Tu-CQm" secondAttribute="centerX" id="JoH-h2-119"/>
                                     <constraint firstItem="qZL-nK-oZ3" firstAttribute="leading" secondItem="3jW-Tu-CQm" secondAttribute="leading" constant="50" id="P9X-aU-AbQ"/>
@@ -877,19 +889,22 @@
         <image name="Group Settings" width="196" height="24"/>
         <image name="IconInfo_normal" width="25" height="25"/>
         <image name="IconInfo_selected" width="25" height="25"/>
-        <image name="IconSettingProfile_normal" width="20" height="21"/>
-        <image name="IconSettingProfile_selected" width="20" height="21"/>
+        <image name="IconSettingProfile_normal" width="25" height="25"/>
+        <image name="IconSettingProfile_selected" width="25" height="25"/>
         <image name="Separator" width="325" height="12"/>
         <image name="avatar-inside-a-circle" width="256" height="256"/>
+        <image name="email" width="340" height="330"/>
+        <image name="facebook-1" width="256" height="256"/>
         <image name="flag-map-marker" width="24" height="24"/>
         <image name="flagAppost" width="24" height="24"/>
         <image name="flagwarning" width="24" height="24"/>
+        <image name="google-plus-1" width="256" height="256"/>
         <image name="mappaa" width="375" height="667"/>
-        <image name="placeholder" width="20" height="20"/>
-        <image name="placeholder 2" width="20" height="20"/>
+        <image name="placeholder" width="25" height="25"/>
+        <image name="placeholder 2" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="McD-Ua-rYx"/>
-        <segue reference="CFO-Rf-dcc"/>
+        <segue reference="Tsq-72-AKj"/>
     </inferredMetricsTieBreakers>
 </document>
