@@ -125,6 +125,11 @@ class NewsTableViewController: UITableViewController {
                 News.article.newsCnt = newsContent[indexPath.row]
                 News.article.newsImgName = articleImages[indexPath.row]
             }
+            
+            if let vc = segue.destination as UIViewController! {
+                
+                vc.hidesBottomBarWhenPushed = true
+            }
         }
     }
  

@@ -20,7 +20,6 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     @IBOutlet weak var btnFacebook: UIButton!
     @IBOutlet weak var btnGoogle: UIButton!
     @IBOutlet weak var subViewLogIn: UIView!
-    @IBOutlet weak var loginError: UILabel!
     
     var ref: DatabaseReference?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate;
@@ -82,14 +81,13 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 if user != nil {
                     // the username was found, so i need to come back and set the User_id
                     self.appDelegate.uid = user?.uid ?? "NoValue";
-                    self.loginError.text! = (error?.localizedDescription)!
                     self.navigationController?.popViewController(animated: true)
                 }
                 else {
                     //  give a message of error
                     print("Errore:\(error.debugDescription)" )
                     
-                    self.loginError.text! = (error?.localizedDescription)!
+                    
                 }
             })
             
