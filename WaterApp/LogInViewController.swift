@@ -30,7 +30,6 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         // set the layout of view
         layoutTextFiled(usernameTextField);
         layoutTextFiled(passwordTextField);
-        passWrong.isHidden = true
         layoutButton(btnLogIn);
         layoutButton(btnGoogle);
         layoutButton(btnFacebook);
