@@ -287,6 +287,13 @@
                                             <segue destination="RXv-fE-kTm" kind="show" id="p32-hW-gJY"/>
                                         </connections>
                                     </button>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QzJ-GN-yTS">
+                                        <rect key="frame" x="306" y="477" width="49" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="actionNotifyChanges:" destination="vsn-W7-Eb3" eventType="valueChanged" id="nnK-NM-AwR"/>
+                                        </connections>
+                                    </switch>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="rb4-Te-seA" firstAttribute="top" secondItem="ssw-xF-Opg" secondAttribute="bottom" constant="35" id="2Ad-BH-qjE"/>
@@ -340,6 +347,7 @@
                         <outlet property="favouritesTableView" destination="zYW-2J-p65" id="G4l-vY-BCe"/>
                         <outlet property="labelLanguage" destination="M5m-eE-Vym" id="puY-Sc-hZh"/>
                         <outlet property="notifyNews" destination="9LG-1d-zEV" id="wim-H2-GaF"/>
+                        <outlet property="switchNotifyChanges" destination="QzJ-GN-yTS" id="5Kt-7D-TXO"/>
                         <outlet property="usernameLabel" destination="6Hb-TZ-1ak" id="tey-ov-mnf"/>
                     </connections>
                 </viewController>
