@@ -25,7 +25,6 @@
 		6DD6D1781FD981D800B78C7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DD6D1761FD981D800B78C7D /* Main.storyboard */; };
 		6DD6D17A1FD981D800B78C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DD6D1791FD981D800B78C7D /* Assets.xcassets */; };
 		6DD6D17D1FD981D800B78C7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DD6D17B1FD981D800B78C7D /* LaunchScreen.storyboard */; };
-		71F7B4A876CD6C1F2A3F2453 /* Pods_WaterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB36C69E258EA45561A9FEAF /* Pods_WaterApp.framework */; };
 		7F360C4A1FDFFA0600521C71 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360C491FDFFA0600521C71 /* SplashViewController.swift */; };
 		7F5BD4441FDD2EB300D7B654 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5BD4431FDD2EB300D7B654 /* MapKit.framework */; };
 		7FBC6C271FDD296F001171BE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBC6C261FDD296F001171BE /* CoreLocation.framework */; };
@@ -35,7 +34,6 @@
 
 /* Begin PBXFileReference section */
 		057F92551FDBEC3D00750964 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		30DFB4EE24CC2F6614492772 /* Pods-WaterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp.release.xcconfig"; sourceTree = "<group>"; };
 		3522EA7B1FE02BFB00280FDF /* AccountsSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSingleton.swift; sourceTree = "<group>"; };
 		355E33CF1FDE8A7C001B551B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		355E33D01FDE8A7C001B551B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -59,8 +57,6 @@
 		7F5BD4431FDD2EB300D7B654 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7FBC6C261FDD296F001171BE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7FE7BDAC1FE2B47E006F751E /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PopUpViewController.swift; path = /Users/MeButStronger/Desktop/UEUE/WaterApp/PopUpViewController.swift; sourceTree = "<absolute>"; };
-		888950CE8850AD2BD21B387E /* Pods-WaterApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp.debug.xcconfig"; sourceTree = "<group>"; };
-		BB36C69E258EA45561A9FEAF /* Pods_WaterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA719131FE15CCD00D25679 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +71,6 @@
 				355E33D51FDE8A7D001B551B /* FBSDKLoginKit.framework in Frameworks */,
 				7FBC6C271FDD296F001171BE /* CoreLocation.framework in Frameworks */,
 				355E33D41FDE8A7D001B551B /* Bolts.framework in Frameworks */,
-				71F7B4A876CD6C1F2A3F2453 /* Pods_WaterApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +83,6 @@
 				6DD6D1711FD981D800B78C7D /* WaterApp */,
 				6DD6D1701FD981D800B78C7D /* Products */,
 				7FBC6C251FDD296E001171BE /* Frameworks */,
-				8D5CD4C1E9993783107FD2D4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,18 +128,8 @@
 			children = (
 				7F5BD4431FDD2EB300D7B654 /* MapKit.framework */,
 				7FBC6C261FDD296F001171BE /* CoreLocation.framework */,
-				BB36C69E258EA45561A9FEAF /* Pods_WaterApp.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		8D5CD4C1E9993783107FD2D4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				888950CE8850AD2BD21B387E /* Pods-WaterApp.debug.xcconfig */,
-				30DFB4EE24CC2F6614492772 /* Pods-WaterApp.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,12 +139,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6DD6D1811FD981D800B78C7D /* Build configuration list for PBXNativeTarget "WaterApp" */;
 			buildPhases = (
-				7F8AFE765B1617030957F79F /* [CP] Check Pods Manifest.lock */,
 				6DD6D16B1FD981D800B78C7D /* Sources */,
 				6DD6D16C1FD981D800B78C7D /* Frameworks */,
 				6DD6D16D1FD981D800B78C7D /* Resources */,
-				897108EF544C74F883174A4F /* [CP] Embed Pods Frameworks */,
-				EACA104D616E8435652BEB11 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -218,68 +199,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		7F8AFE765B1617030957F79F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WaterApp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		897108EF544C74F883174A4F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EACA104D616E8435652BEB11 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6DD6D16B1FD981D800B78C7D /* Sources */ = {
@@ -433,7 +352,6 @@
 		};
 		6DD6D1821FD981D800B78C7D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 888950CE8850AD2BD21B387E /* Pods-WaterApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -454,7 +372,6 @@
 		};
 		6DD6D1831FD981D800B78C7D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30DFB4EE24CC2F6614492772 /* Pods-WaterApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
