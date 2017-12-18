@@ -64,7 +64,7 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         field.leftView = paddingView
         field.leftViewMode = UITextFieldViewMode.always
         
-        field.layer.borderColor = UIColor(red: 0.648, green: 0.710, blue: 0.781, alpha: 0.2).cgColor;
+        field.layer.borderColor = UIColor(red: 0.590, green: 0.890, blue: 0.152, alpha: 0.2).cgColor;
         field.layer.shadowColor = UIColor.black.cgColor;
         field.layer.cornerRadius = 8;
         field.layer.borderWidth = 1;
