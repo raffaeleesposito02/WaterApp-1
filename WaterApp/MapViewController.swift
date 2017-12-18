@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import FirebaseStorage
 
 class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
     
@@ -18,6 +19,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     var starredPlace: [String] = ["Napoli", "Caserta", "#PIGGOD"]
     
     //WHEN MARKER IS TAPPED
+    var storageRef: StorageReference?;
+    
     func mapView(_ mapView:GMSMapView, didTap marker: GMSMarker) -> Bool {
         
         popView.isHidden = false
@@ -40,7 +43,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad();
+        // I get the reference to the Storage where i have the file CSV
+        storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
         
         popView.isHidden = true
         
@@ -50,7 +55,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
         
-        initGoogleMaps()
+        initGoogleMaps();
+        readFromCSV();
+        
         
         popView.layer.cornerRadius = 10
         
@@ -73,30 +80,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         self.googleMapsView.delegate = self
         self.googleMapsView.isMyLocationEnabled = true
         self.googleMapsView.settings.myLocationButton = true
-        
-        
-        // Creates a marker in the center of the map.
-    /*    let marker = GMSMarker()
-               marker.position = CLLocationCoordinate2D(latitude:47.383473872101504 , longitude: 6.240234375)
-        marker.title = "Castel dell'Ovo"
-        marker.snippet = "Australia"
-        marker.map = googleMapsView
-        marker.icon = #imageLiteral(resourceName: "flag-map-marker") */
-        createrMarker(40, 14);
+
      
     }
     
- 
-
    func createrMarker(_ latitude: Float ,_ longitude: Float) {
         let marker = GMSMarker()
       
-        var location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+        let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
         
         marker.position = location
-    marker.title = "Location.name"
-    marker.snippet = "Info window text"
-    marker.map = googleMapsView
+        marker.title = "Location.name"
+        marker.snippet = "Info window text"
+        marker.map = googleMapsView
+        marker.icon = #imageLiteral(resourceName: "flag-map-marker");
     }
 
     
@@ -106,8 +103,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         print("Error while get location \(error)")
     }
  
-    
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
         
@@ -125,7 +120,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         self.googleMapsView.isMyLocationEnabled = true
     }
-    
     
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
         
@@ -162,4 +156,94 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         autocompletecontroller.autocompleteFilter = filter
         self.present(autocompletecontroller, animated: true, completion: nil)
     }
+    
+    func readFromCSV() {
+
+        // Download to the local filesystem
+        storageRef?.downloadURL(completion: { (url, error) in
+            
+            if error != nil {
+                print(error?.localizedDescription)
+                return
+            }
+            
+            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+                
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    guard let text = String(data: data!, encoding: String.Encoding.ascii) as String!
+                        else {
+                            print("error during conversion file \(data?.description)")
+                            return
+                        }
+                    self.converTextToArray(text)
+                    
+                }
+                
+            }).resume()
+        });
+    }
+    
+    func converTextToArray(_ text: String){
+        var dataArray: [[String]] = [[]] ;
+    
+        let rows = cleanRows(file: text).components(separatedBy: "\n")
+            if rows.count > 0 {
+                dataArray.append(getStringFieldsForRow(row: rows.first!,delimiter:","));
+                
+                for row in rows{
+                    dataArray.append(getStringFieldsForRow(row: row,delimiter: ","));
+                }
+            } else {
+                print("No data in file")
+            }
+        createFlags(dataArray,3,4);
+    }
+    
+    func cleanRows(file:String)->String{
+        var cleanFile = file
+        cleanFile = cleanFile.replacingOccurrences(of: "\r", with: "\n")
+        cleanFile = cleanFile.replacingOccurrences(of: "\n\n", with:"\n")
+        return cleanFile
+    }
+    
+    func getStringFieldsForRow(row: String, delimiter:String)-> [String]{
+        return row.components(separatedBy: delimiter)
+    }
+    
+    func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int){
+        
+
+        var latitude: Float = Float(data[3][indexLatitude])!
+        var longitude: Float = Float(data[3][indexLongitude])!
+        
+        for  i in 4...data.count-1 {
+            
+
+            
+            if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
+                
+                if( latitude != Float(data[i][indexLatitude]) || longitude != Float(data[i][indexLongitude])) {
+                    latitude = Float(data[i][indexLatitude])!
+                    longitude = Float (data[i][indexLongitude])!
+                    createrMarker(longitude,latitude);
+                }
+            } else {
+                
+                if( latitude != Float(data[i][indexLatitude]) || longitude != Float(data[i][indexLongitude+1])) {
+                    latitude = Float(data[i][indexLatitude])!
+                    longitude = Float (data[i][indexLongitude+1])!
+                    createrMarker(longitude,latitude);
+                    
+                }
+            }
+            
+        }
+
+    }
+    
 }

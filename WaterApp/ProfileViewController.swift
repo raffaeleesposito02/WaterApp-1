@@ -21,7 +21,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var switchNotifyChanges: UISwitch!
     @IBOutlet weak var btnLogOut: UIButton!
     @IBOutlet weak var labelLanguage: UILabel!
-    @IBOutlet weak var labelMeasurement: UILabel!
     @IBOutlet weak var labelCity: UILabel!
     @IBOutlet weak var favouritesTableView: UITableView!
     
@@ -171,7 +170,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 let notifyNew = value?["NotifyNews"] as? Bool
                 let notifyChanges =  value?["NotifyChanges"] as? Bool
                 self.labelLanguage.text = value?["Language"] as? String
-                self.labelMeasurement.text = value?["Unit of Misure"] as? String;
                 // Placeholder image
                 let placeholderImage = UIImage(named: "placeholder.jpg");
                 // get the reference of the image

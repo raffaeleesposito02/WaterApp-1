@@ -21,4 +21,6 @@ target 'WaterApp' do
 	# Pods for Google Maps	
    pod 'GoogleMaps', '~> 2.5' 
    pod 'GooglePlaces', '~> 2.5' 
+
+
 end

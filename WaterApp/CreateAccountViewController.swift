@@ -77,7 +77,6 @@ class CreateAccountViewController: UIViewController {
                             // Create the all Informations that I need
                             reference?.child("Email").setValue("\(self.emailTextField.text ?? "NoValue")");
                             reference?.child("Language").setValue("English");
-                            reference?.child("Unit of Misure").setValue("Metric");
                             reference?.child("NotifyNews").setValue(true);
                             reference?.child("NotifyChanges").setValue(true);
                             reference?.child("Username").setValue(self.usernameTextField.text!);

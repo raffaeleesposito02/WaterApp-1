@@ -138,7 +138,6 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                     let reference = self.ref?.child("Users").child(self.appDelegate.uid);
                     reference?.child("Email").setValue("\(user?.email ?? "NoValue")");
                     reference?.child("Language").setValue("English");
-                    reference?.child("Unit of Misure").setValue("Metric");
                     reference?.child("NotifyNews").setValue(true);
                     reference?.child("NotifyChanges").setValue(true);
                     reference?.child("Username").setValue( (user?.displayName)!);
