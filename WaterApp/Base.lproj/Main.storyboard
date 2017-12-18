@@ -337,6 +337,7 @@
                         <outlet property="btnLogIn" destination="yh6-4b-Kxr" id="E8I-rb-ncL"/>
                         <outlet property="btnLogOut" destination="fae-hP-KlK" id="Ix2-ce-oOX"/>
                         <outlet property="btnProfile" destination="3nv-bY-hGa" id="1VO-DF-BJG"/>
+                        <outlet property="favouritesTableView" destination="zYW-2J-p65" id="G4l-vY-BCe"/>
                         <outlet property="labelLanguage" destination="M5m-eE-Vym" id="puY-Sc-hZh"/>
                         <outlet property="notifyNews" destination="9LG-1d-zEV" id="wim-H2-GaF"/>
                         <outlet property="usernameLabel" destination="6Hb-TZ-1ak" id="tey-ov-mnf"/>

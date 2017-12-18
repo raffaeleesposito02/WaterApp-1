@@ -54,6 +54,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         btnLogOut.layer.cornerRadius = 8;
         btnProfile.layer.cornerRadius = btnProfile.bounds.width*0.5;
         super.viewDidLoad()
+        favouritesTableView.delegate = self
+        favouritesTableView.dataSource = self
         
         ref = Database.database().reference();
         storageRef = Storage.storage().reference();
@@ -84,8 +86,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         labelLanguage.isUserInteractionEnabled = true;
         
         
-        favouritesTableView.delegate = self
-        favouritesTableView.dataSource = self
+        
         
     }
     
