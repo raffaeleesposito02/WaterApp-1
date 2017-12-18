@@ -62,7 +62,7 @@ class CreateAccountViewController: UIViewController {
     @IBAction func createAccount(_ sender: Any) {
         // If the 2 password aren't equal show the warning
         if( passwordTextField.text != retypePasswordTextField.text  || usernameTextField.text == nil ){
-            createAlertMessage("Problem", "Password doens't match or Username is empty");
+            Accounts.shared.createAlertMessage("Problem", "Password doens't match or Username is empty", self);
         } else { // Do the registration
             
             if let email = emailTextField.text, let pass = passwordTextField.text {
@@ -106,33 +106,22 @@ class CreateAccountViewController: UIViewController {
             switch errCode {
             case .emailAlreadyInUse:
                 // Create an alert message
-                createAlertMessage("Invalid Email", "Please check the entered email address");
+                Accounts.shared.createAlertMessage("Invalid Email", "Please check the entered email address", self);
                 break;
             case .invalidEmail:
                 // Create an alert message
-                createAlertMessage("Email is not valid", "Please check the entered email address");
+                Accounts.shared.createAlertMessage("Email is not valid", "Please check the entered email address", self);
                 break;
             case .weakPassword:
                 print("Weak Password")
                 // Create an alert message
-                createAlertMessage("Weak Password", "Password must have at least 6 characters");
+                Accounts.shared.createAlertMessage("Weak Password", "Password must have at least 6 characters", self);
                 break;
             default:
-                createAlertMessage("Error", "Error 0x00081");
+                Accounts.shared.createAlertMessage("Error", "Error 0x00081", self);
                 print("Other error: \(error.localizedDescription)");
                 break;
             }
         }
-    }
-    
-    func createAlertMessage(_ mTitle:String, _ mMessage: String) {
-        
-        let alertMessage = UIAlertController(title: mTitle, message: mMessage, preferredStyle: .alert)
-        // Attach an action on alert message
-        alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            alertMessage.dismiss(animated: true, completion: nil)
-        }))
-        // Display the alert message
-        self.present(alertMessage, animated: true, completion: nil)
     }
 }
