@@ -19,9 +19,7 @@ class BaseTabBarController: UITabBarController {
         selectedIndex = defaultIndex
     }
     
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        print("Selected Index :\(self.selectedIndex)")
-        
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {       
     }
     
 }
