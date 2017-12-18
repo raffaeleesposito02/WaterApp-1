@@ -141,7 +141,6 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                     reference?.child("Unit of Misure").setValue("Metric");
                     reference?.child("NotifyNews").setValue(true);
                     reference?.child("NotifyChanges").setValue(true);
-                    reference?.child("ProfileImage").setValue("There will be an image here");
                     reference?.child("Username").setValue( (user?.displayName)!);
                 }
                 self.navigationController?.popViewController(animated: true);
