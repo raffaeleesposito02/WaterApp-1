@@ -12,4 +12,5 @@ class Favourite {
     static var shared = Favourite()
     
     var favouritePlace: [String] = []
+    var favouriteMarkersImages: [String] = []
 }
