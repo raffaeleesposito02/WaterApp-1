@@ -40,6 +40,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
  
     //ARRAY THAT CONTAINS STARRED PLACES (STATIC, FOR NOW)
     var starredPlace: [String] = ["Napoli", "Caserta", "#PIGGOD"]
+    var markersPlace: [String] = ["flag-map-marker.png", "flagAppost.png", "flagwarning.png"]
     
     //WHEN MARKER IS TAPPED
     func mapView(_ mapView:GMSMapView, didTap marker: GMSMarker) -> Bool {
@@ -69,6 +70,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     // VARIABLES
     var locationManager = CLLocationManager()
+    var storageRef: StorageReference?
     
     
     override func viewDidLoad() {
