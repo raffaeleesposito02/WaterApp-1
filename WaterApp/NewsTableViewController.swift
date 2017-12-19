@@ -14,7 +14,7 @@ class NewsTableViewController: UITableViewController {
     let newsTitle = ["Physico-Chemical Parameters", "Chlorophyll_a", "pH", "Turbidity"]
     let newsContent = ["This application was proposed to predict Chlorophyla_a, PH and Transparency focused on estimating the physico-chemical parameters seen on the beach in Naples, Italy, using satellite images and Artificial Intelligence Techniques.", "The Chlorophyll_a (Chl-a) concentration is commonly used as indicator for eutrophication. Chl-a is a direct indi-cator used to evaluate the ecological state of a water body, such as algal blooms that degrade the water quality in lakes, reservoirs and beach", "The optimum pH range for most aquatic organisms is 6.5–8.5, and the acid andalkaline death points are around pH 4 and pH 11, respectively.  Most livingorganisms do not tolerate large variations in pH and may die", "Turbidity is an optical determination of water clarity 1. Turbid water will appear cloudy, murky, or otherwise colored, affecting the physical look of the water. Suspended solids and dissolved colored material reduce water clarity by creating an opaque, hazy or muddy appearance. Turbidity measurements are often used as an indicator of water quality based on clarity and estimated total suspended solids in water."]
     
-    var articleImages: [String] = ["oFFFF.png", "oNNNNNNN.png", "oNNNNNNN.png", "oNNNNNNN.png"]
+    var articleImages: [String] = ["PhisicalChemicaParameters.png", "clorophilla.png", "phWater.png", "turbidity.png"]
     
     /* Relationship example:
         If you click the first row, that has newsTitle[0] as title and newsContent[0] as content,
