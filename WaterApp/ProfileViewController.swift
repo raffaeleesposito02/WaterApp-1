@@ -109,16 +109,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         return cell
     }
     
+    //THIS FUNCTION MAKES TABLEVIEWROWS EDITABLE
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    /*func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
-        }
-    }*/
-    
+    //THIS FUNCTION HANDLES SLIDE-TO-LEFT GESTURE ON A ROW
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             deleteFavouriteIndexPath = indexPath as NSIndexPath
@@ -127,6 +123,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
     func confirmDelete(favourite: String) {
         let alert = UIAlertController(title: "Delete Planet", message: "Are you sure you want to permanently delete \(favourite)?", preferredStyle: .actionSheet)
         
@@ -143,6 +140,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.present(alert, animated: true, completion: nil)
     }
     
+    //IF YOU CLICK "DELETE" ON THE ALERT, THIS FUNCTION WILL BE CALLED
     func handleDeleteFavourite(alertAction: UIAlertAction!) -> Void {
         if let indexPath = deleteFavouriteIndexPath {
             favouritesTableView.beginUpdates()
@@ -158,6 +156,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    //IF YOU CLICK "CANCEL" ON THE ALERT, THIS FUNCTION WILL BE CALLED
     func cancelDeleteFavourite(alertAction: UIAlertAction!) {
         deleteFavouriteIndexPath = nil
     }
