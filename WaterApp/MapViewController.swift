@@ -146,10 +146,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         self.googleMapsView.animate(to: camera)
         self.locationManager.stopUpdatingLocation()
-        
-        let filter = GMSAutocompleteFilter()
-        filter.type = .city
-        filter.country = "uk"
+
     }
     
     // MARK: GMSMapview Delegate
