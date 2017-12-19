@@ -24,6 +24,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var labelCity: UILabel!
     @IBOutlet weak var favouritesTableView: UITableView!
     
+    @IBOutlet weak var imageViewCell: UIImageView!
+    
     // I create a Picker view for the language
     var pickerLanguage = UIPickerView();
     var data = ["Italian", "English", "Napolitan"];
@@ -84,10 +86,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let tap = UITapGestureRecognizer(target: self, action: #selector(tap(gestureReconizer:)))
         labelLanguage.addGestureRecognizer(tap)
         labelLanguage.isUserInteractionEnabled = true;
-        
-        
-        
-        
     }
     
     //MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------------ BEGIN
@@ -104,6 +102,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteTableCell", for: indexPath)
         cell.textLabel?.text = Favourite.shared.favouritePlace[indexPath.row]
+        cell.imageView?.image = UIImage(named: Favourite.shared.favouriteMarkersImages[indexPath.row])
         //cell.detailTextLabel?.text = newsContent[indexPath.row]
         
         return cell
