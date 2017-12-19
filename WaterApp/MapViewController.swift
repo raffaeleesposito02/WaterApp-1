@@ -39,7 +39,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     }
  
     //ARRAY THAT CONTAINS STARRED PLACES (STATIC, FOR NOW)
-    var starredPlace: [String] = ["Napoli", "Caserta", "#PIGGOD"]
+    var starredPlace: [String] = ["Napoli", "Caserta", "Salerno"]
     var markersPlace: [String] = ["flag-map-marker.png", "flagAppost.png", "flagwarning.png"]
     
     //WHEN MARKER IS TAPPED
