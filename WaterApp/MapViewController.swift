@@ -14,6 +14,8 @@ import FirebaseStorage
 class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
     
     @IBOutlet weak var popView: UIView!
+    var limitEnterococchi: Int = 200; // (UFC o MPN /100ml, valore limite 200)
+    var limitEschierica: Int = 500; // (UFC o MPN /100ml, valore limite 500)
     
     @IBAction func closePopup(_ sender: Any) {
         popView.isHidden = true
@@ -54,7 +56,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        createrMarker(40.84, 14.27)
+
         // I get the reference to the Storage where i have the file CSV
         storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
         
@@ -103,7 +105,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
      
     }
     
-   func createrMarker(_ latitude: Float ,_ longitude: Float) {
+    func createrMarker(_ latitude: Float ,_ longitude: Float,_ valueEnterococchi: Int, _ valueEschierichia: Int) {
         let marker = GMSMarker()
       
         let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
@@ -111,8 +113,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         marker.position = location
         marker.title = "Location.name"
         marker.snippet = "Info window text"
-        marker.map = googleMapsView
-        marker.icon = #imageLiteral(resourceName: "flag-map-marker");
+        marker.map = googleMapsView;
+        
+        if(valueEnterococchi >= limitEnterococchi  || valueEschierichia >= limitEnterococchi) {
+            
+            if(valueEnterococchi >= limitEnterococchi  && valueEschierichia >= limitEnterococchi){
+                marker.icon = #imageLiteral(resourceName: "flag-map-marker")
+            } else {
+                marker.icon = #imageLiteral(resourceName: "flagwarning")
+            }
+        } else {
+           marker.icon = #imageLiteral(resourceName: "flagAppost")
+        }
+
     }
 
     
@@ -220,7 +233,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
             } else {
                 print("No data in file")
             }
-        createFlags(dataArray,3,4);
+        createFlags(dataArray,3,4,6,7);
     }
     
     func cleanRows(file:String)->String{
@@ -234,7 +247,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         return row.components(separatedBy: delimiter)
     }
     
-    func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int){
+    func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEschierichia: Int,
+                     _ indexEnterococchi: Int ){
         
 
         var latitude: Float = Float(data[3][indexLatitude])!
@@ -249,14 +263,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                 if( latitude != Float(data[i][indexLatitude]) || longitude != Float(data[i][indexLongitude])) {
                     latitude = Float(data[i][indexLatitude])!
                     longitude = Float (data[i][indexLongitude])!
-                    createrMarker(longitude,latitude);
+                    createrMarker(longitude,latitude, Int(data[i][indexEnterococchi])!, Int(data[i][indexEschierichia])!);
                 }
             } else {
                 
                 if( latitude != Float(data[i][indexLatitude]) || longitude != Float(data[i][indexLongitude+1])) {
                     latitude = Float(data[i][indexLatitude])!
                     longitude = Float (data[i][indexLongitude+1])!
-                    createrMarker(longitude,latitude);
+                    createrMarker(longitude,latitude, Int(data[i][indexEnterococchi+1])!, Int(data[i][indexEschierichia+1])!);
                     
                 }
             }

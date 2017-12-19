@@ -27,6 +27,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // I create a Picker view for the language
     var pickerLanguage = UIPickerView();
     var data = ["Italian", "English", "Napolitan"];
+    var deleteFavouriteIndexPath: NSIndexPath? = nil
     
     // Ref to Database
     var ref: DatabaseReference?
@@ -107,6 +108,59 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         return cell
     }
+    
+    //THIS FUNCTION MAKES TABLEVIEWROWS EDITABLE
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    //THIS FUNCTION HANDLES SLIDE-TO-LEFT GESTURE ON A ROW
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteFavouriteIndexPath = indexPath as NSIndexPath
+            let favouriteToDelete = Favourite.shared.favouritePlace[indexPath.row]
+            confirmDelete(favourite: favouriteToDelete)
+        }
+    }
+    
+    //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
+    func confirmDelete(favourite: String) {
+        let alert = UIAlertController(title: "Delete Planet", message: "Are you sure you want to permanently delete \(favourite)?", preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteFavourite)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteFavourite)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        // Support display in iPad
+        alert.popoverPresentationController?.sourceView = self.view
+        alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    //IF YOU CLICK "DELETE" ON THE ALERT, THIS FUNCTION WILL BE CALLED
+    func handleDeleteFavourite(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = deleteFavouriteIndexPath {
+            favouritesTableView.beginUpdates()
+            
+            Favourite.shared.favouritePlace.remove(at: indexPath.row)
+            
+            // Note that indexPath is wrapped in an array:  [indexPath]
+            favouritesTableView.deleteRows(at: [indexPath as IndexPath], with: .automatic)
+            
+            
+            deleteFavouriteIndexPath = nil
+            favouritesTableView.endUpdates()
+        }
+    }
+    
+    //IF YOU CLICK "CANCEL" ON THE ALERT, THIS FUNCTION WILL BE CALLED
+    func cancelDeleteFavourite(alertAction: UIAlertAction!) {
+        deleteFavouriteIndexPath = nil
+    }
+    
     //MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------- END
     
     @IBAction func selectProfilePhotoButtonTapped(_ sender: Any) {
