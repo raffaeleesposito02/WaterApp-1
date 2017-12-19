@@ -24,7 +24,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     @IBOutlet weak var imgEscherichiaSemaphore: UIImageView!
     @IBOutlet weak var popView: UIView!
     var limitEnterococchi: Int = 200; // (UFC o MPN /100ml, valore limite 200)
-    var limitEschierica: Int = 500; // (UFC o MPN /100ml, valore limite 500)
+    var limitEscherica: Int = 500; // (UFC o MPN /100ml, valore limite 500)
     
     var dataArpac: [[String]] = [[]];
     
@@ -49,10 +49,44 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         // I show the popView
         popView.isHidden = false;
         // I need to show the information about that marker.
-//        Retrive information about marker location
-        print("Latitude: \(Float(marker.position.latitude)) Longitude: \(Float(marker.position.longitude))");
+        // Retrive information about marker location
+        
         var searchData = self.searchInArray(dataArpac, 4, 3, Float(marker.position.latitude), Float(marker.position.longitude));
-        print(searchData);
+        
+ 
+        // Set all information
+        self.lblCity.text = searchData[1][1];
+        self.lblCity.sizeToFit();
+        
+        self.lblLocation.text = searchData [1][2];
+        self.lblLocation.sizeToFit();
+        
+        self.lblArea.text = searchData[1][0];
+        self.lblArea.sizeToFit();
+        
+        var lastIndex:Int = searchData.count-1;
+        var valueEnterococchi = Int(searchData[lastIndex][6]);
+        var valueEscherichia = Int(searchData[lastIndex][7]);
+        
+        if(valueEnterococchi! >= limitEnterococchi  || valueEscherichia! >= limitEscherica) {
+            
+            if(valueEnterococchi! >= limitEnterococchi  && valueEscherichia! >= limitEscherica){
+                self.imageFlag.image = UIImage(named: "flag-map-marker1");
+
+            } else {
+                self.imageFlag.image = UIImage(named: "flagwarning1");
+            }
+        } else {
+            self.imageFlag.image = UIImage(named: "flagappost-1");
+        }
+        
+       
+        self.lblValueEscherichia.text = searchData[lastIndex][7];
+        self.lblValueEscherichia.sizeToFit();
+        
+        self.lblValueEnterococchi.text = searchData[lastIndex][6];
+        self.lblValueEnterococchi.sizeToFit();
+        
         return false
     }
 
@@ -63,7 +97,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     func mapView(_ mapView: GMSMapView, didBeginDragging: GMSMapView) {
         
         googleMapsView.delegate = self
-        print("\n\n\n\n\nAHAHAHAHAHAHAHAHA\n\n\n")
+
         legend.isHidden = true
     }
     
@@ -125,7 +159,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
      
     }
     
-    func createrMarker(_ latitude: Float ,_ longitude: Float,_ valueEnterococchi: Int, _ valueEschierichia: Int) {
+    func createrMarker(_ latitude: Float ,_ longitude: Float,_ valueEnterococchi: Int, _ valueEscherichia: Int) {
         let marker = GMSMarker()
       
         let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
@@ -135,9 +169,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         marker.snippet = "Info window text"
         marker.map = googleMapsView;
         
-        if(valueEnterococchi >= limitEnterococchi  || valueEschierichia >= limitEnterococchi) {
+        if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
             
-            if(valueEnterococchi >= limitEnterococchi  && valueEschierichia >= limitEnterococchi){
+            if(valueEnterococchi >= limitEnterococchi  && valueEscherichia >= limitEscherica){
                 marker.icon = #imageLiteral(resourceName: "flag-map-marker")
             } else {
                 marker.icon = #imageLiteral(resourceName: "flagwarning")
@@ -268,7 +302,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         return row.components(separatedBy: delimiter)
     }
     
-    func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEschierichia: Int,
+    func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEscherichia: Int,
                      _ indexEnterococchi: Int ){
         
         var latitude: Float = Float(data[3][indexLatitude])!
@@ -281,14 +315,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                 if( latitude != Float(data[i][indexLatitude]) || longitude != Float(data[i][indexLongitude])) {
                     latitude = Float(data[i][indexLatitude])!
                     longitude = Float (data[i][indexLongitude])!
-                    createrMarker(longitude,latitude, Int(data[i][indexEnterococchi])!, Int(data[i][indexEschierichia])!);
+                    createrMarker(longitude,latitude, Int(data[i][indexEnterococchi])!, Int(data[i][indexEscherichia])!);
                 }
             } else {
                 
                 if( latitude != Float(data[i][indexLatitude]) || longitude != Float(data[i][indexLongitude+1])) {
                     latitude = Float(data[i][indexLatitude])!
                     longitude = Float (data[i][indexLongitude+1])!
-                    createrMarker(longitude,latitude, Int(data[i][indexEnterococchi+1])!, Int(data[i][indexEschierichia+1])!);
+                    createrMarker(longitude,latitude, Int(data[i][indexEnterococchi+1])!, Int(data[i][indexEscherichia+1])!);
                 }
             }
         }
@@ -300,18 +334,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         // I start a cycle
         for i in 3...data.count-1{
+            
             // If I haven't an error during the conversation of the String to Float
             if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
                 if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude])) {
                     // I have fouund the location so i punt in the array-2D
-                    print("Trovato \(i)")
+    
                     values.append(data[i]);
                 }
                 
             } else {
                 
                 if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude+1])) {
-                    print("Trovato")
+    
                     values.append(data[i]);
                 }
             }
