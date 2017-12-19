@@ -224,6 +224,7 @@
                         <outlet property="lblLocation" destination="pwx-Qd-twY" id="bBh-sI-Ugf"/>
                         <outlet property="lblValueEnterococchi" destination="yfZ-Kc-Bjb" id="nYa-TU-pSO"/>
                         <outlet property="lblValueEscherichia" destination="sA9-Fk-UZg" id="pzH-G3-EoB"/>
+                        <outlet property="legend" destination="3fU-iX-SC9" id="JbW-Gz-91d"/>
                         <outlet property="popView" destination="f4V-kh-fvQ" id="m2m-7Z-NiQ"/>
                         <outlet property="star" destination="BtN-t0-bxg" id="Sgj-7C-6PH"/>
                     </connections>

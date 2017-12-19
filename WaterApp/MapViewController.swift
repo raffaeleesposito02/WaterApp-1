@@ -58,6 +58,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
 
     
     // OUTLETS
+    @IBOutlet weak var legend: UIView!
+    
+    func mapView(_ mapView: GMSMapView, didBeginDragging: GMSMapView) {
+        
+        googleMapsView.delegate = self
+        print("\n\n\n\n\nAHAHAHAHAHAHAHAHA\n\n\n")
+        legend.isHidden = true
+    }
+    
     
     @IBOutlet weak var googleMapsView: GMSMapView!
     
@@ -153,15 +162,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         self.googleMapsView.animate(to: camera)
         self.locationManager.stopUpdatingLocation()
-        
-        let filter = GMSAutocompleteFilter()
-        filter.type = .city
-        filter.country = "uk"
+
     }
     
     // MARK: GMSMapview Delegate
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         self.googleMapsView.isMyLocationEnabled = true
+        
+        legend.isHidden = false
     }
     
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
@@ -169,6 +177,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         self.googleMapsView.isMyLocationEnabled = true
         if (gesture) {
             mapView.selectedMarker = nil
+            
+            legend.isHidden = true
         }
     }
     
