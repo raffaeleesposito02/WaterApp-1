@@ -19,7 +19,7 @@ class ArticleViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+
         newsTitleLabel.text! = News.article.newsTit
         newsContentTextView.text! = News.article.newsCnt
         newsImageView.image = UIImage(named: News.article.newsImgName)
