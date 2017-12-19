@@ -13,38 +13,49 @@ import FirebaseStorage
 
 class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
     
+    @IBOutlet weak var lblArea: UILabel!
+    @IBOutlet weak var lblCity: UILabel!
+    @IBOutlet weak var lblLocation: UILabel!
+    @IBOutlet weak var imageFlag: UIImageView!
+    @IBOutlet weak var lblValueEnterococchi: UILabel!
+    @IBOutlet weak var lblValueEscherichia: UILabel!
+    @IBOutlet weak var imageEnterococchiSemaphore: UIImageView!
+    
+    @IBOutlet weak var imgEscherichiaSemaphore: UIImageView!
     @IBOutlet weak var popView: UIView!
     var limitEnterococchi: Int = 200; // (UFC o MPN /100ml, valore limite 200)
     var limitEschierica: Int = 500; // (UFC o MPN /100ml, valore limite 500)
+    
+    var dataArpac: [[String]] = [[]];
     
     @IBAction func closePopup(_ sender: Any) {
         popView.isHidden = true
     }
     
     @IBOutlet weak var star: UIButton!
+    
     @IBAction func addOrRemoveStarred(_ sender: Any) {
 //        THERE IS ALREADY A FULL STAR ICON IN THE ASSETS READY TO USE
     }
  
     //ARRAY THAT CONTAINS STARRED PLACES (STATIC, FOR NOW)
     var starredPlace: [String] = ["Napoli", "Caserta", "#PIGGOD"]
+
+    var storageRef: StorageReference?;
+//    var databaseRef
     
     //WHEN MARKER IS TAPPED
-    var storageRef: StorageReference?;
-    
     func mapView(_ mapView:GMSMapView, didTap marker: GMSMarker) -> Bool {
-        
-        popView.isHidden = false
-        
-//        performSegue(withIdentifier: "markerTapped", sender: nil)
+        // I show the popView
+        popView.isHidden = false;
+        // I need to show the information about that marker.
+//        Retrive information about marker location
+        print("Latitude: \(Float(marker.position.latitude)) Longitude: \(Float(marker.position.longitude))");
+        var searchData = self.searchInArray(dataArpac, 4, 3, Float(marker.position.latitude), Float(marker.position.longitude));
+        print(searchData);
         return false
     }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        
-//        popView.isHidden = true
-//        
-//    }
+
     
     // OUTLETS
     
@@ -221,19 +232,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     }
     
     func converTextToArray(_ text: String){
-        var dataArray: [[String]] = [[]] ;
+        
     
         let rows = cleanRows(file: text).components(separatedBy: "\n")
             if rows.count > 0 {
-                dataArray.append(getStringFieldsForRow(row: rows.first!,delimiter:","));
+                self.dataArpac.append(getStringFieldsForRow(row: rows.first!,delimiter:","));
                 
                 for row in rows{
-                    dataArray.append(getStringFieldsForRow(row: row,delimiter: ","));
+                    self.dataArpac.append(getStringFieldsForRow(row: row,delimiter: ","));
                 }
             } else {
                 print("No data in file")
             }
-        createFlags(dataArray,3,4,6,7);
+        createFlags(self.dataArpac,3,4,6,7);
     }
     
     func cleanRows(file:String)->String{
@@ -250,13 +261,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEschierichia: Int,
                      _ indexEnterococchi: Int ){
         
-
         var latitude: Float = Float(data[3][indexLatitude])!
         var longitude: Float = Float(data[3][indexLongitude])!
         
         for  i in 4...data.count-1 {
-            
-
             
             if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
                 
@@ -271,12 +279,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                     latitude = Float(data[i][indexLatitude])!
                     longitude = Float (data[i][indexLongitude+1])!
                     createrMarker(longitude,latitude, Int(data[i][indexEnterococchi+1])!, Int(data[i][indexEschierichia+1])!);
-                    
                 }
             }
-            
         }
-
     }
     
+    func searchInArray(_ data: [[String]], _ indexLongitude: Int,_ indexLatitude: Int,_ latitudeValue: Float,
+                       _ longitudeValue: Float) -> [[String]] {
+        var values: [[String]] = [[]];
+        
+        // I start a cycle
+        for i in 3...data.count-1{
+            // If I haven't an error during the conversation of the String to Float
+            if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
+                if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude])) {
+                    // I have fouund the location so i punt in the array-2D
+                    print("Trovato \(i)")
+                    values.append(data[i]);
+                }
+                
+            } else {
+                
+                if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude+1])) {
+                    print("Trovato")
+                    values.append(data[i]);
+                }
+            }
+        }
+
+        return values;
+    }
 }
