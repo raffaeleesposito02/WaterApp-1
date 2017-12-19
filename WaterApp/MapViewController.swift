@@ -307,23 +307,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         var latitude: Float = Float(data[3][indexLatitude])!
         var longitude: Float = Float(data[3][indexLongitude])!
+        var valueEnterococchi: Int = Int(data[3][indexEnterococchi])!;
+        var valueEscherichia: Int = Int(data[3][indexEscherichia])!;
         
         for  i in 4...data.count-1 {
             
             if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
                 
                 if( latitude != Float(data[i][indexLatitude]) || longitude != Float(data[i][indexLongitude])) {
-                    latitude = Float(data[i][indexLatitude])!
-                    longitude = Float (data[i][indexLongitude])!
-                    createrMarker(longitude,latitude, Int(data[i][indexEnterococchi])!, Int(data[i][indexEscherichia])!);
+                    // Create a merker in the previous point
+                        createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
+                    // Set the new values
+                        latitude = Float(data[i][indexLatitude])!
+                        longitude = Float (data[i][indexLongitude])!
+                        valueEnterococchi = Int(data[i][indexEnterococchi])!;
+                        valueEscherichia = Int(data[i][indexEscherichia])!;
+                } else {
+                    // update only the values of bacterias
+                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
+                    valueEscherichia = Int(data[i][indexEscherichia])!;
                 }
-            } else {
+                } else {
                 
-                if( latitude != Float(data[i][indexLatitude]) || longitude != Float(data[i][indexLongitude+1])) {
-                    latitude = Float(data[i][indexLatitude])!
-                    longitude = Float (data[i][indexLongitude+1])!
-                    createrMarker(longitude,latitude, Int(data[i][indexEnterococchi+1])!, Int(data[i][indexEscherichia+1])!);
-                }
+                     if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
+                        // Create a merker in the previous point
+                        createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
+                        // Set the new values
+                        latitude = Float(data[i][indexLatitude+1])!
+                        longitude = Float (data[i][indexLongitude+1])!
+                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
+                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
+                    } else {
+                        // update only the values of bacterias
+                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
+                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
+                    }
             }
         }
     }
@@ -351,7 +369,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                 }
             }
         }
-
+        
         return values;
     }
 }
