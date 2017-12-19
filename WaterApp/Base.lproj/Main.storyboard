@@ -894,7 +894,7 @@
             </objects>
             <point key="canvasLocation" x="944" y="-372"/>
         </scene>
-        <!--News-->
+        <!--Info-->
         <scene sceneID="bdU-LU-ccm">
             <objects>
                 <tableViewController storyboardIdentifier="NewsTable" id="ldb-2e-WVc" customClass="NewsTableViewController" customModule="WaterApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -936,7 +936,7 @@
                             <outlet property="delegate" destination="ldb-2e-WVc" id="h7F-ox-DvP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="News" id="Ps4-yR-ea3"/>
+                    <navigationItem key="navigationItem" title="Info" id="Ps4-yR-ea3"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kS4-wb-Lss" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1064,6 +1064,7 @@
         <image name="placeholder 2" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="p32-hW-gJY"/>
         <segue reference="McD-Ua-rYx"/>
         <segue reference="Tsq-72-AKj"/>
     </inferredMetricsTieBreakers>

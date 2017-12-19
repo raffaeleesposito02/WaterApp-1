@@ -165,8 +165,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
         
         marker.position = location
-        marker.title = "Location.name"
-        marker.snippet = "Info window text"
         marker.map = googleMapsView;
         
         if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
