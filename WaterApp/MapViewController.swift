@@ -197,7 +197,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
         
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
         
         self.googleMapsView.animate(to: camera)
         self.locationManager.stopUpdatingLocation()
@@ -225,7 +225,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
-        let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 15.0)
+        let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 13.0)
         self.googleMapsView.camera = camera
         self.dismiss(animated: true, completion: nil) // dismiss after select place
     }
