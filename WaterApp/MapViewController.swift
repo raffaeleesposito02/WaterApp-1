@@ -23,6 +23,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     @IBOutlet weak var imgEscherichiaSemaphore: UIImageView!
     @IBOutlet weak var popView: UIView!
+    
     var limitEnterococchi: Int = 200; // (UFC o MPN /100ml, valore limite 200)
     var limitEscherica: Int = 500; // (UFC o MPN /100ml, valore limite 500)
     
@@ -169,18 +170,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
         
-        marker.position = location
+        marker.position = location;
         marker.map = googleMapsView;
         
         if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
             
             if(valueEnterococchi >= limitEnterococchi  && valueEscherichia >= limitEscherica){
-                marker.icon = #imageLiteral(resourceName: "flag-map-marker")
+                marker.icon = #imageLiteral(resourceName: "flag-map-marker");
             } else {
-                marker.icon = #imageLiteral(resourceName: "flagwarning")
+                marker.icon = #imageLiteral(resourceName: "flagwarning");
+                print("Enterococchi \(valueEnterococchi) Escherichia : \(valueEscherichia) Position \(latitude).\(longitude)")
             }
         } else {
-            marker.icon = #imageLiteral(resourceName: "flagAppost")
+            marker.icon = #imageLiteral(resourceName: "flagAppost");
         }
         
     }
@@ -195,7 +197,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
         
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
         
         self.googleMapsView.animate(to: camera)
         self.locationManager.stopUpdatingLocation()
@@ -223,7 +225,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
-        let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 15.0)
+        let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 13.0)
         self.googleMapsView.camera = camera
         self.dismiss(animated: true, completion: nil) // dismiss after select place
     }
@@ -305,8 +307,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         return row.components(separatedBy: delimiter)
     }
     
-    func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEscherichia: Int,
-                     _ indexEnterococchi: Int ){
+    func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEnterococchi: Int,
+                     _ indexEscherichia: Int ){
         
         var latitude: Float = Float(data[3][indexLatitude])!
         var longitude: Float = Float(data[3][indexLongitude])!
@@ -341,38 +343,50 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                     valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
                     valueEscherichia = Int(data[i][indexEscherichia+1])!;
                 } else {
-                    // update only the values of bacterias
-                    valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
-                    valueEscherichia = Int(data[i][indexEscherichia+1])!;
+                    if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
+                        // Create a merker in the previous point
+                        createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
+                        // Set the new values
+                        latitude = Float(data[i][indexLatitude+1])!
+                        longitude = Float (data[i][indexLongitude+1])!
+                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
+                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
+                    } else {
+                        // update only the values of bacterias
+                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
+                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
+                    }
                 }
             }
         }
     }
     
-    func searchInArray(_ data: [[String]], _ indexLongitude: Int,_ indexLatitude: Int,_ latitudeValue: Float,
-                       _ longitudeValue: Float) -> [[String]] {
-        var values: [[String]] = [[]];
         
-        // I start a cycle
-        for i in 3...data.count-1{
+        func searchInArray(_ data: [[String]], _ indexLongitude: Int,_ indexLatitude: Int,_ latitudeValue: Float,
+                           _ longitudeValue: Float) -> [[String]] {
+            var values: [[String]] = [[]];
             
-            // If I haven't an error during the conversation of the String to Float
-            if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
-                if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude])) {
-                    // I have fouund the location so i punt in the array-2D
-                    
-                    values.append(data[i]);
-                }
+            // I start a cycle
+            for i in 3...data.count-1{
                 
-            } else {
-                
-                if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude+1])) {
+                // If I haven't an error during the conversation of the String to Float
+                if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
+                    if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude])) {
+                        // I have fouund the location so i punt in the array-2D
+                        
+                        values.append(data[i]);
+                    }
                     
-                    values.append(data[i]);
+                } else {
+                    
+                    if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude+1])) {
+                        
+                        values.append(data[i]);
+                    }
                 }
             }
+            
+            return values;
         }
-        
-        return values;
+    
     }
-}

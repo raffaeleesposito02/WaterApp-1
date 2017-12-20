@@ -76,6 +76,10 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97648024559020996" green="0.97646200656890869" blue="0.97647440433502197" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="E5A-pU-Oto"/>
+                                    <constraint firstAttribute="width" constant="154" id="V7f-kz-a6u"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-kh-fvQ">
                                 <rect key="frame" x="24" y="100" width="327" height="466"/>
@@ -245,10 +249,8 @@
                         <constraints>
                             <constraint firstItem="KMD-gR-rHM" firstAttribute="trailing" secondItem="f4V-kh-fvQ" secondAttribute="trailing" constant="24" id="3fh-Rz-KmI"/>
                             <constraint firstItem="2rA-4r-8KR" firstAttribute="trailing" secondItem="KMD-gR-rHM" secondAttribute="trailing" id="5Op-OF-bzb"/>
-                            <constraint firstItem="KMD-gR-rHM" firstAttribute="trailing" secondItem="3fU-iX-SC9" secondAttribute="trailing" constant="205" id="5TG-RD-aBb"/>
                             <constraint firstItem="2rA-4r-8KR" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" id="6BN-xo-AeX"/>
                             <constraint firstItem="f4V-kh-fvQ" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" constant="36" id="CXq-PE-oaS"/>
-                            <constraint firstItem="KMD-gR-rHM" firstAttribute="bottom" secondItem="3fU-iX-SC9" secondAttribute="bottom" constant="448" id="FMy-RU-hFb"/>
                             <constraint firstItem="f4V-kh-fvQ" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" constant="24" id="JWL-Gy-oHo"/>
                             <constraint firstItem="2rA-4r-8KR" firstAttribute="bottom" secondItem="KMD-gR-rHM" secondAttribute="bottom" id="UN2-oZ-cyT"/>
                             <constraint firstItem="3fU-iX-SC9" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" constant="16" id="ZND-Dr-ZNh"/>
@@ -974,7 +976,7 @@
                                             <constraint firstAttribute="height" constant="36" id="wuw-Eq-9fh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="textColor" red="1" green="0.22267030739999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -995,7 +997,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9r-Du-Yae">
                                 <rect key="frame" x="0.0" y="-6" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Titolo barra navigazione" id="Fjl-yN-fm8">
+                                    <navigationItem id="Fjl-yN-fm8">
                                         <barButtonItem key="leftBarButtonItem" title="News" id="31f-HH-VKS">
                                             <connections>
                                                 <segue destination="ldb-2e-WVc" kind="show" id="51U-uN-s9j"/>
