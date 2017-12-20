@@ -10,6 +10,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import FirebaseStorage
+import FirebaseDatabase
 
 class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
     
@@ -20,26 +21,65 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     @IBOutlet weak var lblValueEnterococchi: UILabel!
     @IBOutlet weak var lblValueEscherichia: UILabel!
     @IBOutlet weak var imageEnterococchiSemaphore: UIImageView!
-    
     @IBOutlet weak var imgEscherichiaSemaphore: UIImageView!
     @IBOutlet weak var popView: UIView!
     
+    let iEscherichia: Int = 7;
+    let iEnterococchi: Int = 6;
+    
+    let iLatitude: Int = 3;
+    let iLongitude: Int = 4;
+    
+    
+    // Limit for Enterococchi e Escherichia
     var limitEnterococchi: Int = 200; // (UFC o MPN /100ml, valore limite 200)
     var limitEscherica: Int = 500; // (UFC o MPN /100ml, valore limite 500)
-    
+    // Information from ARPAC
     var dataArpac: [[String]] = [[]];
     
+    // We need this file to save the location
+    var latitude: Float = 0.0;
+    var longitude: Float = 0.0;
+    
+    
+    // I get the reference to database
+    var ref: DatabaseReference?;
+    // I get the User_Id
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate;
+    
     @IBAction func closePopup(_ sender: Any) {
-        popView.isHidden = true
+        popView.isHidden = true;
+        self.star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
     }
     
     @IBOutlet weak var star: UIButton!
     
     @IBAction func addOrRemoveStarred(_ sender: Any) {
-        //        THERE IS ALREADY A FULL STAR ICON IN THE ASSETS READY TO USE
+        // I get the datas
+        var datas = searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
+        
+        // I create an object of type Preference
+        var preference: Preference = Preference(data: datas);
+        let refPreference = self.ref?.child(self.appDelegate.uid).child(String(preference.locality.hashValue));
+        
+        if( star.currentImage != UIImage(named: "star_colored_bordi") ){
+            // If the user have done the log in
+            if( self.appDelegate.uid != "NoValue" ){
+                
+               
+                refPreference?.setValue(preference.toDictionary());
+                refPreference?.child("DataAnalysis").setValue(preference.toDictionaryArray());
+                
+                star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
+            }
+            else { // The user doesn't have an account so i need to save in local the location
+                
+            }
+        } else {
+            refPreference?.removeValue()
+            star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
+        }
     }
-    
-    
     
     //ARRAY THAT CONTAINS STARRED PLACES (STATIC, FOR NOW)
     var starredPlace: [String] = ["Napoli", "Caserta", "Salerno"]
@@ -47,13 +87,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     //WHEN MARKER IS TAPPED
     func mapView(_ mapView:GMSMapView, didTap marker: GMSMarker) -> Bool {
-        // I show the popView
-        popView.isHidden = false;
-        // I need to show the information about that marker.
+
         // Retrive information about marker location
+        latitude = Float(marker.position.latitude);
+        longitude = Float(marker.position.longitude);
+        popView.isHidden = false;
         
-        var searchData = self.searchInArray(dataArpac, 4, 3, Float(marker.position.latitude), Float(marker.position.longitude));
+        var searchData = self.searchInArray(dataArpac, iLatitude, iLongitude, latitude,longitude);
+        // I need to show the information about that marker.
         
+        // First I need to see if the user has saved the place in the preferences
+        if( self.appDelegate.uid != "NoValue" ){
+            
+            let refPreference = self.ref?.child(self.appDelegate.uid).observe(.value, with: { (snapshot) in
+
+                // If YES
+                if (snapshot.hasChild(String(searchData[1][2].hashValue))){
+                    // Se the image blank
+                   self.star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
+
+                }
+            });
+        }
+        
+
         
         // Set all information
         self.lblCity.text = searchData[1][1];
@@ -66,8 +123,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         self.lblArea.sizeToFit();
         
         var lastIndex:Int = searchData.count-1;
-        var valueEnterococchi = Int(searchData[lastIndex][6]);
-        var valueEscherichia = Int(searchData[lastIndex][7]);
+        var valueEnterococchi = Int(searchData[lastIndex][iEnterococchi]);
+        var valueEscherichia = Int(searchData[lastIndex][iEscherichia]);
         
         if(valueEnterococchi! >= limitEnterococchi  || valueEscherichia! >= limitEscherica) {
             
@@ -82,12 +139,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         }
         
         
-        self.lblValueEscherichia.text = searchData[lastIndex][7];
+        self.lblValueEscherichia.text = searchData[lastIndex][iEscherichia];
         self.lblValueEscherichia.sizeToFit();
         
-        self.lblValueEnterococchi.text = searchData[lastIndex][6];
+        self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
         self.lblValueEnterococchi.sizeToFit();
         
+       
         return false
     }
     
@@ -98,11 +156,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     func mapView(_ mapView: GMSMapView, didBeginDragging: GMSMapView) {
         
         googleMapsView.delegate = self
-        
         legend.isHidden = true
-        
     }
-    
     
     @IBOutlet weak var googleMapsView: GMSMapView!
     
@@ -118,6 +173,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         legend.layer.cornerRadius = 10
         // I get the reference to the Storage where i have the file CSV
         storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
+        ref =  Database.database().reference().child("Preferences");
         
         popView.isHidden = true
         
@@ -136,9 +192,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         popView.layer.shadowOpacity = 0.5
         popView.layer.shadowOffset = CGSize.zero
         popView.layer.shadowRadius = 60
+                
+        // Get the reference to Firebase
         
-        //PASS STARRED PLACES TO FavouriteSingleton, JUST FOR CHECKING IF IT WORKS!
-        addToFavourites()
         
     }
     
@@ -146,10 +202,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         popView.isHidden = true
     }
     
-    func addToFavourites(){
-        Favourite.shared.favouritePlace = starredPlace
-        Favourite.shared.favouriteMarkersImages = markersPlace
-    }
     
     func initGoogleMaps() {
         
@@ -179,7 +231,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                 marker.icon = #imageLiteral(resourceName: "flag-map-marker");
             } else {
                 marker.icon = #imageLiteral(resourceName: "flagwarning");
-                print("Enterococchi \(valueEnterococchi) Escherichia : \(valueEscherichia) Position \(latitude).\(longitude)")
+                
             }
         } else {
             marker.icon = #imageLiteral(resourceName: "flagAppost");
@@ -361,7 +413,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         }
     }
     
-    func searchInArray(_ data: [[String]], _ indexLongitude: Int,_ indexLatitude: Int,_ latitudeValue: Float,
+    func searchInArray(_ data: [[String]], _ indexLatitude: Int, _ indexLongitude: Int,_ latitudeValue: Float,
                        _ longitudeValue: Float) -> [[String]] {
         var values: [[String]] = [[]];
         

@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var switchNotifyChanges: UISwitch!
     @IBOutlet weak var btnLogOut: UIButton!
     @IBOutlet weak var labelLanguage: UILabel!
-    @IBOutlet weak var labelCity: UILabel!
+
     @IBOutlet weak var favouritesTableView: UITableView!
     
     @IBOutlet weak var imageViewCell: UIImageView!
@@ -30,6 +30,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var pickerLanguage = UIPickerView();
     var data = ["Italian", "English", "Napolitan"];
     var deleteFavouriteIndexPath: NSIndexPath? = nil
+    
+    var localityTable = Array<String>();
     
     // Ref to Database
     var ref: DatabaseReference?
@@ -95,15 +97,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return Favourite.shared.favouritePlace.count
+        return self.localityTable.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteTableCell", for: indexPath)
-        cell.textLabel?.text = Favourite.shared.favouritePlace[indexPath.row]
-        cell.imageView?.image = UIImage(named: Favourite.shared.favouriteMarkersImages[indexPath.row])
-        //cell.detailTextLabel?.text = newsContent[indexPath.row]
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteTableCell", for: indexPath);
+        cell.textLabel?.text = localityTable[indexPath.row];
         return cell
     }
     
@@ -116,8 +115,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             deleteFavouriteIndexPath = indexPath as NSIndexPath
-            let favouriteToDelete = Favourite.shared.favouritePlace[indexPath.row]
-            confirmDelete(favourite: favouriteToDelete)
+//            let favouriteToDelete = Favourite.shared.favouritePlace[indexPath.row]
+//            confirmDelete(favourite: favouriteToDelete)
         }
     }
     
@@ -143,7 +142,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         if let indexPath = deleteFavouriteIndexPath {
             favouritesTableView.beginUpdates()
             
-            Favourite.shared.favouritePlace.remove(at: indexPath.row)
+//            Favourite.shared.favouritePlace.remove(at: indexPath.row)
             
             // Note that indexPath is wrapped in an array:  [indexPath]
             favouritesTableView.deleteRows(at: [indexPath as IndexPath], with: .automatic)
@@ -243,6 +242,25 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.notifyNews.setOn(notifyNew ?? false, animated: true);
                 self.switchNotifyChanges.setOn(notifyChanges ?? false, animated: true);
                 
+            })
+            
+            ref?.child("Preferences").child(self.appDelegate.uid).observe( .value , with: { (snapshot) in
+                if snapshot.exists() {
+                    for child in snapshot.children {
+                       let snap = child as! DataSnapshot
+                        self.ref?.child("Preferences").child(self.appDelegate.uid).child(snap.key).observe( .value, with: { (snapshot) in
+                            let value = snapshot.value as! NSDictionary;
+                            print(value["Locality"])
+                            self.localityTable.append(value["Locality"] as! String);
+                            print(self.localityTable);
+                            self.favouritesTableView.reloadData();
+                        })
+                    }
+                   
+                }
+                else{ print("ERROR")
+                    
+                }
             })
         }
     }

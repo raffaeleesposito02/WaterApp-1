@@ -92,7 +92,6 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 }
             })
             
-            
         }
     }
     
@@ -145,8 +144,6 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 self.navigationController?.popViewController(animated: true);
                 
             })
-            
-            
             
         }
         
