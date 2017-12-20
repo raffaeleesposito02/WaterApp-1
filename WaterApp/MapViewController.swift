@@ -358,6 +358,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                     }
             }
         }
+        }
     }
     
     func searchInArray(_ data: [[String]], _ indexLongitude: Int,_ indexLatitude: Int,_ latitudeValue: Float,
@@ -383,7 +384,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                 }
             }
         }
-        
         return values;
     }
 }
+
