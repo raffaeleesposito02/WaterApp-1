@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         ref = Database.database().reference();
         storageRef = Storage.storage().reference();
-        
+       
         // I delegate the picker to itself. Same for the datasource of the picker
         pickerLanguage.delegate = self
         pickerLanguage.dataSource = self

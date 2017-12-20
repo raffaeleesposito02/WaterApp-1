@@ -23,6 +23,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     @IBOutlet weak var imgEscherichiaSemaphore: UIImageView!
     @IBOutlet weak var popView: UIView!
+    
     var limitEnterococchi: Int = 200; // (UFC o MPN /100ml, valore limite 200)
     var limitEscherica: Int = 500; // (UFC o MPN /100ml, valore limite 500)
     
@@ -164,20 +165,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
       
         let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
         
-        marker.position = location
-        marker.title = "Location.name"
-        marker.snippet = "Info window text"
+        marker.position = location;
         marker.map = googleMapsView;
         
         if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
             
             if(valueEnterococchi >= limitEnterococchi  && valueEscherichia >= limitEscherica){
-                marker.icon = #imageLiteral(resourceName: "flag-map-marker")
+                marker.icon = #imageLiteral(resourceName: "flag-map-marker");
             } else {
-                marker.icon = #imageLiteral(resourceName: "flagwarning")
+                marker.icon = #imageLiteral(resourceName: "flagwarning");
+                print("Enterococchi \(valueEnterococchi) Escherichia : \(valueEscherichia) Position \(latitude).\(longitude)")
             }
         } else {
-           marker.icon = #imageLiteral(resourceName: "flagAppost")
+            marker.icon = #imageLiteral(resourceName: "flagAppost");
         }
 
     }
@@ -302,8 +302,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         return row.components(separatedBy: delimiter)
     }
     
-    func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEscherichia: Int,
-                     _ indexEnterococchi: Int ){
+    func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEnterococchi: Int,
+                     _ indexEscherichia: Int ){
         
         var latitude: Float = Float(data[3][indexLatitude])!
         var longitude: Float = Float(data[3][indexLongitude])!
@@ -328,7 +328,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                     valueEscherichia = Int(data[i][indexEscherichia])!;
                 }
                 } else {
-                
                      if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
                         // Create a merker in the previous point
                         createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
