@@ -109,10 +109,10 @@
 				3522EA7B1FE02BFB00280FDF /* AccountsSingleton.swift */,
 				6DD6D17B1FD981D800B78C7D /* LaunchScreen.storyboard */,
 				7F360C491FDFFA0600521C71 /* SplashViewController.swift */,
-				BDDC20061FE9535A004E7B17 /* Assets.xcassets */,
 				05C06D131FE67A9F0062DA7E /* ResetPasswordViewController.swift */,
 				6DD6D17E1FD981D800B78C7D /* Info.plist */,
 				BDA719131FE15CCD00D25679 /* GoogleService-Info.plist */,
+				BDDC20061FE9535A004E7B17 /* Assets.xcassets */,
 			);
 			path = WaterApp;
 			sourceTree = "<group>";
