@@ -42,6 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="iPhone 8" width="375" height="667"/>
+        <image name="iPhone 8" width="1125" height="2001"/>
     </resources>
 </document>

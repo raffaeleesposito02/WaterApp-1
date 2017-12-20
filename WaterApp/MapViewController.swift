@@ -36,9 +36,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     @IBOutlet weak var star: UIButton!
     
     @IBAction func addOrRemoveStarred(_ sender: Any) {
-//        THERE IS ALREADY A FULL STAR ICON IN THE ASSETS READY TO USE
+        //        THERE IS ALREADY A FULL STAR ICON IN THE ASSETS READY TO USE
     }
- 
+    
+    
+    
     //ARRAY THAT CONTAINS STARRED PLACES (STATIC, FOR NOW)
     var starredPlace: [String] = ["Napoli", "Caserta", "Salerno"]
     var markersPlace: [String] = ["flag-map-marker.png", "flagAppost.png", "flagwarning.png"]
@@ -52,7 +54,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         var searchData = self.searchInArray(dataArpac, 4, 3, Float(marker.position.latitude), Float(marker.position.longitude));
         
- 
+        
         // Set all information
         self.lblCity.text = searchData[1][1];
         self.lblCity.sizeToFit();
@@ -71,7 +73,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
             
             if(valueEnterococchi! >= limitEnterococchi  && valueEscherichia! >= limitEscherica){
                 self.imageFlag.image = UIImage(named: "flag-map-marker1");
-
+                
             } else {
                 self.imageFlag.image = UIImage(named: "flagwarning1");
             }
@@ -79,7 +81,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
             self.imageFlag.image = UIImage(named: "flagappost-1");
         }
         
-       
+        
         self.lblValueEscherichia.text = searchData[lastIndex][7];
         self.lblValueEscherichia.sizeToFit();
         
@@ -88,7 +90,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         return false
     }
-
+    
     
     // OUTLETS
     @IBOutlet weak var legend: UIView!
@@ -96,8 +98,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     func mapView(_ mapView: GMSMapView, didBeginDragging: GMSMapView) {
         
         googleMapsView.delegate = self
-
+        
         legend.isHidden = true
+        
     }
     
     
@@ -110,7 +113,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     override func viewDidLoad() {
         super.viewDidLoad();
-
+        
+        
+        legend.layer.cornerRadius = 10
         // I get the reference to the Storage where i have the file CSV
         storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
         
@@ -134,7 +139,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         //PASS STARRED PLACES TO FavouriteSingleton, JUST FOR CHECKING IF IT WORKS!
         addToFavourites()
-
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -156,13 +161,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         self.googleMapsView.delegate = self
         self.googleMapsView.isMyLocationEnabled = true
         self.googleMapsView.settings.myLocationButton = true
-
-     
+        
+        
     }
     
     func createrMarker(_ latitude: Float ,_ longitude: Float,_ valueEnterococchi: Int, _ valueEscherichia: Int) {
         let marker = GMSMarker()
-      
+        
         let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
         
         marker.position = location;
@@ -179,16 +184,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         } else {
             marker.icon = #imageLiteral(resourceName: "flagAppost");
         }
-
+        
     }
-
+    
     
     // MARK: CLLocation Manager Delegate
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error while get location \(error)")
     }
- 
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
         
@@ -196,7 +201,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         self.googleMapsView.animate(to: camera)
         self.locationManager.stopUpdatingLocation()
-
+        
     }
     
     // MARK: GMSMapview Delegate
@@ -245,7 +250,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     }
     
     func readFromCSV() {
-
+        
         // Download to the local filesystem
         storageRef?.downloadURL(completion: { (url, error) in
             
@@ -266,7 +271,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                         else {
                             print("error during conversion file \(data?.description)")
                             return
-                        }
+                    }
                     self.converTextToArray(text)
                     
                 }
@@ -277,17 +282,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     func converTextToArray(_ text: String){
         
-    
+        
         let rows = cleanRows(file: text).components(separatedBy: "\n")
-            if rows.count > 0 {
-                self.dataArpac.append(getStringFieldsForRow(row: rows.first!,delimiter:","));
-                
-                for row in rows{
-                    self.dataArpac.append(getStringFieldsForRow(row: row,delimiter: ","));
-                }
-            } else {
-                print("No data in file")
+        if rows.count > 0 {
+            self.dataArpac.append(getStringFieldsForRow(row: rows.first!,delimiter:","));
+            
+            for row in rows{
+                self.dataArpac.append(getStringFieldsForRow(row: row,delimiter: ","));
             }
+        } else {
+            print("No data in file")
+        }
         createFlags(self.dataArpac,3,4,6,7);
     }
     
@@ -316,17 +321,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                 
                 if( latitude != Float(data[i][indexLatitude]) || longitude != Float(data[i][indexLongitude])) {
                     // Create a merker in the previous point
-                        createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
+                    createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
                     // Set the new values
-                        latitude = Float(data[i][indexLatitude])!
-                        longitude = Float (data[i][indexLongitude])!
-                        valueEnterococchi = Int(data[i][indexEnterococchi])!;
-                        valueEscherichia = Int(data[i][indexEscherichia])!;
+                    latitude = Float(data[i][indexLatitude])!
+                    longitude = Float (data[i][indexLongitude])!
+                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
+                    valueEscherichia = Int(data[i][indexEscherichia])!;
                 } else {
                     // update only the values of bacterias
                     valueEnterococchi = Int(data[i][indexEnterococchi])!;
                     valueEscherichia = Int(data[i][indexEscherichia])!;
                 }
+            } else {
+                
+                if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
+                    // Create a merker in the previous point
+                    createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
+                    // Set the new values
+                    latitude = Float(data[i][indexLatitude+1])!
+                    longitude = Float (data[i][indexLongitude+1])!
+                    valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
+                    valueEscherichia = Int(data[i][indexEscherichia+1])!;
                 } else {
                      if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
                         // Create a merker in the previous point
@@ -356,14 +371,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
             if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
                 if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude])) {
                     // I have fouund the location so i punt in the array-2D
-    
+                    
                     values.append(data[i]);
                 }
                 
             } else {
                 
                 if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude+1])) {
-    
+                    
                     values.append(data[i]);
                 }
             }
