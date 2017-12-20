@@ -873,7 +873,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9r-Du-Yae">
                                 <rect key="frame" x="0.0" y="-6" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="Fjl-yN-fm8">
+                                    <navigationItem title="Titolo barra navigazione" id="Fjl-yN-fm8">
                                         <barButtonItem key="leftBarButtonItem" title="News" id="31f-HH-VKS">
                                             <connections>
                                                 <segue destination="ldb-2e-WVc" kind="show" id="51U-uN-s9j"/>
