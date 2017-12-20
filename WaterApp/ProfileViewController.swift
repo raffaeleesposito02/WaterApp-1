@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var switchNotifyChanges: UISwitch!
     @IBOutlet weak var btnLogOut: UIButton!
     @IBOutlet weak var labelLanguage: UILabel!
-    @IBOutlet weak var labelCity: UILabel!
+
     @IBOutlet weak var favouritesTableView: UITableView!
     
     @IBOutlet weak var imageViewCell: UIImageView!
@@ -29,7 +29,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // I create a Picker view for the language
     var pickerLanguage = UIPickerView();
     var data = ["Italian", "English", "Napolitan"];
-    var deleteFavouriteIndexPath: NSIndexPath? = nil
+    var deleteFavouriteIndexPath: IndexPath?;
+    
+    var localityTable = Array<Array<String>>();
     
     // Ref to Database
     var ref: DatabaseReference?
@@ -95,15 +97,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return Favourite.shared.favouritePlace.count
+        return self.localityTable.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteTableCell", for: indexPath)
-        cell.textLabel?.text = Favourite.shared.favouritePlace[indexPath.row]
-        cell.imageView?.image = UIImage(named: Favourite.shared.favouriteMarkersImages[indexPath.row])
-        //cell.detailTextLabel?.text = newsContent[indexPath.row]
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteTableCell", for: indexPath);
+        cell.textLabel?.text = localityTable[indexPath.row][0];
         return cell
     }
     
@@ -115,19 +114,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     //THIS FUNCTION HANDLES SLIDE-TO-LEFT GESTURE ON A ROW
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            deleteFavouriteIndexPath = indexPath as NSIndexPath
-            let favouriteToDelete = Favourite.shared.favouritePlace[indexPath.row]
-            confirmDelete(favourite: favouriteToDelete)
+            
+            confirmDelete(index: indexPath)
         }
     }
     
     //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
-    func confirmDelete(favourite: String) {
-        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(favourite)?", preferredStyle: .actionSheet)
+    func confirmDelete(index: IndexPath) {
+        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.localityTable[index.row][0])?", preferredStyle: .actionSheet)
         
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteFavourite)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteFavourite)
-        
+        self.deleteFavouriteIndexPath = index;
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
         
@@ -140,17 +138,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     //IF YOU CLICK "DELETE" ON THE ALERT, THIS FUNCTION WILL BE CALLED
     func handleDeleteFavourite(alertAction: UIAlertAction!) -> Void {
-        if let indexPath = deleteFavouriteIndexPath {
-            favouritesTableView.beginUpdates()
-            
-            Favourite.shared.favouritePlace.remove(at: indexPath.row)
-            
-            // Note that indexPath is wrapped in an array:  [indexPath]
-            favouritesTableView.deleteRows(at: [indexPath as IndexPath], with: .automatic)
-            
-            
-            deleteFavouriteIndexPath = nil
-            favouritesTableView.endUpdates()
+        if deleteFavouriteIndexPath != nil {
+//            self.favouritesTableView.beginUpdates()
+//
+//            self.favouritesTableView.deleteRows(at: [self.deleteFavouriteIndexPath!], with: .automatic)
+//            deleteFavouriteIndexPath = nil
+//            self.favouritesTableView.endUpdates()
+            self.favouritesTableView.deselectRow(at: self.deleteFavouriteIndexPath!, animated: true);
+        self.ref?.child("Preferences").child(self.appDelegate.uid).child(self.localityTable[(deleteFavouriteIndexPath?.row)!][1]).removeValue();
         }
     }
     
@@ -243,6 +238,28 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.notifyNews.setOn(notifyNew ?? false, animated: true);
                 self.switchNotifyChanges.setOn(notifyChanges ?? false, animated: true);
                 
+            })
+            
+            ref?.child("Preferences").child(self.appDelegate.uid).observe( .value , with: { (snapshot) in
+                if snapshot.exists() {
+                    self.localityTable = Array<Array<String>>()
+                    for child in snapshot.children {
+                       let snap = child as! DataSnapshot
+                        self.ref?.child("Preferences").child(self.appDelegate.uid).child(snap.key).observe( .value, with: { (snapshot) in
+                            if let value = snapshot.value as? NSDictionary {
+                                self.localityTable.append([value["Locality"] as! String, snap.key]);
+                                print(self.localityTable);
+                                self.favouritesTableView.reloadData();
+                            }
+                        })
+                    }
+                   
+                }
+                else{
+                    print("ERROR");
+                    print(self.localityTable);
+                    self.favouritesTableView.reloadData();
+                }
             })
         }
     }
