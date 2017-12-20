@@ -19,22 +19,22 @@ class Preference {
     var latitude: String = "";
     var longitude: String = "";
     
-    init(data: [[String]]) {
+    init(data: Array<Array<String>> ) {
         // because the first row if empty
         if(data.count > 1) {
-            area = data[1][0];
-            city = data[1][1];
-            locality = data[1][2];
+            area = data[0][0];
+            city = data[0][1];
+            locality = data[0][2];
             
-            if((Float(data[1][3]) ?? 0) != 0) {
-                latitude = data[1][3];
-                longitude = data[1][4];
+            if((Float(data[0][3]) ?? 0) != 0) {
+                latitude = data[0][3];
+                longitude = data[0][4];
             }
             else {
-                latitude = data[1][4];
-                longitude = data[1][5];
+                latitude = data[0][4];
+                longitude = data[0][5];
             }
-            for i in 1...data.count-1 {
+            for i in 0...data.count-1 {
                 var temp = Array<String>() ;
                 // I take the last 3 informations : DATE Enterococchi Escherichia
                 for j in data[i].count-3...data[i].count-1 {

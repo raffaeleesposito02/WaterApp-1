@@ -35,7 +35,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     var limitEnterococchi: Int = 200; // (UFC o MPN /100ml, valore limite 200)
     var limitEscherica: Int = 500; // (UFC o MPN /100ml, valore limite 500)
     // Information from ARPAC
-    var dataArpac: [[String]] = [[]];
+    var dataArpac =  Array<Array<String>>();
     
     // We need this file to save the location
     var latitude: Float = 0.0;
@@ -56,17 +56,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     @IBAction func addOrRemoveStarred(_ sender: Any) {
         // I get the datas
-        var datas = searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
+        let datas = searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
         
         // I create an object of type Preference
         var preference: Preference = Preference(data: datas);
         let refPreference = self.ref?.child(self.appDelegate.uid).child(String(preference.locality.hashValue));
-        
+        print("schiacciato");
         if( star.currentImage != UIImage(named: "star_colored_bordi") ){
+            print("schiacciato dentro");
             // If the user have done the log in
             if( self.appDelegate.uid != "NoValue" ){
                 
-               
                 refPreference?.setValue(preference.toDictionary());
                 refPreference?.child("DataAnalysis").setValue(preference.toDictionaryArray());
                 
@@ -76,6 +76,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                 
             }
         } else {
+             print("schiacciato fuori");
             refPreference?.removeValue()
             star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
         }
@@ -92,25 +93,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         latitude = Float(marker.position.latitude);
         longitude = Float(marker.position.longitude);
         popView.isHidden = false;
-        
+      
         var searchData = self.searchInArray(dataArpac, iLatitude, iLongitude, latitude,longitude);
         // I need to show the information about that marker.
-        
+    
         // First I need to see if the user has saved the place in the preferences
         if( self.appDelegate.uid != "NoValue" ){
             
             let refPreference = self.ref?.child(self.appDelegate.uid).observe(.value, with: { (snapshot) in
-
                 // If YES
-                if (snapshot.hasChild(String(searchData[1][2].hashValue))){
+                if (snapshot.hasChild(String(searchData[0][2].hashValue))){
                     // Se the image blank
                    self.star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
 
                 }
             });
         }
-        
-
         
         // Set all information
         self.lblCity.text = searchData[1][1];
@@ -168,7 +166,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        
         
         legend.layer.cornerRadius = 10
         // I get the reference to the Storage where i have the file CSV
@@ -334,7 +331,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     func converTextToArray(_ text: String){
         
-        
         let rows = cleanRows(file: text).components(separatedBy: "\n")
         if rows.count > 0 {
             self.dataArpac.append(getStringFieldsForRow(row: rows.first!,delimiter:","));
@@ -413,26 +409,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         }
     }
     
-        
-        func searchInArray(_ data: [[String]], _ indexLongitude: Int,_ indexLatitude: Int,_ latitudeValue: Float,
-                           _ longitudeValue: Float) -> [[String]] {
-            var values: [[String]] = [[]];
+    func searchInArray(_ data: Array<Array<String>>, _ indexLatitude: Int,_ indexLongitude: Int,_ latitudeValue: Float,
+                           _ longitudeValue: Float) -> Array<Array<String>> {
+            var values = Array<Array<String>>();
             
             // I start a cycle
             for i in 3...data.count-1{
-                
                 // If I haven't an error during the conversation of the String to Float
                 if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
                     if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude])) {
                         // I have fouund the location so i punt in the array-2D
-                        
                         values.append(data[i]);
                     }
                     
                 } else {
                     
-                    if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude+1])) {
-                        
+                    if( latitudeValue == Float(data[i][indexLatitude+1]) && longitudeValue == Float(data[i][indexLongitude+1])) {
                         values.append(data[i]);
                     }
                 }
