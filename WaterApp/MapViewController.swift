@@ -38,6 +38,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
 //        THERE IS ALREADY A FULL STAR ICON IN THE ASSETS READY TO USE
     }
  
+   
+    
     //ARRAY THAT CONTAINS STARRED PLACES (STATIC, FOR NOW)
     var starredPlace: [String] = ["Napoli", "Caserta", "Salerno"]
     var markersPlace: [String] = ["flag-map-marker.png", "flagAppost.png", "flagwarning.png"]
@@ -97,6 +99,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         googleMapsView.delegate = self
 
         legend.isHidden = true
+        
     }
     
     
@@ -110,6 +113,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     override func viewDidLoad() {
         super.viewDidLoad();
 
+        
+        legend.layer.cornerRadius = 10
         // I get the reference to the Storage where i have the file CSV
         storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
         
