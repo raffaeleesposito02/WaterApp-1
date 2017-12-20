@@ -67,9 +67,18 @@ class NewsTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsTitleCell", for: indexPath)
         cell.textLabel?.text = newsTitle[indexPath.row]
-        cell.detailTextLabel?.text = newsContent[indexPath.row]
+        cell.detailTextLabel?.text = ""
+        cell.layer.borderWidth = 1.5
+        cell.layer.borderColor = UIColor.blue.cgColor
         
-        return cell
+  
+//
+//        //other buttons reset
+//        btn1.layer.borderWidth = 0
+//        btn1.layer.borderColor = UIColor.lightGray.cgColor
+//        btn2.layer.borderWidth = 0
+//        btn2.layer.borderColor = UIColor.lightGray.cgColor
+       return cell
     }
     
     /*
