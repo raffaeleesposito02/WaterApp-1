@@ -11,12 +11,12 @@ import Firebase
 import FirebaseAuth
 
 class ResetPasswordViewController: UIViewController {
-
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var resetButton: UIButton!
     
     @IBAction func submitAction(_ sender: Any) {
-    
+        
         if self.emailTextField.text == "" {
             let alertController = UIAlertController(title: "Oops!", message: "Please enter an email.", preferredStyle: .alert)
             

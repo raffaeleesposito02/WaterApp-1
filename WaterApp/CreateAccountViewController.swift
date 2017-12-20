@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 class CreateAccountViewController: UIViewController {
-
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var retypePasswordTextField: UITextField!
@@ -56,7 +56,7 @@ class CreateAccountViewController: UIViewController {
         field.layer.shadowColor = UIColor.black.cgColor;
         field.layer.cornerRadius = 8;
         field.layer.borderWidth = 2;
-
+        
     }
     
     @IBAction func createAccount(_ sender: Any) {
@@ -66,34 +66,34 @@ class CreateAccountViewController: UIViewController {
         } else { // Do the registration
             
             if let email = emailTextField.text, let pass = passwordTextField.text {
-                    Auth.auth().createUser(withEmail: email, password: pass, completion: {
-                
-                        (user, error) in
-        
-                        if user != nil {
-                            self.appDelegate.uid = (user?.uid)!;
-                            // Create a reference to a particular user
-                            let reference =  self.ref?.child("Users").child("\(user?.uid ?? "NoValue")");
-                            // Create the all Informations that I need
-                            reference?.child("Email").setValue("\(self.emailTextField.text ?? "NoValue")");
-                            reference?.child("Language").setValue("English");
-                            reference?.child("NotifyNews").setValue(true);
-                            reference?.child("NotifyChanges").setValue(true);
-                            reference?.child("Username").setValue(self.usernameTextField.text!);
-                            
-                            // I come back to Profile View
-                            self.navigationController?.popToRootViewController(animated: true)
-                        } else {
-                            self.manageTheError(error!);
-                        }
-                    });
+                Auth.auth().createUser(withEmail: email, password: pass, completion: {
+                    
+                    (user, error) in
+                    
+                    if user != nil {
+                        self.appDelegate.uid = (user?.uid)!;
+                        // Create a reference to a particular user
+                        let reference =  self.ref?.child("Users").child("\(user?.uid ?? "NoValue")");
+                        // Create the all Informations that I need
+                        reference?.child("Email").setValue("\(self.emailTextField.text ?? "NoValue")");
+                        reference?.child("Language").setValue("English");
+                        reference?.child("NotifyNews").setValue(true);
+                        reference?.child("NotifyChanges").setValue(true);
+                        reference?.child("Username").setValue(self.usernameTextField.text!);
+                        
+                        // I come back to Profile View
+                        self.navigationController?.popToRootViewController(animated: true)
+                    } else {
+                        self.manageTheError(error!);
+                    }
+                });
             }
         }
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
+    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //        self.view.endEditing(true)
+    //    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

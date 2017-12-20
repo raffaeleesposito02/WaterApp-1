@@ -13,7 +13,7 @@ import GoogleSignIn
 
 
 class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UIScrollViewDelegate{
-
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var btnLogIn: UIButton!
@@ -32,19 +32,19 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         layoutButton(btnLogIn);
         layoutButton(btnGoogle);
         layoutButton(btnFacebook);
-    
+        
         //----
         ref = Database.database().reference();
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self;
         super.viewDidLoad()
-
-            
-            //Looks for single or multiple taps.
+        
+        
+        //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogInViewController.DismissKeyboard))
-            view.addGestureRecognizer(tap)
-        }
+        view.addGestureRecognizer(tap)
+    }
     
     @objc func DismissKeyboard(){
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
@@ -70,7 +70,7 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         field.layer.borderWidth = 1;
         
     }
-
+    
     // when i press the logIn button It have to do login with the email and password that I have put
     @IBAction func buttonLogin(_ sender: Any) {
         //TODO: do some additional controls on validations
@@ -92,13 +92,13 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 }
             })
             
-        
+            
         }
     }
     
     @IBAction func signWithGoogle(_ sender: Any) {
         GIDSignIn.sharedInstance().signIn();
-
+        
     }
     
     
@@ -145,8 +145,8 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 self.navigationController?.popViewController(animated: true);
                 
             })
-
-    
+            
+            
             
         }
         

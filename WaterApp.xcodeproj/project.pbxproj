@@ -21,7 +21,6 @@
 		6DD6D1731FD981D800B78C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD6D1721FD981D800B78C7D /* AppDelegate.swift */; };
 		6DD6D1751FD981D800B78C7D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD6D1741FD981D800B78C7D /* ViewController.swift */; };
 		6DD6D1781FD981D800B78C7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DD6D1761FD981D800B78C7D /* Main.storyboard */; };
-		6DD6D17A1FD981D800B78C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DD6D1791FD981D800B78C7D /* Assets.xcassets */; };
 		6DD6D17D1FD981D800B78C7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DD6D17B1FD981D800B78C7D /* LaunchScreen.storyboard */; };
 		7EE9ACE11AC1BDB5240DD53B /* Pods_WaterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9FE2C8247825EB548E34B6 /* Pods_WaterApp.framework */; };
 		7F360C4A1FDFFA0600521C71 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360C491FDFFA0600521C71 /* SplashViewController.swift */; };
@@ -29,6 +28,7 @@
 		7FBC6C271FDD296F001171BE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBC6C261FDD296F001171BE /* CoreLocation.framework */; };
 		7FE7BDAD1FE2B47E006F751E /* (null) in Sources */ = {isa = PBXBuildFile; };
 		BDA719141FE15CCD00D25679 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDA719131FE15CCD00D25679 /* GoogleService-Info.plist */; };
+		BDDC20071FE9535A004E7B17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDC20061FE9535A004E7B17 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,6 @@
 		6DD6D1721FD981D800B78C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DD6D1741FD981D800B78C7D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6DD6D1771FD981D800B78C7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6DD6D1791FD981D800B78C7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DD6D17C1FD981D800B78C7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6DD6D17E1FD981D800B78C7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74BE1B0BED97C69F68B9269C /* Pods-WaterApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -55,6 +54,7 @@
 		7F5BD4431FDD2EB300D7B654 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7FBC6C261FDD296F001171BE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BDA719131FE15CCD00D25679 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BDDC20061FE9535A004E7B17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE64E667520CDF676AB080FE /* Pods-WaterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp.release.xcconfig"; sourceTree = "<group>"; };
 		DA9FE2C8247825EB548E34B6 /* Pods_WaterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -109,10 +109,10 @@
 				3522EA7B1FE02BFB00280FDF /* AccountsSingleton.swift */,
 				6DD6D17B1FD981D800B78C7D /* LaunchScreen.storyboard */,
 				7F360C491FDFFA0600521C71 /* SplashViewController.swift */,
+				BDDC20061FE9535A004E7B17 /* Assets.xcassets */,
 				05C06D131FE67A9F0062DA7E /* ResetPasswordViewController.swift */,
 				6DD6D17E1FD981D800B78C7D /* Info.plist */,
 				BDA719131FE15CCD00D25679 /* GoogleService-Info.plist */,
-				6DD6D1791FD981D800B78C7D /* Assets.xcassets */,
 			);
 			path = WaterApp;
 			sourceTree = "<group>";
@@ -200,7 +200,7 @@
 			files = (
 				6DD6D17D1FD981D800B78C7D /* LaunchScreen.storyboard in Resources */,
 				BDA719141FE15CCD00D25679 /* GoogleService-Info.plist in Resources */,
-				6DD6D17A1FD981D800B78C7D /* Assets.xcassets in Resources */,
+				BDDC20071FE9535A004E7B17 /* Assets.xcassets in Resources */,
 				6DD6D1781FD981D800B78C7D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
