@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseStorageUI
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource,UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var btnProfile: UIButton!
@@ -51,7 +51,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     override func viewDidLoad() {
-        
         btnLogIn.layer.cornerRadius = 8;
         btnLogOut.layer.cornerRadius = 8;
         btnProfile.layer.cornerRadius = btnProfile.bounds.width*0.5;
@@ -66,11 +65,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         pickerLanguage.delegate = self
         pickerLanguage.dataSource = self
         
-        //        TODO: fix the position in landscape mode
+        //TODO: fix the position in landscape mode
         var pickerRect = pickerLanguage.frame;
         pickerRect.origin.x = self.view.frame.width/2 - pickerRect.width/2;
         pickerRect.origin.y = self.view.frame.height/2 - pickerRect.height/2;
-
+        
         pickerLanguage.layer.cornerRadius = 8;
         pickerLanguage.layer.borderWidth = 0.5;
         
@@ -98,7 +97,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         return Favourite.shared.favouritePlace.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteTableCell", for: indexPath)
         cell.textLabel?.text = Favourite.shared.favouritePlace[indexPath.row]
@@ -124,7 +123,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
     func confirmDelete(favourite: String) {
-        let alert = UIAlertController(title: "Delete Planet", message: "Are you sure you want to permanently delete \(favourite)?", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(favourite)?", preferredStyle: .actionSheet)
         
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteFavourite)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteFavourite)
@@ -212,7 +211,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             //Enable the button Log out and disable the button of LogIn
             btnLogOut.isEnabled = true;
             btnLogIn.isEnabled = false;
-           
+            
             ref?.child("Users").child(self.appDelegate.uid).observe(.value , with: { (snapshot) in
                 
                 // Retrive all informations about that users
