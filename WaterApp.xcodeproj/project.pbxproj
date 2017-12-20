@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		057F92561FDBEC3D00750964 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057F92551FDBEC3D00750964 /* MapViewController.swift */; };
 		05C06D141FE67A9F0062DA7E /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C06D131FE67A9F0062DA7E /* ResetPasswordViewController.swift */; };
+		350DC8A61FEAF6CF009D9EC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 350DC8A51FEAF6CF009D9EC6 /* GoogleService-Info.plist */; };
 		3522EA7C1FE02BFB00280FDF /* AccountsSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3522EA7B1FE02BFB00280FDF /* AccountsSingleton.swift */; };
 		3579493D1FDA872700667BB6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579493C1FDA872700667BB6 /* ProfileViewController.swift */; };
 		35C733281FDC15EC007D1049 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C733271FDC15EC007D1049 /* LogInViewController.swift */; };
@@ -26,7 +27,6 @@
 		7F5BD4441FDD2EB300D7B654 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5BD4431FDD2EB300D7B654 /* MapKit.framework */; };
 		7FBC6C271FDD296F001171BE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBC6C261FDD296F001171BE /* CoreLocation.framework */; };
 		7FE7BDAD1FE2B47E006F751E /* (null) in Sources */ = {isa = PBXBuildFile; };
-		BDA719141FE15CCD00D25679 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDA719131FE15CCD00D25679 /* GoogleService-Info.plist */; };
 		BDB4CC4D1FEA7B8900C6E081 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */; };
 		BDDC20071FE9535A004E7B17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDC20061FE9535A004E7B17 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -34,6 +34,7 @@
 /* Begin PBXFileReference section */
 		057F92551FDBEC3D00750964 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		05C06D131FE67A9F0062DA7E /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		350DC8A51FEAF6CF009D9EC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3522EA7B1FE02BFB00280FDF /* AccountsSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSingleton.swift; sourceTree = "<group>"; };
 		3579493C1FDA872700667BB6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		35C733271FDC15EC007D1049 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -52,7 +53,6 @@
 		7F360C491FDFFA0600521C71 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		7F5BD4431FDD2EB300D7B654 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7FBC6C261FDD296F001171BE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		BDA719131FE15CCD00D25679 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		BDDC20061FE9535A004E7B17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE64E667520CDF676AB080FE /* Pods-WaterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 				7F360C491FDFFA0600521C71 /* SplashViewController.swift */,
 				05C06D131FE67A9F0062DA7E /* ResetPasswordViewController.swift */,
 				6DD6D17E1FD981D800B78C7D /* Info.plist */,
-				BDA719131FE15CCD00D25679 /* GoogleService-Info.plist */,
+				350DC8A51FEAF6CF009D9EC6 /* GoogleService-Info.plist */,
 				BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */,
 				BDDC20061FE9535A004E7B17 /* Assets.xcassets */,
 			);
@@ -199,7 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DD6D17D1FD981D800B78C7D /* LaunchScreen.storyboard in Resources */,
-				BDA719141FE15CCD00D25679 /* GoogleService-Info.plist in Resources */,
+				350DC8A61FEAF6CF009D9EC6 /* GoogleService-Info.plist in Resources */,
 				BDDC20071FE9535A004E7B17 /* Assets.xcassets in Resources */,
 				6DD6D1781FD981D800B78C7D /* Main.storyboard in Resources */,
 			);
@@ -443,7 +443,7 @@
 				INFOPLIST_FILE = WaterApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.alejesse.InfoWater;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.WaterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -465,7 +465,7 @@
 				INFOPLIST_FILE = WaterApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.alejesse.InfoWater;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.WaterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
