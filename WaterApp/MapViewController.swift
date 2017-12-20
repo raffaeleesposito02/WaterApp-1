@@ -343,7 +343,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                     valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
                     valueEscherichia = Int(data[i][indexEscherichia+1])!;
                 } else {
-                     if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
+                    if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
                         // Create a merker in the previous point
                         createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
                         // Set the new values
@@ -356,35 +356,37 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                         valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
                         valueEscherichia = Int(data[i][indexEscherichia+1])!;
                     }
+                }
             }
-        }
         }
     }
     
-    func searchInArray(_ data: [[String]], _ indexLongitude: Int,_ indexLatitude: Int,_ latitudeValue: Float,
-                       _ longitudeValue: Float) -> [[String]] {
-        var values: [[String]] = [[]];
         
-        // I start a cycle
-        for i in 3...data.count-1{
+        func searchInArray(_ data: [[String]], _ indexLongitude: Int,_ indexLatitude: Int,_ latitudeValue: Float,
+                           _ longitudeValue: Float) -> [[String]] {
+            var values: [[String]] = [[]];
             
-            // If I haven't an error during the conversation of the String to Float
-            if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
-                if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude])) {
-                    // I have fouund the location so i punt in the array-2D
-                    
-                    values.append(data[i]);
-                }
+            // I start a cycle
+            for i in 3...data.count-1{
                 
-            } else {
-                
-                if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude+1])) {
+                // If I haven't an error during the conversation of the String to Float
+                if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
+                    if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude])) {
+                        // I have fouund the location so i punt in the array-2D
+                        
+                        values.append(data[i]);
+                    }
                     
-                    values.append(data[i]);
+                } else {
+                    
+                    if( latitudeValue == Float(data[i][indexLatitude]) && longitudeValue == Float(data[i][indexLongitude+1])) {
+                        
+                        values.append(data[i]);
+                    }
                 }
             }
+            
+            return values;
         }
-        return values;
+    
     }
-}
-
