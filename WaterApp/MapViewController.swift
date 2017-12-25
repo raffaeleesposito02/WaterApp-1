@@ -192,7 +192,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                 
         // Get the reference to Firebase
         
-        
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -432,5 +432,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
             
             return values;
         }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.rightBarButtonItem?.setTitlePositionAdjustment(.init(horizontal: 100, vertical: 100), for: .default)
+       
+    }
     
     }

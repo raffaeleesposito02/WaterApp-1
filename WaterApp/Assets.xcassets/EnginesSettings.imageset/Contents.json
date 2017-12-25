@@ -2,17 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "flagwarning.png",
+      "filename" : "icons8-services-500.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "flagwarning1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "flagwarning1-1.png",
       "scale" : "3x"
     }
   ],
