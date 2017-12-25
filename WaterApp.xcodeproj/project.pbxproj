@@ -14,10 +14,6 @@
 		3579493D1FDA872700667BB6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579493C1FDA872700667BB6 /* ProfileViewController.swift */; };
 		35C733281FDC15EC007D1049 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C733271FDC15EC007D1049 /* LogInViewController.swift */; };
 		35C7332A1FDC18A3007D1049 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C733291FDC18A3007D1049 /* CreateAccountViewController.swift */; };
-		35E7354D1FDADBD90058EBB5 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7354C1FDADBD90058EBB5 /* BaseTabBarController.swift */; };
-		6D0245B51FDFDA720020D732 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0245B41FDFDA720020D732 /* NewsTableViewController.swift */; };
-		6D0245B71FDFDF010020D732 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0245B61FDFDF010020D732 /* ArticleViewController.swift */; };
-		6D0245B91FDFE3310020D732 /* NewsSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0245B81FDFE3310020D732 /* NewsSingleton.swift */; };
 		6DD6D1731FD981D800B78C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD6D1721FD981D800B78C7D /* AppDelegate.swift */; };
 		6DD6D1751FD981D800B78C7D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD6D1741FD981D800B78C7D /* ViewController.swift */; };
 		6DD6D1781FD981D800B78C7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DD6D1761FD981D800B78C7D /* Main.storyboard */; };
@@ -39,10 +35,6 @@
 		3579493C1FDA872700667BB6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		35C733271FDC15EC007D1049 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		35C733291FDC18A3007D1049 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
-		35E7354C1FDADBD90058EBB5 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
-		6D0245B41FDFDA720020D732 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
-		6D0245B61FDFDF010020D732 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
-		6D0245B81FDFE3310020D732 /* NewsSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSingleton.swift; sourceTree = "<group>"; };
 		6DD6D16F1FD981D800B78C7D /* WaterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD6D1721FD981D800B78C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DD6D1741FD981D800B78C7D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,10 +92,6 @@
 				3579493C1FDA872700667BB6 /* ProfileViewController.swift */,
 				35C733271FDC15EC007D1049 /* LogInViewController.swift */,
 				35C733291FDC18A3007D1049 /* CreateAccountViewController.swift */,
-				35E7354C1FDADBD90058EBB5 /* BaseTabBarController.swift */,
-				6D0245B81FDFE3310020D732 /* NewsSingleton.swift */,
-				6D0245B41FDFDA720020D732 /* NewsTableViewController.swift */,
-				6D0245B61FDFDF010020D732 /* ArticleViewController.swift */,
 				6DD6D1761FD981D800B78C7D /* Main.storyboard */,
 				3522EA7B1FE02BFB00280FDF /* AccountsSingleton.swift */,
 				6DD6D17B1FD981D800B78C7D /* LaunchScreen.storyboard */,
@@ -283,18 +271,14 @@
 			files = (
 				35C7332A1FDC18A3007D1049 /* CreateAccountViewController.swift in Sources */,
 				3522EA7C1FE02BFB00280FDF /* AccountsSingleton.swift in Sources */,
-				35E7354D1FDADBD90058EBB5 /* BaseTabBarController.swift in Sources */,
-				6D0245B91FDFE3310020D732 /* NewsSingleton.swift in Sources */,
 				3579493D1FDA872700667BB6 /* ProfileViewController.swift in Sources */,
 				35C733281FDC15EC007D1049 /* LogInViewController.swift in Sources */,
-				6D0245B71FDFDF010020D732 /* ArticleViewController.swift in Sources */,
 				7FE7BDAD1FE2B47E006F751E /* (null) in Sources */,
 				6DD6D1751FD981D800B78C7D /* ViewController.swift in Sources */,
 				BDB4CC4D1FEA7B8900C6E081 /* Preference.swift in Sources */,
 				057F92561FDBEC3D00750964 /* MapViewController.swift in Sources */,
 				05C06D141FE67A9F0062DA7E /* ResetPasswordViewController.swift in Sources */,
 				6DD6D1731FD981D800B78C7D /* AppDelegate.swift in Sources */,
-				6D0245B51FDFDA720020D732 /* NewsTableViewController.swift in Sources */,
 				7F360C4A1FDFFA0600521C71 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
