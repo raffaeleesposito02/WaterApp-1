@@ -21,8 +21,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate /*, GMSMapV
     @IBOutlet weak var imageFlag: UIImageView!
     @IBOutlet weak var lblValueEnterococchi: UILabel!
     @IBOutlet weak var lblValueEscherichia: UILabel!
-    @IBOutlet weak var imageEnterococchiSemaphore: UIImageView!
-    @IBOutlet weak var imgEscherichiaSemaphore: UIImageView!
     @IBOutlet weak var popView: UIView!
     
     let iEscherichia: Int = 7;
@@ -87,66 +85,66 @@ class MapViewController: UIViewController, CLLocationManagerDelegate /*, GMSMapV
     var starredPlace: [String] = ["Napoli", "Caserta", "Salerno"]
     var markersPlace: [String] = ["flag-map-marker.png", "flagAppost.png", "flagwarning.png"]
     
-    //WHEN MARKER IS TAPPED
-    func mapView(_ mapView:GMSMapView, didTap marker: GMSMarker) -> Bool {
-
-        // Retrive information about marker location
-        latitude = Float(marker.position.latitude);
-        longitude = Float(marker.position.longitude);
-        popView.isHidden = false;
-      
-        var searchData = self.searchInArray(dataArpac, iLatitude, iLongitude, latitude,longitude);
-        // I need to show the information about that marker.
-    
-        // First I need to see if the user has saved the place in the preferences
-        if( self.appDelegate.uid != "NoValue" ){
-            
-            let refPreference = self.ref?.child(self.appDelegate.uid).observe(.value, with: { (snapshot) in
-                // If YES
-                if (snapshot.hasChild(String(searchData[0][2].hashValue))){
-                    // Se the image blank
-                   self.star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
-
-                }
-            });
-        }
-        
-        // Set all information
-        self.lblCity.text = searchData[1][1];
-        self.lblCity.sizeToFit();
-        
-        self.lblLocation.text = searchData [1][2];
-        self.lblLocation.sizeToFit();
-        
-        self.lblArea.text = searchData[1][0];
-        self.lblArea.sizeToFit();
-        
-        var lastIndex:Int = searchData.count-1;
-        var valueEnterococchi = Int(searchData[lastIndex][iEnterococchi]);
-        var valueEscherichia = Int(searchData[lastIndex][iEscherichia]);
-        
-        if(valueEnterococchi! >= limitEnterococchi  || valueEscherichia! >= limitEscherica) {
-            
-            if(valueEnterococchi! >= limitEnterococchi  && valueEscherichia! >= limitEscherica){
-                self.imageFlag.image = UIImage(named: "flag-map-marker1");
-                
-            } else {
-                self.imageFlag.image = UIImage(named: "flagwarning1");
-            }
-        } else {
-            self.imageFlag.image = UIImage(named: "flagappost-1");
-        }
-        
-        
-        self.lblValueEscherichia.text = searchData[lastIndex][iEscherichia];
-        self.lblValueEscherichia.sizeToFit();
-        
-        self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
-        self.lblValueEnterococchi.sizeToFit();
-        
-       
-        return false
-    }
+//    //WHEN MARKER IS TAPPED
+//    func mapView(_ mapView:GMSMapView, didTap marker: GMSMarker) -> Bool {
+//
+//        // Retrive information about marker location
+//        latitude = Float(marker.position.latitude);
+//        longitude = Float(marker.position.longitude);
+//        popView.isHidden = false;
+//
+//        var searchData = self.searchInArray(dataArpac, iLatitude, iLongitude, latitude,longitude);
+//        // I need to show the information about that marker.
+//
+////        // First I need to see if the user has saved the place in the preferences
+////        if( self.appDelegate.uid != "NoValue" ){
+////
+////            let refPreference = self.ref?.child(self.appDelegate.uid).observe(.value, with: { (snapshot) in
+////                // If YES
+////                if (snapshot.hasChild(String(searchData[0][2].hashValue))){
+////                    // Se the image blank
+////                   self.star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
+////
+////                }
+////            });
+////        }
+//
+//        // Set all information
+//        self.lblCity.text = searchData[1][1];
+//        self.lblCity.sizeToFit();
+//
+//        self.lblLocation.text = searchData [1][2];
+//        self.lblLocation.sizeToFit();
+//
+//        self.lblArea.text = searchData[1][0];
+//        self.lblArea.sizeToFit();
+//
+//        var lastIndex:Int = searchData.count-1;
+//        var valueEnterococchi = Int(searchData[lastIndex][iEnterococchi]);
+//        var valueEscherichia = Int(searchData[lastIndex][iEscherichia]);
+//
+//        if(valueEnterococchi! >= limitEnterococchi  || valueEscherichia! >= limitEscherica) {
+//
+//            if(valueEnterococchi! >= limitEnterococchi  && valueEscherichia! >= limitEscherica){
+//                self.imageFlag.image = UIImage(named: "flag-map-marker1");
+//
+//            } else {
+//                self.imageFlag.image = UIImage(named: "flagwarning1");
+//            }
+//        } else {
+//            self.imageFlag.image = UIImage(named: "flagappost-1");
+//        }
+//
+//
+//        self.lblValueEscherichia.text = searchData[lastIndex][iEscherichia];
+//        self.lblValueEscherichia.sizeToFit();
+//
+//        self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
+//        self.lblValueEnterococchi.sizeToFit();
+//
+//
+//        return false
+//    }
     
     
     // OUTLETS
@@ -190,8 +188,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate /*, GMSMapV
         popView.layer.shadowOpacity = 0.5
         popView.layer.shadowOffset = CGSize.zero
         popView.layer.shadowRadius = 60
-                
-        // Get the reference to Firebase
+        
         
 //        MAPKIT
         searchCompleter.delegate = self
@@ -211,12 +208,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate /*, GMSMapV
         mapView.addGestureRecognizer(tap)
 
     }
+    
     @objc func DismissKeyboard(){
         self.farFromTop.priority = UILayoutPriority(rawValue: 999)
-        self.closeToTop.priority = UILayoutPriority(rawValue: 1)
+        self.closeToTop.priority = UILayoutPriority(rawValue: 1);
         view.endEditing(true)
     }
-    let regionRadius: CLLocationDistance = 15000
+    
+    let regionRadius: CLLocationDistance = 15000;
+    
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
                                                                   regionRadius, regionRadius)
@@ -384,6 +384,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate /*, GMSMapV
 //    func getStringFieldsForRow(row: String, delimiter:String)-> [String]{
 //        return row.components(separatedBy: delimiter)
 //    }
+    
+    
     //------------------------FILE------------------------
     
     
@@ -465,11 +467,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate /*, GMSMapV
             
             return values;
         }
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationItem.rightBarButtonItem?.setTitlePositionAdjustment(.init(horizontal: 100, vertical: 100), for: .default)
-       
-    }
-    
     
 //   --------------------vvv MAPKIT vvv---------------------
     
@@ -495,7 +492,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate /*, GMSMapV
         }, completion: nil)
     }
     
-    }
+}
+
 extension MapViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -551,18 +549,18 @@ extension MapViewController: UITableViewDelegate {
         search.start { (response, error) in
             let coordinate = response?.mapItems[0].placemark.coordinate
             print(String(describing: coordinate))
-            
+
             //     CREATE PIN ON SEARCHED
             let artwork = Artwork(title: completion.title,
                                   locationName: completion.subtitle, discipline: "boh",
                                   coordinate: CLLocationCoordinate2D(latitude: (coordinate?.latitude)!, longitude: (coordinate?.longitude)!))
             self.mapView.addAnnotation(artwork)
-            
+
             //      MOVE ON SEARCHED
             let initialLocation = CLLocation(latitude: (coordinate?.latitude)!, longitude: (coordinate?.longitude)!)
-            
+
             self.centerMapOnLocation(location: initialLocation)
-            
+
             self.popView.isHidden = true
             self.DismissKeyboard()
         }
