@@ -293,7 +293,7 @@
                                             <outlet property="delegate" destination="pze-eX-819" id="yoa-fH-NKU"/>
                                         </connections>
                                     </tableView>
-                                    <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Phv-bm-o0A">
+                                    <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="Phv-bm-o0A">
                                         <rect key="frame" x="0.0" y="8" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <textInputTraits key="textInputTraits"/>
