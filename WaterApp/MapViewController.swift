@@ -206,6 +206,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate /*, GMSMapV
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
         mapView.addGestureRecognizer(tap)
+        popView.addGestureRecognizer(tap)
 
     }
     
