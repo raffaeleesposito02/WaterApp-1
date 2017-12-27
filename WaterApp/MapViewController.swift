@@ -33,7 +33,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     
     // Limit for Enterococchi e Escherichia
     var limitEnterococchi: Int = 200; // (UFC o MPN /100ml, valore limite 200)
-    var limitEscherica: Int = 500; // (UFC o MPN /100ml, valore limite 500)
+    var limitEscherica: Int = 5000; // (UFC o MPN /100ml, valore limite 500)
     // Information from ARPAC
     var dataArpac =  Array<Array<String>>();
     
@@ -137,10 +137,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         }
         
         
-        self.lblValueEscherichia.text = searchData[lastIndex][iEscherichia];
+        self.lblValueEscherichia.text = searchData[lastIndex][iEscherichia] + " UFC/100 ml";
         self.lblValueEscherichia.sizeToFit();
         
-        self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
+        self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi] + " UFC/100 ml";
         self.lblValueEnterococchi.sizeToFit();
         
        
