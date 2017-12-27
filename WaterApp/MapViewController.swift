@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import MapKit
 import GoogleMaps
 import GooglePlaces
 import FirebaseStorage
 import FirebaseDatabase
 
-class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate /*, GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate*/ {
     
     @IBOutlet weak var lblArea: UILabel!
     @IBOutlet weak var lblCity: UILabel!
@@ -151,11 +152,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     // OUTLETS
     @IBOutlet weak var legend: UIView!
     
-    func mapView(_ mapView: GMSMapView, didBeginDragging: GMSMapView) {
-        
-        googleMapsView.delegate = self
-        legend.isHidden = true
-    }
+//    func mapView(_ mapView: GMSMapView, didBeginDragging: GMSMapView) {
+//
+//        googleMapsView.delegate = self
+//        legend.isHidden = true
+//    }
     
     @IBOutlet weak var googleMapsView: GMSMapView!
     
@@ -174,14 +175,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
         
         popView.isHidden = true
         
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
-        
-        initGoogleMaps();
-        readFromCSV();
+//        locationManager = CLLocationManager()
+//        locationManager.delegate = self
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.startUpdatingLocation()
+//        locationManager.startMonitoringSignificantLocationChanges()
+//
+//        initGoogleMaps();
+//        readFromCSV();
         
         
         popView.layer.cornerRadius = 24
@@ -192,7 +193,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
                 
         // Get the reference to Firebase
         
+//        MAPKIT
+        searchCompleter.delegate = self
+        mapView.delegate = self
+        
+        let initialLocation = CLLocation(latitude: 40.8517746, longitude: 14.2681244)
+        
+        centerMapOnLocation(location: initialLocation)
+        
+        let artwork = Artwork(title: "Prova",
+                              locationName: "Napoli",
+                              discipline: "Sculpture",
+                              coordinate: CLLocationCoordinate2D(latitude: 40.8517746, longitude: 14.2681244))
+        mapView.addAnnotation(artwork)
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
+        mapView.addGestureRecognizer(tap)
 
+    }
+    @objc func DismissKeyboard(){
+        self.farFromTop.priority = UILayoutPriority(rawValue: 999)
+        self.closeToTop.priority = UILayoutPriority(rawValue: 1)
+        view.endEditing(true)
+    }
+    let regionRadius: CLLocationDistance = 15000
+    func centerMapOnLocation(location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
+                                                                  regionRadius, regionRadius)
+        mapView.setRegion(coordinateRegion, animated: true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -200,214 +228,219 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
     }
     
     
-    func initGoogleMaps() {
-        
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        mapView.isMyLocationEnabled = true
-        self.googleMapsView.camera = camera
-        
-        self.googleMapsView.delegate = self
-        self.googleMapsView.isMyLocationEnabled = true
-        self.googleMapsView.settings.myLocationButton = true
-        
-        
-    }
+//    func initGoogleMaps() {
+//
+//        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
+//        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+//        mapView.isMyLocationEnabled = true
+//        self.googleMapsView.camera = camera
+//
+//        self.googleMapsView.delegate = self
+//        self.googleMapsView.isMyLocationEnabled = true
+//        self.googleMapsView.settings.myLocationButton = true
+//
+//
+//    }
     
-    func createrMarker(_ latitude: Float ,_ longitude: Float,_ valueEnterococchi: Int, _ valueEscherichia: Int) {
-        let marker = GMSMarker()
-        
-        let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
-        
-        marker.position = location;
-        marker.map = googleMapsView;
-        
-        if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
-            
-            if(valueEnterococchi >= limitEnterococchi  && valueEscherichia >= limitEscherica){
-                marker.icon = #imageLiteral(resourceName: "flag-map-marker");
-            } else {
-                marker.icon = #imageLiteral(resourceName: "flagwarning");
-                
-            }
-        } else {
-            marker.icon = #imageLiteral(resourceName: "flagAppost");
-        }
-        
-    }
+//    func createrMarker(_ latitude: Float ,_ longitude: Float,_ valueEnterococchi: Int, _ valueEscherichia: Int) {
+//        let marker = GMSMarker()
+//
+//        let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+//
+//        marker.position = location;
+//        marker.map = googleMapsView;
+//
+//        if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
+//
+//            if(valueEnterococchi >= limitEnterococchi  && valueEscherichia >= limitEscherica){
+//                marker.icon = #imageLiteral(resourceName: "flag-map-marker");
+//            } else {
+//                marker.icon = #imageLiteral(resourceName: "flagwarning");
+//
+//            }
+//        } else {
+//            marker.icon = #imageLiteral(resourceName: "flagAppost");
+//        }
+//
+//    }
     
     
     // MARK: CLLocation Manager Delegate
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error while get location \(error)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last
-        
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
-        
-        self.googleMapsView.animate(to: camera)
-        self.locationManager.stopUpdatingLocation()
-        
-    }
-    
+//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        print("Error while get location \(error)")
+//    }
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        let location = locations.last
+//
+//        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
+//
+//        self.googleMapsView.animate(to: camera)
+//        self.locationManager.stopUpdatingLocation()
+//
+//    }
+//
     // MARK: GMSMapview Delegate
-    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-        self.googleMapsView.isMyLocationEnabled = true
-        
-        legend.isHidden = false
-    }
-    
-    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-        
-        self.googleMapsView.isMyLocationEnabled = true
-        if (gesture) {
-            mapView.selectedMarker = nil
-            
-            legend.isHidden = true
-        }
-    }
+//    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+//        self.googleMapsView.isMyLocationEnabled = true
+//
+//        legend.isHidden = false
+//    }
+//
+//    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+//
+//        self.googleMapsView.isMyLocationEnabled = true
+//        if (gesture) {
+//            mapView.selectedMarker = nil
+//
+//            legend.isHidden = true
+//        }
+//    }
     
     // MARK: GOOGLE AUTO COMPLETE DELEGATE
     
-    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        
-        let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 13.0)
-        self.googleMapsView.camera = camera
-        self.dismiss(animated: true, completion: nil) // dismiss after select place
-    }
+//    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+//
+//        let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 13.0)
+//        self.googleMapsView.camera = camera
+//        self.dismiss(animated: true, completion: nil) // dismiss after select place
+//    }
+//
+//    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+//
+//        print("ERROR AUTO COMPLETE \(error)")
+//    }
+//
+//    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+//        self.dismiss(animated: true, completion: nil) // when cancel search
+//    }
     
-    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        
-        print("ERROR AUTO COMPLETE \(error)")
-    }
+//    @IBAction func openSearchAddress(_ sender: UIBarButtonItem) {
+//        let autocompletecontroller = GMSAutocompleteViewController()
+//        autocompletecontroller.delegate = self
+//        let filter = GMSAutocompleteFilter()
+//        filter.type = .city //suitable filter type
+//        filter.country = "IT"  //appropriate country code
+//        autocompletecontroller.autocompleteFilter = filter
+//        self.present(autocompletecontroller, animated: true, completion: nil)
+//    }
     
-    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        self.dismiss(animated: true, completion: nil) // when cancel search
-    }
     
-    @IBAction func openSearchAddress(_ sender: UIBarButtonItem) {
-        let autocompletecontroller = GMSAutocompleteViewController()
-        autocompletecontroller.delegate = self
-        let filter = GMSAutocompleteFilter()
-        filter.type = .city //suitable filter type
-        filter.country = "IT"  //appropriate country code
-        autocompletecontroller.autocompleteFilter = filter
-        self.present(autocompletecontroller, animated: true, completion: nil)
-    }
+    //-------------------FILE-------------------
+//    func readFromCSV() {
+//
+//        // Download to the local filesystem
+//        storageRef?.downloadURL(completion: { (url, error) in
+//
+//            if error != nil {
+//                print(error?.localizedDescription)
+//                return
+//            }
+//
+//            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+//
+//                if error != nil {
+//                    print(error!)
+//                    return
+//                }
+//
+//                DispatchQueue.main.async {
+//                    guard let text = String(data: data!, encoding: String.Encoding.ascii) as String!
+//                        else {
+//                            print("error during conversion file \(data?.description)")
+//                            return
+//                    }
+//                    self.converTextToArray(text)
+//
+//                }
+//
+//            }).resume()
+//        });
+//    }
+//
+//    func converTextToArray(_ text: String){
+//
+//        let rows = cleanRows(file: text).components(separatedBy: "\n")
+//        if rows.count > 0 {
+//            self.dataArpac.append(getStringFieldsForRow(row: rows.first!,delimiter:","));
+//
+//            for row in rows{
+//                self.dataArpac.append(getStringFieldsForRow(row: row,delimiter: ","));
+//            }
+//        } else {
+//            print("No data in file")
+//        }
+////        createFlags(self.dataArpac,3,4,6,7);
+//    }
+//
+//    func cleanRows(file:String)->String{
+//        var cleanFile = file
+//        cleanFile = cleanFile.replacingOccurrences(of: "\r", with: "\n")
+//        cleanFile = cleanFile.replacingOccurrences(of: "\n\n", with:"\n")
+//        return cleanFile
+//    }
+//
+//    func getStringFieldsForRow(row: String, delimiter:String)-> [String]{
+//        return row.components(separatedBy: delimiter)
+//    }
+    //------------------------FILE------------------------
     
-    func readFromCSV() {
-        
-        // Download to the local filesystem
-        storageRef?.downloadURL(completion: { (url, error) in
-            
-            if error != nil {
-                print(error?.localizedDescription)
-                return
-            }
-            
-            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-                
-                if error != nil {
-                    print(error!)
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    guard let text = String(data: data!, encoding: String.Encoding.ascii) as String!
-                        else {
-                            print("error during conversion file \(data?.description)")
-                            return
-                    }
-                    self.converTextToArray(text)
-                    
-                }
-                
-            }).resume()
-        });
-    }
     
-    func converTextToArray(_ text: String){
-        
-        let rows = cleanRows(file: text).components(separatedBy: "\n")
-        if rows.count > 0 {
-            self.dataArpac.append(getStringFieldsForRow(row: rows.first!,delimiter:","));
-            
-            for row in rows{
-                self.dataArpac.append(getStringFieldsForRow(row: row,delimiter: ","));
-            }
-        } else {
-            print("No data in file")
-        }
-        createFlags(self.dataArpac,3,4,6,7);
-    }
     
-    func cleanRows(file:String)->String{
-        var cleanFile = file
-        cleanFile = cleanFile.replacingOccurrences(of: "\r", with: "\n")
-        cleanFile = cleanFile.replacingOccurrences(of: "\n\n", with:"\n")
-        return cleanFile
-    }
-    
-    func getStringFieldsForRow(row: String, delimiter:String)-> [String]{
-        return row.components(separatedBy: delimiter)
-    }
-    
-    func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEnterococchi: Int,
-                     _ indexEscherichia: Int ){
-        
-        var latitude: Float = Float(data[3][indexLatitude])!
-        var longitude: Float = Float(data[3][indexLongitude])!
-        var valueEnterococchi: Int = Int(data[3][indexEnterococchi])!;
-        var valueEscherichia: Int = Int(data[3][indexEscherichia])!;
-        
-        for  i in 4...data.count-1 {
-            
-            if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
-                
-                if( latitude != Float(data[i][indexLatitude]) || longitude != Float(data[i][indexLongitude])) {
-                    // Create a merker in the previous point
-                    createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
-                    // Set the new values
-                    latitude = Float(data[i][indexLatitude])!
-                    longitude = Float (data[i][indexLongitude])!
-                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
-                    valueEscherichia = Int(data[i][indexEscherichia])!;
-                } else {
-                    // update only the values of bacterias
-                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
-                    valueEscherichia = Int(data[i][indexEscherichia])!;
-                }
-            } else {
-                
-                if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
-                    // Create a merker in the previous point
-                    createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
-                    // Set the new values
-                    latitude = Float(data[i][indexLatitude+1])!
-                    longitude = Float (data[i][indexLongitude+1])!
-                    valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
-                    valueEscherichia = Int(data[i][indexEscherichia+1])!;
-                } else {
-                    if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
-                        // Create a merker in the previous point
-                        createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
-                        // Set the new values
-                        latitude = Float(data[i][indexLatitude+1])!
-                        longitude = Float (data[i][indexLongitude+1])!
-                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
-                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
-                    } else {
-                        // update only the values of bacterias
-                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
-                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
-                    }
-                }
-            }
-        }
-    }
+//    func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEnterococchi: Int,
+//                     _ indexEscherichia: Int ){
+//
+//        var latitude: Float = Float(data[3][indexLatitude])!
+//        var longitude: Float = Float(data[3][indexLongitude])!
+//        var valueEnterococchi: Int = Int(data[3][indexEnterococchi])!;
+//        var valueEscherichia: Int = Int(data[3][indexEscherichia])!;
+//
+//        for  i in 4...data.count-1 {
+//
+//            if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
+//
+//                if( latitude != Float(data[i][indexLatitude]) || longitude != Float(data[i][indexLongitude])) {
+//                    // Create a merker in the previous point
+//                    createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
+//                    // Set the new values
+//                    latitude = Float(data[i][indexLatitude])!
+//                    longitude = Float (data[i][indexLongitude])!
+//                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
+//                    valueEscherichia = Int(data[i][indexEscherichia])!;
+//                } else {
+//                    // update only the values of bacterias
+//                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
+//                    valueEscherichia = Int(data[i][indexEscherichia])!;
+//                }
+//            } else {
+//
+//                if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
+//                    // Create a merker in the previous point
+//                    createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
+//                    // Set the new values
+//                    latitude = Float(data[i][indexLatitude+1])!
+//                    longitude = Float (data[i][indexLongitude+1])!
+//                    valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
+//                    valueEscherichia = Int(data[i][indexEscherichia+1])!;
+//                } else {
+//                    if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
+//                        // Create a merker in the previous point
+//                        createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
+//                        // Set the new values
+//                        latitude = Float(data[i][indexLatitude+1])!
+//                        longitude = Float (data[i][indexLongitude+1])!
+//                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
+//                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
+//                    } else {
+//                        // update only the values of bacterias
+//                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
+//                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     func searchInArray(_ data: Array<Array<String>>, _ indexLatitude: Int,_ indexLongitude: Int,_ latitudeValue: Float,
                            _ longitudeValue: Float) -> Array<Array<String>> {
@@ -437,4 +470,131 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , GMSMapVie
        
     }
     
+    
+//   --------------------vvv MAPKIT vvv---------------------
+    
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var searchResultsTableView: UITableView!
+    @IBOutlet weak var farFromTop: NSLayoutConstraint!
+    @IBOutlet weak var closeToTop: NSLayoutConstraint!
+    
+    var searchCompleter = MKLocalSearchCompleter()
+    var searchResults = [MKLocalSearchCompletion]()
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        self.farFromTop.priority = UILayoutPriority(rawValue: 1)
+        self.closeToTop.priority = UILayoutPriority(rawValue: 999)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseOut], animations: {
+            
+            self.view.layoutIfNeeded()
+            
+        }, completion: nil)
     }
+    
+    }
+extension MapViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        searchCompleter.queryFragment = searchText
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}
+
+extension MapViewController: MKLocalSearchCompleterDelegate {
+    
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        searchResults = completer.results
+        searchResultsTableView.reloadData()
+    }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        // handle error
+    }
+}
+
+extension MapViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let searchResult = searchResults[indexPath.row]
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        cell.textLabel?.text = searchResult.title
+        cell.detailTextLabel?.text = searchResult.subtitle
+        return cell
+    }
+}
+
+extension MapViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let completion = searchResults[indexPath.row]
+        
+        let searchRequest = MKLocalSearchRequest(completion: completion)
+        let search = MKLocalSearch(request: searchRequest)
+        search.start { (response, error) in
+            let coordinate = response?.mapItems[0].placemark.coordinate
+            print(String(describing: coordinate))
+            
+            //     CREATE PIN ON SEARCHED
+            let artwork = Artwork(title: completion.title,
+                                  locationName: completion.subtitle, discipline: "boh",
+                                  coordinate: CLLocationCoordinate2D(latitude: (coordinate?.latitude)!, longitude: (coordinate?.longitude)!))
+            self.mapView.addAnnotation(artwork)
+            
+            //      MOVE ON SEARCHED
+            let initialLocation = CLLocation(latitude: (coordinate?.latitude)!, longitude: (coordinate?.longitude)!)
+            
+            self.centerMapOnLocation(location: initialLocation)
+            
+            self.popView.isHidden = true
+            self.DismissKeyboard()
+        }
+    }
+}
+
+extension MapViewController: MKMapViewDelegate {
+    // 1
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // 2
+        guard let annotation = annotation as? Artwork else { return nil }
+        // 3
+        let identifier = "marker"
+        var view: MKMarkerAnnotationView
+        // 4
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            as? MKMarkerAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            // 5
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = false
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        return view
+    }
+    
+    func mapView(_ mapView: MKMapView,
+                 didSelect view: MKAnnotationView){
+        popView.isHidden = false
+    }
+}
+

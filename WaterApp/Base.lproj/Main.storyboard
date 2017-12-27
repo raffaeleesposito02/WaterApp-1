@@ -29,19 +29,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rA-4r-8KR" customClass="GMSMapView">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bvz-HA-VOl">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dkd-66-p1w">
-                                        <rect key="frame" x="84" y="166" width="0.0" height="0.0"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fU-iX-SC9">
                                 <rect key="frame" x="16" y="16" width="154" height="90"/>
                                 <subviews>
@@ -92,7 +82,7 @@
                                     <constraint firstAttribute="width" constant="154" id="V7f-kz-a6u"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-kh-fvQ">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-kh-fvQ">
                                 <rect key="frame" x="17" y="13" width="341" height="525"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWB-tx-CbX" userLabel="Close">
@@ -292,19 +282,42 @@
                                     <constraint firstAttribute="bottom" secondItem="u45-C5-hGN" secondAttribute="bottom" id="xBK-hH-2kG"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hn-rh-vYY" userLabel="Search View">
+                                <rect key="frame" x="0.0" y="150" width="375" height="647"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DiI-sJ-2IS" userLabel="Search Results Table View">
+                                        <rect key="frame" x="0.0" y="64" width="375" height="583"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                    <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Phv-bm-o0A">
+                                        <rect key="frame" x="0.0" y="8" width="375" height="56"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="647" id="pFY-Z0-ZG8"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="KMD-gR-rHM" firstAttribute="trailing" secondItem="f4V-kh-fvQ" secondAttribute="trailing" constant="17" id="3fh-Rz-KmI"/>
-                            <constraint firstItem="2rA-4r-8KR" firstAttribute="trailing" secondItem="KMD-gR-rHM" secondAttribute="trailing" id="5Op-OF-bzb"/>
-                            <constraint firstItem="2rA-4r-8KR" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" id="6BN-xo-AeX"/>
                             <constraint firstItem="f4V-kh-fvQ" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" constant="13" id="CXq-PE-oaS"/>
+                            <constraint firstItem="8hn-rh-vYY" firstAttribute="top" secondItem="3W4-uf-iiP" secondAttribute="top" priority="1" constant="150" id="Fo5-Tx-1F3"/>
                             <constraint firstItem="f4V-kh-fvQ" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" constant="17" id="JWL-Gy-oHo"/>
-                            <constraint firstItem="2rA-4r-8KR" firstAttribute="bottom" secondItem="KMD-gR-rHM" secondAttribute="bottom" id="UN2-oZ-cyT"/>
+                            <constraint firstItem="Bvz-HA-VOl" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" id="Lj5-Rs-Syy"/>
+                            <constraint firstItem="8hn-rh-vYY" firstAttribute="trailing" secondItem="KMD-gR-rHM" secondAttribute="trailing" id="Moa-XP-ogr"/>
+                            <constraint firstItem="Bvz-HA-VOl" firstAttribute="trailing" secondItem="KMD-gR-rHM" secondAttribute="trailing" id="R7K-vp-fen"/>
+                            <constraint firstItem="8hn-rh-vYY" firstAttribute="top" secondItem="3W4-uf-iiP" secondAttribute="top" priority="999" constant="150" id="TCu-xq-YHq"/>
                             <constraint firstItem="3fU-iX-SC9" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" constant="16" id="ZND-Dr-ZNh"/>
+                            <constraint firstItem="8hn-rh-vYY" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" id="cYg-ie-nvS"/>
                             <constraint firstItem="KMD-gR-rHM" firstAttribute="bottom" secondItem="f4V-kh-fvQ" secondAttribute="bottom" constant="13" id="gX5-SZ-OUb"/>
                             <constraint firstItem="3fU-iX-SC9" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" constant="16" id="lzP-dL-FGL"/>
-                            <constraint firstItem="2rA-4r-8KR" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" id="xka-1F-RAP"/>
+                            <constraint firstItem="Bvz-HA-VOl" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" id="mek-U0-bTY"/>
+                            <constraint firstItem="Bvz-HA-VOl" firstAttribute="bottom" secondItem="KMD-gR-rHM" secondAttribute="bottom" id="qDj-MC-Atr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KMD-gR-rHM"/>
                     </view>
@@ -321,7 +334,8 @@
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="googleMapsView" destination="2rA-4r-8KR" id="fFB-Rv-Eld"/>
+                        <outlet property="closeToTop" destination="Fo5-Tx-1F3" id="ezI-of-byB"/>
+                        <outlet property="farFromTop" destination="TCu-xq-YHq" id="ade-d5-mN0"/>
                         <outlet property="imageFlag" destination="GLD-aU-mEO" id="0UO-KC-YaI"/>
                         <outlet property="lblArea" destination="n5g-uC-0KQ" id="6GO-C5-1oT"/>
                         <outlet property="lblCity" destination="pwx-Qd-twY" id="DLH-NG-0IF"/>
@@ -329,7 +343,11 @@
                         <outlet property="lblValueEnterococchi" destination="yfZ-Kc-Bjb" id="nYa-TU-pSO"/>
                         <outlet property="lblValueEscherichia" destination="sA9-Fk-UZg" id="pzH-G3-EoB"/>
                         <outlet property="legend" destination="3fU-iX-SC9" id="lbo-5V-oRX"/>
+                        <outlet property="mapView" destination="Bvz-HA-VOl" id="GI6-gf-7It"/>
                         <outlet property="popView" destination="f4V-kh-fvQ" id="m2m-7Z-NiQ"/>
+                        <outlet property="searchBar" destination="Phv-bm-o0A" id="fOZ-Z9-cgo"/>
+                        <outlet property="searchResultsTableView" destination="DiI-sJ-2IS" id="6ak-nC-i0b"/>
+                        <outlet property="searchView" destination="8hn-rh-vYY" id="vOd-ro-BCi"/>
                         <outlet property="star" destination="BtN-t0-bxg" id="Sgj-7C-6PH"/>
                     </connections>
                 </viewController>
