@@ -8,10 +8,9 @@
 
 import UIKit
 import MapKit
-import GoogleMaps
-import GooglePlaces
+
 import FirebaseStorage
-import FirebaseDatabase
+
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
