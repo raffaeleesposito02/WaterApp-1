@@ -11,7 +11,7 @@
 		05C06D141FE67A9F0062DA7E /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C06D131FE67A9F0062DA7E /* ResetPasswordViewController.swift */; };
 		350DC8A61FEAF6CF009D9EC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 350DC8A51FEAF6CF009D9EC6 /* GoogleService-Info.plist */; };
 		3522EA7C1FE02BFB00280FDF /* AccountsSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3522EA7B1FE02BFB00280FDF /* AccountsSingleton.swift */; };
-		35418F5E1FF3BF4D0032BBE1 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35418F5D1FF3BF4C0032BBE1 /* Artwork.swift */; };
+		35418F5E1FF3BF4D0032BBE1 /* AnalysisPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35418F5D1FF3BF4C0032BBE1 /* AnalysisPoint.swift */; };
 		3579493D1FDA872700667BB6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579493C1FDA872700667BB6 /* ProfileViewController.swift */; };
 		35C733281FDC15EC007D1049 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C733271FDC15EC007D1049 /* LogInViewController.swift */; };
 		35C7332A1FDC18A3007D1049 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C733291FDC18A3007D1049 /* CreateAccountViewController.swift */; };
@@ -24,6 +24,7 @@
 		7F5BD4441FDD2EB300D7B654 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5BD4431FDD2EB300D7B654 /* MapKit.framework */; };
 		7FBC6C271FDD296F001171BE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBC6C261FDD296F001171BE /* CoreLocation.framework */; };
 		7FE7BDAD1FE2B47E006F751E /* (null) in Sources */ = {isa = PBXBuildFile; };
+		BD7EE8951FF50DD500DBF4A5 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7EE8941FF50DD400DBF4A5 /* Artwork.swift */; };
 		BDB4CC4D1FEA7B8900C6E081 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */; };
 		BDDC20071FE9535A004E7B17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDC20061FE9535A004E7B17 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -33,7 +34,7 @@
 		05C06D131FE67A9F0062DA7E /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		350DC8A51FEAF6CF009D9EC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3522EA7B1FE02BFB00280FDF /* AccountsSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSingleton.swift; sourceTree = "<group>"; };
-		35418F5D1FF3BF4C0032BBE1 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
+		35418F5D1FF3BF4C0032BBE1 /* AnalysisPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisPoint.swift; sourceTree = "<group>"; };
 		3579493C1FDA872700667BB6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		35C733271FDC15EC007D1049 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		35C733291FDC18A3007D1049 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +48,7 @@
 		7F360C491FDFFA0600521C71 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		7F5BD4431FDD2EB300D7B654 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7FBC6C261FDD296F001171BE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		BD7EE8941FF50DD400DBF4A5 /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		BDDC20061FE9535A004E7B17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE64E667520CDF676AB080FE /* Pods-WaterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -100,9 +102,10 @@
 				7F360C491FDFFA0600521C71 /* SplashViewController.swift */,
 				05C06D131FE67A9F0062DA7E /* ResetPasswordViewController.swift */,
 				6DD6D17E1FD981D800B78C7D /* Info.plist */,
+				BD7EE8941FF50DD400DBF4A5 /* Artwork.swift */,
 				350DC8A51FEAF6CF009D9EC6 /* GoogleService-Info.plist */,
 				BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */,
-				35418F5D1FF3BF4C0032BBE1 /* Artwork.swift */,
+				35418F5D1FF3BF4C0032BBE1 /* AnalysisPoint.swift */,
 				BDDC20061FE9535A004E7B17 /* Assets.xcassets */,
 			);
 			path = WaterApp;
@@ -279,10 +282,11 @@
 				7FE7BDAD1FE2B47E006F751E /* (null) in Sources */,
 				6DD6D1751FD981D800B78C7D /* ViewController.swift in Sources */,
 				BDB4CC4D1FEA7B8900C6E081 /* Preference.swift in Sources */,
+				BD7EE8951FF50DD500DBF4A5 /* Artwork.swift in Sources */,
 				057F92561FDBEC3D00750964 /* MapViewController.swift in Sources */,
 				05C06D141FE67A9F0062DA7E /* ResetPasswordViewController.swift in Sources */,
 				6DD6D1731FD981D800B78C7D /* AppDelegate.swift in Sources */,
-				35418F5E1FF3BF4D0032BBE1 /* Artwork.swift in Sources */,
+				35418F5E1FF3BF4D0032BBE1 /* AnalysisPoint.swift in Sources */,
 				7F360C4A1FDFFA0600521C71 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

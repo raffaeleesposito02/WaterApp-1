@@ -30,6 +30,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bvz-HA-VOl">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pze-eX-819" id="J6Q-AN-bfX"/>
+                                </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fU-iX-SC9">
                                 <rect key="frame" x="16" y="16" width="154" height="90"/>

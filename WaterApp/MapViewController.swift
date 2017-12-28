@@ -138,23 +138,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     func createrMarker(_ latitude: Float ,_ longitude: Float,_ valueEnterococchi: Int, _ valueEscherichia: Int) {
         
-        let artwork = Artwork(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)));
+        let analysisPoint = AnalysisPoint(CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)), valueEnterococchi, valueEscherichia );
         
-        mapView.addAnnotation(artwork)
-  
-    
-//        if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
-//
-//            if(valueEnterococchi >= limitEnterococchi  && valueEscherichia >= limitEscherica){
-//                marker.icon = #imageLiteral(resourceName: "flag-map-marker");
-//            } else {
-//                marker.icon = #imageLiteral(resourceName: "flagwarning");
-//
-//            }
-//        } else {
-//            marker.icon = #imageLiteral(resourceName: "flagAppost");
-//        }
-
+        mapView.addAnnotation(analysisPoint)
     }
 
 //    -------------------READ FROM FILE-------------------
@@ -389,35 +375,43 @@ extension MapViewController: UITableViewDelegate {
 }
 
 extension MapViewController: MKMapViewDelegate {
-    // 1
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        // 2
-        guard let annotation = annotation as? Artwork else { return nil }
-        // 3
-        let identifier = "marker"
-        var view: MKMarkerAnnotationView
-        // 4
-        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-            as? MKMarkerAnnotationView {
-            dequeuedView.annotation = annotation
-            view = dequeuedView;
+        
+        if annotation is MKUserLocation { return nil}
+        
+        guard let annotation = annotation as? AnalysisPoint else { return nil }
+        let view : MKAnnotationView;
+
+        if let annotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "Pin") {
+            annotationView.annotation = annotation;
+            view = annotationView;
         } else {
-            // 5
-            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            view.canShowCallout = false
+            view = MKAnnotationView(annotation: annotation, reuseIdentifier: "Pin");
+            view.canShowCallout = false;
             view.calloutOffset = CGPoint(x: -5, y: 5)
-            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure);
         }
-        return view
+        
+        if(annotation.vEnterococchi >= limitEnterococchi  || annotation.vEscherichia >= limitEscherica) {
+            
+            if(annotation.vEnterococchi >= limitEnterococchi  && annotation.vEscherichia >= limitEscherica){
+               view.image = UIImage(named: "flag-map-marker");
+            } else {
+                view.image =  UIImage(named: "flagwarning");
+            }
+        } else {
+            view.image =  UIImage(named:"flagAppost")
+        }
+        return view;
     }
     
+    // WHEN A MARKER IS TAPPED
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
         
         // Retrive information about marker location
         latitude = Float((view.annotation?.coordinate.latitude)!);
         longitude = Float((view.annotation?.coordinate.longitude)!);
-        
-        popView.isHidden = false;
 
         var searchData = self.searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
         /* I need to show the information about that marker.
