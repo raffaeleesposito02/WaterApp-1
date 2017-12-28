@@ -101,7 +101,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         popView.layer.shadowOpacity = 0.5
         popView.layer.shadowOffset = CGSize.zero
         popView.layer.shadowRadius = 60
-        
+        gradientToView(view: self.popView);
 //        MAPKIT
         searchCompleter.delegate = self
         mapView.delegate = self
@@ -116,6 +116,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.showsUserLocation = true;
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
         self.mapView.addGestureRecognizer(tap)
+ 
 
     }
     
@@ -142,6 +143,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let analysisPoint = AnalysisPoint(CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)), valueEnterococchi, valueEscherichia );
         
         mapView.addAnnotation(analysisPoint)
+    }
+    
+    // Create a gradient view
+    func gradientToView(view : UIView) {
+        
+        let gradientLayer:CAGradientLayer = CAGradientLayer()
+        gradientLayer.frame.size = view.frame.size
+        gradientLayer.colors = [UIColor(red:1/255, green:64/255, blue:121/255, alpha:1 ).cgColor, UIColor(red:25/255, green:31/255, blue:52/255, alpha:1).cgColor]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.cornerRadius = 6;
+        view.layer.insertSublayer(gradientLayer, at: 0);
     }
 
 //    -------------------READ FROM FILE-------------------
