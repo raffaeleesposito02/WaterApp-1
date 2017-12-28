@@ -84,14 +84,14 @@
 				6DD6D1741FD981D800B78C7D /* ViewController.swift */,
 				057F92551FDBEC3D00750964 /* MapViewController.swift */,
 				3579493C1FDA872700667BB6 /* ProfileViewController.swift */,
-				6DD6D1761FD981D800B78C7D /* Main.storyboard */,
-				6DD6D17B1FD981D800B78C7D /* LaunchScreen.storyboard */,
 				7F360C491FDFFA0600521C71 /* SplashViewController.swift */,
 				35418F5D1FF3BF4C0032BBE1 /* AnalysisPoint.swift */,
 				BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */,
+				6DD6D1761FD981D800B78C7D /* Main.storyboard */,
+				6DD6D17B1FD981D800B78C7D /* LaunchScreen.storyboard */,
+				BDDC20061FE9535A004E7B17 /* Assets.xcassets */,
 				6DD6D17E1FD981D800B78C7D /* Info.plist */,
 				350DC8A51FEAF6CF009D9EC6 /* GoogleService-Info.plist */,
-				BDDC20061FE9535A004E7B17 /* Assets.xcassets */,
 			);
 			path = WaterApp;
 			sourceTree = "<group>";

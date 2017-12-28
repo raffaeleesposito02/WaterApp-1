@@ -106,11 +106,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 //        MAPKIT
         searchCompleter.delegate = self
         mapView.delegate = self
-        self.searchBar.backgroundColor = UIColor(red:0.00, green:0.25, blue:0.47, alpha:0.80)
-        searchBar.textColor = UIColor.white
-
-       
-
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -154,10 +150,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         let gradientLayer:CAGradientLayer = CAGradientLayer()
         gradientLayer.frame.size = view.frame.size
-        gradientLayer.colors = [UIColor(red:1/255, green:64/255, blue:121/255, alpha:1 ).cgColor, UIColor(red:25/255, green:31/255, blue:52/255, alpha:1).cgColor]
+        gradientLayer.colors = [UIColor(named: "BluOcean")?.cgColor, UIColor(named:"DarkBlu")?.cgColor]
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.cornerRadius = 6;
         view.layer.insertSublayer(gradientLayer, at: 0);
+
     }
 
 //    -------------------READ FROM FILE-------------------
