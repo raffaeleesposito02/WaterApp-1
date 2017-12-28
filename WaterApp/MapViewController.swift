@@ -49,6 +49,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     // I get the User_Id
     let appDelegate = UIApplication.shared.delegate as! AppDelegate;
     
+
+    
     @IBAction func closePopup(_ sender: Any) {
         popView.isHidden = true;
         self.star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
@@ -105,7 +107,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 //        MAPKIT
         searchCompleter.delegate = self
         mapView.delegate = self
-        
+        self.searchBar.backgroundColor = UIColor(red:0.00, green:0.25, blue:0.47, alpha:0.80)
+        searchBar.textColor = UIColor.white
+
+       
+
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -116,7 +122,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.showsUserLocation = true;
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
         self.mapView.addGestureRecognizer(tap)
-
+       
     }
     
     @objc func DismissKeyboard(){
@@ -389,6 +395,28 @@ extension MapViewController: UITableViewDelegate {
     }
 }
 
+extension UISearchBar {
+    
+    var textColor:UIColor? {
+        get {
+            if let textField = self.value(forKey: "searchField") as?
+                UITextField  {
+                return textField.textColor
+            } else {
+                return nil
+            }
+        }
+        
+        set (newValue) {
+            if let textField = self.value(forKey: "searchField") as?
+                UITextField  {
+                textField.textColor = newValue
+            }
+        }
+    }
+    
+}
+
 extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -469,5 +497,7 @@ extension MapViewController: MKMapViewDelegate {
         
         popView.isHidden = false
     }
+ 
+
 }
 
