@@ -1,19 +1,9 @@
 //
 //  Artwork.swift
-//  GoogleToolboxForMac
+//  WaterApp
 //
-//  Created by Alessio Antonisio on 27/12/2017.
+//  Created by Luigi Previdente on 12/28/17.
+//  Copyright © 2017 Raffaele. All rights reserved.
 //
 
 import Foundation
-import MapKit
-
-class Artwork: NSObject, MKAnnotation {
-
-    let coordinate: CLLocationCoordinate2D
-    
-    init(coordinate: CLLocationCoordinate2D) {
-        self.coordinate = coordinate
-        super.init()
-    }
-}
