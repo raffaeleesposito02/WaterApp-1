@@ -9,18 +9,8 @@ target 'WaterApp' do
 
 	# Pods For Firebase
    pod 'Firebase/Core'
-   pod 'Firebase/Auth'
-   pod 'Firebase/Database'
    pod 'Firebase/Storage'
    pod 'FirebaseUI/Storage' 
-
-	#Pods for Sign in
-   pod 'GoogleSignIn'
-
-
-	# Pods for Google Maps	
-   pod 'GoogleMaps', '~> 2.5' 
-   pod 'GooglePlaces', '~> 2.5' 
 
 
 end
