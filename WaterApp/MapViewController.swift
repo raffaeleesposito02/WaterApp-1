@@ -21,6 +21,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var imageFlag: UIImageView!
     @IBOutlet weak var lblValueEnterococchi: UILabel!
     @IBOutlet weak var lblValueEscherichia: UILabel!
+    @IBOutlet weak var dateLastAnalysis: UILabel!
     @IBOutlet weak var popView: UIView!
     
     let iEscherichia: Int = 7;
@@ -215,6 +216,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         return row.components(separatedBy: delimiter)
     }
     
+//    ----GET DATE IN A FORMAT EASY TO READ
+    
+    func formattedDate(date: String) -> String {
+        
+        let startingIndex = date.index(date.startIndex, offsetBy: 4)
+        let new = date.substring(from: startingIndex)
+        let endingIndex = new.index(new.endIndex, offsetBy: -19)
+        let final = new.substring(to: endingIndex)
+        
+        return final + " 2017"
+    }
+    
 /*  SEARCH LOCATIONS OF ANALYSIS AND CREATE FLAGS */
     
     func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEnterococchi: Int,
@@ -308,6 +321,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var searchResults = [MKLocalSearchCompletion]()
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        popView.isHidden = true
         
         self.farFromTop.priority = UILayoutPriority(rawValue: 1)
         self.closeToTop.priority = UILayoutPriority(rawValue: 999)
@@ -431,6 +446,9 @@ extension MapViewController: MKMapViewDelegate {
 
         self.lblLocation.text = searchData [1][2];
         self.lblLocation.sizeToFit();
+        
+        self.dateLastAnalysis.text = formattedDate(date: searchData [1][5]);
+        self.dateLastAnalysis.sizeToFit();
 
         var lastIndex:Int = searchData.count-1;
         var valueEnterococchi = Int(searchData[lastIndex][iEnterococchi]);
@@ -454,6 +472,7 @@ extension MapViewController: MKMapViewDelegate {
 
         self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
         self.lblValueEnterococchi.sizeToFit();
+        
         popView.isHidden = false
     }
 }

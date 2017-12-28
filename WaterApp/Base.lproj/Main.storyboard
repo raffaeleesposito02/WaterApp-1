@@ -131,8 +131,8 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enterococchi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LkZ-0I-phK">
-                                                <rect key="frame" x="205" y="171" width="110" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enterococci" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LkZ-0I-phK">
+                                                <rect key="frame" x="215.5" y="171" width="99.5" height="22"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -144,7 +144,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yfZ-Kc-Bjb">
-                                                <rect key="frame" x="239" y="208" width="43" height="22"/>
+                                                <rect key="frame" x="244.5" y="208" width="43" height="22"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -155,8 +155,8 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Analysis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAe-4z-JOS">
-                                                <rect key="frame" x="20" y="272" width="110" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Analysis:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAe-4z-JOS">
+                                                <rect key="frame" x="20" y="272" width="115" height="22"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -168,8 +168,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lV0-eG-RKC">
-                                                <rect key="frame" x="145" y="273" width="40" height="21"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                <rect key="frame" x="150" y="276" width="35.5" height="18"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -180,20 +180,20 @@
                                                     <constraint firstAttribute="width" constant="70" id="eUM-ny-CYp"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limit Value of Escherichia UFC o MPN /100ml" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MD8-ts-PPr">
-                                                <rect key="frame" x="15" y="347" width="267" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limit Value of Escherichia:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MD8-ts-PPr">
+                                                <rect key="frame" x="15" y="347" width="272.5" height="17"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limit Value of Enterococci UFC o MPN /100ml" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="don-le-XEV">
-                                                <rect key="frame" x="15" y="374" width="269" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limit Value of Enterococci:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="don-le-XEV">
+                                                <rect key="frame" x="15" y="374" width="153" height="17"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Source by ARPA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROb-bo-hhd">
-                                                <rect key="frame" x="241" y="403" width="84" height="21"/>
+                                                <rect key="frame" x="236" y="403" width="84" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="Gw2-Xc-uYw"/>
                                                 </constraints>
@@ -201,14 +201,14 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="500" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Irr-Ar-o24">
-                                                <rect key="frame" x="291" y="347" width="24" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="500 UFC o MPN /100ml" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Irr-Ar-o24">
+                                                <rect key="frame" x="170" y="347" width="150" height="17"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldz-Ur-3RM">
-                                                <rect key="frame" x="291" y="374" width="24" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="200 UFC o MPN /100ml" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldz-Ur-3RM">
+                                                <rect key="frame" x="170" y="374" width="150" height="17"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -225,7 +225,7 @@
                                             <constraint firstItem="dpC-D8-QVU" firstAttribute="top" secondItem="n5g-uC-0KQ" secondAttribute="bottom" constant="20" id="CnQ-F6-ybj"/>
                                             <constraint firstItem="don-le-XEV" firstAttribute="top" secondItem="MD8-ts-PPr" secondAttribute="bottom" constant="10" id="DzT-T6-m7b"/>
                                             <constraint firstItem="yfZ-Kc-Bjb" firstAttribute="trailing" secondItem="MD8-ts-PPr" secondAttribute="trailing" id="Fho-bX-ui7"/>
-                                            <constraint firstAttribute="trailing" secondItem="ldz-Ur-3RM" secondAttribute="trailing" constant="26" id="GAB-Km-7JP"/>
+                                            <constraint firstAttribute="trailing" secondItem="ldz-Ur-3RM" secondAttribute="trailing" constant="8" id="GAB-Km-7JP"/>
                                             <constraint firstAttribute="bottom" secondItem="ROb-bo-hhd" secondAttribute="bottom" constant="63" id="HC8-Fi-S2o"/>
                                             <constraint firstItem="SpE-Ac-EaU" firstAttribute="bottom" secondItem="JaB-Of-lVQ" secondAttribute="bottom" id="HUE-t9-lQq"/>
                                             <constraint firstItem="ldz-Ur-3RM" firstAttribute="baseline" secondItem="don-le-XEV" secondAttribute="baseline" id="IZG-L5-mx2"/>
@@ -246,7 +246,7 @@
                                             <constraint firstItem="pwx-Qd-twY" firstAttribute="leading" secondItem="dpC-D8-QVU" secondAttribute="trailing" constant="15" id="i9K-l1-0CD"/>
                                             <constraint firstItem="lV0-eG-RKC" firstAttribute="baseline" secondItem="qAe-4z-JOS" secondAttribute="baseline" id="llZ-uO-N7Y"/>
                                             <constraint firstItem="JaB-Of-lVQ" firstAttribute="leading" secondItem="dpC-D8-QVU" secondAttribute="leading" id="oWL-Yd-mXP"/>
-                                            <constraint firstAttribute="trailing" secondItem="ROb-bo-hhd" secondAttribute="trailing" constant="16" id="ple-UJ-xgt"/>
+                                            <constraint firstAttribute="trailing" secondItem="ROb-bo-hhd" secondAttribute="trailing" constant="21" id="ple-UJ-xgt"/>
                                             <constraint firstItem="Irr-Ar-o24" firstAttribute="baseline" secondItem="MD8-ts-PPr" secondAttribute="baseline" id="qld-Tb-nmy"/>
                                             <constraint firstItem="sA9-Fk-UZg" firstAttribute="centerX" secondItem="GTC-3v-mKH" secondAttribute="centerX" id="rU7-jY-Pa4"/>
                                             <constraint firstItem="qAe-4z-JOS" firstAttribute="top" secondItem="sA9-Fk-UZg" secondAttribute="bottom" constant="43" id="rsZ-gU-Ik3"/>
@@ -341,6 +341,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="closeToTop" destination="Fo5-Tx-1F3" id="ezI-of-byB"/>
+                        <outlet property="dateLastAnalysis" destination="lV0-eG-RKC" id="BWa-ua-Wp0"/>
                         <outlet property="farFromTop" destination="TCu-xq-YHq" id="ade-d5-mN0"/>
                         <outlet property="imageFlag" destination="GLD-aU-mEO" id="0UO-KC-YaI"/>
                         <outlet property="lblArea" destination="n5g-uC-0KQ" id="6GO-C5-1oT"/>
