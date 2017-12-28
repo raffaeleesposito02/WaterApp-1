@@ -117,8 +117,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.showsUserLocation = true;
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
         self.mapView.addGestureRecognizer(tap)
-       
-    }
+        
+            }
     
     @objc func DismissKeyboard(){
         self.farFromTop.priority = UILayoutPriority(rawValue: 999)
@@ -318,6 +318,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
+    
+    
+    
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         

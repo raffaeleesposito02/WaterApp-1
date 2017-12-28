@@ -300,7 +300,12 @@
                                     <searchBar contentMode="scaleAspectFill" fixedFrame="YES" text="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phv-bm-o0A">
                                         <rect key="frame" x="0.0" y="8" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="barTintColor" name="BluOcean"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <scopeButtonTitles>
+                                            <string>Title</string>
+                                            <string>Title</string>
+                                        </scopeButtonTitles>
                                         <connections>
                                             <outlet property="delegate" destination="pze-eX-819" id="1Eu-bv-6BG"/>
                                         </connections>
