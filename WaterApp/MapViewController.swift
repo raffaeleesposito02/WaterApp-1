@@ -89,7 +89,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        
+        Thread.sleep(forTimeInterval: 1.4)
+
         legend.layer.cornerRadius = 10
         // I get the reference to the Storage where i have the file CSV
         storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
@@ -334,6 +335,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             self.view.layoutIfNeeded()
             
         }, completion: nil)
+   
     }
     
 }
