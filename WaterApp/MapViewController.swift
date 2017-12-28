@@ -92,14 +92,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         // I get the reference to the Storage where i have the file CSV
         storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
         
-        popView.isHidden = true
-        
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges();
-        
+        popView.isHidden = true;
         readFromCSV();
         
         popView.layer.cornerRadius = 24
@@ -112,10 +105,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         searchCompleter.delegate = self
         mapView.delegate = self
         
-        let initialLocation = CLLocation(latitude: 40.8517746, longitude: 14.2681244)
-        createrMarker(40.8517746,  14.2681244, 0, 0);
-        centerMapOnLocation(location: locationManager.location!);
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges();
         
+        centerMapOnLocation(location: locationManager.location!);
+        mapView.showsUserLocation = true;
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
         self.mapView.addGestureRecognizer(tap)
 
@@ -144,8 +141,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let artwork = Artwork(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)));
         
         mapView.addAnnotation(artwork)
-
-       
+  
+    
 //        if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
 //
 //            if(valueEnterococchi >= limitEnterococchi  && valueEscherichia >= limitEscherica){
@@ -403,7 +400,7 @@ extension MapViewController: MKMapViewDelegate {
         if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
             as? MKMarkerAnnotationView {
             dequeuedView.annotation = annotation
-            view = dequeuedView
+            view = dequeuedView;
         } else {
             // 5
             view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
