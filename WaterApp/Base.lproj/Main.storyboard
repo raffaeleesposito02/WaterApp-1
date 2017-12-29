@@ -94,28 +94,6 @@
                                     <constraint firstAttribute="width" constant="154" id="V7f-kz-a6u"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juG-2k-1JO">
-                                <rect key="frame" x="0.0" y="551" width="375" height="432"/>
-                                <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4jd-Pw-56k">
-                                        <rect key="frame" x="8" y="38" width="359" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <segments>
-                                            <segment title="Map"/>
-                                            <segment title="Satellite"/>
-                                        </segments>
-                                        <color key="tintColor" red="0.097014732658863068" green="0.24621638655662537" blue="0.45884507894515991" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <connections>
-                                            <action selector="mapTypeSelector:" destination="pze-eX-819" eventType="valueChanged" id="dUm-zZ-6uF"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="432" id="kbe-AO-dgd"/>
-                                </constraints>
-                            </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-kh-fvQ">
                                 <rect key="frame" x="17" y="13" width="341" height="466"/>
                                 <subviews>
@@ -343,6 +321,28 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="647" id="pFY-Z0-ZG8"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juG-2k-1JO">
+                                <rect key="frame" x="0.0" y="551" width="375" height="432"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4jd-Pw-56k">
+                                        <rect key="frame" x="8" y="38" width="359" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <segments>
+                                            <segment title="Map"/>
+                                            <segment title="Satellite"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.097014732658863068" green="0.24621638655662537" blue="0.45884507894515991" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <connections>
+                                            <action selector="mapTypeSelector:" destination="pze-eX-819" eventType="valueChanged" id="dUm-zZ-6uF"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="432" id="kbe-AO-dgd"/>
                                 </constraints>
                             </view>
                         </subviews>
