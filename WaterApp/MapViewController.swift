@@ -346,6 +346,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
     
+    
 //    BUTTON FOR STARRED AND MAP TYPE
     
     @IBOutlet weak var starredClosed: NSLayoutConstraint!
@@ -364,6 +365,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             
         }, completion: nil)
         
+    }
+    
+    @IBAction func myLocationButton(_ sender: Any) {
+        let location = CLLocation()
+        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: self.mapView.region.span)
+        
+        mapView!.setRegion(region, animated: true)
+        mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
     }
     
 // SEARCH BAR
