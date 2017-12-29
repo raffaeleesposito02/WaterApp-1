@@ -117,6 +117,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         popView.layer.shadowOffset = CGSize.zero
         popView.layer.shadowRadius = 60
         gradientToView(view: self.popView);
+        
 //        MAPKIT
         searchCompleter.delegate = self
         mapView.delegate = self
@@ -137,6 +138,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @objc func DismissKeyboard(){
         self.farFromTop.priority = UILayoutPriority(rawValue: 999)
         self.closeToTop.priority = UILayoutPriority(rawValue: 1);
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
+            
+            self.view.layoutIfNeeded()
+            
+        }, completion: nil)
         view.endEditing(true)
     }
     
@@ -333,8 +339,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
     
+//    BUTTON FOR STARRED AND MAP TYPE
     
+    @IBOutlet weak var starredClosed: NSLayoutConstraint!
     
+    @IBOutlet weak var starredOpen: NSLayoutConstraint!
+    
+    @IBAction func starredButton(_ sender: Any) {
+        
+        let m = starredClosed.priority
+        starredClosed.priority = starredOpen.priority
+        starredOpen.priority = m
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseOut], animations: {
+            
+            self.view.layoutIfNeeded()
+            
+        }, completion: nil)
+        
+    }
+    
+// SEARCH BAR
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         
