@@ -22,6 +22,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var lblValueEscherichia: UILabel!
     @IBOutlet weak var dateLastAnalysis: UILabel!
     @IBOutlet weak var popView: UIView!
+    @IBOutlet weak var enterococchiEscherichiaConstraint: NSLayoutConstraint!
     
     let iEscherichia: Int = 7;
     let iEnterococchi: Int = 6;
@@ -60,11 +61,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             mapView.mapType = .standard
         }
     }
-    
-    
+
     @IBAction func closePopup(_ sender: Any) {
         popView.isHidden = true;
         self.star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
+        self.searchBar.isHidden = false;
     }
     
     @IBOutlet weak var star: UIButton!
@@ -81,8 +82,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             print("schiacciato dentro");
             // If the user have done the log in
             if( self.appDelegate.uid != "NoValue" ){
-                
-
                 
                 star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
             }
@@ -116,7 +115,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         popView.layer.shadowOpacity = 0.5
         popView.layer.shadowOffset = CGSize.zero
         popView.layer.shadowRadius = 60
-        gradientToView(view: self.popView);
+//        gradientToView(view: self.popView);
         
 //        MAPKIT
         searchCompleter.delegate = self
@@ -133,7 +132,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
         self.mapView.addGestureRecognizer(tap)
         
-            }
+    }
     
     @objc func DismissKeyboard(){
         self.farFromTop.priority = UILayoutPriority(rawValue: 999)
@@ -168,14 +167,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     // Create a gradient view
     func gradientToView(view : UIView) {
         
-        let gradientLayer:CAGradientLayer = CAGradientLayer()
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.frame.size = view.frame.size
         gradientLayer.colors = [UIColor(named: "BluOcean")?.cgColor, UIColor(named:"DarkBlu")?.cgColor]
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.cornerRadius = 6;
         view.layer.insertSublayer(gradientLayer, at: 0);
-
+    
     }
+    
+    //    Detect the rotation of screen
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil) { _ in
+            if UIDevice.current.orientation.isLandscape {
+                
+                self.enterococchiEscherichiaConstraint.constant = self.popView.frame.width - (274);
+    
+            } else {
+             
+                self.enterococchiEscherichiaConstraint.constant = self.popView.frame.width - (274);
+    
+            }
+        }
+    }
+
 
 //    -------------------READ FROM FILE-------------------
     func readFromCSV() {
@@ -544,7 +560,7 @@ extension MapViewController: MKMapViewDelegate {
 
         self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
         self.lblValueEnterococchi.sizeToFit();
-        
+        self.searchBar.isHidden = true;
         popView.isHidden = false
     }
  

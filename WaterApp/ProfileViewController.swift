@@ -154,7 +154,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             print("Portrait")
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool){
         super.viewDidAppear(animated)
 
