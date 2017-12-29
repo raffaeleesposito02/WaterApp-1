@@ -114,7 +114,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         popView.layer.shadowColor = UIColor.black.cgColor
         popView.layer.shadowOpacity = 0.5
         popView.layer.shadowOffset = CGSize.zero
-        popView.layer.shadowRadius = 60
+        popView.layer.shadowRadius = 60;
         gradientToView(view: self.popView);
         
 //        MAPKIT
@@ -380,7 +380,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         
-        popView.isHidden = true
+        popView.isHidden = true;
         
         self.farFromTop.priority = UILayoutPriority(rawValue: 1)
         self.closeToTop.priority = UILayoutPriority(rawValue: 999)
@@ -392,6 +392,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }, completion: nil)
    
     }
+    
+    @IBAction func swipeDownSearchBar(_ sender: UISwipeGestureRecognizer) {
+        self.DismissKeyboard()
+    }
+    
     
 }
 
@@ -432,8 +437,14 @@ extension MapViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let searchResult = searchResults[indexPath.row]
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+ 
+        cell.backgroundColor = UIColor(named: "BluOcean");
+        
         cell.textLabel?.text = searchResult.title
+        cell.textLabel?.textColor = UIColor.white;
+        
         cell.detailTextLabel?.text = searchResult.subtitle
+        cell.detailTextLabel?.textColor = UIColor.white;
         return cell
     }
 }
@@ -456,7 +467,7 @@ extension MapViewController: UITableViewDelegate {
 
             self.centerMapOnLocation(location: initialLocation)
 
-            self.popView.isHidden = true
+            self.popView.isHidden = true;
             self.DismissKeyboard()
         }
     }

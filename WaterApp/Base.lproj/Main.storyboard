@@ -35,7 +35,7 @@
                                     <outlet property="delegate" destination="pze-eX-819" id="J6Q-AN-bfX"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zb4-1H-y1z" userLabel="Star">
+                            <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zb4-1H-y1z" userLabel="Star">
                                 <rect key="frame" x="314" y="16" width="43" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="STAR-Map-buttons"/>
@@ -43,7 +43,7 @@
                                     <action selector="starredButton:" destination="pze-eX-819" eventType="touchUpInside" id="5eq-cW-Mal"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dR-PW-Dn5" userLabel="MyLocation">
+                            <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dR-PW-Dn5" userLabel="MyLocation">
                                 <rect key="frame" x="314" y="59" width="43" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="LOC-Map-buttons"/>
@@ -300,10 +300,10 @@
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hn-rh-vYY" userLabel="Search View">
                                 <rect key="frame" x="0.0" y="487" width="375" height="647"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DiI-sJ-2IS" userLabel="Search Results Table View">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" indicatorStyle="white" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DiI-sJ-2IS" userLabel="Search Results Table View">
                                         <rect key="frame" x="0.0" y="64" width="375" height="583"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" name="BluOcean"/>
                                         <connections>
                                             <outlet property="dataSource" destination="pze-eX-819" id="Z5N-gT-cCf"/>
                                             <outlet property="delegate" destination="pze-eX-819" id="yoa-fH-NKU"/>
@@ -315,6 +315,7 @@
                                         <subviews>
                                             <searchBar contentMode="scaleAspectFill" ambiguous="YES" text="" placeholder="Search " translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phv-bm-o0A">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                                <gestureRecognizers/>
                                                 <color key="barTintColor" name="BluOcean"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <scopeButtonTitles>
@@ -322,6 +323,7 @@
                                                 </scopeButtonTitles>
                                                 <connections>
                                                     <outlet property="delegate" destination="pze-eX-819" id="1Eu-bv-6BG"/>
+                                                    <outletCollection property="gestureRecognizers" destination="jgF-Q8-LkQ" appends="YES" id="OIO-z8-AK1"/>
                                                 </connections>
                                             </searchBar>
                                         </subviews>
@@ -360,7 +362,7 @@
                             <constraint firstItem="KMD-gR-rHM" firstAttribute="trailing" secondItem="f4V-kh-fvQ" secondAttribute="trailing" constant="17" id="3fh-Rz-KmI"/>
                             <constraint firstItem="juG-2k-1JO" firstAttribute="leading" secondItem="3W4-uf-iiP" secondAttribute="leading" id="584-q3-VhF"/>
                             <constraint firstItem="f4V-kh-fvQ" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" constant="13" id="CXq-PE-oaS"/>
-                            <constraint firstItem="8hn-rh-vYY" firstAttribute="top" secondItem="3W4-uf-iiP" secondAttribute="top" priority="1" constant="150" id="Fo5-Tx-1F3"/>
+                            <constraint firstItem="8hn-rh-vYY" firstAttribute="top" secondItem="3W4-uf-iiP" secondAttribute="top" priority="1" constant="15" id="Fo5-Tx-1F3"/>
                             <constraint firstItem="f4V-kh-fvQ" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" constant="17" id="JWL-Gy-oHo"/>
                             <constraint firstItem="juG-2k-1JO" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" priority="999" constant="551" id="KJz-gC-Jn2"/>
                             <constraint firstItem="Bvz-HA-VOl" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" id="Lj5-Rs-Syy"/>
@@ -413,6 +415,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o9S-l6-tfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="jgF-Q8-LkQ">
+                    <connections>
+                        <action selector="swipeDownSearchBar:" destination="pze-eX-819" id="KLn-CX-uKU"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1664.8" y="836.13193403298362"/>
         </scene>
