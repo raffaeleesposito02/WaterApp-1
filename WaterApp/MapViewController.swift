@@ -44,10 +44,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var storageRef: StorageReference?
     
-    // I get the reference to database
-
     // I get the User_Id
     let appDelegate = UIApplication.shared.delegate as! AppDelegate;
+    
+    var gradientLayer: CAGradientLayer?;
     
 // MAP TYPE SEGMENTED
     @IBOutlet weak var mapTypeSelectorOutlet: UISegmentedControl!
@@ -115,7 +115,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         popView.layer.shadowOpacity = 0.5
         popView.layer.shadowOffset = CGSize.zero
         popView.layer.shadowRadius = 60
-//        gradientToView(view: self.popView);
+        gradientToView(view: self.popView);
         
 //        MAPKIT
         searchCompleter.delegate = self
@@ -167,29 +167,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     // Create a gradient view
     func gradientToView(view : UIView) {
         
-        let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.frame.size = view.frame.size
-        gradientLayer.colors = [UIColor(named: "BluOcean")?.cgColor, UIColor(named:"DarkBlu")?.cgColor]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.cornerRadius = 6;
-        view.layer.insertSublayer(gradientLayer, at: 0);
+        gradientLayer = CAGradientLayer()
+        gradientLayer!.frame.size = view.frame.size
+        gradientLayer!.colors = [UIColor(named: "BluOcean")?.cgColor, UIColor(named:"DarkBlu")?.cgColor]
+        gradientLayer!.locations = [0.0, 1.0]
+        gradientLayer!.cornerRadius = 6;
+        view.layer.insertSublayer(gradientLayer!, at: 0);
     
     }
-    
-    //    Detect the rotation of screen
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: nil) { _ in
-            if UIDevice.current.orientation.isLandscape {
-                
-                self.enterococchiEscherichiaConstraint.constant = self.popView.frame.width - (274);
-    
-            } else {
-             
-                self.enterococchiEscherichiaConstraint.constant = self.popView.frame.width - (274);
-    
-            }
-        }
+
+    // Updte the constraint and the gradient after a rotation
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.enterococchiEscherichiaConstraint.constant = self.popView.frame.width - (274);
+        gradientLayer!.frame = self.popView.layer.bounds
     }
 
 
