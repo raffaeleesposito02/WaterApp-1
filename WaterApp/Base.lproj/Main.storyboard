@@ -35,13 +35,20 @@
                                     <outlet property="delegate" destination="pze-eX-819" id="J6Q-AN-bfX"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zb4-1H-y1z">
-                                <rect key="frame" x="284" y="47" width="53" height="59"/>
+                            <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zb4-1H-y1z" userLabel="Star">
+                                <rect key="frame" x="314" y="16" width="43" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Button" image="STAR-Map-buttons"/>
                                 <connections>
                                     <action selector="starredButton:" destination="pze-eX-819" eventType="touchUpInside" id="5eq-cW-Mal"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dR-PW-Dn5" userLabel="MyLocation">
+                                <rect key="frame" x="314" y="59" width="43" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="LOC-Map-buttons"/>
+                                <connections>
+                                    <action selector="myLocationButton:" destination="pze-eX-819" eventType="touchUpInside" id="u6U-Gf-mFX"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fU-iX-SC9">
@@ -960,6 +967,8 @@
         <image name="Delete" width="25" height="25"/>
         <image name="EnginesSettings" width="500" height="500"/>
         <image name="Information" width="30" height="57"/>
+        <image name="LOC-Map-buttons" width="90" height="91"/>
+        <image name="STAR-Map-buttons" width="90" height="90"/>
         <image name="Separator" width="325" height="12"/>
         <image name="Settings" width="25" height="25"/>
         <image name="add-to-favorites" width="25" height="23"/>
