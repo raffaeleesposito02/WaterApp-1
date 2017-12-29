@@ -48,7 +48,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     // I get the User_Id
     let appDelegate = UIApplication.shared.delegate as! AppDelegate;
     
-
+// MAP TYPE SEGMENTED
+    @IBOutlet weak var mapTypeSelectorOutlet: UISegmentedControl!
+    @IBAction func mapTypeSelector(_ sender: Any) {
+        switch ((sender as AnyObject).selectedSegmentIndex) {
+        case 0:
+            mapView.mapType = .standard
+        case 1:
+            mapView.mapType = .satellite
+        default:
+            mapView.mapType = .standard
+        }
+    }
+    
     
     @IBAction func closePopup(_ sender: Any) {
         popView.isHidden = true;
@@ -83,7 +95,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
         }
     }
-    
+
     // OUTLETS
     @IBOutlet weak var legend: UIView!
     
@@ -91,6 +103,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad();
         Thread.sleep(forTimeInterval: 1.4)
 
+        mapTypeSelectorOutlet.layer.cornerRadius = 4
         legend.layer.cornerRadius = 10
         // I get the reference to the Storage where i have the file CSV
         storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
