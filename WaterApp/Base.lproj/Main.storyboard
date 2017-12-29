@@ -51,7 +51,7 @@
                                     <action selector="myLocationButton:" destination="pze-eX-819" eventType="touchUpInside" id="u6U-Gf-mFX"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fU-iX-SC9">
+                            <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fU-iX-SC9">
                                 <rect key="frame" x="16" y="16" width="154" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Legend:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgK-B9-kud">
@@ -95,7 +95,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.97648024559020996" green="0.97646200656890869" blue="0.97647440433502197" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.96851998567581177" green="0.96492558717727661" blue="0.94901806116104126" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="E5A-pU-Oto"/>
                                     <constraint firstAttribute="width" constant="154" id="V7f-kz-a6u"/>
@@ -988,9 +988,6 @@
         <image name="flagAppost" width="25" height="25"/>
         <image name="flagwarning" width="25" height="25"/>
         <image name="google-plus-1" width="256" height="256"/>
-        <namedColor name="BluOcean">
-            <color red="0.0039215686274509803" green="0.25098039215686274" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="BluOcean">
             <color red="0.0039215686274509803" green="0.25098039215686274" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
