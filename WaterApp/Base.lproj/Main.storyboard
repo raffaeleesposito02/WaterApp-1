@@ -313,7 +313,7 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juG-2k-1JO" userLabel="Favorites View">
-                                        <rect key="frame" x="0.0" y="64" width="375" height="432"/>
+                                        <rect key="frame" x="0.0" y="64" width="375" height="580"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4jd-Pw-56k">
                                                 <rect key="frame" x="8" y="38" width="359" height="29"/>
@@ -331,7 +331,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="432" id="978-8K-tYA"/>
+                                            <constraint firstAttribute="height" constant="580" id="978-8K-tYA"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="s4V-fm-43h">
@@ -377,7 +377,7 @@
                         <constraints>
                             <constraint firstItem="KMD-gR-rHM" firstAttribute="trailing" secondItem="f4V-kh-fvQ" secondAttribute="trailing" constant="17" id="3fh-Rz-KmI"/>
                             <constraint firstItem="f4V-kh-fvQ" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" constant="13" id="CXq-PE-oaS"/>
-                            <constraint firstItem="8hn-rh-vYY" firstAttribute="top" secondItem="3W4-uf-iiP" secondAttribute="top" priority="1" constant="15" id="Fo5-Tx-1F3"/>
+                            <constraint firstItem="8hn-rh-vYY" firstAttribute="top" secondItem="3W4-uf-iiP" secondAttribute="top" priority="1" constant="100" id="Fo5-Tx-1F3"/>
                             <constraint firstItem="f4V-kh-fvQ" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" constant="17" id="JWL-Gy-oHo"/>
                             <constraint firstItem="Bvz-HA-VOl" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" id="Lj5-Rs-Syy"/>
                             <constraint firstItem="8hn-rh-vYY" firstAttribute="trailing" secondItem="KMD-gR-rHM" secondAttribute="trailing" id="Moa-XP-ogr"/>
