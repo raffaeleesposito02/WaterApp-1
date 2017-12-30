@@ -11,9 +11,9 @@ import MapKit
 
 import FirebaseStorage
 
-
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
+    // OUTLETS FOR POPVIEW
     @IBOutlet weak var lblArea: UILabel!
     @IBOutlet weak var lblCity: UILabel!
     @IBOutlet weak var lblLocation: UILabel!
@@ -22,8 +22,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var lblValueEscherichia: UILabel!
     @IBOutlet weak var dateLastAnalysis: UILabel!
     @IBOutlet weak var popView: UIView!
+    @IBOutlet weak var star: UIButton!
+    
     @IBOutlet weak var enterococchiEscherichiaConstraint: NSLayoutConstraint!
+    
+    // Favorite Places
     @IBOutlet weak var favoriteView: UIView!
+    @IBOutlet weak var mapTypeSelectorOutlet: UISegmentedControl!
+    
+    // Outlet for MAPS
+    @IBOutlet weak var starredButtonOutlet: UIButton!
+    @IBOutlet weak var myLocationButtonOutlet: UIButton!
+    @IBOutlet weak var legend: UIView!
     
     let iEscherichia: Int = 7;
     let iEnterococchi: Int = 6;
@@ -34,6 +44,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     // Limit for Enterococchi e Escherichia
     var limitEnterococchi: Int = 200; // (UFC o MPN /100ml, valore limite 200)
     var limitEscherica: Int = 500; // (UFC o MPN /100ml, valore limite 500)
+    
     // Information from ARPAC
     var dataArpac =  Array<Array<String>>();
     
@@ -50,59 +61,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var gradientLayer: CAGradientLayer?;
     
-// MAP TYPE SEGMENTED
-    @IBOutlet weak var mapTypeSelectorOutlet: UISegmentedControl!
-    @IBAction func mapTypeSelector(_ sender: Any) {
-        switch ((sender as AnyObject).selectedSegmentIndex) {
-        case 0:
-            mapView.mapType = .standard
-        case 1:
-            mapView.mapType = .satellite
-        default:
-            mapView.mapType = .standard
-        }
-    }
-
-    @IBAction func closePopup(_ sender: Any) {
-        popView.isHidden = true;
-        self.star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
-        self.searchView.isHidden = false;
-    }
-    
-    @IBOutlet weak var star: UIButton!
-    
-    @IBAction func addOrRemoveStarred(_ sender: Any) {
-        // I get the datas
-        let datas = searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
-        
-        // I create an object of type Preference
-        var preference: Preference = Preference(data: datas);
-        
-        print("schiacciato");
-        if( star.currentImage != UIImage(named: "star_colored_bordi") ){
-            print("schiacciato dentro");
-            // If the user have done the log in
-            if( self.appDelegate.uid != "NoValue" ){
-                
-                star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
-            }
-            else { // The user doesn't have an account so i need to save in local the location
-                
-            }
-        } else {
-             print("schiacciato fuori");
-         
-            star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
-        }
-    }
-
-    // OUTLETS
-    @IBOutlet weak var legend: UIView!
-    
     override func viewDidLoad() {
         super.viewDidLoad();
         Thread.sleep(forTimeInterval: 1.4)
-
+        
         mapTypeSelectorOutlet.layer.cornerRadius = 4
         legend.layer.cornerRadius = 10
         // I get the reference to the Storage where i have the file CSV
@@ -118,7 +80,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         popView.layer.shadowRadius = 60;
         gradientToView(view: self.popView);
         
-//        MAPKIT
+        //        MAPKIT
         searchCompleter.delegate = self
         mapView.delegate = self
         
@@ -136,7 +98,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.showsCompass = false
         
     }
-
+    
     @objc func DismissKeyboard(){
         self.farFromTop.priority = UILayoutPriority(rawValue: 999)
         self.closeToTop.priority = UILayoutPriority(rawValue: 1);
@@ -148,13 +110,38 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         view.endEditing(true)
     }
     
+    // MAP TYPE SEGMENTED
+    @IBAction func mapTypeSelector(_ sender: Any) {
+        switch ((sender as AnyObject).selectedSegmentIndex) {
+        case 0:
+            mapView.mapType = .standard
+        case 1:
+            mapView.mapType = .satellite
+        default:
+            mapView.mapType = .standard
+        }
+    }
+
+    @IBAction func closePopup(_ sender: Any) {
+        popView.isHidden = true;
+        self.star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
+        self.searchView.isHidden = false;
+    }
     
+    @IBAction func addOrRemoveStarred(_ sender: Any) {
+        // I get the datas
+        let datas = searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
+        // I create an object of type Preference
+        var preference: Preference = Preference(data: datas);
+        
+        if( star.currentImage != UIImage(named: "star_colored_bordi") ){
+            star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
+        } else {
+            star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
+        }
+    }
     
     // HIDE LEGEND AND BUTTONS WHEN MAP IS MOVING
-    
-    @IBOutlet weak var starredButtonOutlet: UIButton!
-    @IBOutlet weak var myLocationButtonOutlet: UIButton!
-    
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         legend.isHidden = true
         starredButtonOutlet.isHidden = true
@@ -227,7 +214,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 DispatchQueue.main.async {
                     guard let text = String(data: data!, encoding: String.Encoding.ascii) as String!
                         else {
-                            print("error during conversion file \(data?.description)")
+                            print("Error during conversion file \(data?.description)")
                             return
                     }
                     self.converTextToArray(text)
@@ -370,7 +357,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     
 //    BUTTON FOR STARRED AND MAP TYPE
-    
     
     @IBAction func starredButton(_ sender: Any) {
         favoriteView.isHidden = false;
@@ -553,7 +539,7 @@ extension MapViewController: MKMapViewDelegate {
     
     // WHEN A MARKER IS TAPPED
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
-        
+    
         // Retrive information about marker location
         latitude = Float((view.annotation?.coordinate.latitude)!);
         longitude = Float((view.annotation?.coordinate.longitude)!);
@@ -563,7 +549,6 @@ extension MapViewController: MKMapViewDelegate {
            Set all information */
         self.lblArea.text = searchData[1][0];
         self.lblArea.sizeToFit();
-        
         
         self.lblCity.text = searchData[1][1];
         self.lblCity.sizeToFit();
@@ -590,16 +575,18 @@ extension MapViewController: MKMapViewDelegate {
             self.imageFlag.image = UIImage(named: "flagappost-1");
         }
 
-
         self.lblValueEscherichia.text = searchData[lastIndex][iEscherichia];
         self.lblValueEscherichia.sizeToFit();
 
         self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
         self.lblValueEnterococchi.sizeToFit();
         self.searchView.isHidden = true;
-        popView.isHidden = false
+        view.isSelected = false;
+
+        mapView.deselectAnnotation(view.annotation, animated: true);
+        popView.isHidden = false;
+        
     }
- 
 
 }
 

@@ -454,32 +454,32 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rb4-Te-seA">
-                                        <rect key="frame" x="26" y="115" width="80" height="21"/>
+                                        <rect key="frame" x="26" y="82" width="80" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <color key="textColor" red="0.0027726537020000002" green="0.3250108028" blue="0.54885756969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify changes in starred" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbj-Xe-N4u">
-                                        <rect key="frame" x="26" y="197" width="202" height="21"/>
+                                        <rect key="frame" x="26" y="164" width="202" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <color key="textColor" red="0.0027726537020000002" green="0.3250108028" blue="0.54885756969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QzJ-GN-yTS">
-                                        <rect key="frame" x="302" y="192" width="51" height="31"/>
+                                        <rect key="frame" x="302" y="159" width="51" height="31"/>
                                         <color key="onTintColor" red="0.1291470528" green="0.16612911220000001" blue="0.26543751360000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="actionNotifyChanges:" destination="vsn-W7-Eb3" eventType="valueChanged" id="nnK-NM-AwR"/>
                                         </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mC5-fY-jPR">
-                                        <rect key="frame" x="53" y="61" width="84" height="27"/>
+                                        <rect key="frame" x="53" y="28" width="84" height="27"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
                                         <color key="textColor" red="0.13350868229999999" green="0.19101804489999999" blue="0.1569065154" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OIf-SH-fe4">
-                                        <rect key="frame" x="23" y="93" width="152" height="1"/>
+                                        <rect key="frame" x="23" y="60" width="152" height="1"/>
                                         <color key="backgroundColor" red="0.13350868229999999" green="0.19101804489999999" blue="0.1569065154" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="152" id="5Oj-c0-OYg"/>
@@ -487,46 +487,46 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvw-Ob-a5P">
-                                        <rect key="frame" x="19" y="273" width="152" height="1"/>
+                                        <rect key="frame" x="19" y="240" width="152" height="1"/>
                                         <color key="backgroundColor" red="0.13350868229999999" green="0.19101804489999999" blue="0.1569065154" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="c1n-NR-ZhG"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jI0-7L-NLP">
-                                        <rect key="frame" x="54" y="244" width="39" height="27"/>
+                                        <rect key="frame" x="54" y="211" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5m-eE-Vym">
-                                        <rect key="frame" x="299" y="115" width="56" height="21"/>
+                                        <rect key="frame" x="299" y="82" width="56" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                         <color key="textColor" red="0.1291470528" green="0.16612911220000001" blue="0.26543751360000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9LG-1d-zEV">
-                                        <rect key="frame" x="302" y="151" width="51" height="31"/>
+                                        <rect key="frame" x="302" y="118" width="51" height="31"/>
                                         <color key="onTintColor" red="0.1291470528" green="0.16612911220000001" blue="0.26543751360000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="actionNotifyNews:" destination="vsn-W7-Eb3" eventType="valueChanged" id="WQ1-hO-Nat"/>
                                         </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify news" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGJ-QT-eYF">
-                                        <rect key="frame" x="26" y="156" width="95" height="21"/>
+                                        <rect key="frame" x="26" y="123" width="95" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <color key="textColor" red="0.0027726537020000002" green="0.3250108028" blue="0.54885756969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EnginesSettings" translatesAutoresizingMaskIntoConstraints="NO" id="aGw-Rv-DoK">
-                                        <rect key="frame" x="23" y="63" width="25" height="25"/>
+                                        <rect key="frame" x="23" y="30" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="1ic-Xw-4Pq"/>
                                             <constraint firstAttribute="height" constant="25" id="H17-k0-3uB"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Information" translatesAutoresizingMaskIntoConstraints="NO" id="htV-Vj-f1m">
-                                        <rect key="frame" x="30" y="248" width="10" height="18"/>
+                                        <rect key="frame" x="30" y="215" width="10" height="18"/>
                                         <color key="tintColor" red="0.13350868229999999" green="0.19101804489999999" blue="0.1569065154" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="RXR-4C-2Ud"/>
@@ -562,7 +562,7 @@
                                     <constraint firstItem="OIf-SH-fe4" firstAttribute="leading" secondItem="aGw-Rv-DoK" secondAttribute="leading" id="rtG-AN-hCv"/>
                                     <constraint firstItem="M5m-eE-Vym" firstAttribute="baseline" secondItem="rb4-Te-seA" secondAttribute="baseline" id="s1d-gX-7Pp"/>
                                     <constraint firstItem="QzJ-GN-yTS" firstAttribute="centerX" secondItem="9LG-1d-zEV" secondAttribute="centerX" id="vHj-4r-V0S"/>
-                                    <constraint firstItem="aGw-Rv-DoK" firstAttribute="top" secondItem="ON5-FC-0Ex" secondAttribute="top" constant="63" id="viF-Po-uo9"/>
+                                    <constraint firstItem="aGw-Rv-DoK" firstAttribute="top" secondItem="ON5-FC-0Ex" secondAttribute="top" constant="30" id="viF-Po-uo9"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
