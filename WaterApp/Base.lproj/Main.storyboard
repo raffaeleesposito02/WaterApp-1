@@ -425,6 +425,7 @@
                         <outlet property="searchResultsTableView" destination="DiI-sJ-2IS" id="6ak-nC-i0b"/>
                         <outlet property="searchView" destination="8hn-rh-vYY" id="vOd-ro-BCi"/>
                         <outlet property="star" destination="BtN-t0-bxg" id="Sgj-7C-6PH"/>
+                        <outlet property="starredButtonOutlet" destination="zb4-1H-y1z" id="Jad-70-t6S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o9S-l6-tfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
