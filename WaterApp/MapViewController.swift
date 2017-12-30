@@ -134,7 +134,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.addGestureRecognizer(tap)
         
     }
-    
+
     @objc func DismissKeyboard(){
         self.farFromTop.priority = UILayoutPriority(rawValue: 999)
         self.closeToTop.priority = UILayoutPriority(rawValue: 1);
@@ -145,6 +145,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }, completion: nil)
         view.endEditing(true)
     }
+    
+    
+    
+    // HIDE LEGEND AND BUTTONS WHEN MAP IS MOVING
+    
+    @IBOutlet weak var starredButtonOutlet: UIButton!
+    @IBOutlet weak var myLocationButtonOutlet: UIButton!
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        legend.isHidden = true
+        starredButtonOutlet.isHidden = true
+        myLocationButtonOutlet.isHidden = true
+    }
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        legend.isHidden = false
+        starredButtonOutlet.isHidden = false
+        myLocationButtonOutlet.isHidden = false
+    }
+    
     
     let regionRadius: CLLocationDistance = 15000;
     

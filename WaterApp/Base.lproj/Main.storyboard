@@ -37,7 +37,7 @@
                                 </connections>
                             </mapView>
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zb4-1H-y1z" userLabel="Star">
-                                <rect key="frame" x="314" y="16" width="43" height="43"/>
+                                <rect key="frame" x="319" y="16" width="43" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="STAR-Map-buttons"/>
                                 <connections>
@@ -45,15 +45,15 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dR-PW-Dn5" userLabel="MyLocation">
-                                <rect key="frame" x="314" y="59" width="43" height="43"/>
+                                <rect key="frame" x="319" y="59" width="43" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="LOC-Map-buttons"/>
                                 <connections>
                                     <action selector="myLocationButton:" destination="pze-eX-819" eventType="touchUpInside" id="u6U-Gf-mFX"/>
                                 </connections>
                             </button>
-                            <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fU-iX-SC9">
-                                <rect key="frame" x="16" y="16" width="154" height="90"/>
+                            <view alpha="0.94999999999999996" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fU-iX-SC9">
+                                <rect key="frame" x="11" y="16" width="154" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Legend:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgK-B9-kud">
                                         <rect key="frame" x="3" y="0.0" width="92" height="32"/>
@@ -419,6 +419,7 @@
                         <outlet property="legend" destination="3fU-iX-SC9" id="lbo-5V-oRX"/>
                         <outlet property="mapTypeSelectorOutlet" destination="4jd-Pw-56k" id="bET-yW-je8"/>
                         <outlet property="mapView" destination="Bvz-HA-VOl" id="GI6-gf-7It"/>
+                        <outlet property="myLocationButtonOutlet" destination="2dR-PW-Dn5" id="gwQ-ha-Vw1"/>
                         <outlet property="popView" destination="f4V-kh-fvQ" id="m2m-7Z-NiQ"/>
                         <outlet property="searchBar" destination="Phv-bm-o0A" id="fOZ-Z9-cgo"/>
                         <outlet property="searchResultsTableView" destination="DiI-sJ-2IS" id="6ak-nC-i0b"/>
