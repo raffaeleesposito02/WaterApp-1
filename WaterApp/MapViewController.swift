@@ -23,6 +23,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var dateLastAnalysis: UILabel!
     @IBOutlet weak var popView: UIView!
     @IBOutlet weak var enterococchiEscherichiaConstraint: NSLayoutConstraint!
+    @IBOutlet weak var favoriteView: UIView!
     
     let iEscherichia: Int = 7;
     let iEnterococchi: Int = 6;
@@ -65,7 +66,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func closePopup(_ sender: Any) {
         popView.isHidden = true;
         self.star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
-        self.searchBar.isHidden = false;
+        self.searchView.isHidden = false;
     }
     
     @IBOutlet weak var star: UIButton!
@@ -176,7 +177,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     }
 
-    // Updte the constraint and the gradient after a rotation
+    // Update the constraint and the gradient after a rotation
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.enterococchiEscherichiaConstraint.constant = self.popView.frame.width - (274);
@@ -349,22 +350,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
 //    BUTTON FOR STARRED AND MAP TYPE
     
-    @IBOutlet weak var starredClosed: NSLayoutConstraint!
-    
-    @IBOutlet weak var starredOpen: NSLayoutConstraint!
     
     @IBAction func starredButton(_ sender: Any) {
-        
-        let m = starredClosed.priority
-        starredClosed.priority = starredOpen.priority
-        starredOpen.priority = m
-        
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseOut], animations: {
-            
-            self.view.layoutIfNeeded()
-            
-        }, completion: nil)
-        
+        favoriteView.isHidden = false;
+        self.searchResultsTableView.isHidden = true;
+        setPrioritySearchBar();
     }
     
     @IBAction func myLocationButton(_ sender: Any) {
@@ -381,20 +371,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         
         popView.isHidden = true;
+        favoriteView.isHidden = true;
+        searchResultsTableView.isHidden = false;
+        setPrioritySearchBar();
+   
+    }
+    
+    @IBAction func swipeDownSearchBar(_ sender: UISwipeGestureRecognizer) {
+        self.DismissKeyboard()
+    }
+    
+    @IBAction func swipeUpTouchBar(_ sender: UISwipeGestureRecognizer) {
+        favoriteView.isHidden = false;
+        self.searchResultsTableView.isHidden = true;
+        setPrioritySearchBar();
+    }
+    
+    func setPrioritySearchBar() {
         
         self.farFromTop.priority = UILayoutPriority(rawValue: 1)
         self.closeToTop.priority = UILayoutPriority(rawValue: 999)
+        
         
         UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseOut], animations: {
             
             self.view.layoutIfNeeded()
             
         }, completion: nil)
-   
-    }
-    
-    @IBAction func swipeDownSearchBar(_ sender: UISwipeGestureRecognizer) {
-        self.DismissKeyboard()
     }
     
     
@@ -468,7 +471,7 @@ extension MapViewController: UITableViewDelegate {
             self.centerMapOnLocation(location: initialLocation)
 
             self.popView.isHidden = true;
-            self.DismissKeyboard()
+            self.DismissKeyboard();
         }
     }
 }
@@ -572,7 +575,7 @@ extension MapViewController: MKMapViewDelegate {
 
         self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
         self.lblValueEnterococchi.sizeToFit();
-        self.searchBar.isHidden = true;
+        self.searchView.isHidden = true;
         popView.isHidden = false
     }
  
