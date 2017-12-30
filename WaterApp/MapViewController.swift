@@ -133,6 +133,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
         self.mapView.addGestureRecognizer(tap)
         
+        mapView.showsCompass = false
+        
     }
 
     @objc func DismissKeyboard(){
