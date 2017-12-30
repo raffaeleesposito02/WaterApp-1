@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var notifyNews: UISwitch!
     @IBOutlet weak var switchNotifyChanges: UISwitch!
     @IBOutlet weak var labelLanguage: UILabel!
-
+    
 
     // I create a Picker view for the language
     var pickerLanguage = UIPickerView();
@@ -154,7 +154,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             print("Portrait")
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool){
         super.viewDidAppear(animated)
 

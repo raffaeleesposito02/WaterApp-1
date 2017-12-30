@@ -22,6 +22,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var lblValueEscherichia: UILabel!
     @IBOutlet weak var dateLastAnalysis: UILabel!
     @IBOutlet weak var popView: UIView!
+    @IBOutlet weak var enterococchiEscherichiaConstraint: NSLayoutConstraint!
+    @IBOutlet weak var favoriteView: UIView!
     
     let iEscherichia: Int = 7;
     let iEnterococchi: Int = 6;
@@ -43,16 +45,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var storageRef: StorageReference?
     
-    // I get the reference to database
-
     // I get the User_Id
     let appDelegate = UIApplication.shared.delegate as! AppDelegate;
     
-
+    var gradientLayer: CAGradientLayer?;
     
+// MAP TYPE SEGMENTED
+    @IBOutlet weak var mapTypeSelectorOutlet: UISegmentedControl!
+    @IBAction func mapTypeSelector(_ sender: Any) {
+        switch ((sender as AnyObject).selectedSegmentIndex) {
+        case 0:
+            mapView.mapType = .standard
+        case 1:
+            mapView.mapType = .satellite
+        default:
+            mapView.mapType = .standard
+        }
+    }
+
     @IBAction func closePopup(_ sender: Any) {
         popView.isHidden = true;
         self.star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
+        self.searchView.isHidden = false;
     }
     
     @IBOutlet weak var star: UIButton!
@@ -70,8 +84,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             // If the user have done the log in
             if( self.appDelegate.uid != "NoValue" ){
                 
-
-                
                 star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
             }
             else { // The user doesn't have an account so i need to save in local the location
@@ -83,7 +95,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
         }
     }
-    
+
     // OUTLETS
     @IBOutlet weak var legend: UIView!
     
@@ -91,6 +103,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad();
         Thread.sleep(forTimeInterval: 1.4)
 
+        mapTypeSelectorOutlet.layer.cornerRadius = 4
         legend.layer.cornerRadius = 10
        
         // I get the reference to the Storage where i have the file CSV
@@ -103,8 +116,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         popView.layer.shadowColor = UIColor.black.cgColor
         popView.layer.shadowOpacity = 0.5
         popView.layer.shadowOffset = CGSize.zero
-        popView.layer.shadowRadius = 60
+        popView.layer.shadowRadius = 60;
         gradientToView(view: self.popView);
+        
 //        MAPKIT
         searchCompleter.delegate = self
         mapView.delegate = self
@@ -120,13 +134,37 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
         self.mapView.addGestureRecognizer(tap)
         
-            }
-    
+    }
+
     @objc func DismissKeyboard(){
         self.farFromTop.priority = UILayoutPriority(rawValue: 999)
         self.closeToTop.priority = UILayoutPriority(rawValue: 1);
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
+            
+            self.view.layoutIfNeeded()
+            
+        }, completion: nil)
         view.endEditing(true)
     }
+    
+    
+    
+    // HIDE LEGEND AND BUTTONS WHEN MAP IS MOVING
+    
+    @IBOutlet weak var starredButtonOutlet: UIButton!
+    @IBOutlet weak var myLocationButtonOutlet: UIButton!
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        legend.isHidden = true
+        starredButtonOutlet.isHidden = true
+        myLocationButtonOutlet.isHidden = true
+    }
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        legend.isHidden = false
+        starredButtonOutlet.isHidden = false
+        myLocationButtonOutlet.isHidden = false
+    }
+    
     
     let regionRadius: CLLocationDistance = 15000;
     
@@ -150,14 +188,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     // Create a gradient view
     func gradientToView(view : UIView) {
         
-        let gradientLayer:CAGradientLayer = CAGradientLayer()
-        gradientLayer.frame.size = view.frame.size
-        gradientLayer.colors = [UIColor(named: "BluOcean")?.cgColor, UIColor(named:"DarkBlu")?.cgColor]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.cornerRadius = 6;
-        view.layer.insertSublayer(gradientLayer, at: 0);
-
+        gradientLayer = CAGradientLayer()
+        gradientLayer!.frame.size = view.frame.size
+        gradientLayer!.colors = [UIColor(named: "BluOcean")?.cgColor, UIColor(named:"DarkBlu")?.cgColor]
+        gradientLayer!.locations = [0.0, 1.0]
+        gradientLayer!.cornerRadius = 6;
+        view.layer.insertSublayer(gradientLayer!, at: 0);
+    
     }
+
+    // Update the constraint and the gradient after a rotation
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.enterococchiEscherichiaConstraint.constant = self.popView.frame.width - (274);
+        gradientLayer!.frame = self.popView.layer.bounds
+    }
+
 
 //    -------------------READ FROM FILE-------------------
     func readFromCSV() {
@@ -322,22 +368,58 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var searchResults = [MKLocalSearchCompletion]()
     
     
+//    BUTTON FOR STARRED AND MAP TYPE
     
+    
+    @IBAction func starredButton(_ sender: Any) {
+        favoriteView.isHidden = false;
+        self.searchResultsTableView.isHidden = true;
+        setPrioritySearchBar();
+    }
+    
+    @IBAction func myLocationButton(_ sender: Any) {
+        let location = CLLocation()
+        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: self.mapView.region.span)
+        
+        mapView!.setRegion(region, animated: true)
+        mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
+    }
+    
+// SEARCH BAR
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         
-        popView.isHidden = true
+        popView.isHidden = true;
+        favoriteView.isHidden = true;
+        searchResultsTableView.isHidden = false;
+        setPrioritySearchBar();
+   
+    }
+    
+    @IBAction func swipeDownSearchBar(_ sender: UISwipeGestureRecognizer) {
+        self.DismissKeyboard()
+    }
+    
+    @IBAction func swipeUpTouchBar(_ sender: UISwipeGestureRecognizer) {
+        favoriteView.isHidden = false;
+        self.searchResultsTableView.isHidden = true;
+        setPrioritySearchBar();
+    }
+    
+    func setPrioritySearchBar() {
         
         self.farFromTop.priority = UILayoutPriority(rawValue: 1)
         self.closeToTop.priority = UILayoutPriority(rawValue: 999)
+        
         
         UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseOut], animations: {
             
             self.view.layoutIfNeeded()
             
         }, completion: nil)
-   
     }
+    
     
 }
 
@@ -378,8 +460,14 @@ extension MapViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let searchResult = searchResults[indexPath.row]
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+ 
+        cell.backgroundColor = UIColor(named: "BluOcean");
+        
         cell.textLabel?.text = searchResult.title
+        cell.textLabel?.textColor = UIColor.white;
+        
         cell.detailTextLabel?.text = searchResult.subtitle
+        cell.detailTextLabel?.textColor = UIColor.white;
         return cell
     }
 }
@@ -402,8 +490,8 @@ extension MapViewController: UITableViewDelegate {
 
             self.centerMapOnLocation(location: initialLocation)
 
-            self.popView.isHidden = true
-            self.DismissKeyboard()
+            self.popView.isHidden = true;
+            self.DismissKeyboard();
         }
     }
 }
@@ -507,7 +595,7 @@ extension MapViewController: MKMapViewDelegate {
 
         self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
         self.lblValueEnterococchi.sizeToFit();
-        
+        self.searchView.isHidden = true;
         popView.isHidden = false
     }
  
