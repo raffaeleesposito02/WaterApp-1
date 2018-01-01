@@ -548,6 +548,40 @@
                                             <constraint firstAttribute="width" constant="10" id="zfI-PX-ksp"/>
                                         </constraints>
                                     </imageView>
+                                    <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ljB-6I-8zy" userLabel="OverlayView">
+                                        <rect key="frame" x="0.0" y="-117" width="375" height="668"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" name="OverlayColor"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ufi-SO-DNl" userLabel="Picker w/ button View">
+                                        <rect key="frame" x="0.0" y="290" width="375" height="261"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hHa-kR-rmS">
+                                                <rect key="frame" x="0.0" y="44" width="375" height="217"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="vsn-W7-Eb3" id="oVB-DX-6wP"/>
+                                                    <outlet property="delegate" destination="vsn-W7-Eb3" id="bMJ-87-j8Y"/>
+                                                </connections>
+                                            </pickerView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcT-Da-HFX">
+                                                <rect key="frame" x="314" y="8" width="44" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                <size key="titleShadowOffset" width="0.0" height="2"/>
+                                                <state key="normal" title="Done">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="donePicker:" destination="vsn-W7-Eb3" eventType="touchUpInside" id="ytZ-8v-ZZC"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0027726537020000002" green="0.3250108028" blue="0.54885756969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="lvw-Ob-a5P" secondAttribute="bottom" constant="277" id="04d-Re-uB5"/>
@@ -596,8 +630,12 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Settings &amp; Info" id="bmk-Ca-1pr"/>
                     <connections>
+                        <outlet property="bntDonePicker" destination="hcT-Da-HFX" id="Rfa-kt-yrK"/>
                         <outlet property="labelLanguage" destination="M5m-eE-Vym" id="puY-Sc-hZh"/>
                         <outlet property="notifyNews" destination="9LG-1d-zEV" id="wim-H2-GaF"/>
+                        <outlet property="overlayView" destination="ljB-6I-8zy" id="HhT-o1-OrQ"/>
+                        <outlet property="pickerLanguage" destination="hHa-kR-rmS" id="Oqg-c1-p4I"/>
+                        <outlet property="pickerWithButton" destination="ufi-SO-DNl" id="jb9-HV-FhI"/>
                         <outlet property="switchNotifyChanges" destination="QzJ-GN-yTS" id="5Kt-7D-TXO"/>
                     </connections>
                 </viewController>
@@ -1026,6 +1064,9 @@
         <image name="google-plus-1" width="256" height="256"/>
         <namedColor name="BluOcean">
             <color red="0.0039215686274509803" green="0.25098039215686274" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="OverlayColor">
+            <color red="0.015686274509803921" green="0.015686274509803921" blue="0.058823529411764705" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
