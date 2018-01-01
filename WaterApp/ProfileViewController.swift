@@ -21,6 +21,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var bntDonePicker: UIButton!
     @IBOutlet weak var overlayView: UIView!
     
+
+    @IBOutlet weak var constraintScroll: NSLayoutConstraint!
+    
     var localityTable = Array<Array<String>>();
     
     var data = ["Italian", "English"];
@@ -40,6 +43,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         labelLanguage.addGestureRecognizer(tap)
         labelLanguage.isUserInteractionEnabled = true;
         gradientToView(view: pickerWithButton);
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        constraintScroll.constant = self.view.frame.width - (292);
+        gradientLayer!.frame = self.pickerWithButton.layer.bounds
     }
     
     // Create a gradient view
