@@ -28,6 +28,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     // Favorite Places
     @IBOutlet weak var favoriteView: UIView!
+    @IBOutlet weak var barView: UIView!
     @IBOutlet weak var mapTypeSelectorOutlet: UISegmentedControl!
     
     // Outlet for MAPS
@@ -96,7 +97,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.addGestureRecognizer(tap)
         
         mapView.showsCompass = false
-        
+        barView.layer.cornerRadius = 2;
     }
     
     @objc func DismissKeyboard(){

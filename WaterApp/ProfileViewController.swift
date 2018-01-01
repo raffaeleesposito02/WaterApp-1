@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var deleteFavouriteIndexPath: IndexPath?;
     
     var gradientLayer: CAGradientLayer?;
-    var pickerSelected : String = "";
+    var pickerSelected : String?;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,7 +132,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func donePicker(_ sender: Any) {
         pickerWithButton.isHidden = true;
         overlayView.isHidden = true;
-        labelLanguage.text = pickerSelected
+        labelLanguage.text = pickerSelected ?? "\(labelLanguage.text!)";
         labelLanguage.sizeToFit();
     }
     

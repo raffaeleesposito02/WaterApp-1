@@ -19,6 +19,8 @@
 		7F5BD4441FDD2EB300D7B654 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5BD4431FDD2EB300D7B654 /* MapKit.framework */; };
 		7FBC6C271FDD296F001171BE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBC6C261FDD296F001171BE /* CoreLocation.framework */; };
 		7FE7BDAD1FE2B47E006F751E /* (null) in Sources */ = {isa = PBXBuildFile; };
+		BD369B091FFAF0FA002CAFC0 /* MapSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD369B081FFAF0FA002CAFC0 /* MapSegmentedControl.swift */; };
+		BD369B0B1FFAFC63002CAFC0 /* FavoritePlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD369B0A1FFAFC63002CAFC0 /* FavoritePlacesView.swift */; };
 		BDB4CC4D1FEA7B8900C6E081 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */; };
 		BDDC20071FE9535A004E7B17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDC20061FE9535A004E7B17 /* Assets.xcassets */; };
 		C4CC6A66B838FBA090C6914C /* Pods_WaterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69521789BB68C8D3EA14B856 /* Pods_WaterApp.framework */; };
@@ -41,6 +43,8 @@
 		7F360C491FDFFA0600521C71 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		7F5BD4431FDD2EB300D7B654 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7FBC6C261FDD296F001171BE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		BD369B081FFAF0FA002CAFC0 /* MapSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSegmentedControl.swift; sourceTree = "<group>"; };
+		BD369B0A1FFAFC63002CAFC0 /* FavoritePlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlacesView.swift; sourceTree = "<group>"; };
 		BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		BDDC20061FE9535A004E7B17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,9 +88,11 @@
 				6DD6D1741FD981D800B78C7D /* ViewController.swift */,
 				057F92551FDBEC3D00750964 /* MapViewController.swift */,
 				3579493C1FDA872700667BB6 /* ProfileViewController.swift */,
+				BD369B081FFAF0FA002CAFC0 /* MapSegmentedControl.swift */,
 				7F360C491FDFFA0600521C71 /* SplashViewController.swift */,
 				35418F5D1FF3BF4C0032BBE1 /* AnalysisPoint.swift */,
 				BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */,
+				BD369B0A1FFAFC63002CAFC0 /* FavoritePlacesView.swift */,
 				6DD6D1761FD981D800B78C7D /* Main.storyboard */,
 				6DD6D17B1FD981D800B78C7D /* LaunchScreen.storyboard */,
 				BDDC20061FE9535A004E7B17 /* Assets.xcassets */,
@@ -257,6 +263,8 @@
 				BDB4CC4D1FEA7B8900C6E081 /* Preference.swift in Sources */,
 				057F92561FDBEC3D00750964 /* MapViewController.swift in Sources */,
 				6DD6D1731FD981D800B78C7D /* AppDelegate.swift in Sources */,
+				BD369B0B1FFAFC63002CAFC0 /* FavoritePlacesView.swift in Sources */,
+				BD369B091FFAF0FA002CAFC0 /* MapSegmentedControl.swift in Sources */,
 				35418F5E1FF3BF4D0032BBE1 /* AnalysisPoint.swift in Sources */,
 				7F360C4A1FDFFA0600521C71 /* SplashViewController.swift in Sources */,
 			);
