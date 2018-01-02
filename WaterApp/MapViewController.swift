@@ -62,6 +62,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var gradientLayer: CAGradientLayer?;
     
+     var fakeDate: [String] = ["Napoli - S. Giovanni a Teduccio", "Ischia - Punta Molino"]
+    
     override func viewDidLoad() {
         super.viewDidLoad();
         Thread.sleep(forTimeInterval: 1.4)
@@ -381,6 +383,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         popView.isHidden = true;
         favoriteView.isHidden = true;
         searchResultsTableView.isHidden = false;
+        self.closeToTop.constant = 100;
         setPrioritySearchBar();
    
     }
@@ -390,6 +393,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func swipeUpTouchBar(_ sender: UISwipeGestureRecognizer) {
+        
+        // I need to modify the constraint in order to show the favorite places
+        self.closeToTop.constant = self.view.frame.height - (self.searchBar.frame.height + self.favoriteView.frame.height + 13)
         favoriteView.isHidden = false;
         self.searchResultsTableView.isHidden = true;
         setPrioritySearchBar();
@@ -407,6 +413,80 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             
         }, completion: nil)
     }
+    
+    
+//    // MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------------ BEGIN
+//
+//
+//        func numberOfSections(in tableView: UITableView) -> Int {
+//            return 1
+//        }
+//
+//        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//            return fakeDate.count
+//        }
+//
+//        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//            let resuseIdentifier = "FavoriteCell"
+//
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: resuseIdentifier, for: indexPath) as? FavoriteCell else {
+//                print("Fatal Error during the creation of FavoriteCell");
+//            };
+//
+//            cell.lblLocation.text = fakeDate[indexPath.row];
+//            cell.imgFlag.image = UIImage(named: "flag-map-marker");
+//            return cell
+//        }
+//
+//        //THIS FUNCTION MAKES TABLEVIEWROWS EDITABLE
+//        func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//            return true
+//        }
+//
+//        //THIS FUNCTION HANDLES SLIDE-TO-LEFT GESTURE ON A ROW
+//        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//            if editingStyle == .delete {
+//
+//                confirmDelete(index: indexPath)
+//            }
+//        }
+    
+//        //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
+//        func confirmDelete(index: IndexPath) {
+//            let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.localityTable[index.row][0])?", preferredStyle: .actionSheet)
+//
+//            let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteFavourite)
+//            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteFavourite)
+//            self.deleteFavouriteIndexPath = index;
+//            alert.addAction(deleteAction)
+//            alert.addAction(cancelAction)
+//
+//            // Support display in iPad
+//            alert.popoverPresentationController?.sourceView = self.view
+//            alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+//
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//
+//        //IF YOU CLICK "DELETE" ON THE ALERT, THIS FUNCTION WILL BE CALLED
+//        func handleDeleteFavourite(alertAction: UIAlertAction!) -> Void {
+//            if deleteFavouriteIndexPath != nil {
+//    //            self.favouritesTableView.beginUpdates()
+//    //
+//    //            self.favouritesTableView.deleteRows(at: [self.deleteFavouriteIndexPath!], with: .automatic)
+//    //            deleteFavouriteIndexPath = nil
+//    //            self.favouritesTableView.endUpdates()
+//
+//            self.ref?.child("Preferences").child(self.appDelegate.uid).child(self.localityTable[(deleteFavouriteIndexPath?.row)!][1]).removeValue();
+//            }
+//        }
+//
+//        //IF YOU CLICK "CANCEL" ON THE ALERT, THIS FUNCTION WILL BE CALLED
+//        func cancelDeleteFavourite(alertAction: UIAlertAction!) {
+//            deleteFavouriteIndexPath = nil
+//        }
+    
+    //MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------- END
     
     
 }
@@ -442,21 +522,45 @@ extension MapViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
+        if tableView.restorationIdentifier == "SearchTableView" {
+       
+            print("Search")
+            return searchResults.count;
+            
+        }
+        else {
+            print("Favorite")
+            return fakeDate.count;
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let searchResult = searchResults[indexPath.row]
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
- 
-        cell.backgroundColor = UIColor(named: "BluOcean");
         
-        cell.textLabel?.text = searchResult.title
-        cell.textLabel?.textColor = UIColor.white;
-        
-        cell.detailTextLabel?.text = searchResult.subtitle
-        cell.detailTextLabel?.textColor = UIColor.white;
-        return cell
+        if tableView.restorationIdentifier == "SearchTableView" {
+            let searchResult = searchResults[indexPath.row]
+            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+            
+            cell.backgroundColor = UIColor(named: "BluOcean");
+            
+            cell.textLabel?.text = searchResult.title
+            cell.textLabel?.textColor = UIColor.white;
+            
+            cell.detailTextLabel?.text = searchResult.subtitle
+            cell.detailTextLabel?.textColor = UIColor.white;
+            return cell
+        }
+        else {
+            let resuseIdentifier = "FavoriteCell"
+
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: resuseIdentifier, for: indexPath) as? FavoriteCell else {
+                    print("Fatal Error during the creation of FavoriteCell")
+                    return FavoriteCell();
+                };
+
+            cell.lblLocation.text = fakeDate[indexPath.row];
+            cell.imgFlag.image = UIImage(named: "flag-map-marker");
+            return cell
+        }
     }
 }
 

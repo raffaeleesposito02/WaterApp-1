@@ -10,7 +10,7 @@ import UIKit
 import FirebaseStorage
 import FirebaseStorageUI
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var notifyNews: UISwitch!
     @IBOutlet weak var switchNotifyChanges: UISwitch!
@@ -61,73 +61,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         view.layer.insertSublayer(gradientLayer!, at: 0);
         
     }
-//
-//    //MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------------ BEGIN
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//
-//        return 1
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//
-//        return self.localityTable.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "favouriteTableCell", for: indexPath);
-//        cell.textLabel?.text = localityTable[indexPath.row][0];
-//        return cell
-//    }
-//
-//    //THIS FUNCTION MAKES TABLEVIEWROWS EDITABLE
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//    //THIS FUNCTION HANDLES SLIDE-TO-LEFT GESTURE ON A ROW
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//
-//            confirmDelete(index: indexPath)
-//        }
-//    }
-//
-//    //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
-//    func confirmDelete(index: IndexPath) {
-//        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.localityTable[index.row][0])?", preferredStyle: .actionSheet)
-//
-//        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteFavourite)
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteFavourite)
-//        self.deleteFavouriteIndexPath = index;
-//        alert.addAction(deleteAction)
-//        alert.addAction(cancelAction)
-//
-//        // Support display in iPad
-//        alert.popoverPresentationController?.sourceView = self.view
-//        alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
-//
-//        self.present(alert, animated: true, completion: nil)
-//    }
-//
-//    //IF YOU CLICK "DELETE" ON THE ALERT, THIS FUNCTION WILL BE CALLED
-//    func handleDeleteFavourite(alertAction: UIAlertAction!) -> Void {
-//        if deleteFavouriteIndexPath != nil {
-////            self.favouritesTableView.beginUpdates()
-////
-////            self.favouritesTableView.deleteRows(at: [self.deleteFavouriteIndexPath!], with: .automatic)
-////            deleteFavouriteIndexPath = nil
-////            self.favouritesTableView.endUpdates()
-//
-//        self.ref?.child("Preferences").child(self.appDelegate.uid).child(self.localityTable[(deleteFavouriteIndexPath?.row)!][1]).removeValue();
-//        }
-//    }
-//
-//    //IF YOU CLICK "CANCEL" ON THE ALERT, THIS FUNCTION WILL BE CALLED
-//    func cancelDeleteFavourite(alertAction: UIAlertAction!) {
-//        deleteFavouriteIndexPath = nil
-//    }
-//
-    //MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------- END
     
     @IBAction func donePicker(_ sender: Any) {
         pickerWithButton.isHidden = true;
