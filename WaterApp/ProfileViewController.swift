@@ -134,6 +134,34 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         overlayView.isHidden = true;
         labelLanguage.text = pickerSelected ?? "\(labelLanguage.text!)";
         labelLanguage.sizeToFit();
+        
+        if pickerSelected == "English" {
+            self.changeToLanguage("en")
+        } else {
+            self.changeToLanguage("it")
+        }
+    }
+    
+    override func  didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    func changeToLanguage(_ langCode: String) {
+        if Bundle.main.preferredLocalizations.first != langCode {
+            let confirmAlert = UIAlertController(title: NSLocalizedString("restartTitle", comment: ""), message: NSLocalizedString("restart", comment: ""), preferredStyle: .alert)
+            
+            let confirmAction = UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .destructive) {
+                _ in
+                UserDefaults.standard.set([langCode], forKey: "AppleLanguages")
+                UserDefaults.standard.synchronize()
+                exit(EXIT_SUCCESS)
+            }
+            confirmAlert.addAction(confirmAction)
+            
+            let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil)
+            confirmAlert.addAction(cancelAction)
+            
+            present(confirmAlert, animated: true, completion: nil)
+        }
     }
     
     

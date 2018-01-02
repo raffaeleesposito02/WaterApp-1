@@ -18,7 +18,7 @@
 "Irr-Ar-o24.text" = "500 UFC o MPN /100ml";
 
 /* Class = "UILabel"; text = "Location:"; ObjectID = "JaB-Of-lVQ"; */
-"JaB-Of-lVQ.text" = "Location:";
+"JaB-Of-lVQ.text" = "Località:";
 
 /* Class = "UILabel"; text = "Notify changes in starred"; ObjectID = "Kbj-Xe-N4u"; */
 "Kbj-Xe-N4u.text" = "Notifica cambiamenti nei preferiti";
@@ -51,13 +51,13 @@
 "XGJ-QT-eYF.text" = "Notifica novità";
 
 /* Class = "UINavigationItem"; title = "Settings & Info"; ObjectID = "bmk-Ca-1pr"; */
-"bmk-Ca-1pr.title" = "Impostazioni e info";
+"bmk-Ca-1pr.title" = "Impostazioni & info";
 
 /* Class = "UILabel"; text = "Limit Value of Enterococci:"; ObjectID = "don-le-XEV"; */
-"don-le-XEV.text" = "Valore limite dell'Enterococchi:";
+"don-le-XEV.text" = "Valore limite dell'Enterococci:";
 
 /* Class = "UILabel"; text = "City:"; ObjectID = "dpC-D8-QVU"; */
-"dpC-D8-QVU.text" = "Napoli:";
+"dpC-D8-QVU.text" = "Città:";
 
 /* Class = "UILabel"; text = "Favorite places"; ObjectID = "fKQ-tx-U2m"; */
 "fKQ-tx-U2m.text" = "Preferiti";

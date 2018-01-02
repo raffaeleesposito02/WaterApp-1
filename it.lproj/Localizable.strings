@@ -5,3 +5,7 @@
   Created by Alessio Antonisio on 02/01/2018.
   Copyright © 2018 Raffaele. All rights reserved.
 */
+"restart" = "Per cambiare lingua, è necessario chiudere e riaprire l'App";
+"restartTitle" = "Riavvio dell'App richiesto";
+"cancel" = "Annulla";
+"close" = "Chiudi ora";
