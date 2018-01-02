@@ -732,9 +732,6 @@
         <namedColor name="BluOcean">
             <color red="0.0039215686274509803" green="0.25098039215686274" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="BluOcean">
-            <color red="0.0039215686274509803" green="0.25098039215686274" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="LightBlu">
             <color red="0.42352941176470588" green="0.57647058823529407" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

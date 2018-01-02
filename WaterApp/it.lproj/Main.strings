@@ -1,0 +1,114 @@
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "2dR-PW-Dn5"; */
+"2dR-PW-Dn5.normalTitle" = "Button";
+
+/* Class = "UISegmentedControl"; 4jd-Pw-56k.segmentTitles[0] = "Map"; ObjectID = "4jd-Pw-56k"; */
+"4jd-Pw-56k.segmentTitles[0]" = "Mappa";
+
+/* Class = "UISegmentedControl"; 4jd-Pw-56k.segmentTitles[1] = "Satellite"; ObjectID = "4jd-Pw-56k"; */
+"4jd-Pw-56k.segmentTitles[1]" = "Satellite";
+
+/* Class = "UILabel"; text = "High warning"; ObjectID = "4xE-XL-KD4"; */
+"4xE-XL-KD4.text" = "Rischio alto";
+
+/* Class = "UILabel"; text = "Escherichia Coli"; ObjectID = "GTC-3v-mKH"; */
+"GTC-3v-mKH.text" = "Escherichia Coli";
+
+/* Class = "UILabel"; text = "500 UFC o MPN /100ml"; ObjectID = "Irr-Ar-o24"; */
+"Irr-Ar-o24.text" = "500 UFC o MPN /100ml";
+
+/* Class = "UILabel"; text = "Location:"; ObjectID = "JaB-Of-lVQ"; */
+"JaB-Of-lVQ.text" = "Location:";
+
+/* Class = "UILabel"; text = "Notify changes in starred"; ObjectID = "Kbj-Xe-N4u"; */
+"Kbj-Xe-N4u.text" = "Notifica cambiamenti nei preferiti";
+
+/* Class = "UILabel"; text = "Enterococci"; ObjectID = "LkZ-0I-phK"; */
+"LkZ-0I-phK.text" = "Enterococchi";
+
+/* Class = "UILabel"; text = "English"; ObjectID = "M5m-eE-Vym"; */
+"M5m-eE-Vym.text" = "English";
+
+/* Class = "UILabel"; text = "Limit Value of Escherichia:"; ObjectID = "MD8-ts-PPr"; */
+"MD8-ts-PPr.text" = "Valore limite dell'Escherichia:";
+
+/* Class = "UISearchBar"; placeholder = "Search "; ObjectID = "Phv-bm-o0A"; */
+"Phv-bm-o0A.placeholder" = "Cerca ";
+
+/* Class = "UISearchBar"; Phv-bm-o0A.scopeButtonTitles[0] = "Title"; ObjectID = "Phv-bm-o0A"; */
+"Phv-bm-o0A.scopeButtonTitles[0]" = "Title";
+
+/* Class = "UILabel"; text = "Source by ARPA"; ObjectID = "ROb-bo-hhd"; */
+"ROb-bo-hhd.text" = "Fonte: ARPA";
+
+/* Class = "UINavigationItem"; title = "Map"; ObjectID = "ReM-K7-1Zy"; */
+"ReM-K7-1Zy.title" = "Mappa";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "SpE-Ac-EaU"; */
+"SpE-Ac-EaU.text" = "Label";
+
+/* Class = "UILabel"; text = "Notify news"; ObjectID = "XGJ-QT-eYF"; */
+"XGJ-QT-eYF.text" = "Notifica novità";
+
+/* Class = "UINavigationItem"; title = "Settings & Info"; ObjectID = "bmk-Ca-1pr"; */
+"bmk-Ca-1pr.title" = "Impostazioni e info";
+
+/* Class = "UILabel"; text = "Limit Value of Enterococci:"; ObjectID = "don-le-XEV"; */
+"don-le-XEV.text" = "Valore limite dell'Enterococchi:";
+
+/* Class = "UILabel"; text = "City:"; ObjectID = "dpC-D8-QVU"; */
+"dpC-D8-QVU.text" = "Napoli:";
+
+/* Class = "UILabel"; text = "Favorite places"; ObjectID = "fKQ-tx-U2m"; */
+"fKQ-tx-U2m.text" = "Preferiti";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "hcT-Da-HFX"; */
+"hcT-Da-HFX.normalTitle" = "Fatto";
+
+/* Class = "UILabel"; text = "Info"; ObjectID = "jI0-7L-NLP"; */
+"jI0-7L-NLP.text" = "Info";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "lV0-eG-RKC"; */
+"lV0-eG-RKC.text" = "Label";
+
+/* Class = "UILabel"; text = "200 UFC o MPN /100ml"; ObjectID = "ldz-Ur-3RM"; */
+"ldz-Ur-3RM.text" = "200 UFC o MPN /100ml";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "mC5-fY-jPR"; */
+"mC5-fY-jPR.text" = "Impostazioni";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "n5g-uC-0KQ"; */
+"n5g-uC-0KQ.text" = "Label";
+
+/* Class = "UILabel"; text = "Area:"; ObjectID = "pX2-nM-zxz"; */
+"pX2-nM-zxz.text" = "Provincia:";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "pwx-Qd-twY"; */
+"pwx-Qd-twY.text" = "Label";
+
+/* Class = "UILabel"; text = "Last Analysis:"; ObjectID = "qAe-4z-JOS"; */
+"qAe-4z-JOS.text" = "Ultima analisi:";
+
+/* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "r7R-Op-3ma"; */
+"r7R-Op-3ma.title" = "Impostazioni";
+
+/* Class = "UILabel"; text = "Language"; ObjectID = "rb4-Te-seA"; */
+"rb4-Te-seA.text" = "Lingua";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "sA9-Fk-UZg"; */
+"sA9-Fk-UZg.text" = "Label";
+
+/* Class = "UILabel"; text = "Medium warning"; ObjectID = "uN1-A0-s6j"; */
+"uN1-A0-s6j.text" = "Rischio medio";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "yfZ-Kc-Bjb"; */
+"yfZ-Kc-Bjb.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "zb4-1H-y1z"; */
+"zb4-1H-y1z.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Legend:"; ObjectID = "zgK-B9-kud"; */
+"zgK-B9-kud.text" = "Legenda:";
+
+/* Class = "UILabel"; text = "Low warning"; ObjectID = "zva-0W-vpD"; */
+"zva-0W-vpD.text" = "Rischio basso";
