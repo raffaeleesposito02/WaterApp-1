@@ -11,6 +11,7 @@
 		350DC8A61FEAF6CF009D9EC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 350DC8A51FEAF6CF009D9EC6 /* GoogleService-Info.plist */; };
 		35418F5E1FF3BF4D0032BBE1 /* AnalysisPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35418F5D1FF3BF4C0032BBE1 /* AnalysisPoint.swift */; };
 		3579493D1FDA872700667BB6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579493C1FDA872700667BB6 /* ProfileViewController.swift */; };
+		35F7711F1FFBE024000C8A5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35F771211FFBE024000C8A5B /* Localizable.strings */; };
 		6DD6D1731FD981D800B78C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD6D1721FD981D800B78C7D /* AppDelegate.swift */; };
 		6DD6D1751FD981D800B78C7D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD6D1741FD981D800B78C7D /* ViewController.swift */; };
 		6DD6D1781FD981D800B78C7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DD6D1761FD981D800B78C7D /* Main.storyboard */; };
@@ -21,7 +22,6 @@
 		7FE7BDAD1FE2B47E006F751E /* (null) in Sources */ = {isa = PBXBuildFile; };
 		BD369B091FFAF0FA002CAFC0 /* MapSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD369B081FFAF0FA002CAFC0 /* MapSegmentedControl.swift */; };
 		BD369B0B1FFAFC63002CAFC0 /* FavoritePlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD369B0A1FFAFC63002CAFC0 /* FavoritePlacesView.swift */; };
-		BD369B0D1FFBB78D002CAFC0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD369B0C1FFBB78C002CAFC0 /* Localizable.strings */; };
 		BD369B0F1FFBCBDE002CAFC0 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD369B0E1FFBCBDE002CAFC0 /* FavoriteCell.swift */; };
 		BDB4CC4D1FEA7B8900C6E081 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */; };
 		BDDC20071FE9535A004E7B17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDC20061FE9535A004E7B17 /* Assets.xcassets */; };
@@ -37,6 +37,8 @@
 		352244371FFBA0D600F19ABD /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		35418F5D1FF3BF4C0032BBE1 /* AnalysisPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisPoint.swift; sourceTree = "<group>"; };
 		3579493C1FDA872700667BB6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		35F771201FFBE024000C8A5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		35F771221FFBE02A000C8A5B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		69521789BB68C8D3EA14B856 /* Pods_WaterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD6D16F1FD981D800B78C7D /* WaterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD6D1721FD981D800B78C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,7 +51,6 @@
 		7FBC6C261FDD296F001171BE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BD369B081FFAF0FA002CAFC0 /* MapSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSegmentedControl.swift; sourceTree = "<group>"; };
 		BD369B0A1FFAFC63002CAFC0 /* FavoritePlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlacesView.swift; sourceTree = "<group>"; };
-		BD369B0C1FFBB78C002CAFC0 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		BD369B0E1FFBCBDE002CAFC0 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		BDDC20061FE9535A004E7B17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -101,7 +102,7 @@
 				BD369B0A1FFAFC63002CAFC0 /* FavoritePlacesView.swift */,
 				BD369B0E1FFBCBDE002CAFC0 /* FavoriteCell.swift */,
 				6DD6D1761FD981D800B78C7D /* Main.storyboard */,
-				BD369B0C1FFBB78C002CAFC0 /* Localizable.strings */,
+				35F771211FFBE024000C8A5B /* Localizable.strings */,
 				6DD6D17B1FD981D800B78C7D /* LaunchScreen.storyboard */,
 				BDDC20061FE9535A004E7B17 /* Assets.xcassets */,
 				6DD6D17E1FD981D800B78C7D /* Info.plist */,
@@ -192,7 +193,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD369B0D1FFBB78D002CAFC0 /* Localizable.strings in Resources */,
+				35F7711F1FFBE024000C8A5B /* Localizable.strings in Resources */,
 				6DD6D17D1FD981D800B78C7D /* LaunchScreen.storyboard in Resources */,
 				350DC8A61FEAF6CF009D9EC6 /* GoogleService-Info.plist in Resources */,
 				BDDC20071FE9535A004E7B17 /* Assets.xcassets in Resources */,
@@ -284,6 +285,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		35F771211FFBE024000C8A5B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				35F771201FFBE024000C8A5B /* en */,
+				35F771221FFBE02A000C8A5B /* it */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		6DD6D1761FD981D800B78C7D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
