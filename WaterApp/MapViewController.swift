@@ -62,7 +62,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var gradientLayer: CAGradientLayer?;
     
-     var fakeDate: [String] = ["Napoli - S. Giovanni a Teduccio", "Ischia - Punta Molino"]
+    //  For Favorite Table View
+    var deleteFavouriteIndexPath: IndexPath?;
+    @IBOutlet weak var favoriteTableView: UITableView!
+    var fakeDate: [String] = ["Napoli - S. Giovanni a Teduccio", "Ischia - Punta Molino"]
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -414,78 +417,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }, completion: nil)
     }
     
-    
-//    // MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------------ BEGIN
-//
-//
-//        func numberOfSections(in tableView: UITableView) -> Int {
-//            return 1
-//        }
-//
-//        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//            return fakeDate.count
-//        }
-//
-//        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//            let resuseIdentifier = "FavoriteCell"
-//
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: resuseIdentifier, for: indexPath) as? FavoriteCell else {
-//                print("Fatal Error during the creation of FavoriteCell");
-//            };
-//
-//            cell.lblLocation.text = fakeDate[indexPath.row];
-//            cell.imgFlag.image = UIImage(named: "flag-map-marker");
-//            return cell
-//        }
-//
-//        //THIS FUNCTION MAKES TABLEVIEWROWS EDITABLE
-//        func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//            return true
-//        }
-//
-//        //THIS FUNCTION HANDLES SLIDE-TO-LEFT GESTURE ON A ROW
-//        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//            if editingStyle == .delete {
-//
-//                confirmDelete(index: indexPath)
-//            }
-//        }
-    
-//        //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
-//        func confirmDelete(index: IndexPath) {
-//            let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.localityTable[index.row][0])?", preferredStyle: .actionSheet)
-//
-//            let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteFavourite)
-//            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteFavourite)
-//            self.deleteFavouriteIndexPath = index;
-//            alert.addAction(deleteAction)
-//            alert.addAction(cancelAction)
-//
-//            // Support display in iPad
-//            alert.popoverPresentationController?.sourceView = self.view
-//            alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
-//
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//
-//        //IF YOU CLICK "DELETE" ON THE ALERT, THIS FUNCTION WILL BE CALLED
-//        func handleDeleteFavourite(alertAction: UIAlertAction!) -> Void {
-//            if deleteFavouriteIndexPath != nil {
-//    //            self.favouritesTableView.beginUpdates()
-//    //
-//    //            self.favouritesTableView.deleteRows(at: [self.deleteFavouriteIndexPath!], with: .automatic)
-//    //            deleteFavouriteIndexPath = nil
-//    //            self.favouritesTableView.endUpdates()
-//
-//            self.ref?.child("Preferences").child(self.appDelegate.uid).child(self.localityTable[(deleteFavouriteIndexPath?.row)!][1]).removeValue();
-//            }
-//        }
-//
-//        //IF YOU CLICK "CANCEL" ON THE ALERT, THIS FUNCTION WILL BE CALLED
-//        func cancelDeleteFavourite(alertAction: UIAlertAction!) {
-//            deleteFavouriteIndexPath = nil
-//        }
-    
+
     //MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------- END
     
     
@@ -515,7 +447,7 @@ extension MapViewController: MKLocalSearchCompleterDelegate {
     }
 }
 
-extension MapViewController: UITableViewDataSource {
+extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -523,13 +455,10 @@ extension MapViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.restorationIdentifier == "SearchTableView" {
-       
-            print("Search")
             return searchResults.count;
             
         }
         else {
-            print("Favorite")
             return fakeDate.count;
         }
     }
@@ -562,31 +491,80 @@ extension MapViewController: UITableViewDataSource {
             return cell
         }
     }
-}
 
-extension MapViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            self.confirmDelete(index: indexPath);
+        }
+        
+        let share = UITableViewRowAction(style: .default, title: "Share") { (action, indexPath) in
+            // share item at indexPath
+            print("I want to share: \(self.fakeDate[indexPath.row])")
+        }
+        
+        share.backgroundColor = UIColor.lightGray
+        
+        return [delete, share]
+        
+    }
+
+    //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
+    func confirmDelete(index: IndexPath) {
+        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.fakeDate[index.row]) ?", preferredStyle: .actionSheet)
+
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteFavourite)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteFavourite)
+        
+        self.deleteFavouriteIndexPath = index;
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+
+        // Support display in iPad
+        alert.popoverPresentationController?.sourceView = self.view
+        alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    //IF YOU CLICK "DELETE" ON THE ALERT, THIS FUNCTION WILL BE CALLED
+    func handleDeleteFavourite(alertAction: UIAlertAction!) -> Void {
+        if deleteFavouriteIndexPath != nil {
+            self.fakeDate.remove(at: deleteFavouriteIndexPath!.row)
+            self.favoriteTableView.deleteRows(at: [deleteFavouriteIndexPath!], with: .fade)
+            deleteFavouriteIndexPath = nil
+        }
+    }
+
+    //IF YOU CLICK "CANCEL" ON THE ALERT, THIS FUNCTION WILL BE CALLED
+    func cancelDeleteFavourite(alertAction: UIAlertAction!) {
+        deleteFavouriteIndexPath = nil
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let completion = searchResults[indexPath.row]
-        
-        let searchRequest = MKLocalSearchRequest(completion: completion)
-        let search = MKLocalSearch(request: searchRequest)
-        search.start { (response, error) in
-            let coordinate = response?.mapItems[0].placemark.coordinate
-            print(String(describing: coordinate))
-
-            //      MOVE ON SEARCHED
-            let initialLocation = CLLocation(latitude: (coordinate?.latitude)!, longitude: (coordinate?.longitude)!)
-
-            self.centerMapOnLocation(location: initialLocation)
-
-            self.popView.isHidden = true;
-            self.DismissKeyboard();
+        if( tableView.restorationIdentifier == "SearchTableView") {
+            tableView.deselectRow(at: indexPath, animated: true)
+            let completion = searchResults[indexPath.row]
+            
+            let searchRequest = MKLocalSearchRequest(completion: completion)
+            let search = MKLocalSearch(request: searchRequest)
+            search.start { (response, error) in
+                let coordinate = response?.mapItems[0].placemark.coordinate
+                print(String(describing: coordinate))
+                
+                //      MOVE ON SEARCHED
+                let initialLocation = CLLocation(latitude: (coordinate?.latitude)!, longitude: (coordinate?.longitude)!)
+                
+                self.centerMapOnLocation(location: initialLocation)
+                
+                self.popView.isHidden = true;
+                self.DismissKeyboard();
+            }
         }
     }
 }
+
 
 extension UISearchBar {
     

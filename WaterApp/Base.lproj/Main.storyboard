@@ -349,7 +349,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FavoriteTableview" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hd6-mg-XNc">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FavoriteTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hd6-mg-XNc">
                                                 <rect key="frame" x="25" y="120" width="335" height="143"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
@@ -506,6 +506,7 @@
                         <outlet property="dateLastAnalysis" destination="lV0-eG-RKC" id="BWa-ua-Wp0"/>
                         <outlet property="enterococchiEscherichiaConstraint" destination="AxK-vf-9em" id="fsb-xr-dVR"/>
                         <outlet property="farFromTop" destination="TCu-xq-YHq" id="ade-d5-mN0"/>
+                        <outlet property="favoriteTableView" destination="hd6-mg-XNc" id="F4W-HL-dsb"/>
                         <outlet property="favoriteView" destination="juG-2k-1JO" id="1zE-qs-8W4"/>
                         <outlet property="imageFlag" destination="GLD-aU-mEO" id="0UO-KC-YaI"/>
                         <outlet property="lblArea" destination="n5g-uC-0KQ" id="6GO-C5-1oT"/>
