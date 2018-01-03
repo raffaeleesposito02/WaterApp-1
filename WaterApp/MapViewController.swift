@@ -11,9 +11,9 @@ import MapKit
 
 import FirebaseStorage
 
-
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
+    // OUTLETS FOR POPVIEW
     @IBOutlet weak var lblArea: UILabel!
     @IBOutlet weak var lblCity: UILabel!
     @IBOutlet weak var lblLocation: UILabel!
@@ -22,8 +22,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var lblValueEscherichia: UILabel!
     @IBOutlet weak var dateLastAnalysis: UILabel!
     @IBOutlet weak var popView: UIView!
+    @IBOutlet weak var star: UIButton!
+    
     @IBOutlet weak var enterococchiEscherichiaConstraint: NSLayoutConstraint!
+    
+    // Favorite Places
     @IBOutlet weak var favoriteView: UIView!
+    @IBOutlet weak var barView: UIView!
+    @IBOutlet weak var mapTypeSelectorOutlet: UISegmentedControl!
+    
+    // Outlet for MAPS
+    @IBOutlet weak var starredButtonOutlet: UIButton!
+    @IBOutlet weak var myLocationButtonOutlet: UIButton!
+    @IBOutlet weak var legend: UIView!
     
     let iEscherichia: Int = 7;
     let iEnterococchi: Int = 6;
@@ -34,6 +45,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     // Limit for Enterococchi e Escherichia
     var limitEnterococchi: Int = 200; // (UFC o MPN /100ml, valore limite 200)
     var limitEscherica: Int = 500; // (UFC o MPN /100ml, valore limite 500)
+    
     // Information from ARPAC
     var dataArpac =  Array<Array<String>>();
     
@@ -50,8 +62,62 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var gradientLayer: CAGradientLayer?;
     
-// MAP TYPE SEGMENTED
-    @IBOutlet weak var mapTypeSelectorOutlet: UISegmentedControl!
+    //  For Favorite Table View
+    var deleteFavouriteIndexPath: IndexPath?;
+    @IBOutlet weak var favoriteTableView: UITableView!
+    var fakeDate: [String] = ["Napoli - S. Giovanni a Teduccio", "Ischia - Punta Molino"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad();
+        Thread.sleep(forTimeInterval: 1.4)
+        
+        mapTypeSelectorOutlet.layer.cornerRadius = 4
+        legend.layer.cornerRadius = 10
+       
+        // I get the reference to the Storage where i have the file CSV
+        storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
+        
+        popView.isHidden = true;
+        readFromCSV();
+        
+        popView.layer.cornerRadius = 24
+        popView.layer.shadowColor = UIColor.black.cgColor
+        popView.layer.shadowOpacity = 0.5
+        popView.layer.shadowOffset = CGSize.zero
+        popView.layer.shadowRadius = 60;
+        gradientToView(view: self.popView);
+        
+        //        MAPKIT
+        searchCompleter.delegate = self
+        mapView.delegate = self
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges();
+        
+        centerMapOnLocation(location: locationManager.location!);
+        mapView.showsUserLocation = true;
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
+        self.mapView.addGestureRecognizer(tap)
+        
+        mapView.showsCompass = false
+        barView.layer.cornerRadius = 2;
+    }
+    
+    @objc func DismissKeyboard(){
+        self.farFromTop.priority = UILayoutPriority(rawValue: 999)
+        self.closeToTop.priority = UILayoutPriority(rawValue: 1);
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
+            
+            self.view.layoutIfNeeded()
+            
+        }, completion: nil)
+        view.endEditing(true)
+    }
+    
+    // MAP TYPE SEGMENTED
     @IBAction func mapTypeSelector(_ sender: Any) {
         switch ((sender as AnyObject).selectedSegmentIndex) {
         case 0:
@@ -69,91 +135,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.searchView.isHidden = false;
     }
     
-    @IBOutlet weak var star: UIButton!
-    
     @IBAction func addOrRemoveStarred(_ sender: Any) {
         // I get the datas
         let datas = searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
-        
         // I create an object of type Preference
         var preference: Preference = Preference(data: datas);
         
-        print("schiacciato");
         if( star.currentImage != UIImage(named: "star_colored_bordi") ){
-            print("schiacciato dentro");
-            // If the user have done the log in
-            if( self.appDelegate.uid != "NoValue" ){
-                
-                star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
-            }
-            else { // The user doesn't have an account so i need to save in local the location
-                
-            }
+            star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
         } else {
-             print("schiacciato fuori");
-         
             star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
         }
     }
-
-    // OUTLETS
-    @IBOutlet weak var legend: UIView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad();
-        Thread.sleep(forTimeInterval: 1.4)
-
-        mapTypeSelectorOutlet.layer.cornerRadius = 4
-        legend.layer.cornerRadius = 10
-       
-        // I get the reference to the Storage where i have the file CSV
-        storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
-        
-        popView.isHidden = true;
-        readFromCSV();
-        
-        popView.layer.cornerRadius = 24
-        popView.layer.shadowColor = UIColor.black.cgColor
-        popView.layer.shadowOpacity = 0.5
-        popView.layer.shadowOffset = CGSize.zero
-        popView.layer.shadowRadius = 60;
-        gradientToView(view: self.popView);
-        
-//        MAPKIT
-        searchCompleter.delegate = self
-        mapView.delegate = self
-        
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges();
-        
-        centerMapOnLocation(location: locationManager.location!);
-        mapView.showsUserLocation = true;
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
-        self.mapView.addGestureRecognizer(tap)
-        
-    }
-
-    @objc func DismissKeyboard(){
-        self.farFromTop.priority = UILayoutPriority(rawValue: 999)
-        self.closeToTop.priority = UILayoutPriority(rawValue: 1);
-        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
-            
-            self.view.layoutIfNeeded()
-            
-        }, completion: nil)
-        view.endEditing(true)
-    }
-    
-    
     
     // HIDE LEGEND AND BUTTONS WHEN MAP IS MOVING
-    
-    @IBOutlet weak var starredButtonOutlet: UIButton!
-    @IBOutlet weak var myLocationButtonOutlet: UIButton!
-    
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         legend.isHidden = true
         starredButtonOutlet.isHidden = true
@@ -226,7 +221,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 DispatchQueue.main.async {
                     guard let text = String(data: data!, encoding: String.Encoding.ascii) as String!
                         else {
-                            print("error during conversion file \(data?.description)")
+                            print("Error during conversion file \(data?.description)")
                             return
                     }
                     self.converTextToArray(text)
@@ -370,7 +365,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
 //    BUTTON FOR STARRED AND MAP TYPE
     
-    
     @IBAction func starredButton(_ sender: Any) {
         favoriteView.isHidden = false;
         self.searchResultsTableView.isHidden = true;
@@ -393,6 +387,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         popView.isHidden = true;
         favoriteView.isHidden = true;
         searchResultsTableView.isHidden = false;
+        self.closeToTop.constant = 100;
         setPrioritySearchBar();
    
     }
@@ -402,6 +397,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func swipeUpTouchBar(_ sender: UISwipeGestureRecognizer) {
+        
+        // I need to modify the constraint in order to show the favorite places
+        self.closeToTop.constant = self.view.frame.height - (self.searchBar.frame.height + self.favoriteView.frame.height + 13)
         favoriteView.isHidden = false;
         self.searchResultsTableView.isHidden = true;
         setPrioritySearchBar();
@@ -419,6 +417,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             
         }, completion: nil)
     }
+    
+
+    //MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------- END
     
     
 }
@@ -447,54 +448,124 @@ extension MapViewController: MKLocalSearchCompleterDelegate {
     }
 }
 
-extension MapViewController: UITableViewDataSource {
+extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
+        if tableView.restorationIdentifier == "SearchTableView" {
+            return searchResults.count;
+            
+        }
+        else {
+            return fakeDate.count;
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let searchResult = searchResults[indexPath.row]
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
- 
-        cell.backgroundColor = UIColor(named: "BluOcean");
         
-        cell.textLabel?.text = searchResult.title
-        cell.textLabel?.textColor = UIColor.white;
-        
-        cell.detailTextLabel?.text = searchResult.subtitle
-        cell.detailTextLabel?.textColor = UIColor.white;
-        return cell
-    }
-}
+        if tableView.restorationIdentifier == "SearchTableView" {
+            let searchResult = searchResults[indexPath.row]
+            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+            
+            cell.backgroundColor = UIColor(named: "BluOcean");
+            
+            cell.textLabel?.text = searchResult.title
+            cell.textLabel?.textColor = UIColor.white;
+            
+            cell.detailTextLabel?.text = searchResult.subtitle
+            cell.detailTextLabel?.textColor = UIColor.white;
+            return cell
+        }
+        else {
+            let resuseIdentifier = "FavoriteCell"
 
-extension MapViewController: UITableViewDelegate {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: resuseIdentifier, for: indexPath) as? FavoriteCell else {
+                    print("Fatal Error during the creation of FavoriteCell")
+                    return FavoriteCell();
+                };
+
+            cell.lblLocation.text = fakeDate[indexPath.row];
+            cell.imgFlag.image = UIImage(named: "flag-map-marker");
+            return cell
+        }
+    }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            self.confirmDelete(index: indexPath);
+        }
+        
+        let share = UITableViewRowAction(style: .default, title: "Share") { (action, indexPath) in
+            // share item at indexPath
+            print("I want to share: \(self.fakeDate[indexPath.row])")
+        }
+        
+        share.backgroundColor = UIColor.lightGray
+        
+        return [delete, share]
+        
+    }
+
+    //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
+    func confirmDelete(index: IndexPath) {
+        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.fakeDate[index.row]) ?", preferredStyle: .actionSheet)
+
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteFavourite)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteFavourite)
+        
+        self.deleteFavouriteIndexPath = index;
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+
+        // Support display in iPad
+        alert.popoverPresentationController?.sourceView = self.view
+        alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    //IF YOU CLICK "DELETE" ON THE ALERT, THIS FUNCTION WILL BE CALLED
+    func handleDeleteFavourite(alertAction: UIAlertAction!) -> Void {
+        if deleteFavouriteIndexPath != nil {
+            self.fakeDate.remove(at: deleteFavouriteIndexPath!.row)
+            self.favoriteTableView.deleteRows(at: [deleteFavouriteIndexPath!], with: .fade)
+            deleteFavouriteIndexPath = nil
+        }
+    }
+
+    //IF YOU CLICK "CANCEL" ON THE ALERT, THIS FUNCTION WILL BE CALLED
+    func cancelDeleteFavourite(alertAction: UIAlertAction!) {
+        deleteFavouriteIndexPath = nil
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let completion = searchResults[indexPath.row]
-        
-        let searchRequest = MKLocalSearchRequest(completion: completion)
-        let search = MKLocalSearch(request: searchRequest)
-        search.start { (response, error) in
-            let coordinate = response?.mapItems[0].placemark.coordinate
-            print(String(describing: coordinate))
-
-            //      MOVE ON SEARCHED
-            let initialLocation = CLLocation(latitude: (coordinate?.latitude)!, longitude: (coordinate?.longitude)!)
-
-            self.centerMapOnLocation(location: initialLocation)
-
-            self.popView.isHidden = true;
-            self.DismissKeyboard();
+        if( tableView.restorationIdentifier == "SearchTableView") {
+            tableView.deselectRow(at: indexPath, animated: true)
+            let completion = searchResults[indexPath.row]
+            
+            let searchRequest = MKLocalSearchRequest(completion: completion)
+            let search = MKLocalSearch(request: searchRequest)
+            search.start { (response, error) in
+                let coordinate = response?.mapItems[0].placemark.coordinate
+                print(String(describing: coordinate))
+                
+                //      MOVE ON SEARCHED
+                let initialLocation = CLLocation(latitude: (coordinate?.latitude)!, longitude: (coordinate?.longitude)!)
+                
+                self.centerMapOnLocation(location: initialLocation)
+                
+                self.popView.isHidden = true;
+                self.DismissKeyboard();
+            }
         }
     }
 }
+
 
 extension UISearchBar {
     
@@ -552,7 +623,7 @@ extension MapViewController: MKMapViewDelegate {
     
     // WHEN A MARKER IS TAPPED
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
-        
+    
         // Retrive information about marker location
         latitude = Float((view.annotation?.coordinate.latitude)!);
         longitude = Float((view.annotation?.coordinate.longitude)!);
@@ -562,7 +633,6 @@ extension MapViewController: MKMapViewDelegate {
            Set all information */
         self.lblArea.text = searchData[1][0];
         self.lblArea.sizeToFit();
-        
         
         self.lblCity.text = searchData[1][1];
         self.lblCity.sizeToFit();
@@ -589,16 +659,18 @@ extension MapViewController: MKMapViewDelegate {
             self.imageFlag.image = UIImage(named: "flagappost-1");
         }
 
-
         self.lblValueEscherichia.text = searchData[lastIndex][iEscherichia];
         self.lblValueEscherichia.sizeToFit();
 
         self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
         self.lblValueEnterococchi.sizeToFit();
         self.searchView.isHidden = true;
-        popView.isHidden = false
+        view.isSelected = false;
+
+        mapView.deselectAnnotation(view.annotation, animated: true);
+        popView.isHidden = false;
+        
     }
- 
 
 }
 
