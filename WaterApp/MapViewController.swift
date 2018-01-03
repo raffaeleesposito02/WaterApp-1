@@ -141,16 +141,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         // I get the datas
         let datas = searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
         // I create an object of type Preference
-        var preference: Preference = Preference(data: datas);
+        let preference: Preference = Preference(data: datas);
 
-        var lastAnalysis: Int = (preference.analisysData.count - 1);
-        if( star.currentImage != UIImage(named: "star_colored_bordi") ){
+        let lastAnalysis: Int = (preference.analisysData.count - 1);
+        
+        if( star.currentImage == UIImage(named: "add-to-favorites") ){
             star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
-            coreData.addFavorite(area: preference.area, locality: preference.locality, latitude: Float(preference.longitude)!, longitude: Float(preference.longitude)!,
+            coreData.addFavorite(area: preference.area, locality: preference.locality, latitude: Float(preference.latitude)!, longitude: Float(preference.longitude)!,
                                  enterococci: Int16(Int(preference.analisysData[lastAnalysis][1])!), escherichia: Int16(Int(preference.analisysData[lastAnalysis][2])!));
+            self.favoriteTableView.reloadData();
 
         } else {
             star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
+            coreData.deleteFavorite(latitude: Float(preference.latitude)!, longitude: Float(preference.longitude)!)
         }
     }
     
@@ -530,7 +533,7 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
 
     //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
     func confirmDelete(index: IndexPath) {
-        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.FavoritesDate![index.row]) ?", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.FavoritesDate![index.row].area!)-\(self.FavoritesDate![index.row].locality!) ?", preferredStyle: .actionSheet)
 
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteFavourite)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteFavourite)
@@ -550,7 +553,10 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
     //IF YOU CLICK "DELETE" ON THE ALERT, THIS FUNCTION WILL BE CALLED
     func handleDeleteFavourite(alertAction: UIAlertAction!) -> Void {
         if deleteFavouriteIndexPath != nil {
-            self.FavoritesDate!.remove(at: deleteFavouriteIndexPath!.row)
+            // I delete the Favorite from database
+            coreData.deleteFavorite(latitude: FavoritesDate![(deleteFavouriteIndexPath?.row)!].latitude, longitude: FavoritesDate![(deleteFavouriteIndexPath?.row)!].longitude);
+            // I delete the Favorite also from array
+            self.FavoritesDate!.remove(at: deleteFavouriteIndexPath!.row);
             self.favoriteTableView.deleteRows(at: [deleteFavouriteIndexPath!], with: .fade)
             deleteFavouriteIndexPath = nil
         }
@@ -686,6 +692,15 @@ extension MapViewController: MKMapViewDelegate {
         view.isSelected = false;
 
         mapView.deselectAnnotation(view.annotation, animated: true);
+
+        if coreData.loadFavorite(latitude: latitude, longitude: longitude) == nil {
+            star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
+        }
+        else{
+            self.star.setImage(UIImage(named: "star_colored_bordi"), for: .normal)
+            
+        }
+        
         popView.isHidden = false;
         
     }
