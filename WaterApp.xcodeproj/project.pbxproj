@@ -20,9 +20,13 @@
 		7F5BD4441FDD2EB300D7B654 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5BD4431FDD2EB300D7B654 /* MapKit.framework */; };
 		7FBC6C271FDD296F001171BE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBC6C261FDD296F001171BE /* CoreLocation.framework */; };
 		7FE7BDAD1FE2B47E006F751E /* (null) in Sources */ = {isa = PBXBuildFile; };
+		BD236CED1FFD271E003AF1D9 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD236CEC1FFD271E003AF1D9 /* CoreDataController.swift */; };
+		BD30C3BD1FFD2C7000AC6620 /* Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD30C3BB1FFD2C7000AC6620 /* Favorite+CoreDataClass.swift */; };
+		BD30C3BE1FFD2C7000AC6620 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD30C3BC1FFD2C7000AC6620 /* Favorite+CoreDataProperties.swift */; };
 		BD369B091FFAF0FA002CAFC0 /* MapSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD369B081FFAF0FA002CAFC0 /* MapSegmentedControl.swift */; };
 		BD369B0B1FFAFC63002CAFC0 /* FavoritePlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD369B0A1FFAFC63002CAFC0 /* FavoritePlacesView.swift */; };
 		BD369B0F1FFBCBDE002CAFC0 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD369B0E1FFBCBDE002CAFC0 /* FavoriteCell.swift */; };
+		BD8A18C31FFD20BE001BBC14 /* WaterApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BD8A18C11FFD20BE001BBC14 /* WaterApp.xcdatamodeld */; };
 		BDB4CC4D1FEA7B8900C6E081 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */; };
 		BDDC20071FE9535A004E7B17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDC20061FE9535A004E7B17 /* Assets.xcassets */; };
 		C4CC6A66B838FBA090C6914C /* Pods_WaterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69521789BB68C8D3EA14B856 /* Pods_WaterApp.framework */; };
@@ -49,9 +53,13 @@
 		7F360C491FDFFA0600521C71 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		7F5BD4431FDD2EB300D7B654 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7FBC6C261FDD296F001171BE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		BD236CEC1FFD271E003AF1D9 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		BD30C3BB1FFD2C7000AC6620 /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BD30C3BC1FFD2C7000AC6620 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BD369B081FFAF0FA002CAFC0 /* MapSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSegmentedControl.swift; sourceTree = "<group>"; };
 		BD369B0A1FFAFC63002CAFC0 /* FavoritePlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlacesView.swift; sourceTree = "<group>"; };
 		BD369B0E1FFBCBDE002CAFC0 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		BD8A18C21FFD20BE001BBC14 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BDB4CC4C1FEA7B8900C6E081 /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		BDDC20061FE9535A004E7B17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,7 +99,10 @@
 		6DD6D1711FD981D800B78C7D /* WaterApp */ = {
 			isa = PBXGroup;
 			children = (
+				BD30C3BB1FFD2C7000AC6620 /* Favorite+CoreDataClass.swift */,
+				BD30C3BC1FFD2C7000AC6620 /* Favorite+CoreDataProperties.swift */,
 				6DD6D1721FD981D800B78C7D /* AppDelegate.swift */,
+				BD236CEC1FFD271E003AF1D9 /* CoreDataController.swift */,
 				6DD6D1741FD981D800B78C7D /* ViewController.swift */,
 				057F92551FDBEC3D00750964 /* MapViewController.swift */,
 				3579493C1FDA872700667BB6 /* ProfileViewController.swift */,
@@ -105,6 +116,7 @@
 				35F771211FFBE024000C8A5B /* Localizable.strings */,
 				6DD6D17B1FD981D800B78C7D /* LaunchScreen.storyboard */,
 				BDDC20061FE9535A004E7B17 /* Assets.xcassets */,
+				BD8A18C11FFD20BE001BBC14 /* WaterApp.xcdatamodeld */,
 				6DD6D17E1FD981D800B78C7D /* Info.plist */,
 				350DC8A51FEAF6CF009D9EC6 /* GoogleService-Info.plist */,
 			);
@@ -269,7 +281,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3579493D1FDA872700667BB6 /* ProfileViewController.swift in Sources */,
+				BD236CED1FFD271E003AF1D9 /* CoreDataController.swift in Sources */,
 				7FE7BDAD1FE2B47E006F751E /* (null) in Sources */,
+				BD30C3BD1FFD2C7000AC6620 /* Favorite+CoreDataClass.swift in Sources */,
 				6DD6D1751FD981D800B78C7D /* ViewController.swift in Sources */,
 				BDB4CC4D1FEA7B8900C6E081 /* Preference.swift in Sources */,
 				057F92561FDBEC3D00750964 /* MapViewController.swift in Sources */,
@@ -277,8 +291,10 @@
 				6DD6D1731FD981D800B78C7D /* AppDelegate.swift in Sources */,
 				BD369B0B1FFAFC63002CAFC0 /* FavoritePlacesView.swift in Sources */,
 				BD369B091FFAF0FA002CAFC0 /* MapSegmentedControl.swift in Sources */,
+				BD30C3BE1FFD2C7000AC6620 /* Favorite+CoreDataProperties.swift in Sources */,
 				35418F5E1FF3BF4D0032BBE1 /* AnalysisPoint.swift in Sources */,
 				7F360C4A1FDFFA0600521C71 /* SplashViewController.swift in Sources */,
+				BD8A18C31FFD20BE001BBC14 /* WaterApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,7 +446,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P67WHNM478;
+				DEVELOPMENT_TEAM = 8ZGX3X3644;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WaterApp",
@@ -439,7 +455,7 @@
 				INFOPLIST_FILE = WaterApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.CimminoVittorio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.WaterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -452,7 +468,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P67WHNM478;
+				DEVELOPMENT_TEAM = 8ZGX3X3644;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WaterApp",
@@ -461,7 +477,7 @@
 				INFOPLIST_FILE = WaterApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.CimminoVittorio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.WaterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -490,6 +506,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BD8A18C11FFD20BE001BBC14 /* WaterApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BD8A18C21FFD20BE001BBC14 /* Model.xcdatamodel */,
+			);
+			currentVersion = BD8A18C21FFD20BE001BBC14 /* Model.xcdatamodel */;
+			path = WaterApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6DD6D1671FD981D800B78C7D /* Project object */;
 }

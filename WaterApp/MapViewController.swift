@@ -65,7 +65,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     //  For Favorite Table View
     var deleteFavouriteIndexPath: IndexPath?;
     @IBOutlet weak var favoriteTableView: UITableView!
-    var fakeDate: [String] = ["Napoli - S. Giovanni a Teduccio", "Ischia - Punta Molino"]
+    var FavoritesDate: [Favorite]?;
+    
+    let coreData: CoreDataController = CoreDataController.shared;
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -140,9 +142,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let datas = searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
         // I create an object of type Preference
         var preference: Preference = Preference(data: datas);
-        
+
+        var lastAnalysis: Int = (preference.analisysData.count - 1);
         if( star.currentImage != UIImage(named: "star_colored_bordi") ){
             star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
+            coreData.addFavorite(area: preference.area, locality: preference.locality, latitude: Float(preference.longitude)!, longitude: Float(preference.longitude)!,
+                                 enterococci: Int16(Int(preference.analisysData[lastAnalysis][1])!), escherichia: Int16(Int(preference.analisysData[lastAnalysis][2])!));
+
         } else {
             star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
         }
@@ -460,7 +466,8 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
             
         }
         else {
-            return fakeDate.count;
+            FavoritesDate = coreData.loadAllFavorites();
+            return FavoritesDate!.count;
         }
     }
     
@@ -486,9 +493,20 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
                     print("Fatal Error during the creation of FavoriteCell")
                     return FavoriteCell();
                 };
-
-            cell.lblLocation.text = fakeDate[indexPath.row];
-            cell.imgFlag.image = UIImage(named: "flag-map-marker");
+         
+            cell.lblLocation.text = "\(FavoritesDate![indexPath.row].area!)-\(FavoritesDate![indexPath.row].locality!)";
+            
+            if(FavoritesDate![indexPath.row].enterococci >= limitEnterococchi  || FavoritesDate![indexPath.row].escherichia >= limitEscherica) {
+                
+                if(FavoritesDate![indexPath.row].enterococci >= limitEnterococchi  && FavoritesDate![indexPath.row].escherichia >= limitEscherica){
+                    cell.imgFlag.image = UIImage(named: "flag-map-marker");
+                } else {
+                    cell.imgFlag.image =  UIImage(named: "flagwarning");
+                }
+            } else {
+                cell.imgFlag.image =  UIImage(named:"flagAppost")
+            }
+            
             return cell
         }
     }
@@ -501,7 +519,7 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
         
         let share = UITableViewRowAction(style: .default, title: "Share") { (action, indexPath) in
             // share item at indexPath
-            print("I want to share: \(self.fakeDate[indexPath.row])")
+            print("I want to share: \(self.FavoritesDate![indexPath.row])")
         }
         
         share.backgroundColor = UIColor.lightGray
@@ -512,7 +530,7 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
 
     //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
     func confirmDelete(index: IndexPath) {
-        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.fakeDate[index.row]) ?", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.FavoritesDate![index.row]) ?", preferredStyle: .actionSheet)
 
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteFavourite)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteFavourite)
@@ -532,7 +550,7 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
     //IF YOU CLICK "DELETE" ON THE ALERT, THIS FUNCTION WILL BE CALLED
     func handleDeleteFavourite(alertAction: UIAlertAction!) -> Void {
         if deleteFavouriteIndexPath != nil {
-            self.fakeDate.remove(at: deleteFavouriteIndexPath!.row)
+            self.FavoritesDate!.remove(at: deleteFavouriteIndexPath!.row)
             self.favoriteTableView.deleteRows(at: [deleteFavouriteIndexPath!], with: .fade)
             deleteFavouriteIndexPath = nil
         }

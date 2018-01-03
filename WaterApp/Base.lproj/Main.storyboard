@@ -364,15 +364,15 @@
                                                                     <rect key="frame" x="300" y="10" width="25" height="23"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Napoli - S. Giovanni" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfM-MP-iKf">
-                                                                    <rect key="frame" x="25" y="11" width="162" height="21"/>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                                    <rect key="frame" x="15" y="10" width="171.5" height="24"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="JfM-MP-iKf" firstAttribute="centerY" secondItem="bNk-Ih-ahD" secondAttribute="centerY" id="8Z9-ra-tQ4"/>
-                                                                <constraint firstItem="JfM-MP-iKf" firstAttribute="leading" secondItem="bNk-Ih-ahD" secondAttribute="leadingMargin" constant="10" id="VFA-Y8-uX8"/>
+                                                                <constraint firstItem="JfM-MP-iKf" firstAttribute="leading" secondItem="bNk-Ih-ahD" secondAttribute="leadingMargin" id="VFA-Y8-uX8"/>
                                                                 <constraint firstItem="JfM-MP-iKf" firstAttribute="centerY" secondItem="iA3-G1-8mI" secondAttribute="centerY" id="eeZ-Pn-ORt"/>
                                                                 <constraint firstItem="iA3-G1-8mI" firstAttribute="top" secondItem="bNk-Ih-ahD" secondAttribute="top" constant="10" id="lrX-lh-a8U"/>
                                                                 <constraint firstAttribute="trailing" secondItem="iA3-G1-8mI" secondAttribute="trailing" constant="10" id="nMg-DE-Uuz"/>
