@@ -43,7 +43,7 @@ class CoreDataController {
     }
     
     func loadAllFavorites() -> [Favorite] {
-        print("[CDC] Recupero tutti i libri dal context ")
+//      Recupero tutti i libri dal context 
         var array = [Favorite]()
         
         let fetchRequest: NSFetchRequest<Favorite> = Favorite.fetchRequest();

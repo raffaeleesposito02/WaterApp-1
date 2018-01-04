@@ -149,12 +149,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
             coreData.addFavorite(area: preference.area, locality: preference.locality, latitude: Float(preference.latitude)!, longitude: Float(preference.longitude)!,
                                  enterococci: Int16(Int(preference.analisysData[lastAnalysis][1])!), escherichia: Int16(Int(preference.analisysData[lastAnalysis][2])!));
-            self.favoriteTableView.reloadData();
-
         } else {
             star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
             coreData.deleteFavorite(latitude: Float(preference.latitude)!, longitude: Float(preference.longitude)!)
         }
+        
+         self.favoriteTableView.reloadData();
     }
     
     // HIDE LEGEND AND BUTTONS WHEN MAP IS MOVING
@@ -568,6 +568,7 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if( tableView.restorationIdentifier == "SearchTableView") {
             tableView.deselectRow(at: indexPath, animated: true)
             let completion = searchResults[indexPath.row]
@@ -586,6 +587,13 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
                 self.popView.isHidden = true;
                 self.DismissKeyboard();
             }
+        } else {
+            /* I selected a location in favorite and I need to set all info in the popView and Hide the search bar */
+            tableView.deselectRow(at: indexPath, animated: true);
+            self.searchView.isHidden = true;
+            centerMapOnLocation(location: CLLocation(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)));
+            setPopView(latitude: self.FavoritesDate![indexPath.row].latitude, longitude: self.FavoritesDate![indexPath.row].longitude);
+            
         }
     }
 }
@@ -652,47 +660,49 @@ extension MapViewController: MKMapViewDelegate {
         latitude = Float((view.annotation?.coordinate.latitude)!);
         longitude = Float((view.annotation?.coordinate.longitude)!);
 
+        setPopView(latitude: latitude, longitude: longitude)
+        mapView.deselectAnnotation(view.annotation, animated: true);
+    }
+    
+    func setPopView(latitude: Float, longitude: Float) {
         var searchData = self.searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
         /* I need to show the information about that marker.
-           Set all information */
+         Set all information */
         self.lblArea.text = searchData[1][0];
         self.lblArea.sizeToFit();
         
         self.lblCity.text = searchData[1][1];
         self.lblCity.sizeToFit();
-
+        
         self.lblLocation.text = searchData [1][2];
         self.lblLocation.sizeToFit();
         
         self.dateLastAnalysis.text = formattedDate(date: searchData [1][5]);
         self.dateLastAnalysis.sizeToFit();
-
+        
         var lastIndex:Int = searchData.count-1;
         var valueEnterococchi = Int(searchData[lastIndex][iEnterococchi]);
         var valueEscherichia = Int(searchData[lastIndex][iEscherichia]);
-
+        
         if(valueEnterococchi! >= limitEnterococchi  || valueEscherichia! >= limitEscherica) {
-
+            
             if(valueEnterococchi! >= limitEnterococchi  && valueEscherichia! >= limitEscherica){
                 self.imageFlag.image = UIImage(named: "flag-map-marker1");
-
+                
             } else {
                 self.imageFlag.image = UIImage(named: "flagwarning1");
             }
         } else {
             self.imageFlag.image = UIImage(named: "flagappost-1");
         }
-
+        
         self.lblValueEscherichia.text = searchData[lastIndex][iEscherichia];
         self.lblValueEscherichia.sizeToFit();
-
+        
         self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
         self.lblValueEnterococchi.sizeToFit();
         self.searchView.isHidden = true;
-        view.isSelected = false;
-
-        mapView.deselectAnnotation(view.annotation, animated: true);
-
+        
         if coreData.loadFavorite(latitude: latitude, longitude: longitude) == nil {
             star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
         }
@@ -702,7 +712,6 @@ extension MapViewController: MKMapViewDelegate {
         }
         
         popView.isHidden = false;
-        
     }
 
 }
