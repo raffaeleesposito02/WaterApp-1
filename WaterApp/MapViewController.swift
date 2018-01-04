@@ -69,6 +69,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let coreData: CoreDataController = CoreDataController.shared;
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.hidesBackButton = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad();
         Thread.sleep(forTimeInterval: 1.4)

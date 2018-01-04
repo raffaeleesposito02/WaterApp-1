@@ -112,3 +112,6 @@
 
 /* Class = "UILabel"; text = "Low warning"; ObjectID = "zva-0W-vpD"; */
 "zva-0W-vpD.text" = "Rischio basso";
+
+/* Class = "UILabel"; text = "The data contained in this app are for information purpose, we are not responsible for its use."; ObjetID = "azx-f5-kBA"; */
+"azx-f5-kBA.text" = "I dati contenuti nell'app sono al solo scopo informativo, non siamo responsabili per il loro uso";
