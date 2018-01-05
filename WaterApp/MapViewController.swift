@@ -596,7 +596,7 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
             /* I selected a location in favorite and I need to set all info in the popView and Hide the search bar */
             tableView.deselectRow(at: indexPath, animated: true);
             self.searchView.isHidden = true;
-            centerMapOnLocation(location: CLLocation(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)));
+            centerMapOnLocation(location: CLLocation(latitude: CLLocationDegrees(self.FavoritesDate![indexPath.row].latitude), longitude: CLLocationDegrees(self.FavoritesDate![indexPath.row].longitude)));
             setPopView(latitude: self.FavoritesDate![indexPath.row].latitude, longitude: self.FavoritesDate![indexPath.row].longitude);
             
         }
