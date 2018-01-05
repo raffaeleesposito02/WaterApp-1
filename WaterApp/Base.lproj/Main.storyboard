@@ -723,6 +723,7 @@
                         <outlet property="bntDonePicker" destination="hcT-Da-HFX" id="Rfa-kt-yrK"/>
                         <outlet property="constraintScroll" destination="Qul-pT-f5p" id="wYh-av-wVH"/>
                         <outlet property="labelLanguage" destination="M5m-eE-Vym" id="puY-Sc-hZh"/>
+                        <outlet property="labelTest" destination="rb4-Te-seA" id="a5e-KA-F2a"/>
                         <outlet property="notifyNews" destination="9LG-1d-zEV" id="wim-H2-GaF"/>
                         <outlet property="overlayView" destination="NFe-fh-KzX" id="UqS-8E-S7e"/>
                         <outlet property="pickerLanguage" destination="hHa-kR-rmS" id="Oqg-c1-p4I"/>
