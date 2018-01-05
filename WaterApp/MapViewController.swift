@@ -82,7 +82,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         legend.layer.cornerRadius = 10
        
         // I get the reference to the Storage where i have the file CSV
-        storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
+        storageRef = Storage.storage().reference().child("Data").child("Data_ARPA_Formatted_CSV.csv");
         
         popView.isHidden = true;
         readFromCSV();
@@ -153,7 +153,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if( star.currentImage == UIImage(named: "add-to-favorites") ){
             star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
             coreData.addFavorite(area: preference.area, locality: preference.locality, latitude: Float(preference.latitude)!, longitude: Float(preference.longitude)!,
-                                 enterococci: Int16(Int(preference.analisysData[lastAnalysis][1])!), escherichia: Int16(Int(preference.analisysData[lastAnalysis][2])!));
+                                 enterococci: Int16(Int(Float(preference.analisysData[lastAnalysis][1])!)), escherichia: Int16(Int(Float(preference.analisysData[lastAnalysis][2])!)));
         } else {
             star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
             coreData.deleteFavorite(latitude: Float(preference.latitude)!, longitude: Float(preference.longitude)!)
@@ -272,29 +272,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         return row.components(separatedBy: delimiter)
     }
     
-//    ----GET DATE IN A FORMAT EASY TO READ
-    
-    func formattedDate(date: String) -> String {
-        
-        let startingIndex = date.index(date.startIndex, offsetBy: 4)
-        let new = date.substring(from: startingIndex)
-        let endingIndex = new.index(new.endIndex, offsetBy: -19)
-        let final = new.substring(to: endingIndex)
-        
-        return final + " 2017"
-    }
-    
 /*  SEARCH LOCATIONS OF ANALYSIS AND CREATE FLAGS */
     
     func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEnterococchi: Int,
                      _ indexEscherichia: Int ){
-
-        var latitude: Float = Float(data[3][indexLatitude])!
-        var longitude: Float = Float(data[3][indexLongitude])!
-        var valueEnterococchi: Int = Int(data[3][indexEnterococchi])!;
-        var valueEscherichia: Int = Int(data[3][indexEscherichia])!;
-
-        for  i in 4...data.count-1 {
+        print(data[0][indexLatitude]);
+        var latitude: Float = Float(data[0][indexLatitude])!
+        var longitude: Float = Float(data[0][indexLongitude])!
+        var valueEnterococchi: Int = Int(Float(data[0][indexEnterococchi])!);
+        var valueEscherichia: Int = Int(Float(data[0][indexEscherichia])!);
+        
+        for  i in 1...data.count-1 {
 
             if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
 
@@ -304,12 +292,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     // Set the new values
                     latitude = Float(data[i][indexLatitude])!
                     longitude = Float (data[i][indexLongitude])!
-                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
-                    valueEscherichia = Int(data[i][indexEscherichia])!;
+                    valueEnterococchi = Int(Float(data[i][indexEnterococchi])!);
+                    valueEscherichia = Int(Float(data[i][indexEscherichia])!);
                 } else {
                     // update only the values of bacterias
-                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
-                    valueEscherichia = Int(data[i][indexEscherichia])!;
+                    valueEnterococchi = Int(Float(data[i][indexEnterococchi])!);
+                    valueEscherichia = Int(Float(data[i][indexEscherichia])!);
                 }
             } else {
 
@@ -319,8 +307,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     // Set the new values
                     latitude = Float(data[i][indexLatitude+1])!
                     longitude = Float (data[i][indexLongitude+1])!
-                    valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
-                    valueEscherichia = Int(data[i][indexEscherichia+1])!;
+                    valueEnterococchi = Int(Float(data[i][indexEscherichia+1])!);
+                    valueEscherichia = Int(Float(data[i][indexEscherichia+1])!);
                 } else {
                     if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
                         // Create a merker in the previous point
@@ -328,12 +316,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                         // Set the new values
                         latitude = Float(data[i][indexLatitude+1])!
                         longitude = Float (data[i][indexLongitude+1])!
-                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
-                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
+                        valueEnterococchi = Int(Float(data[i][indexEnterococchi+1])!);
+                        valueEscherichia = Int(Float(data[i][indexEscherichia+1])!);
                     } else {
                         // update only the values of bacterias
-                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
-                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
+                        valueEnterococchi = Int(Float(data[i][indexEnterococchi+1])!);
+                        valueEscherichia = Int(Float(data[i][indexEscherichia+1])!);
                     }
                 }
             }
@@ -673,25 +661,25 @@ extension MapViewController: MKMapViewDelegate {
         var searchData = self.searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
         /* I need to show the information about that marker.
          Set all information */
-        self.lblArea.text = searchData[1][0];
+        self.lblArea.text = searchData[0][0];
         self.lblArea.sizeToFit();
         
-        self.lblCity.text = searchData[1][1];
+        self.lblCity.text = searchData[0][1];
         self.lblCity.sizeToFit();
         
-        self.lblLocation.text = searchData [1][2];
+        self.lblLocation.text = searchData[0][2];
         self.lblLocation.sizeToFit();
         
-        self.dateLastAnalysis.text = formattedDate(date: searchData [1][5]);
+        self.dateLastAnalysis.text = searchData[0][5];
         self.dateLastAnalysis.sizeToFit();
         
         var lastIndex:Int = searchData.count-1;
-        var valueEnterococchi = Int(searchData[lastIndex][iEnterococchi]);
-        var valueEscherichia = Int(searchData[lastIndex][iEscherichia]);
+        var valueEnterococchi = Int(Float(searchData[lastIndex][iEnterococchi])!);
+        var valueEscherichia = Int(Float(searchData[lastIndex][iEscherichia])!);
         
-        if(valueEnterococchi! >= limitEnterococchi  || valueEscherichia! >= limitEscherica) {
+        if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
             
-            if(valueEnterococchi! >= limitEnterococchi  && valueEscherichia! >= limitEscherica){
+            if(valueEnterococchi >= limitEnterococchi  && valueEscherichia >= limitEscherica){
                 self.imageFlag.image = UIImage(named: "flag-map-marker1");
                 
             } else {
