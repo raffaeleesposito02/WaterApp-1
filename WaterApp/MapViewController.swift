@@ -153,7 +153,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if( star.currentImage == UIImage(named: "add-to-favorites") ){
             star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
             coreData.addFavorite(area: preference.area, locality: preference.locality, latitude: Float(preference.latitude)!, longitude: Float(preference.longitude)!,
-                                 enterococci: Int16(Int(Float(preference.analisysData[lastAnalysis][1])!)), escherichia: Int16(Int(Float(preference.analisysData[lastAnalysis][2])!)));
+                                 enterococci: Int16(Int(preference.analisysData[lastAnalysis][1])!), escherichia: Int16(Int(preference.analisysData[lastAnalysis][2])!));
         } else {
             star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
             coreData.deleteFavorite(latitude: Float(preference.latitude)!, longitude: Float(preference.longitude)!)
@@ -279,8 +279,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         print(data[0][indexLatitude]);
         var latitude: Float = Float(data[0][indexLatitude])!
         var longitude: Float = Float(data[0][indexLongitude])!
-        var valueEnterococchi: Int = Int(Float(data[0][indexEnterococchi])!);
-        var valueEscherichia: Int = Int(Float(data[0][indexEscherichia])!);
+        var valueEnterococchi: Int = Int(data[0][indexEnterococchi])!;
+        var valueEscherichia: Int = Int(data[0][indexEscherichia])!;
         
         for  i in 1...data.count-1 {
 
@@ -292,12 +292,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     // Set the new values
                     latitude = Float(data[i][indexLatitude])!
                     longitude = Float (data[i][indexLongitude])!
-                    valueEnterococchi = Int(Float(data[i][indexEnterococchi])!);
-                    valueEscherichia = Int(Float(data[i][indexEscherichia])!);
+                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
+                    valueEscherichia = Int(data[i][indexEscherichia])!;
                 } else {
                     // update only the values of bacterias
-                    valueEnterococchi = Int(Float(data[i][indexEnterococchi])!);
-                    valueEscherichia = Int(Float(data[i][indexEscherichia])!);
+                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
+                    valueEscherichia = Int(data[i][indexEscherichia])!;
                 }
             } else {
 
@@ -307,8 +307,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     // Set the new values
                     latitude = Float(data[i][indexLatitude+1])!
                     longitude = Float (data[i][indexLongitude+1])!
-                    valueEnterococchi = Int(Float(data[i][indexEscherichia+1])!);
-                    valueEscherichia = Int(Float(data[i][indexEscherichia+1])!);
+                    valueEnterococchi = Int(data[i][indexEscherichia+1])!;
+                    valueEscherichia = Int(data[i][indexEscherichia+1])!;
                 } else {
                     if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
                         // Create a merker in the previous point
@@ -316,12 +316,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                         // Set the new values
                         latitude = Float(data[i][indexLatitude+1])!
                         longitude = Float (data[i][indexLongitude+1])!
-                        valueEnterococchi = Int(Float(data[i][indexEnterococchi+1])!);
-                        valueEscherichia = Int(Float(data[i][indexEscherichia+1])!);
+                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
+                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
                     } else {
                         // update only the values of bacterias
-                        valueEnterococchi = Int(Float(data[i][indexEnterococchi+1])!);
-                        valueEscherichia = Int(Float(data[i][indexEscherichia+1])!);
+                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
+                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
                     }
                 }
             }
@@ -674,8 +674,8 @@ extension MapViewController: MKMapViewDelegate {
         self.dateLastAnalysis.sizeToFit();
         
         var lastIndex:Int = searchData.count-1;
-        var valueEnterococchi = Int(Float(searchData[lastIndex][iEnterococchi])!);
-        var valueEscherichia = Int(Float(searchData[lastIndex][iEscherichia])!);
+        var valueEnterococchi = Int(searchData[lastIndex][iEnterococchi])!;
+        var valueEscherichia = Int(searchData[lastIndex][iEscherichia])!;
         
         if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
             
