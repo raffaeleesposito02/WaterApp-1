@@ -494,11 +494,10 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
             
             if(FavoritesDate![indexPath.row].enterococci >= limitEnterococchi  || FavoritesDate![indexPath.row].escherichia >= limitEscherica) {
                 
-                if(FavoritesDate![indexPath.row].enterococci >= limitEnterococchi  && FavoritesDate![indexPath.row].escherichia >= limitEscherica){
                     cell.imgFlag.image = UIImage(named: "flag-map-marker");
-                } else {
+                } else if(FavoritesDate![indexPath.row].enterococci >= limitEnterococchi-50  || FavoritesDate![indexPath.row].escherichia >= limitEscherica-100){
                     cell.imgFlag.image =  UIImage(named: "flagwarning");
-                }
+                
             } else {
                 cell.imgFlag.image =  UIImage(named:"flagAppost")
             }
@@ -635,11 +634,10 @@ extension MapViewController: MKMapViewDelegate {
         
         if(annotation.vEnterococchi >= limitEnterococchi  || annotation.vEscherichia >= limitEscherica) {
             
-            if(annotation.vEnterococchi >= limitEnterococchi  && annotation.vEscherichia >= limitEscherica){
                view.image = UIImage(named: "flag-map-marker");
-            } else {
+            } else if(annotation.vEnterococchi >= limitEnterococchi-50  || annotation.vEscherichia >= limitEscherica-100){
                 view.image =  UIImage(named: "flagwarning");
-            }
+            
         } else {
             view.image =  UIImage(named:"flagAppost")
         }
@@ -679,12 +677,11 @@ extension MapViewController: MKMapViewDelegate {
         
         if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
             
-            if(valueEnterococchi >= limitEnterococchi  && valueEscherichia >= limitEscherica){
                 self.imageFlag.image = UIImage(named: "flag-map-marker1");
                 
-            } else {
+            } else if(valueEnterococchi >= limitEnterococchi-50  || valueEscherichia >= limitEscherica-100){
                 self.imageFlag.image = UIImage(named: "flagwarning1");
-            }
+            
         } else {
             self.imageFlag.image = UIImage(named: "flagappost-1");
         }
