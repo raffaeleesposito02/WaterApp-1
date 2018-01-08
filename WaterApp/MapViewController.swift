@@ -110,7 +110,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.addGestureRecognizer(tap)
         
         mapView.showsCompass = false
-        barView.layer.cornerRadius = 2;
+
+        farFromTop.constant = self.view.frame.height - ( self.searchBar.frame.height + (self.navigationController?.navigationBar.frame.height)!  + 35);
+        closeToTop.constant = 100;
+
     }
     
     @objc func DismissKeyboard(){
