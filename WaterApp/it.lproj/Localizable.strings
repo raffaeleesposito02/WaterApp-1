@@ -9,3 +9,7 @@
 "restartTitle" = "Riavvio dell'App richiesto";
 "cancel" = "Annulla";
 "close" = "Chiudi ora";
+"error" = " Errore Geocalizzazione ";
+"errorgeo" = "Oh no :( Abbiamo dei problemi con la geocalizzazione. Hai dato il permesso per avere la tua posizione?";
+"errorDownTitle" = "Errore Download";
+"errorDownDesc" = "Errore durante il download delle informazioni. Prova a ravviare l'app e verifica la tua connesione Internet";

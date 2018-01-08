@@ -9,3 +9,7 @@
 "restartTitle" = "App restart needed";
 "cancel" = "Cancel";
 "close" = "Close now";
+"error" = " Error Geolocalization";
+"errorgeo" = "Oh :( We have same problems with geolocalization. Have you give the permission for localization?";
+"errorDownTitle" = "Error Download";
+"errorDownDesc" = "Error during the donwload of information. Try to restar the app and verify your connection ";
