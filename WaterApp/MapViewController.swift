@@ -368,11 +368,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 //    BUTTON FOR STARRED AND MAP TYPE
     
     @IBAction func starredButton(_ sender: Any) {
-        self.closeToTop.constant = self.view.frame.height - (self.searchBar.frame.height + self.favoriteView.frame.height + 13)
-        favoriteView.isHidden = false;
-        self.searchResultsTableView.isHidden = true;
-        self.searchResultsTableView.isHidden = true;
-        setPrioritySearchBar();
+        if( self.closeToTop.priority == UILayoutPriority(rawValue: 1)) {
+            self.closeToTop.constant = self.view.frame.height - (self.searchBar.frame.height + self.favoriteView.frame.height + 13)
+            favoriteView.isHidden = false;
+            self.searchResultsTableView.isHidden = true;
+            setPrioritySearchBar();
+        } else {
+            self.DismissKeyboard();
+        }
     }
     
     @IBAction func myLocationButton(_ sender: Any) {
@@ -381,7 +384,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let region = MKCoordinateRegion(center: center, span: self.mapView.region.span)
         
         mapView!.setRegion(region, animated: true)
-        mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
+        mapView!.setCenter(mapView!.userLocation.coordinate, animated: true);
+        self.DismissKeyboard();
     }
     
 // SEARCH BAR
