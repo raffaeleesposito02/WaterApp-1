@@ -104,7 +104,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges();
         
-        centerMapOnLocation(location: locationManager.location!);
+        if let location = locationManager.location {
+            centerMapOnLocation(location: location );
+        } else {
+            createAlertMessage(NSLocalizedString("error", comment: ""), NSLocalizedString("errorgeo", comment: ""));
+            
+        }
         mapView.showsUserLocation = true;
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
         self.mapView.addGestureRecognizer(tap)
@@ -137,6 +142,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         default:
             mapView.mapType = .standard
         }
+    }
+    
+    func createAlertMessage(_ mTitle:String, _ mMessage: String) {
+    
+    let alertMessage = UIAlertController(title: mTitle, message: mMessage, preferredStyle: .alert)
+        // Attach an action on alert message
+        alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+        alertMessage.dismiss(animated: true, completion: nil)
+        }))
+        // Display the alert message
+        self.present(alertMessage, animated: true, completion: nil)
     }
 
     @IBAction func closePopup(_ sender: Any) {
@@ -224,7 +240,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         storageRef?.downloadURL(completion: { (url, error) in
 
             if error != nil {
-                print(error?.localizedDescription)
+                self.createAlertMessage(NSLocalizedString("errorDownTitle", comment: ""), NSLocalizedString("errorDownDesc", comment: ""));
                 return
             }
 
@@ -242,7 +258,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                             return
                     }
                     self.converTextToArray(text)
-
                 }
 
             }).resume()
@@ -675,7 +690,7 @@ extension MapViewController: MKMapViewDelegate {
         self.lblCity.sizeToFit();
         
         self.lblLocation.text = searchData[0][2];
-        self.lblLocation.sizeToFit();
+        // self.lblLocation.sizeToFit();
         
         self.dateLastAnalysis.text = searchData[0][5];
         self.dateLastAnalysis.sizeToFit();
