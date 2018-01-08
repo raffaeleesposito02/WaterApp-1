@@ -32,9 +32,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var gradientLayer: CAGradientLayer?;
     var pickerSelected : String?;
     
+    @IBOutlet weak var labelTest: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        // to show the current language in the labelLanguage
+        if labelTest.text == "Language" {
+            labelLanguage.text = data[1]
+        } else {
+            labelLanguage.text = data[0]
+        }
+        
         // I delegate the picker to itself. Same for the datasource of the picker
         pickerLanguage.delegate = self
         pickerLanguage.dataSource = self

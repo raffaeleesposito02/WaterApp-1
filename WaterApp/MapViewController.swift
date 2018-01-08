@@ -65,8 +65,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     //  For Favorite Table View
     var deleteFavouriteIndexPath: IndexPath?;
     @IBOutlet weak var favoriteTableView: UITableView!
-    var fakeDate: [String] = ["Napoli - S. Giovanni a Teduccio", "Ischia - Punta Molino"]
+    var FavoritesDate: [Favorite]?;
     
+    let coreData: CoreDataController = CoreDataController.shared;
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.hidesBackButton = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad();
         Thread.sleep(forTimeInterval: 1.4)
@@ -75,7 +82,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         legend.layer.cornerRadius = 10
        
         // I get the reference to the Storage where i have the file CSV
-        storageRef = Storage.storage().reference().child("Data").child("Data_ARPAC_Formatted_CSV.csv");
+        storageRef = Storage.storage().reference().child("Data").child("Data_ARPA_Formatted_CSV.csv");
         
         popView.isHidden = true;
         readFromCSV();
@@ -139,13 +146,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         // I get the datas
         let datas = searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
         // I create an object of type Preference
-        var preference: Preference = Preference(data: datas);
+        let preference: Preference = Preference(data: datas);
+
+        let lastAnalysis: Int = (preference.analisysData.count - 1);
         
-        if( star.currentImage != UIImage(named: "star_colored_bordi") ){
+        if( star.currentImage == UIImage(named: "add-to-favorites") ){
             star.setImage(UIImage(named: "star_colored_bordi"), for: .normal);
+            coreData.addFavorite(area: preference.area, locality: preference.locality, latitude: Float(preference.latitude)!, longitude: Float(preference.longitude)!,
+                                 enterococci: Int16(Int(preference.analisysData[lastAnalysis][1])!), escherichia: Int16(Int(preference.analisysData[lastAnalysis][2])!));
         } else {
             star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
+            coreData.deleteFavorite(latitude: Float(preference.latitude)!, longitude: Float(preference.longitude)!)
         }
+        
+         self.favoriteTableView.reloadData();
     }
     
     // HIDE LEGEND AND BUTTONS WHEN MAP IS MOVING
@@ -258,29 +272,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         return row.components(separatedBy: delimiter)
     }
     
-//    ----GET DATE IN A FORMAT EASY TO READ
-    
-    func formattedDate(date: String) -> String {
-        
-        let startingIndex = date.index(date.startIndex, offsetBy: 4)
-        let new = date.substring(from: startingIndex)
-        let endingIndex = new.index(new.endIndex, offsetBy: -19)
-        let final = new.substring(to: endingIndex)
-        
-        return final + " 2017"
-    }
-    
 /*  SEARCH LOCATIONS OF ANALYSIS AND CREATE FLAGS */
     
     func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEnterococchi: Int,
                      _ indexEscherichia: Int ){
-
-        var latitude: Float = Float(data[3][indexLatitude])!
-        var longitude: Float = Float(data[3][indexLongitude])!
-        var valueEnterococchi: Int = Int(data[3][indexEnterococchi])!;
-        var valueEscherichia: Int = Int(data[3][indexEscherichia])!;
-
-        for  i in 4...data.count-1 {
+        print(data[0][indexLatitude]);
+        var latitude: Float = Float(data[0][indexLatitude])!
+        var longitude: Float = Float(data[0][indexLongitude])!
+        var valueEnterococchi: Int = Int(data[0][indexEnterococchi])!;
+        var valueEscherichia: Int = Int(data[0][indexEscherichia])!;
+        
+        for  i in 1...data.count-1 {
 
             if( (Float(data[i][indexLongitude]) ?? 0) != 0) {
 
@@ -305,7 +307,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     // Set the new values
                     latitude = Float(data[i][indexLatitude+1])!
                     longitude = Float (data[i][indexLongitude+1])!
-                    valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
+                    valueEnterococchi = Int(data[i][indexEscherichia+1])!;
                     valueEscherichia = Int(data[i][indexEscherichia+1])!;
                 } else {
                     if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
@@ -366,9 +368,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 //    BUTTON FOR STARRED AND MAP TYPE
     
     @IBAction func starredButton(_ sender: Any) {
-        favoriteView.isHidden = false;
-        self.searchResultsTableView.isHidden = true;
-        setPrioritySearchBar();
+        if( self.closeToTop.priority == UILayoutPriority(rawValue: 1)) {
+            self.closeToTop.constant = self.view.frame.height - (self.searchBar.frame.height + self.favoriteView.frame.height + 13)
+            favoriteView.isHidden = false;
+            self.searchResultsTableView.isHidden = true;
+            setPrioritySearchBar();
+        } else {
+            self.DismissKeyboard();
+        }
     }
     
     @IBAction func myLocationButton(_ sender: Any) {
@@ -377,7 +384,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let region = MKCoordinateRegion(center: center, span: self.mapView.region.span)
         
         mapView!.setRegion(region, animated: true)
-        mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
+        mapView!.setCenter(mapView!.userLocation.coordinate, animated: true);
+        self.DismissKeyboard();
     }
     
 // SEARCH BAR
@@ -460,7 +468,8 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
             
         }
         else {
-            return fakeDate.count;
+            FavoritesDate = coreData.loadAllFavorites();
+            return FavoritesDate!.count;
         }
     }
     
@@ -486,9 +495,19 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
                     print("Fatal Error during the creation of FavoriteCell")
                     return FavoriteCell();
                 };
-
-            cell.lblLocation.text = fakeDate[indexPath.row];
-            cell.imgFlag.image = UIImage(named: "flag-map-marker");
+         
+            cell.lblLocation.text = "\(FavoritesDate![indexPath.row].area!)-\(FavoritesDate![indexPath.row].locality!)";
+            
+            if(FavoritesDate![indexPath.row].enterococci >= limitEnterococchi  || FavoritesDate![indexPath.row].escherichia >= limitEscherica) {
+                
+                    cell.imgFlag.image = UIImage(named: "flag-map-marker");
+                } else if(FavoritesDate![indexPath.row].enterococci >= limitEnterococchi-100  || FavoritesDate![indexPath.row].escherichia >= limitEscherica-250){
+                    cell.imgFlag.image =  UIImage(named: "flagwarning");
+                
+            } else {
+                cell.imgFlag.image =  UIImage(named:"flagAppost")
+            }
+            
             return cell
         }
     }
@@ -501,7 +520,7 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
         
         let share = UITableViewRowAction(style: .default, title: "Share") { (action, indexPath) in
             // share item at indexPath
-            print("I want to share: \(self.fakeDate[indexPath.row])")
+            print("I want to share: \(self.FavoritesDate![indexPath.row])")
         }
         
         share.backgroundColor = UIColor.lightGray
@@ -512,7 +531,7 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
 
     //THIS FUNCTION SHOWS A CONFIRM ALERT BEFORE DELETING A FAVOURITE
     func confirmDelete(index: IndexPath) {
-        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.fakeDate[index.row]) ?", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Delete Favourite", message: "Are you sure you want to permanently delete \(self.FavoritesDate![index.row].area!)-\(self.FavoritesDate![index.row].locality!) ?", preferredStyle: .actionSheet)
 
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteFavourite)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteFavourite)
@@ -532,7 +551,10 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
     //IF YOU CLICK "DELETE" ON THE ALERT, THIS FUNCTION WILL BE CALLED
     func handleDeleteFavourite(alertAction: UIAlertAction!) -> Void {
         if deleteFavouriteIndexPath != nil {
-            self.fakeDate.remove(at: deleteFavouriteIndexPath!.row)
+            // I delete the Favorite from database
+            coreData.deleteFavorite(latitude: FavoritesDate![(deleteFavouriteIndexPath?.row)!].latitude, longitude: FavoritesDate![(deleteFavouriteIndexPath?.row)!].longitude);
+            // I delete the Favorite also from array
+            self.FavoritesDate!.remove(at: deleteFavouriteIndexPath!.row);
             self.favoriteTableView.deleteRows(at: [deleteFavouriteIndexPath!], with: .fade)
             deleteFavouriteIndexPath = nil
         }
@@ -544,6 +566,7 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if( tableView.restorationIdentifier == "SearchTableView") {
             tableView.deselectRow(at: indexPath, animated: true)
             let completion = searchResults[indexPath.row]
@@ -562,6 +585,13 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
                 self.popView.isHidden = true;
                 self.DismissKeyboard();
             }
+        } else {
+            /* I selected a location in favorite and I need to set all info in the popView and Hide the search bar */
+            tableView.deselectRow(at: indexPath, animated: true);
+            self.searchView.isHidden = true;
+            centerMapOnLocation(location: CLLocation(latitude: CLLocationDegrees(self.FavoritesDate![indexPath.row].latitude), longitude: CLLocationDegrees(self.FavoritesDate![indexPath.row].longitude)));
+            setPopView(latitude: self.FavoritesDate![indexPath.row].latitude, longitude: self.FavoritesDate![indexPath.row].longitude);
+            
         }
     }
 }
@@ -610,11 +640,10 @@ extension MapViewController: MKMapViewDelegate {
         
         if(annotation.vEnterococchi >= limitEnterococchi  || annotation.vEscherichia >= limitEscherica) {
             
-            if(annotation.vEnterococchi >= limitEnterococchi  && annotation.vEscherichia >= limitEscherica){
                view.image = UIImage(named: "flag-map-marker");
-            } else {
+            } else if(annotation.vEnterococchi >= limitEnterococchi-100  || annotation.vEscherichia >= limitEscherica-250){
                 view.image =  UIImage(named: "flagwarning");
-            }
+            
         } else {
             view.image =  UIImage(named:"flagAppost")
         }
@@ -628,48 +657,57 @@ extension MapViewController: MKMapViewDelegate {
         latitude = Float((view.annotation?.coordinate.latitude)!);
         longitude = Float((view.annotation?.coordinate.longitude)!);
 
+        setPopView(latitude: latitude, longitude: longitude)
+        mapView.deselectAnnotation(view.annotation, animated: true);
+    }
+    
+    func setPopView(latitude: Float, longitude: Float) {
         var searchData = self.searchInArray(dataArpac, iLatitude, iLongitude, latitude, longitude);
         /* I need to show the information about that marker.
-           Set all information */
-        self.lblArea.text = searchData[1][0];
+         Set all information */
+        self.lblArea.text = searchData[0][0];
         self.lblArea.sizeToFit();
         
-        self.lblCity.text = searchData[1][1];
+        self.lblCity.text = searchData[0][1];
         self.lblCity.sizeToFit();
-
-        self.lblLocation.text = searchData [1][2];
+        
+        self.lblLocation.text = searchData[0][2];
         self.lblLocation.sizeToFit();
         
-        self.dateLastAnalysis.text = formattedDate(date: searchData [1][5]);
+        self.dateLastAnalysis.text = searchData[0][5];
         self.dateLastAnalysis.sizeToFit();
-
+        
         var lastIndex:Int = searchData.count-1;
-        var valueEnterococchi = Int(searchData[lastIndex][iEnterococchi]);
-        var valueEscherichia = Int(searchData[lastIndex][iEscherichia]);
-
-        if(valueEnterococchi! >= limitEnterococchi  || valueEscherichia! >= limitEscherica) {
-
-            if(valueEnterococchi! >= limitEnterococchi  && valueEscherichia! >= limitEscherica){
+        var valueEnterococchi = Int(searchData[lastIndex][iEnterococchi])!;
+        var valueEscherichia = Int(searchData[lastIndex][iEscherichia])!;
+        
+        if(valueEnterococchi >= limitEnterococchi  || valueEscherichia >= limitEscherica) {
+            
                 self.imageFlag.image = UIImage(named: "flag-map-marker1");
-
-            } else {
+                
+            } else if(valueEnterococchi >= limitEnterococchi-100  || valueEscherichia >= limitEscherica-250){
                 self.imageFlag.image = UIImage(named: "flagwarning1");
-            }
+            
         } else {
             self.imageFlag.image = UIImage(named: "flagappost-1");
         }
-
+        
         self.lblValueEscherichia.text = searchData[lastIndex][iEscherichia];
         self.lblValueEscherichia.sizeToFit();
-
+        
         self.lblValueEnterococchi.text = searchData[lastIndex][iEnterococchi];
         self.lblValueEnterococchi.sizeToFit();
         self.searchView.isHidden = true;
-        view.isSelected = false;
-
-        mapView.deselectAnnotation(view.annotation, animated: true);
-        popView.isHidden = false;
         
+        if coreData.loadFavorite(latitude: latitude, longitude: longitude) == nil {
+            star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
+        }
+        else{
+            self.star.setImage(UIImage(named: "star_colored_bordi"), for: .normal)
+            
+        }
+        
+        popView.isHidden = false;
     }
 
 }
