@@ -756,7 +756,7 @@
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamation-mark" translatesAutoresizingMaskIntoConstraints="NO" id="JqS-pl-kBx">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamation-mark2" translatesAutoresizingMaskIntoConstraints="NO" id="JqS-pl-kBx">
                                 <rect key="frame" x="39" y="585" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="0n1-10-6Hy"/>
@@ -831,7 +831,7 @@
         <image name="STAR-Map-buttons" width="90" height="90"/>
         <image name="Settings" width="25" height="25"/>
         <image name="add-to-favorites" width="25" height="23"/>
-        <image name="exclamation-mark" width="32" height="32"/>
+        <image name="exclamation-mark2" width="64" height="64"/>
         <image name="flag-map-marker" width="25" height="25"/>
         <image name="flag-map-marker1" width="512" height="512"/>
         <image name="flagAppost" width="25" height="25"/>
