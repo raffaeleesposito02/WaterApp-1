@@ -10,7 +10,7 @@ import UIKit
 import FirebaseStorage
 import FirebaseStorageUI
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var notifyNews: UISwitch!
     @IBOutlet weak var switchNotifyChanges: UISwitch!
@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var bntDonePicker: UIButton!
     @IBOutlet weak var overlayView: UIView!
     
-
+    @IBOutlet weak var developerInfoTableView: UITableView!
     @IBOutlet weak var constraintScroll: NSLayoutConstraint!
     
     var localityTable = Array<Array<String>>();
@@ -32,10 +32,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var gradientLayer: CAGradientLayer?;
     var pickerSelected : String?;
     
+    //INFO TITLE ARRAY
+    var tableInfo: [String] = ["Chi siamo", "Contatti", "Eterococchi", "Batteri", "Sviluppi futuri"]
+    
+    //INFO CONTENT ARRAY. WILL BE SHOWN IN INFOVIEWCONTROLLER, WHEN YOU CLICK ON "TABLEINFO" ELEMENT
+    var tableContent: [String] = [
+        "Raffaele", "Telefono", "INFO SU ETEROCOCCHI", "INFO SU BATTERI", "INFO SU SVILUPPI FUTURI"
+    ]
+    
     @IBOutlet weak var labelTest: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        developerInfoTableView.delegate = self
+        developerInfoTableView.dataSource = self
        
         // to show the current language in the labelLanguage
         if labelTest.text == "Language" {
@@ -141,6 +152,33 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func actionNotifyChanges(_ sender: Any) {
         // Implement notifications
     }
+    
+    //MANAGE INFO TABLEVIEW ------------------------------------------------------------ BEGIN
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return self.tableInfo.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "developerInfoTableCell", for: indexPath);
+        cell.textLabel?.text = tableInfo[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        Information.shared.infoTitle = tableInfo[indexPath.row]
+        Information.shared.infoContent = tableContent[indexPath.row]
+        
+    }
+    
+    //MANAGE INFO TABLEVIEW ------------------------------------------------------- END
     
 }
 
