@@ -368,7 +368,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 //    BUTTON FOR STARRED AND MAP TYPE
     
     @IBAction func starredButton(_ sender: Any) {
+        self.closeToTop.constant = self.view.frame.height - (self.searchBar.frame.height + self.favoriteView.frame.height + 13)
         favoriteView.isHidden = false;
+        self.searchResultsTableView.isHidden = true;
         self.searchResultsTableView.isHidden = true;
         setPrioritySearchBar();
     }
