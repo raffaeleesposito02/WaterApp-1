@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone 8" translatesAutoresizingMaskIntoConstraints="NO" id="TBo-4b-EtI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="porcamadonna" translatesAutoresizingMaskIntoConstraints="NO" id="TBo-4b-EtI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
@@ -37,6 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="iPhone 8" width="1125" height="2001"/>
+        <image name="porcamadonna" width="375" height="667"/>
     </resources>
 </document>
