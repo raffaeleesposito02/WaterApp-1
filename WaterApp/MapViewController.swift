@@ -497,7 +497,7 @@ extension MapViewController: UITableViewDataSource,UITableViewDelegate  {
             if(FavoritesDate![indexPath.row].enterococci >= limitEnterococchi  || FavoritesDate![indexPath.row].escherichia >= limitEscherica) {
                 
                     cell.imgFlag.image = UIImage(named: "flag-map-marker");
-                } else if(FavoritesDate![indexPath.row].enterococci >= limitEnterococchi-50  || FavoritesDate![indexPath.row].escherichia >= limitEscherica-100){
+                } else if(FavoritesDate![indexPath.row].enterococci >= limitEnterococchi-100  || FavoritesDate![indexPath.row].escherichia >= limitEscherica-250){
                     cell.imgFlag.image =  UIImage(named: "flagwarning");
                 
             } else {
@@ -637,7 +637,7 @@ extension MapViewController: MKMapViewDelegate {
         if(annotation.vEnterococchi >= limitEnterococchi  || annotation.vEscherichia >= limitEscherica) {
             
                view.image = UIImage(named: "flag-map-marker");
-            } else if(annotation.vEnterococchi >= limitEnterococchi-50  || annotation.vEscherichia >= limitEscherica-100){
+            } else if(annotation.vEnterococchi >= limitEnterococchi-100  || annotation.vEscherichia >= limitEscherica-250){
                 view.image =  UIImage(named: "flagwarning");
             
         } else {
@@ -681,7 +681,7 @@ extension MapViewController: MKMapViewDelegate {
             
                 self.imageFlag.image = UIImage(named: "flag-map-marker1");
                 
-            } else if(valueEnterococchi >= limitEnterococchi-50  || valueEscherichia >= limitEscherica-100){
+            } else if(valueEnterococchi >= limitEnterococchi-100  || valueEscherichia >= limitEscherica-250){
                 self.imageFlag.image = UIImage(named: "flagwarning1");
             
         } else {
