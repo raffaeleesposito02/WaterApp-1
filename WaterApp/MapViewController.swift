@@ -294,7 +294,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEnterococchi: Int,
                      _ indexEscherichia: Int ){
-        print(data[0][indexLatitude]);
         var latitude: Float = Float(data[0][indexLatitude])!
         var longitude: Float = Float(data[0][indexLongitude])!
         var valueEnterococchi: Int = Int(data[0][indexEnterococchi])!;
@@ -670,13 +669,16 @@ extension MapViewController: MKMapViewDelegate {
     
     // WHEN A MARKER IS TAPPED
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
-    
-        // Retrive information about marker location
-        latitude = Float((view.annotation?.coordinate.latitude)!);
-        longitude = Float((view.annotation?.coordinate.longitude)!);
+        
+        if view.annotation is MKUserLocation
+        { } else {
+            // Retrive information about marker location
+            latitude = Float((view.annotation?.coordinate.latitude)!);
+            longitude = Float((view.annotation?.coordinate.longitude)!);
 
-        setPopView(latitude: latitude, longitude: longitude)
-        mapView.deselectAnnotation(view.annotation, animated: true);
+            setPopView(latitude: latitude, longitude: longitude)
+            mapView.deselectAnnotation(view.annotation, animated: true);
+        }
     }
     
     func setPopView(latitude: Float, longitude: Float) {

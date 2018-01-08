@@ -31,7 +31,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bvz-HA-VOl">
-                                <rect key="frame" x="0.0" y="20" width="375" height="462"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <connections>
                                     <outlet property="delegate" destination="pze-eX-819" id="J6Q-AN-bfX"/>
                                 </connections>
@@ -475,11 +475,12 @@
                             <constraint firstItem="KMD-gR-rHM" firstAttribute="trailing" secondItem="zb4-1H-y1z" secondAttribute="trailing" constant="13" id="9Vb-AU-Egf"/>
                             <constraint firstItem="f4V-kh-fvQ" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" constant="13" id="CXq-PE-oaS"/>
                             <constraint firstItem="8hn-rh-vYY" firstAttribute="top" secondItem="3W4-uf-iiP" secondAttribute="top" priority="1" constant="100" id="Fo5-Tx-1F3"/>
+                            <constraint firstItem="Bvz-HA-VOl" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" id="GhK-Lc-TUP"/>
                             <constraint firstItem="f4V-kh-fvQ" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" constant="17" id="JWL-Gy-oHo"/>
                             <constraint firstItem="Bvz-HA-VOl" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" id="Lj5-Rs-Syy"/>
                             <constraint firstItem="8hn-rh-vYY" firstAttribute="trailing" secondItem="KMD-gR-rHM" secondAttribute="trailing" id="Moa-XP-ogr"/>
-                            <constraint firstItem="Bvz-HA-VOl" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" id="Mub-OR-flq"/>
                             <constraint firstItem="Bvz-HA-VOl" firstAttribute="trailing" secondItem="KMD-gR-rHM" secondAttribute="trailing" id="R7K-vp-fen"/>
+                            <constraint firstItem="Bvz-HA-VOl" firstAttribute="bottom" secondItem="KMD-gR-rHM" secondAttribute="bottom" id="T1k-Yb-yov"/>
                             <constraint firstItem="8hn-rh-vYY" firstAttribute="top" secondItem="3W4-uf-iiP" secondAttribute="top" priority="999" constant="482" id="TCu-xq-YHq"/>
                             <constraint firstItem="2dR-PW-Dn5" firstAttribute="top" secondItem="zb4-1H-y1z" secondAttribute="bottom" id="TpU-fx-knd"/>
                             <constraint firstItem="3fU-iX-SC9" firstAttribute="leading" secondItem="KMD-gR-rHM" secondAttribute="leading" constant="11" id="ZND-Dr-ZNh"/>
@@ -487,9 +488,6 @@
                             <constraint firstItem="KMD-gR-rHM" firstAttribute="bottom" secondItem="f4V-kh-fvQ" secondAttribute="bottom" constant="20" id="gX5-SZ-OUb"/>
                             <constraint firstItem="KMD-gR-rHM" firstAttribute="trailing" secondItem="2dR-PW-Dn5" secondAttribute="trailing" constant="13" id="jvN-Kc-Md1"/>
                             <constraint firstItem="3fU-iX-SC9" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" constant="16" id="lzP-dL-FGL"/>
-                            <constraint firstItem="Bvz-HA-VOl" firstAttribute="top" secondItem="KMD-gR-rHM" secondAttribute="top" id="mek-U0-bTY"/>
-                            <constraint firstItem="Bvz-HA-VOl" firstAttribute="bottom" secondItem="KMD-gR-rHM" secondAttribute="bottom" id="qDj-MC-Atr"/>
-                            <constraint firstItem="8hn-rh-vYY" firstAttribute="top" secondItem="Bvz-HA-VOl" secondAttribute="bottom" id="xle-Ho-CrQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KMD-gR-rHM"/>
                     </view>
