@@ -634,23 +634,22 @@
                                             <action selector="actionNotifyNews:" destination="vsn-W7-Eb3" eventType="valueChanged" id="WQ1-hO-Nat"/>
                                         </connections>
                                     </switch>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Lq-oa-Vdj">
-                                        <rect key="frame" x="8" y="259" width="359" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Lq-oa-Vdj">
+                                        <rect key="frame" x="15" y="261" width="340" height="227"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="developerInfoTableCell" textLabel="GOe-BT-buM" style="IBUITableViewCellStyleDefault" id="niq-5Z-1wy">
-                                                <rect key="frame" x="0.0" y="28" width="359" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="340" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="niq-5Z-1wy" id="0W1-z5-kOJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="326" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="307" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GOe-BT-buM">
-                                                            <rect key="frame" x="15" y="0.0" width="309" height="44"/>
+                                                            <rect key="frame" x="15" y="0.0" width="290" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" name="BluOcean"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                            <color key="textColor" red="0.0027726537020000002" green="0.3250108028" blue="0.54885756969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -682,18 +681,22 @@
                                     <constraint firstItem="lvw-Ob-a5P" firstAttribute="leading" secondItem="ON5-FC-0Ex" secondAttribute="leading" constant="19" id="Qsw-An-eh8"/>
                                     <constraint firstItem="QzJ-GN-yTS" firstAttribute="leading" secondItem="Kbj-Xe-N4u" secondAttribute="trailing" constant="83" id="Qul-pT-f5p"/>
                                     <constraint firstItem="htV-Vj-f1m" firstAttribute="top" secondItem="Kbj-Xe-N4u" secondAttribute="bottom" constant="30" id="TIf-KK-i9H"/>
+                                    <constraint firstItem="0Lq-oa-Vdj" firstAttribute="leading" secondItem="ON5-FC-0Ex" secondAttribute="leading" constant="15" id="TSn-mk-XPr"/>
                                     <constraint firstItem="mC5-fY-jPR" firstAttribute="baseline" secondItem="aGw-Rv-DoK" secondAttribute="baseline" constant="-5.5" id="Uty-zF-iPH"/>
                                     <constraint firstItem="XGJ-QT-eYF" firstAttribute="centerX" secondItem="jI0-7L-NLP" secondAttribute="centerX" id="V4U-i0-BTB"/>
                                     <constraint firstItem="Kbj-Xe-N4u" firstAttribute="leading" secondItem="XGJ-QT-eYF" secondAttribute="leading" id="Zkv-QG-V2M"/>
                                     <constraint firstItem="OIf-SH-fe4" firstAttribute="top" secondItem="aGw-Rv-DoK" secondAttribute="bottom" constant="5" id="buE-yb-ip3"/>
                                     <constraint firstItem="lvw-Ob-a5P" firstAttribute="top" secondItem="jI0-7L-NLP" secondAttribute="bottom" constant="2" id="dgq-iV-LYO"/>
                                     <constraint firstItem="aGw-Rv-DoK" firstAttribute="leading" secondItem="ON5-FC-0Ex" secondAttribute="leading" constant="23" id="hfV-GA-4dq"/>
+                                    <constraint firstItem="0Lq-oa-Vdj" firstAttribute="top" secondItem="lvw-Ob-a5P" secondAttribute="bottom" constant="20" id="m3A-Fj-cuW"/>
                                     <constraint firstItem="XGJ-QT-eYF" firstAttribute="leading" secondItem="rb4-Te-seA" secondAttribute="leading" id="mD4-7q-zer"/>
                                     <constraint firstItem="9LG-1d-zEV" firstAttribute="centerY" secondItem="XGJ-QT-eYF" secondAttribute="centerY" id="rBF-y8-icE"/>
                                     <constraint firstItem="OIf-SH-fe4" firstAttribute="leading" secondItem="aGw-Rv-DoK" secondAttribute="leading" id="rtG-AN-hCv"/>
                                     <constraint firstItem="M5m-eE-Vym" firstAttribute="baseline" secondItem="rb4-Te-seA" secondAttribute="baseline" id="s1d-gX-7Pp"/>
                                     <constraint firstItem="QzJ-GN-yTS" firstAttribute="centerX" secondItem="9LG-1d-zEV" secondAttribute="centerX" id="vHj-4r-V0S"/>
                                     <constraint firstItem="aGw-Rv-DoK" firstAttribute="top" secondItem="ON5-FC-0Ex" secondAttribute="top" constant="30" id="viF-Po-uo9"/>
+                                    <constraint firstAttribute="bottom" secondItem="0Lq-oa-Vdj" secondAttribute="bottom" constant="30" id="wio-Ho-wBK"/>
+                                    <constraint firstAttribute="trailing" secondItem="0Lq-oa-Vdj" secondAttribute="trailing" constant="20" id="yG7-nD-the"/>
                                 </constraints>
                             </scrollView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFe-fh-KzX" userLabel="OverlayView">
@@ -920,9 +923,6 @@
         <image name="flagwarning" width="25" height="25"/>
         <image name="porcamadonna" width="375" height="667"/>
         <image name="star_colored_bordi" width="32" height="32"/>
-        <namedColor name="BluOcean">
-            <color red="0.0039215686274509803" green="0.25098039215686274" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="BluOcean">
             <color red="0.0039215686274509803" green="0.25098039215686274" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

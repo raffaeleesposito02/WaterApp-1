@@ -69,11 +69,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let coreData: CoreDataController = CoreDataController.shared;
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.hidesBackButton = true
-    }
+    let regionRadius: CLLocationDistance = 15000;
+    
     override func viewDidLoad() {
         super.viewDidLoad();
         Thread.sleep(forTimeInterval: 1.4)
@@ -94,7 +91,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         popView.layer.shadowRadius = 60;
         gradientToView(view: self.popView);
         
-        //        MAPKIT
+        
         searchCompleter.delegate = self
         mapView.delegate = self
         
@@ -108,8 +105,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             centerMapOnLocation(location: location );
         } else {
             createAlertMessage(NSLocalizedString("error", comment: ""), NSLocalizedString("errorgeo", comment: ""));
-            
         }
+        
         mapView.showsUserLocation = true;
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.DismissKeyboard))
         self.mapView.addGestureRecognizer(tap)
@@ -121,15 +118,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     }
     
-    @objc func DismissKeyboard(){
-        self.farFromTop.priority = UILayoutPriority(rawValue: 999)
-        self.closeToTop.priority = UILayoutPriority(rawValue: 1);
-        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
-            
-            self.view.layoutIfNeeded()
-            
-        }, completion: nil)
-        view.endEditing(true)
+    // Update the constraint and the gradient after a rotation
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.enterococchiEscherichiaConstraint.constant = self.popView.frame.width - (274);
+        gradientLayer!.frame = self.popView.layer.bounds
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.hidesBackButton = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        popView.isHidden = true
     }
     
     // MAP TYPE SEGMENTED
@@ -144,17 +147,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    func createAlertMessage(_ mTitle:String, _ mMessage: String) {
-    
-    let alertMessage = UIAlertController(title: mTitle, message: mMessage, preferredStyle: .alert)
-        // Attach an action on alert message
-        alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-        alertMessage.dismiss(animated: true, completion: nil)
-        }))
-        // Display the alert message
-        self.present(alertMessage, animated: true, completion: nil)
+    //    BUTTON FOR STARRED AND MAP TYPE
+    @IBAction func starredButton(_ sender: Any) {
+        if( self.closeToTop.priority == UILayoutPriority(rawValue: 1)) {
+            self.closeToTop.constant = self.view.frame.height - (self.searchBar.frame.height + self.favoriteView.frame.height + 13)
+            favoriteView.isHidden = false;
+            self.searchResultsTableView.isHidden = true;
+            setPrioritySearchBar();
+        } else {
+            self.DismissKeyboard();
+        }
     }
-
+    
+    @IBAction func myLocationButton(_ sender: Any) {
+        let location = CLLocation()
+        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: self.mapView.region.span)
+        
+        mapView!.setRegion(region, animated: true)
+        mapView!.setCenter(mapView!.userLocation.coordinate, animated: true);
+        self.DismissKeyboard();
+    }
+    
     @IBAction func closePopup(_ sender: Any) {
         popView.isHidden = true;
         self.star.setImage(UIImage(named: "add-to-favorites"), for: .normal);
@@ -180,58 +194,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
          self.favoriteTableView.reloadData();
     }
-    
-    // HIDE LEGEND AND BUTTONS WHEN MAP IS MOVING
-    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        legend.isHidden = true
-        starredButtonOutlet.isHidden = true
-        myLocationButtonOutlet.isHidden = true
-    }
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        legend.isHidden = false
-        starredButtonOutlet.isHidden = false
-        myLocationButtonOutlet.isHidden = false
-    }
-    
-    
-    let regionRadius: CLLocationDistance = 15000;
-    
+
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        popView.isHidden = true
-    }
-    
-    
+
     func createrMarker(_ latitude: Float ,_ longitude: Float,_ valueEnterococchi: Int, _ valueEscherichia: Int) {
         
         let analysisPoint = AnalysisPoint(CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)), valueEnterococchi, valueEscherichia );
         
         mapView.addAnnotation(analysisPoint)
     }
-    
-    // Create a gradient view
-    func gradientToView(view : UIView) {
-        
-        gradientLayer = CAGradientLayer()
-        gradientLayer!.frame.size = view.frame.size
-        gradientLayer!.colors = [UIColor(named: "BluOcean")?.cgColor, UIColor(named:"DarkBlu")?.cgColor]
-        gradientLayer!.locations = [0.0, 1.0]
-        gradientLayer!.cornerRadius = 6;
-        view.layer.insertSublayer(gradientLayer!, at: 0);
-    
-    }
-
-    // Update the constraint and the gradient after a rotation
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.enterococchiEscherichiaConstraint.constant = self.popView.frame.width - (274);
-        gradientLayer!.frame = self.popView.layer.bounds
-    }
-
 
 //    -------------------READ FROM FILE-------------------
     func readFromCSV() {
@@ -254,12 +228,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 DispatchQueue.main.async {
                     guard let text = String(data: data!, encoding: String.Encoding.ascii) as String!
                         else {
-                            print("Error during conversion file \(data?.description)")
+                            self.createAlertMessage(NSLocalizedString("errorDownTitle", comment: ""), NSLocalizedString("errorDownDesc", comment: ""));
                             return
                     }
                     self.converTextToArray(text)
                 }
-
             }).resume()
         });
     }
@@ -294,6 +267,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     func createFlags(_ data: [[String]],_ indexLongitude: Int,_ indexLatitude: Int,_ indexEnterococchi: Int,
                      _ indexEscherichia: Int ){
+        // Inital value
         var latitude: Float = Float(data[0][indexLatitude])!
         var longitude: Float = Float(data[0][indexLongitude])!
         var valueEnterococchi: Int = Int(data[0][indexEnterococchi])!;
@@ -309,23 +283,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     // Set the new values
                     latitude = Float(data[i][indexLatitude])!
                     longitude = Float (data[i][indexLongitude])!
-                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
-                    valueEscherichia = Int(data[i][indexEscherichia])!;
-                } else {
-                    // update only the values of bacterias
-                    valueEnterococchi = Int(data[i][indexEnterococchi])!;
-                    valueEscherichia = Int(data[i][indexEscherichia])!;
                 }
+                // update only the values of bacterias
+                valueEnterococchi = Int(data[i][indexEnterococchi])!;
+                valueEscherichia = Int(data[i][indexEscherichia])!;
             } else {
-
                 if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
                     // Create a merker in the previous point
                     createrMarker(longitude,latitude, valueEnterococchi, valueEscherichia );
                     // Set the new values
                     latitude = Float(data[i][indexLatitude+1])!
                     longitude = Float (data[i][indexLongitude+1])!
-                    valueEnterococchi = Int(data[i][indexEscherichia+1])!;
-                    valueEscherichia = Int(data[i][indexEscherichia+1])!;
+ 
                 } else {
                     if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
                         // Create a merker in the previous point
@@ -333,14 +302,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                         // Set the new values
                         latitude = Float(data[i][indexLatitude+1])!
                         longitude = Float (data[i][indexLongitude+1])!
-                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
-                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
-                    } else {
-                        // update only the values of bacterias
-                        valueEnterococchi = Int(data[i][indexEnterococchi+1])!;
-                        valueEscherichia = Int(data[i][indexEscherichia+1])!;
                     }
                 }
+                valueEnterococchi = Int(data[i][indexEscherichia+1])!
+                valueEscherichia = Int(data[i][indexEscherichia+1])!;
             }
         }
     }
@@ -369,7 +334,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         return values;
     }
     
-//   --------------------vvv MAPKIT vvv---------------------
+//   --------------------- MAPKIT -----------------------
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -381,30 +346,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
     
-    
-//    BUTTON FOR STARRED AND MAP TYPE
-    
-    @IBAction func starredButton(_ sender: Any) {
-        if( self.closeToTop.priority == UILayoutPriority(rawValue: 1)) {
-            self.closeToTop.constant = self.view.frame.height - (self.searchBar.frame.height + self.favoriteView.frame.height + 13)
-            favoriteView.isHidden = false;
-            self.searchResultsTableView.isHidden = true;
-            setPrioritySearchBar();
-        } else {
-            self.DismissKeyboard();
-        }
+    // HIDE LEGEND AND BUTTONS WHEN MAP IS MOVING
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        legend.isHidden = true
+        starredButtonOutlet.isHidden = true
+        myLocationButtonOutlet.isHidden = true
     }
-    
-    @IBAction func myLocationButton(_ sender: Any) {
-        let location = CLLocation()
-        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: self.mapView.region.span)
-        
-        mapView!.setRegion(region, animated: true)
-        mapView!.setCenter(mapView!.userLocation.coordinate, animated: true);
-        self.DismissKeyboard();
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        legend.isHidden = false
+        starredButtonOutlet.isHidden = false
+        myLocationButtonOutlet.isHidden = false
     }
-    
 // SEARCH BAR
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -422,7 +374,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func swipeUpTouchBar(_ sender: UISwipeGestureRecognizer) {
-        
         // I need to modify the constraint in order to show the favorite places
         self.closeToTop.constant = self.view.frame.height - (self.searchBar.frame.height + self.favoriteView.frame.height + 13)
         favoriteView.isHidden = false;
@@ -443,9 +394,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }, completion: nil)
     }
     
-
-    //MANAGE FAVOURITES TABLEVIEW ------------------------------------------------------- END
+    // CREATE ALLERT
+    func createAlertMessage(_ mTitle:String, _ mMessage: String) {
+        
+        let alertMessage = UIAlertController(title: mTitle, message: mMessage, preferredStyle: .alert)
+        // Attach an action on alert message
+        alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            alertMessage.dismiss(animated: true, completion: nil)
+        }))
+        // Display the alert message
+        self.present(alertMessage, animated: true, completion: nil)
+    }
     
+    // ADD A GRADIENT TO VIEW
+    func gradientToView(view : UIView) {
+        
+        gradientLayer = CAGradientLayer()
+        gradientLayer!.frame.size = view.frame.size
+        gradientLayer!.colors = [UIColor(named: "BluOcean")?.cgColor, UIColor(named:"DarkBlu")?.cgColor]
+        gradientLayer!.locations = [0.0, 1.0]
+        gradientLayer!.cornerRadius = 6;
+        view.layer.insertSublayer(gradientLayer!, at: 0);
+        
+    }
+    
+    // DISMISS KEYBOARD
+    @objc func DismissKeyboard(){
+        self.farFromTop.priority = UILayoutPriority(rawValue: 999)
+        self.closeToTop.priority = UILayoutPriority(rawValue: 1);
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
+            
+            self.view.layoutIfNeeded()
+            
+        }, completion: nil)
+        view.endEditing(true)
+    }
     
 }
 
@@ -694,10 +677,10 @@ extension MapViewController: MKMapViewDelegate {
         self.lblLocation.text = searchData[0][2];
         // self.lblLocation.sizeToFit();
         
-        self.dateLastAnalysis.text = searchData[0][5];
+        var lastIndex:Int = searchData.count-1;
+        self.dateLastAnalysis.text = searchData[lastIndex][5];
         self.dateLastAnalysis.sizeToFit();
         
-        var lastIndex:Int = searchData.count-1;
         var valueEnterococchi = Int(searchData[lastIndex][iEnterococchi])!;
         var valueEscherichia = Int(searchData[lastIndex][iEscherichia])!;
         
