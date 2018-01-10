@@ -33,15 +33,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var pickerSelected : String?;
     
     //INFO TITLE ARRAY
-    var tableInfo: [String] = ["Chi siamo", "Intestinal enterococci", "Escherichia coli"]
+    var tableInfo: [String] = ["About us", "Intestinal enterococci", "Escherichia coli"]
     
     //INFO CONTENT ARRAY. WILL BE SHOWN IN INFOVIEWCONTROLLER, WHEN YOU CLICK ON "TABLEINFO" ELEMENT
     var tableContent: [String] = [
-        "Luigi Previdente:  Computing science degree, coordinator\n\n\nVincenzo Pugliese : Computing science degree, collaborator\n\n\nAlessio Antonisio: Computing science student, coder\n\n\nRaffaele Esposito: Computing science student, coder\n\n\nVittorio Cimmino: Computing science student, designer\n\n\nGrazia Assunta Mazzei: Computing science student, coder\n\n\nHieda Adriana Silva: PhD Student in Information Engineering, collaborator",
+        "Luigi Previdente:  Computer science degree, coordinator\n\n\nVincenzo Pugliese : Computer science degree, collaborator\n\n\nAlessio Antonisio: Electronical engineering student, coder\n\n\nRaffaele Esposito: Computer science student, coder\n\n\nVittorio Cimmino: Computer science student, designer\n\n\nGrazia Assunta Mazzei: Computer science student, coder\n\n\nHieda Adriana Silva: PhD Student in Information Engineering, collaborator",
         
-        "Enterococci are facultative anaerobic organisms, i.e., they are capable of cellular respiration in both oxygen-rich and oxygen-poor environments. Though they are not capable of forming spores, enterococci are tolerant of a wide range of environmental conditions: extreme temperature (10–45 °C), pH (4.5–10.0), and high sodium chloride concentrations.Enterococci often occur in pairs (diplococci) or short chains. Important clinical infections caused by Enterococcus include urinary tract infections, bacteremia, bacterial endocarditis, diverticulitis, and meningitis. In bodies of water, the acceptable level of contamination is very low. The treshold limit is however established at 200 millions of Unities forming a colony (UFC), for 100 ml of water.",
+        "Enterococci are facultative anaerobic organisms, i.e., they are capable of cellular respiration in both oxygen-rich and oxygen-poor environments. Enterococci often occur in pairs (diplococci) or short chains. Important clinical infections caused by Enterococcus include urinary tract infections, bacteremia, bacterial endocarditis, diverticulitis, and meningitis. In bodies of water, the acceptable level of contamination is very low. The limit value for italian coast-water was established at 200 millions of Unities forming a colony (UFC), for 100 ml of water.",
         
-        "Is a common bacterium, genre Enterobacteria, Gram-negative . We can distinguish about 171 serotype. It is normally present in the intestine of all humans and mammals. The are necessary for the correct digestion of the food.. There can be situation in which E. coli can provoke sickness and other disturbance on the man. Example intestinal and urinary infections, meningitis, peritonitis,  septicemy and pneumonia. This happens however rarely and expecially in elevated doses, through alimentar infection rather than in polluted water (when we make a bath) and only by particular subspecies of that (serotype). In particular we are interested in the threshold of it that indicates that coast waters are or less polluted by human activities , sewage discharge. An absence of E.Coli indicates that water is pure, not polluted at all. The treshold limit is however established at 500 millions of Unities forming a colony (UFC), for 100 ml of water"
+        "Is a common bacterium, genre Enterobacteria, Gram-negative. We can distinguish about 171 serotype. It is normally present in the intestine of all humans and mammals and are necessary for the correct digestion of the food. There can be situation in which E. coli can provoke sickness and other disturbance on the man, like intestinal and urinary infections, meningitis, peritonitis,  septicemy and pneumonia. This mostly happens through alimentar infection, but polluted water is also very risky. This kind of pollution is entirely caused by human activities. The limit value for italian coast-water was established at 500 millions of Unities forming a colony (UFC), for 100 ml of water"
     ]
     
     @IBOutlet weak var labelTest: UILabel!
@@ -170,7 +170,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "developerInfoTableCell", for: indexPath);
-        cell.textLabel?.text = tableInfo[indexPath.row]
+        cell.textLabel?.text = NSLocalizedString(tableInfo[indexPath.row], comment: "");
         return cell
     }
     
@@ -178,8 +178,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
-        Information.shared.infoTitle = tableInfo[indexPath.row]
-        Information.shared.infoContent = tableContent[indexPath.row]
+        Information.shared.infoTitle = NSLocalizedString(tableInfo[indexPath.row], comment: "");
+        Information.shared.infoContent = NSLocalizedString(tableContent[indexPath.row], comment: "");
         
     }
     
