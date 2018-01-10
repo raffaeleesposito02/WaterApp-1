@@ -10,16 +10,14 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
-    @IBOutlet weak var infoTitleLabel: UILabel!
-    
+
     @IBOutlet weak var infoContentTextView: UITextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        infoTitleLabel.text! = Information.shared.infoTitle
+        self.navigationItem.title = Information.shared.infoTitle
         infoContentTextView.text! = Information.shared.infoContent
     }
 

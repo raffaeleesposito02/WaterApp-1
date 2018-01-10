@@ -294,7 +294,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     // Set the new values
                     latitude = Float(data[i][indexLatitude+1])!
                     longitude = Float (data[i][indexLongitude+1])!
- 
+
                 } else {
                     if( latitude != Float(data[i][indexLatitude+1]) || longitude != Float(data[i][indexLongitude+1])) {
                         // Create a merker in the previous point
