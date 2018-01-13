@@ -276,7 +276,7 @@
                                             <constraint firstAttribute="height" constant="24" id="6QK-di-aRX"/>
                                             <constraint firstAttribute="width" constant="24" id="C1R-1X-4x9"/>
                                         </constraints>
-                                        <state key="normal" image="Delete">
+                                        <state key="normal" image="close2">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -492,7 +492,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" title="Map" id="ReM-K7-1Zy">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" image="Settings" id="r7R-Op-3ma">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" image="settings-1" id="r7R-Op-3ma">
                             <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="0.0"/>
                             <inset key="largeContentSizeImageInsets" minX="0.0" minY="-1" maxX="0.0" maxY="-1"/>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -906,19 +906,19 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Delete" width="25" height="25"/>
         <image name="EnginesSettings" width="500" height="500"/>
         <image name="Information" width="30" height="57"/>
         <image name="LOC2-Map-buttons" width="90" height="91"/>
         <image name="STAR-Map-buttons" width="90" height="90"/>
-        <image name="Settings" width="25" height="25"/>
         <image name="add-to-favorites" width="25" height="23"/>
+        <image name="close2" width="25" height="25"/>
         <image name="exclamation-mark2" width="64" height="64"/>
         <image name="flag-map-marker" width="25" height="25"/>
         <image name="flag-map-marker1" width="512" height="512"/>
         <image name="flagAppost" width="25" height="25"/>
         <image name="flagwarning" width="25" height="25"/>
         <image name="porcamadonna" width="375" height="667"/>
+        <image name="settings-1" width="25" height="25"/>
         <image name="star_colored_bordi" width="32" height="32"/>
         <namedColor name="BluOcean">
             <color red="0.0039215686274509803" green="0.25098039215686274" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

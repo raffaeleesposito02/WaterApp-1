@@ -2,15 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "clorophilla.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "settings.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "settings-1.png",
       "scale" : "3x"
     }
   ],
