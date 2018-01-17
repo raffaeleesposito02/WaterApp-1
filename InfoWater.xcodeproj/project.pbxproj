@@ -11,6 +11,14 @@
 		350DC8A61FEAF6CF009D9EC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 350DC8A51FEAF6CF009D9EC6 /* GoogleService-Info.plist */; };
 		35418F5E1FF3BF4D0032BBE1 /* AnalysisPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35418F5D1FF3BF4C0032BBE1 /* AnalysisPoint.swift */; };
 		3579493D1FDA872700667BB6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579493C1FDA872700667BB6 /* ProfileViewController.swift */; };
+		357C7F20200F6A37000080C7 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 357C7F1E200F6A37000080C7 /* Interface.storyboard */; };
+		357C7F22200F6A37000080C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 357C7F21200F6A37000080C7 /* Assets.xcassets */; };
+		357C7F29200F6A37000080C7 /* InfoWater_watchOS Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 357C7F28200F6A37000080C7 /* InfoWater_watchOS Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		357C7F2E200F6A37000080C7 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C7F2D200F6A37000080C7 /* InterfaceController.swift */; };
+		357C7F30200F6A37000080C7 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C7F2F200F6A37000080C7 /* ExtensionDelegate.swift */; };
+		357C7F32200F6A37000080C7 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C7F31200F6A37000080C7 /* NotificationController.swift */; };
+		357C7F34200F6A37000080C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 357C7F33200F6A37000080C7 /* Assets.xcassets */; };
+		357C7F39200F6A37000080C7 /* InfoWater_watchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 357C7F1C200F6A37000080C7 /* InfoWater_watchOS.app */; };
 		358DD30D1FFE880000E97363 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 358DD30C1FFE880000E97363 /* LaunchScreen.storyboard */; };
 		358DD30F1FFE89C200E97363 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358DD30E1FFE89C200E97363 /* LaunchScreenViewController.swift */; };
 		35F7711F1FFBE024000C8A5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35F771211FFBE024000C8A5B /* Localizable.strings */; };
@@ -33,6 +41,48 @@
 		C4CC6A66B838FBA090C6914C /* Pods_WaterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69521789BB68C8D3EA14B856 /* Pods_WaterApp.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		357C7F2A200F6A37000080C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DD6D1671FD981D800B78C7D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 357C7F27200F6A37000080C7;
+			remoteInfo = "InfoWater_watchOS Extension";
+		};
+		357C7F37200F6A37000080C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DD6D1671FD981D800B78C7D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 357C7F1B200F6A37000080C7;
+			remoteInfo = InfoWater_watchOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		357C7F3D200F6A37000080C7 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				357C7F29200F6A37000080C7 /* InfoWater_watchOS Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		357C7F41200F6A37000080C7 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				357C7F39200F6A37000080C7 /* InfoWater_watchOS.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		057F92551FDBEC3D00750964 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		07633CB2073CCF1ECAAB2CB8 /* Pods-WaterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaterApp/Pods-WaterApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -41,6 +91,17 @@
 		352244361FFBA0D600F19ABD /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		35418F5D1FF3BF4C0032BBE1 /* AnalysisPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisPoint.swift; sourceTree = "<group>"; };
 		3579493C1FDA872700667BB6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		357C7F1C200F6A37000080C7 /* InfoWater_watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfoWater_watchOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		357C7F1F200F6A37000080C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		357C7F21200F6A37000080C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		357C7F23200F6A37000080C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		357C7F28200F6A37000080C7 /* InfoWater_watchOS Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "InfoWater_watchOS Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		357C7F2D200F6A37000080C7 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		357C7F2F200F6A37000080C7 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		357C7F31200F6A37000080C7 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		357C7F33200F6A37000080C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		357C7F35200F6A37000080C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		357C7F36200F6A37000080C7 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		358DD30C1FFE880000E97363 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		358DD30E1FFE89C200E97363 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		35F771201FFBE024000C8A5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -48,7 +109,7 @@
 		69521789BB68C8D3EA14B856 /* Pods_WaterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D06DD102003AF9300C42DE0 /* InfoSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoSingleton.swift; sourceTree = "<group>"; };
 		6D06DD122003AFB500C42DE0 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
-		6DD6D16F1FD981D800B78C7D /* WaterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DD6D16F1FD981D800B78C7D /* InfoWater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfoWater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD6D1721FD981D800B78C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DD6D1771FD981D800B78C7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6DD6D17E1FD981D800B78C7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +127,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		357C7F25200F6A37000080C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6DD6D16C1FD981D800B78C7D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -79,10 +147,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		357C7F1D200F6A37000080C7 /* InfoWater_watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				357C7F1E200F6A37000080C7 /* Interface.storyboard */,
+				357C7F21200F6A37000080C7 /* Assets.xcassets */,
+				357C7F23200F6A37000080C7 /* Info.plist */,
+			);
+			path = InfoWater_watchOS;
+			sourceTree = "<group>";
+		};
+		357C7F2C200F6A37000080C7 /* InfoWater_watchOS Extension */ = {
+			isa = PBXGroup;
+			children = (
+				357C7F2D200F6A37000080C7 /* InterfaceController.swift */,
+				357C7F2F200F6A37000080C7 /* ExtensionDelegate.swift */,
+				357C7F31200F6A37000080C7 /* NotificationController.swift */,
+				357C7F33200F6A37000080C7 /* Assets.xcassets */,
+				357C7F35200F6A37000080C7 /* Info.plist */,
+				357C7F36200F6A37000080C7 /* PushNotificationPayload.apns */,
+			);
+			path = "InfoWater_watchOS Extension";
+			sourceTree = "<group>";
+		};
 		6DD6D1661FD981D800B78C7D = {
 			isa = PBXGroup;
 			children = (
 				6DD6D1711FD981D800B78C7D /* WaterApp */,
+				357C7F1D200F6A37000080C7 /* InfoWater_watchOS */,
+				357C7F2C200F6A37000080C7 /* InfoWater_watchOS Extension */,
 				6DD6D1701FD981D800B78C7D /* Products */,
 				7FBC6C251FDD296E001171BE /* Frameworks */,
 				EDAB1EDE66440D9870387625 /* Pods */,
@@ -92,7 +185,9 @@
 		6DD6D1701FD981D800B78C7D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6DD6D16F1FD981D800B78C7D /* WaterApp.app */,
+				6DD6D16F1FD981D800B78C7D /* InfoWater.app */,
+				357C7F1C200F6A37000080C7 /* InfoWater_watchOS.app */,
+				357C7F28200F6A37000080C7 /* InfoWater_watchOS Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,9 +242,43 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6DD6D16E1FD981D800B78C7D /* WaterApp */ = {
+		357C7F1B200F6A37000080C7 /* InfoWater_watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6DD6D1811FD981D800B78C7D /* Build configuration list for PBXNativeTarget "WaterApp" */;
+			buildConfigurationList = 357C7F3E200F6A37000080C7 /* Build configuration list for PBXNativeTarget "InfoWater_watchOS" */;
+			buildPhases = (
+				357C7F1A200F6A37000080C7 /* Resources */,
+				357C7F3D200F6A37000080C7 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				357C7F2B200F6A37000080C7 /* PBXTargetDependency */,
+			);
+			name = InfoWater_watchOS;
+			productName = InfoWater_watchOS;
+			productReference = 357C7F1C200F6A37000080C7 /* InfoWater_watchOS.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		357C7F27200F6A37000080C7 /* InfoWater_watchOS Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 357C7F3A200F6A37000080C7 /* Build configuration list for PBXNativeTarget "InfoWater_watchOS Extension" */;
+			buildPhases = (
+				357C7F24200F6A37000080C7 /* Sources */,
+				357C7F25200F6A37000080C7 /* Frameworks */,
+				357C7F26200F6A37000080C7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "InfoWater_watchOS Extension";
+			productName = "InfoWater_watchOS Extension";
+			productReference = 357C7F28200F6A37000080C7 /* InfoWater_watchOS Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		6DD6D16E1FD981D800B78C7D /* InfoWater */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DD6D1811FD981D800B78C7D /* Build configuration list for PBXNativeTarget "InfoWater" */;
 			buildPhases = (
 				52275233D6459393109DB800 /* [CP] Check Pods Manifest.lock */,
 				6DD6D16B1FD981D800B78C7D /* Sources */,
@@ -157,14 +286,16 @@
 				6DD6D16D1FD981D800B78C7D /* Resources */,
 				418941B53151E72F8B8EDE68 /* [CP] Embed Pods Frameworks */,
 				EF0BFE51A6B1EAB5909D31B3 /* [CP] Copy Pods Resources */,
+				357C7F41200F6A37000080C7 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				357C7F38200F6A37000080C7 /* PBXTargetDependency */,
 			);
-			name = WaterApp;
+			name = InfoWater;
 			productName = WaterApp;
-			productReference = 6DD6D16F1FD981D800B78C7D /* WaterApp.app */;
+			productReference = 6DD6D16F1FD981D800B78C7D /* InfoWater.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -177,13 +308,21 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Raffaele;
 				TargetAttributes = {
+					357C7F1B200F6A37000080C7 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					357C7F27200F6A37000080C7 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					6DD6D16E1FD981D800B78C7D = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 6DD6D16A1FD981D800B78C7D /* Build configuration list for PBXProject "WaterApp" */;
+			buildConfigurationList = 6DD6D16A1FD981D800B78C7D /* Build configuration list for PBXProject "InfoWater" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -197,12 +336,31 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6DD6D16E1FD981D800B78C7D /* WaterApp */,
+				6DD6D16E1FD981D800B78C7D /* InfoWater */,
+				357C7F1B200F6A37000080C7 /* InfoWater_watchOS */,
+				357C7F27200F6A37000080C7 /* InfoWater_watchOS Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		357C7F1A200F6A37000080C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				357C7F22200F6A37000080C7 /* Assets.xcassets in Resources */,
+				357C7F20200F6A37000080C7 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		357C7F26200F6A37000080C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				357C7F34200F6A37000080C7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6DD6D16D1FD981D800B78C7D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -278,6 +436,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		357C7F24200F6A37000080C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				357C7F32200F6A37000080C7 /* NotificationController.swift in Sources */,
+				357C7F30200F6A37000080C7 /* ExtensionDelegate.swift in Sources */,
+				357C7F2E200F6A37000080C7 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6DD6D16B1FD981D800B78C7D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -303,7 +471,28 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		357C7F2B200F6A37000080C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 357C7F27200F6A37000080C7 /* InfoWater_watchOS Extension */;
+			targetProxy = 357C7F2A200F6A37000080C7 /* PBXContainerItemProxy */;
+		};
+		357C7F38200F6A37000080C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 357C7F1B200F6A37000080C7 /* InfoWater_watchOS */;
+			targetProxy = 357C7F37200F6A37000080C7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		357C7F1E200F6A37000080C7 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				357C7F1F200F6A37000080C7 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		35F771211FFBE024000C8A5B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -325,6 +514,80 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		357C7F3B200F6A37000080C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 362LJJ5AQ2;
+				INFOPLIST_FILE = "InfoWater_watchOS Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.InfoWater.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Debug;
+		};
+		357C7F3C200F6A37000080C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 362LJJ5AQ2;
+				INFOPLIST_FILE = "InfoWater_watchOS Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.InfoWater.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Release;
+		};
+		357C7F3F200F6A37000080C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 362LJJ5AQ2;
+				IBSC_MODULE = InfoWater_watchOS_Extension;
+				INFOPLIST_FILE = InfoWater_watchOS/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.InfoWater.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Debug;
+		};
+		357C7F40200F6A37000080C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 362LJJ5AQ2;
+				IBSC_MODULE = InfoWater_watchOS_Extension;
+				INFOPLIST_FILE = InfoWater_watchOS/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosda.InfoWater.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Release;
+		};
 		6DD6D17F1FD981D800B78C7D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -481,7 +744,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6DD6D16A1FD981D800B78C7D /* Build configuration list for PBXProject "WaterApp" */ = {
+		357C7F3A200F6A37000080C7 /* Build configuration list for PBXNativeTarget "InfoWater_watchOS Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				357C7F3B200F6A37000080C7 /* Debug */,
+				357C7F3C200F6A37000080C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		357C7F3E200F6A37000080C7 /* Build configuration list for PBXNativeTarget "InfoWater_watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				357C7F3F200F6A37000080C7 /* Debug */,
+				357C7F40200F6A37000080C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DD6D16A1FD981D800B78C7D /* Build configuration list for PBXProject "InfoWater" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6DD6D17F1FD981D800B78C7D /* Debug */,
@@ -490,7 +771,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6DD6D1811FD981D800B78C7D /* Build configuration list for PBXNativeTarget "WaterApp" */ = {
+		6DD6D1811FD981D800B78C7D /* Build configuration list for PBXNativeTarget "InfoWater" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6DD6D1821FD981D800B78C7D /* Debug */,

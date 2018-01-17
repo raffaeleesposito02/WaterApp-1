@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:WaterApp.xcodeproj">
+      location = "group:/Users/alejesse/Desktop/WaterApp/InfoWater.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
